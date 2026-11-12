@@ -1,0 +1,2131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | TrustNest</title>
+
+    <meta name="description"
+          content="Create your TrustNest Smart Insurance account">
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
+
+
+    <style>
+
+        /* =========================================
+           RESET
+        ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f5f8fc 0%,
+                    #eaf1f9 100%
+                );
+
+            color: #172033;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =========================================
+           PAGE
+        ========================================= */
+
+        .page {
+
+            min-height: 100vh;
+
+            display: grid;
+
+            grid-template-columns:
+                0.9fr 1.1fr;
+        }
+
+
+        /* =========================================
+           LEFT SECTION
+        ========================================= */
+
+        .left-section {
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #061f42,
+                    #092b5c,
+                    #123f78
+                );
+
+            color: white;
+
+            padding: 45px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: space-between;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        .left-section::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 450px;
+            height: 450px;
+
+            border-radius: 50%;
+
+            border: 1px solid
+                rgba(255,255,255,0.08);
+
+            right: -200px;
+            top: -150px;
+        }
+
+
+        .left-section::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 320px;
+            height: 320px;
+
+            border-radius: 50%;
+
+            border: 1px solid
+                rgba(201,162,39,0.15);
+
+            left: -170px;
+            bottom: -130px;
+        }
+
+
+        /* =========================================
+           LOGO
+        ========================================= */
+
+        .logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .logo-icon {
+
+            width: 44px;
+            height: 44px;
+
+            border-radius: 50%;
+
+            background: white;
+
+            color: #092b5c;
+
+            border: 3px solid #c9a227;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 20px;
+
+            font-weight: 800;
+        }
+
+
+        .logo-name {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 26px;
+
+            font-weight: 700;
+        }
+
+
+        .logo-subtitle {
+
+            display: block;
+
+            font-size: 8px;
+
+            letter-spacing: 2px;
+
+            color: #d6b23c;
+
+            text-transform: uppercase;
+
+            margin-top: -3px;
+        }
+
+
+        /* =========================================
+           LEFT CONTENT
+        ========================================= */
+
+        .left-content {
+
+            position: relative;
+
+            z-index: 2;
+
+            max-width: 470px;
+        }
+
+
+        .badge {
+
+            display: inline-block;
+
+            padding: 8px 14px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.15);
+
+            color: #d6b23c;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            margin-bottom: 20px;
+        }
+
+
+        .left-content h1 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                clamp(38px, 4vw, 55px);
+
+            line-height: 1.12;
+
+            margin-bottom: 20px;
+        }
+
+
+        .left-content h1 span {
+
+            color: #d6b23c;
+        }
+
+
+        .left-content p {
+
+            color: #c4d0df;
+
+            font-size: 14px;
+
+            line-height: 1.8;
+        }
+
+
+        /* =========================================
+           BENEFITS
+        ========================================= */
+
+        .benefits {
+
+            margin-top: 30px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 14px;
+        }
+
+
+        .benefit {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            color: #d8e1ed;
+
+            font-size: 12px;
+        }
+
+
+        .check {
+
+            width: 22px;
+            height: 22px;
+
+            flex-shrink: 0;
+
+            border-radius: 50%;
+
+            background:
+                rgba(201,162,39,0.18);
+
+            color: #d6b23c;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 11px;
+
+            font-weight: 800;
+        }
+
+
+        .left-footer {
+
+            position: relative;
+
+            z-index: 2;
+
+            color: #8ea0b7;
+
+            font-size: 10px;
+        }
+
+
+        /* =========================================
+           RIGHT SECTION
+        ========================================= */
+
+        .right-section {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 35px 50px;
+
+            overflow-y: auto;
+        }
+
+
+        /* =========================================
+           REGISTER CARD
+        ========================================= */
+
+        .register-card {
+
+            width: min(570px, 100%);
+
+            background: white;
+
+            padding: 36px;
+
+            border-radius: 18px;
+
+            border:
+                1px solid #e5ebf2;
+
+            box-shadow:
+                0 25px 70px
+                rgba(9,43,92,0.12);
+        }
+
+
+        .register-header {
+
+            margin-bottom: 24px;
+        }
+
+
+        .register-header h2 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            color: #092b5c;
+
+            font-size: 32px;
+
+            margin-bottom: 6px;
+        }
+
+
+        .register-header p {
+
+            color: #667085;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================================
+           ROLE SELECTION
+        ========================================= */
+
+        .section-label {
+
+            display: block;
+
+            color: #344054;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            margin-bottom: 9px;
+        }
+
+
+        .role-options {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 10px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .role-option {
+
+            position: relative;
+        }
+
+
+        .role-option input {
+
+            position: absolute;
+
+            opacity: 0;
+        }
+
+
+        .role-option label {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            padding: 11px;
+
+            border:
+                1px solid #d9e0e8;
+
+            border-radius: 8px;
+
+            color: #667085;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+
+        .role-option input:checked + label {
+
+            background: #edf3fa;
+
+            border-color: #092b5c;
+
+            color: #092b5c;
+        }
+
+
+        /* =========================================
+           FORM GRID
+        ========================================= */
+
+        .form-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 16px;
+        }
+
+
+        .form-group {
+
+            margin-bottom: 16px;
+        }
+
+
+        .full-width {
+
+            grid-column:
+                1 / -1;
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            color: #344054;
+
+            margin-bottom: 7px;
+        }
+
+
+        .required {
+
+            color: #c0392b;
+        }
+
+
+        .input-wrapper {
+
+            position: relative;
+        }
+
+
+        .input-icon {
+
+            position: absolute;
+
+            left: 13px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            color: #98a2b3;
+
+            font-size: 14px;
+        }
+
+
+        .form-control,
+        .form-select {
+
+            width: 100%;
+
+            padding:
+                12px
+                13px
+                12px
+                38px;
+
+            border:
+                1px solid #d9e0e8;
+
+            border-radius: 7px;
+
+            outline: none;
+
+            font-family:
+                "Inter",
+                sans-serif;
+
+            font-size: 12px;
+
+            color: #172033;
+
+            background: white;
+
+            transition: 0.25s;
+        }
+
+
+        .form-select {
+
+            padding-left: 13px;
+
+            cursor: pointer;
+        }
+
+
+        .form-control:focus,
+        .form-select:focus {
+
+            border-color: #092b5c;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(9,43,92,0.08);
+        }
+
+
+        .form-control::placeholder {
+
+            color: #98a2b3;
+        }
+
+
+        /* =========================================
+           PASSWORD
+        ========================================= */
+
+        .password-toggle {
+
+            position: absolute;
+
+            right: 12px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            color: #667085;
+
+            font-size: 11px;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================================
+           AGENT DETAILS
+        ========================================= */
+
+        #agentFields {
+
+            display: none;
+
+            grid-column:
+                1 / -1;
+
+            padding: 17px;
+
+            background: #f7f9fc;
+
+            border:
+                1px solid #e6ebf2;
+
+            border-radius: 9px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .agent-title {
+
+            color: #092b5c;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            margin-bottom: 14px;
+        }
+
+
+        .agent-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 15px;
+        }
+
+
+        /* =========================================
+           TERMS
+        ========================================= */
+
+        .terms {
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 8px;
+
+            margin:
+                4px 0 18px;
+
+            color: #667085;
+
+            font-size: 10px;
+
+            line-height: 1.5;
+        }
+
+
+        .terms input {
+
+            margin-top: 2px;
+
+            accent-color: #092b5c;
+        }
+
+
+        .terms a {
+
+            color: #092b5c;
+
+            font-weight: 600;
+        }
+
+
+        /* =========================================
+           REGISTER BUTTON
+        ========================================= */
+
+        .register-btn {
+
+            width: 100%;
+
+            border: none;
+
+            padding: 13px;
+
+            border-radius: 8px;
+
+            background: #092b5c;
+
+            color: white;
+
+            font-family:
+                "Inter",
+                sans-serif;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+
+        .register-btn:hover {
+
+            background: #061f42;
+
+            transform:
+                translateY(-1px);
+
+            box-shadow:
+                0 8px 20px
+                rgba(9,43,92,0.18);
+        }
+
+
+        .register-btn:disabled {
+
+            opacity: 0.65;
+
+            cursor: not-allowed;
+
+            transform: none;
+        }
+
+
+        /* =========================================
+           MESSAGES
+        ========================================= */
+
+        .message {
+
+            display: none;
+
+            padding: 10px 12px;
+
+            border-radius: 7px;
+
+            font-size: 11px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .error-message {
+
+            background: #fff0f0;
+
+            border:
+                1px solid #f3caca;
+
+            color: #c0392b;
+        }
+
+
+        .success-message {
+
+            background: #edf9f1;
+
+            border:
+                1px solid #c8ead3;
+
+            color: #258351;
+        }
+
+
+        /* =========================================
+           LOGIN LINK
+        ========================================= */
+
+        .login-text {
+
+            text-align: center;
+
+            margin-top: 19px;
+
+            color: #667085;
+
+            font-size: 12px;
+        }
+
+
+        .login-text a {
+
+            color: #092b5c;
+
+            font-weight: 700;
+        }
+
+
+        .login-text a:hover {
+
+            color: #c9a227;
+        }
+
+
+        .security-note {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 6px;
+
+            margin-top: 15px;
+
+            color: #7b8797;
+
+            font-size: 9px;
+        }
+
+
+        .security-note span {
+
+            color: #258351;
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 950px) {
+
+            .page {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .left-section {
+
+                min-height: 430px;
+
+                padding: 35px;
+            }
+
+
+            .left-content {
+
+                margin:
+                    45px 0 30px;
+            }
+
+
+            .left-footer {
+
+                display: none;
+            }
+
+
+            .right-section {
+
+                padding: 35px 20px;
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            .left-section {
+
+                padding: 25px;
+
+                min-height: 390px;
+            }
+
+
+            .left-content h1 {
+
+                font-size: 37px;
+            }
+
+
+            .left-content p {
+
+                font-size: 12px;
+            }
+
+
+            .right-section {
+
+                padding: 20px 14px;
+            }
+
+
+            .register-card {
+
+                padding: 25px 20px;
+            }
+
+
+            .form-grid,
+            .agent-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .full-width {
+
+                grid-column:
+                    auto;
+            }
+
+
+            #agentFields {
+
+                grid-column:
+                    auto;
+            }
+
+
+            .role-options {
+
+                grid-template-columns:
+                    1fr 1fr;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+    <!-- =================================================
+         LEFT SIDE
+    ================================================== -->
+
+    <section class="left-section">
+
+
+        <!-- LOGO -->
+
+        <a href="../index.html"
+           class="logo">
+
+            <div class="logo-icon">
+                T
+            </div>
+
+            <div>
+
+                <div class="logo-name">
+                    TrustNest
+                </div>
+
+                <span class="logo-subtitle">
+                    Insurance Intelligence
+                </span>
+
+            </div>
+
+        </a>
+
+
+
+        <!-- CONTENT -->
+
+        <div class="left-content">
+
+
+            <div class="badge">
+
+                ● Join TrustNest
+
+            </div>
+
+
+            <h1>
+
+                Build a smarter
+
+                <span>
+                    insurance experience.
+                </span>
+
+            </h1>
+
+
+            <p>
+
+                Create your TrustNest account and
+                access a secure platform designed
+                for better insurance management,
+                stronger customer relationships and
+                greater transparency.
+
+            </p>
+
+
+            <div class="benefits">
+
+
+                <div class="benefit">
+
+                    <span class="check">
+                        ✓
+                    </span>
+
+                    Secure account management
+
+                </div>
+
+
+                <div class="benefit">
+
+                    <span class="check">
+                        ✓
+                    </span>
+
+                    Verified agent information
+
+                </div>
+
+
+                <div class="benefit">
+
+                    <span class="check">
+                        ✓
+                    </span>
+
+                    Smart customer management
+
+                </div>
+
+
+                <div class="benefit">
+
+                    <span class="check">
+                        ✓
+                    </span>
+
+                    Intelligent insurance insights
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <div class="left-footer">
+
+            © 2026 TrustNest · Smart Insurance Management
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         RIGHT SIDE
+    ================================================== -->
+
+    <section class="right-section">
+
+
+        <div class="register-card">
+
+
+            <!-- HEADER -->
+
+            <div class="register-header">
+
+                <h2>
+                    Create Account
+                </h2>
+
+                <p>
+                    Join TrustNest and get started today.
+                </p>
+
+            </div>
+
+
+
+            <!-- ERROR MESSAGE -->
+
+            <div id="errorMessage"
+                 class="message error-message">
+
+            </div>
+
+
+
+            <!-- SUCCESS MESSAGE -->
+
+            <div id="successMessage"
+                 class="message success-message">
+
+                Account created successfully.
+
+            </div>
+
+
+
+            <!-- ROLE -->
+
+            <span class="section-label">
+
+                Select account type
+
+            </span>
+
+
+            <div class="role-options">
+
+
+                <div class="role-option">
+
+                    <input
+                        type="radio"
+                        id="agentRole"
+                        name="role"
+                        value="agent"
+                        checked
+                    >
+
+                    <label for="agentRole">
+
+                        👨‍💼
+
+                        Insurance Agent
+
+                    </label>
+
+                </div>
+
+
+                <div class="role-option">
+
+                    <input
+                        type="radio"
+                        id="customerRole"
+                        name="role"
+                        value="customer"
+                    >
+
+                    <label for="customerRole">
+
+                        👤
+
+                        Customer
+
+                    </label>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- FORM -->
+
+            <form id="registerForm">
+
+
+                <div class="form-grid">
+
+
+                    <!-- FULL NAME -->
+
+                    <div class="form-group">
+
+                        <label for="fullName">
+
+                            Full Name
+                            <span class="required">*</span>
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                👤
+                            </span>
+
+
+                            <input
+                                type="text"
+                                id="fullName"
+                                class="form-control"
+                                placeholder="Enter full name"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+
+                            Email Address
+                            <span class="required">*</span>
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                ✉
+                            </span>
+
+
+                            <input
+                                type="email"
+                                id="email"
+                                class="form-control"
+                                placeholder="Enter email"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- PHONE -->
+
+                    <div class="form-group">
+
+                        <label for="phone">
+
+                            Mobile Number
+                            <span class="required">*</span>
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                ☎
+                            </span>
+
+
+                            <input
+                                type="tel"
+                                id="phone"
+                                class="form-control"
+                                placeholder="10-digit mobile number"
+                                maxlength="10"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- CITY -->
+
+                    <div class="form-group">
+
+                        <label for="city">
+
+                            City
+                            <span class="required">*</span>
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                📍
+                            </span>
+
+
+                            <input
+                                type="text"
+                                id="city"
+                                class="form-control"
+                                placeholder="Enter city"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- AGENT FIELDS -->
+
+                    <div id="agentFields">
+
+
+                        <div class="agent-title">
+
+                            Agent Information
+
+                        </div>
+
+
+                        <div class="agent-grid">
+
+
+                            <!-- AGENT ID -->
+
+                            <div class="form-group">
+
+                                <label for="agentId">
+
+                                    Agent ID
+
+                                </label>
+
+
+                                <input
+                                    type="text"
+                                    id="agentId"
+                                    class="form-control"
+                                    placeholder="Enter Agent ID"
+                                    style="padding-left:13px;"
+                                >
+
+                            </div>
+
+
+
+                            <!-- BRANCH -->
+
+                            <div class="form-group">
+
+                                <label for="branch">
+
+                                    Branch
+
+                                </label>
+
+
+                                <select
+                                    id="branch"
+                                    class="form-select">
+
+                                    <option value="">
+                                        Select branch
+                                    </option>
+
+                                    <option value="karur">
+                                        Karur Branch
+                                    </option>
+
+                                    <option value="trichy">
+                                        Trichy Branch
+                                    </option>
+
+                                    <option value="coimbatore">
+                                        Coimbatore Branch
+                                    </option>
+
+                                    <option value="chennai">
+                                        Chennai Branch
+                                    </option>
+
+                                    <option value="salem">
+                                        Salem Branch
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label for="password">
+
+                            Password
+                            <span class="required">*</span>
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+
+                            <input
+                                type="password"
+                                id="password"
+                                class="form-control"
+                                placeholder="Create password"
+                                style="padding-left:13px;
+                                       padding-right:55px;"
+                                required
+                            >
+
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                id="togglePassword">
+
+                                Show
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- CONFIRM PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label for="confirmPassword">
+
+                            Confirm Password
+                            <span class="required">*</span>
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                class="form-control"
+                                placeholder="Confirm password"
+                                style="padding-left:13px;
+                                       padding-right:55px;"
+                                required
+                            >
+
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                id="toggleConfirmPassword">
+
+                                Show
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- TERMS -->
+
+                <label class="terms">
+
+                    <input
+                        type="checkbox"
+                        id="terms"
+                        required
+                    >
+
+
+                    <span>
+
+                        I agree to the
+                        <a href="#">
+                            Terms & Conditions
+                        </a>
+                        and
+                        <a href="#">
+                            Privacy Policy
+                        </a>
+                        of TrustNest.
+
+                    </span>
+
+                </label>
+
+
+
+                <!-- REGISTER BUTTON -->
+
+                <button
+                    type="submit"
+                    class="register-btn"
+                    id="registerButton">
+
+                    Create Account
+
+                </button>
+
+
+            </form>
+
+
+
+            <!-- LOGIN -->
+
+            <div class="login-text">
+
+                Already have an account?
+
+                <a href="login.html">
+
+                    Sign in
+
+                </a>
+
+            </div>
+
+
+
+            <!-- SECURITY -->
+
+            <div class="security-note">
+
+                <span>
+                    🔒
+                </span>
+
+                Your personal information is protected.
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+</div>
+
+
+
+<script>
+
+    /* =========================================
+       ELEMENTS
+    ========================================= */
+
+    const agentRole =
+        document.getElementById("agentRole");
+
+    const customerRole =
+        document.getElementById("customerRole");
+
+    const agentFields =
+        document.getElementById("agentFields");
+
+    const registerForm =
+        document.getElementById("registerForm");
+
+    const errorMessage =
+        document.getElementById("errorMessage");
+
+    const successMessage =
+        document.getElementById("successMessage");
+
+    const registerButton =
+        document.getElementById("registerButton");
+
+
+
+    /* =========================================
+       SHOW AGENT FIELDS
+    ========================================= */
+
+    function updateRoleFields() {
+
+        if (agentRole.checked) {
+
+            agentFields.style.display =
+                "block";
+
+        } else {
+
+            agentFields.style.display =
+                "none";
+
+        }
+
+    }
+
+
+    agentRole.addEventListener(
+        "change",
+        updateRoleFields
+    );
+
+
+    customerRole.addEventListener(
+        "change",
+        updateRoleFields
+    );
+
+
+    /* Show initially */
+
+    updateRoleFields();
+
+
+
+    /* =========================================
+       PASSWORD TOGGLE
+    ========================================= */
+
+    const password =
+        document.getElementById("password");
+
+    const confirmPassword =
+        document.getElementById("confirmPassword");
+
+    const togglePassword =
+        document.getElementById("togglePassword");
+
+    const toggleConfirmPassword =
+        document.getElementById(
+            "toggleConfirmPassword"
+        );
+
+
+    togglePassword.addEventListener(
+        "click",
+        function () {
+
+            if (
+                password.type === "password"
+            ) {
+
+                password.type = "text";
+
+                togglePassword.textContent =
+                    "Hide";
+
+            } else {
+
+                password.type = "password";
+
+                togglePassword.textContent =
+                    "Show";
+
+            }
+
+        }
+    );
+
+
+    toggleConfirmPassword.addEventListener(
+        "click",
+        function () {
+
+            if (
+                confirmPassword.type ===
+                "password"
+            ) {
+
+                confirmPassword.type =
+                    "text";
+
+                toggleConfirmPassword.textContent =
+                    "Hide";
+
+            } else {
+
+                confirmPassword.type =
+                    "password";
+
+                toggleConfirmPassword.textContent =
+                    "Show";
+
+            }
+
+        }
+    );
+
+
+
+    /* =========================================
+       REGISTRATION
+    ========================================= */
+
+    registerForm.addEventListener(
+        "submit",
+        function (event) {
+
+            event.preventDefault();
+
+
+            /* Hide old messages */
+
+            errorMessage.style.display =
+                "none";
+
+            successMessage.style.display =
+                "none";
+
+
+            /* Get values */
+
+            const fullName =
+                document
+                    .getElementById("fullName")
+                    .value
+                    .trim();
+
+
+            const email =
+                document
+                    .getElementById("email")
+                    .value
+                    .trim();
+
+
+            const phone =
+                document
+                    .getElementById("phone")
+                    .value
+                    .trim();
+
+
+            const city =
+                document
+                    .getElementById("city")
+                    .value
+                    .trim();
+
+
+            const passwordValue =
+                password.value;
+
+
+            const confirmPasswordValue =
+                confirmPassword.value;
+
+
+            const role =
+                document
+                    .querySelector(
+                        'input[name="role"]:checked'
+                    )
+                    .value;
+
+
+
+            /* =====================================
+               VALIDATION
+            ===================================== */
+
+            if (
+                fullName === "" ||
+                email === "" ||
+                phone === "" ||
+                city === "" ||
+                passwordValue === "" ||
+                confirmPasswordValue === ""
+            ) {
+
+                showError(
+                    "Please fill in all required fields."
+                );
+
+                return;
+            }
+
+
+
+            /* PHONE VALIDATION */
+
+            if (
+                !/^[0-9]{10}$/.test(phone)
+            ) {
+
+                showError(
+                    "Please enter a valid 10-digit mobile number."
+                );
+
+                return;
+            }
+
+
+
+            /* PASSWORD LENGTH */
+
+            if (
+                passwordValue.length < 6
+            ) {
+
+                showError(
+                    "Password must contain at least 6 characters."
+                );
+
+                return;
+            }
+
+
+
+            /* PASSWORD MATCH */
+
+            if (
+                passwordValue !==
+                confirmPasswordValue
+            ) {
+
+                showError(
+                    "Passwords do not match."
+                );
+
+                return;
+            }
+
+
+
+            /* AGENT VALIDATION */
+
+            if (role === "agent") {
+
+                const agentId =
+                    document
+                        .getElementById("agentId")
+                        .value
+                        .trim();
+
+
+                const branch =
+                    document
+                        .getElementById("branch")
+                        .value;
+
+
+                if (
+                    agentId === "" ||
+                    branch === ""
+                ) {
+
+                    showError(
+                        "Please enter your Agent ID and select your branch."
+                    );
+
+                    return;
+                }
+
+            }
+
+/* =====================================
+   SUBMIT TO BACKEND
+===================================== */
+
+registerButton.disabled = true;
+
+registerButton.textContent =
+    "Creating Account...";
+
+
+const agentId =
+    role === "agent"
+        ? document
+            .getElementById("agentId")
+            .value
+            .trim()
+        : "";
+
+
+const branch =
+    role === "agent"
+        ? document
+            .getElementById("branch")
+            .value
+        : "";
+
+
+const registrationData = {
+
+    fullName: fullName,
+
+    email: email,
+
+    phone: phone,
+
+    city: city,
+
+    agentId: agentId,
+
+    branch: branch,
+
+    password: passwordValue
+
+};
+
+
+fetch("http://localhost:5000/api/agents/register", {
+
+    method: "POST",
+
+    headers: {
+        "Content-Type": "application/json"
+    },
+
+    body: JSON.stringify(
+        registrationData
+    )
+
+})
+
+
+.then(async response => {
+
+    const data =
+        await response.json();
+
+
+    if (!response.ok) {
+
+        throw new Error(
+            data.message ||
+            "Registration failed."
+        );
+
+    }
+
+
+    return data;
+
+})
+
+
+.then(data => {
+
+    console.log(
+        "Registration successful:",
+        data
+    );
+
+
+    /* Save Rajesh's MongoDB ID */
+
+    localStorage.setItem(
+        "agentId",
+        data.agent.id
+    );
+
+
+    localStorage.setItem(
+        "agentName",
+        data.agent.fullName
+    );
+
+
+    localStorage.setItem(
+        "agentEmail",
+        data.agent.email
+    );
+
+
+    successMessage.textContent =
+        "Account created successfully. Redirecting to login...";
+
+
+    successMessage.style.display =
+        "block";
+
+
+    registerButton.textContent =
+        "Account Created";
+
+
+    setTimeout(() => {
+
+        window.location.href =
+            "login.html";
+
+    }, 1200);
+
+})
+
+.catch(error => {
+
+    console.error(
+        "Registration error:",
+        error
+    );
+
+
+    showError(
+        error.message ||
+        "Unable to create account."
+    );
+
+
+    registerButton.disabled =
+        false;
+
+
+    registerButton.textContent =
+        "Create Account";
+
+});
+
+        }
+    );
+
+
+
+    /* =========================================
+       ERROR FUNCTION
+    ========================================= */
+
+    function showError(message) {
+
+        errorMessage.textContent =
+            message;
+
+        errorMessage.style.display =
+            "block";
+
+        errorMessage.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

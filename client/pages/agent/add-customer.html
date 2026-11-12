@@ -1,0 +1,3702 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Add Customer | TrustNest</title>
+
+<meta name="description"
+      content="Add or edit a customer in TrustNest">
+
+<link rel="preconnect"
+      href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet">
+
+<link rel="stylesheet"
+      href="../../css/style.css">
+
+<link rel="stylesheet"
+      href="../../css/dashboard.css">
+
+<link rel="stylesheet"
+      href="../../css/forms.css">
+
+<link rel="stylesheet"
+      href="../../css/responsive.css">
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background: #f5f7fb;
+    color: #172033;
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    width: 250px;
+    background: linear-gradient(180deg, #061f42, #092b5c);
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    transition: 0.3s;
+}
+
+.sidebar-logo {
+    height: 85px;
+    display: flex;
+    align-items: center;
+    padding: 0 25px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    color: #092b5c;
+    border: 3px solid #c9a227;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    margin-right: 10px;
+}
+
+.logo-name {
+    font-family: "Playfair Display", serif;
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.logo-subtitle {
+    display: block;
+    font-size: 7px;
+    letter-spacing: 1.5px;
+    color: #d6b23c;
+    margin-top: -2px;
+}
+
+.menu-title {
+    padding: 25px 25px 10px;
+    color: #7f94ad;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0 12px;
+}
+
+.sidebar-menu li {
+    margin-bottom: 4px;
+}
+
+.sidebar-menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 13px;
+    border-radius: 7px;
+    color: #b8c6d8;
+    font-size: 12px;
+    transition: 0.25s;
+}
+
+.sidebar-menu a:hover {
+    background: rgba(255,255,255,0.07);
+    color: white;
+}
+
+.sidebar-menu a.active {
+    background: rgba(255,255,255,0.12);
+    color: white;
+    border-left: 3px solid #c9a227;
+}
+
+.menu-icon {
+    width: 22px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+    padding: 15px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.sidebar-bottom a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #aebed0;
+    font-size: 11px;
+    padding: 10px;
+}
+
+.sidebar-bottom a:hover {
+    color: white;
+}
+
+/* MAIN */
+
+.main {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    min-height: 100vh;
+}
+
+/* TOPBAR */
+
+.topbar {
+    height: 75px;
+    background: white;
+    border-bottom: 1px solid #e8edf3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.mobile-menu {
+    display: none;
+    border: none;
+    background: none;
+    font-size: 22px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.page-title h1 {
+    font-family: "Playfair Display", serif;
+    color: #092b5c;
+    font-size: 24px;
+    margin-bottom: 2px;
+}
+
+.page-title p {
+    color: #8995a5;
+    font-size: 10px;
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.notification {
+    position: relative;
+    font-size: 18px;
+    color: #526071;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -6px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #c9a227;
+    color: white;
+    font-size: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.agent-profile-mini {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.agent-avatar-small {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #092b5c, #1c518e);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 13px;
+    border: 2px solid #d6b23c;
+}
+
+.agent-mini-info strong {
+    display: block;
+    font-size: 11px;
+    color: #172033;
+}
+
+.agent-mini-info span {
+    font-size: 9px;
+    color: #8995a5;
+}
+
+/* CONTENT */
+
+.content {
+    padding: 28px 30px;
+    max-width: 1250px;
+    margin: auto;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 9px;
+    color: #8995a5;
+    margin-bottom: 18px;
+}
+
+.breadcrumb a {
+    color: #52769c;
+    font-weight: 500;
+}
+
+.breadcrumb a:hover {
+    color: #092b5c;
+}
+
+.breadcrumb .current {
+    color: #526071;
+    font-weight: 600;
+}
+
+/* HEADER */
+
+.form-header {
+    background: white;
+    border: 1px solid #e5eaf0;
+    border-radius: 11px;
+    padding: 22px 25px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.form-header-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: #edf3fa;
+    color: #092b5c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+    flex-shrink: 0;
+}
+
+.form-header h2 {
+    font-family: "Playfair Display", serif;
+    color: #092b5c;
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+
+.form-header p {
+    color: #8995a5;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+/* FORM */
+
+.form-card {
+    background: white;
+    border: 1px solid #e5eaf0;
+    border-radius: 11px;
+    overflow: hidden;
+    margin-bottom: 18px;
+}
+
+.form-section {
+    padding: 24px 25px;
+    border-bottom: 1px solid #edf0f4;
+}
+
+.form-section:last-child {
+    border-bottom: none;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.section-number {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #092b5c;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.section-title h3 {
+    font-size: 13px;
+    color: #172033;
+}
+
+.section-title p {
+    font-size: 8px;
+    color: #8995a5;
+    margin-top: 2px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 17px 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    color: #344054;
+    font-size: 9px;
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+
+.required {
+    color: #c94b4b;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid #dce3eb;
+    border-radius: 7px;
+    background: white;
+    color: #344054;
+    font-size: 10px;
+    outline: none;
+    transition: 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #092b5c;
+    box-shadow: 0 0 0 3px rgba(9,43,92,0.06);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 85px;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #b2bac5;
+}
+
+.field-help {
+    color: #9aa4b1;
+    font-size: 8px;
+    margin-top: 5px;
+    line-height: 1.4;
+}
+
+/* READONLY BRANCH */
+
+.branch-input {
+    background: #f1f5f9 !important;
+    color: #475569 !important;
+    cursor: not-allowed;
+}
+
+/* PASSWORD */
+
+.password-section {
+    background: linear-gradient(135deg, #f8fbff, #ffffff);
+}
+
+.password-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 9px;
+    padding: 18px;
+}
+
+.password-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.password-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: #092b5c;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.password-header strong {
+    display: block;
+    color: #092b5c;
+    font-size: 11px;
+}
+
+.password-header span {
+    display: block;
+    color: #8995a5;
+    font-size: 8px;
+    margin-top: 2px;
+}
+
+.password-input-wrapper {
+    position: relative;
+}
+
+.password-input-wrapper input {
+    padding-right: 42px;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: #64748b;
+    font-size: 15px;
+    padding: 4px;
+}
+
+.password-toggle:hover {
+    color: #092b5c;
+}
+
+.password-rules {
+    margin-top: 14px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 7px;
+}
+
+.password-rule {
+    font-size: 8px;
+    color: #8995a5;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.password-rule.valid {
+    color: #258351;
+}
+
+.password-rule.invalid {
+    color: #c94b4b;
+}
+
+.login-id-preview {
+    background: #edf3fa;
+    border: 1px solid #d7e2ef;
+    border-radius: 7px;
+    padding: 10px 12px;
+    color: #092b5c;
+    font-size: 9px;
+    margin-top: 10px;
+}
+
+.login-id-preview strong {
+    font-weight: 700;
+}
+
+/* RADIO */
+
+.radio-group {
+    display: flex;
+    gap: 18px;
+    padding-top: 5px;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 9px;
+    color: #526071;
+    cursor: pointer;
+}
+
+.radio-option input {
+    accent-color: #092b5c;
+    width: 14px;
+    height: 14px;
+}
+
+/* UPLOAD */
+
+.upload-box {
+    border: 1px dashed #ccd5df;
+    border-radius: 8px;
+    padding: 22px;
+    text-align: center;
+    background: #fafbfd;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.upload-box:hover {
+    border-color: #092b5c;
+    background: #f7f9fc;
+}
+
+.upload-icon {
+    font-size: 25px;
+    color: #092b5c;
+    margin-bottom: 7px;
+}
+
+.upload-box strong {
+    display: block;
+    color: #344054;
+    font-size: 10px;
+    margin-bottom: 4px;
+}
+
+.upload-box span {
+    color: #8995a5;
+    font-size: 8px;
+}
+
+.upload-box input {
+    display: none;
+}
+
+.file-name {
+    display: block;
+    margin-top: 8px;
+    color: #258351;
+    font-size: 8px;
+    font-weight: 600;
+}
+
+/* CONSENT */
+
+.consent-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    background: #f8fafc;
+    border: 1px solid #e8edf2;
+    border-radius: 7px;
+    padding: 13px;
+}
+
+.consent-box input {
+    margin-top: 2px;
+    accent-color: #092b5c;
+}
+
+.consent-box label {
+    font-size: 8px;
+    line-height: 1.6;
+    color: #697586;
+    cursor: pointer;
+}
+
+/* ACTIONS */
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fafbfd;
+    padding: 17px 25px;
+    border-top: 1px solid #edf0f4;
+}
+
+.secure-note {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #8995a5;
+    font-size: 8px;
+}
+
+.secure-icon {
+    color: #258351;
+    font-size: 12px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 9px;
+}
+
+.btn {
+    border: none;
+    border-radius: 7px;
+    padding: 10px 17px;
+    font-size: 9px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-cancel {
+    background: #edf0f4;
+    color: #526071;
+}
+
+.btn-save {
+    background: #092b5c;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-save:hover {
+    background: #061f42;
+}
+
+.btn-save:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* INFO */
+
+.info-card {
+    background: linear-gradient(135deg, #092b5c, #0d396e);
+    border-radius: 11px;
+    padding: 20px 22px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.info-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    flex-shrink: 0;
+}
+
+.info-card h4 {
+    font-size: 11px;
+    margin-bottom: 4px;
+}
+
+.info-card p {
+    color: #b9c9dc;
+    font-size: 8px;
+    line-height: 1.5;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .main {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .mobile-menu {
+        display: block;
+    }
+}
+
+@media (max-width: 650px) {
+
+    .content {
+        padding: 20px 15px;
+    }
+
+    .topbar {
+        padding: 0 15px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full {
+        grid-column: auto;
+    }
+
+    .form-section {
+        padding: 20px 18px;
+    }
+
+    .form-actions {
+        padding: 15px 18px;
+        flex-direction: column;
+        gap: 14px;
+        align-items: stretch;
+    }
+
+    .action-buttons {
+        width: 100%;
+    }
+
+    .btn {
+        flex: 1;
+        justify-content: center;
+    }
+
+    .agent-mini-info {
+        display: none;
+    }
+
+    .radio-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .password-rules {
+        grid-template-columns: 1fr;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar" id="sidebar">
+
+    <a href="dashboard.html" class="sidebar-logo">
+
+        <div class="logo-icon">
+            T
+        </div>
+
+        <div>
+            <div class="logo-name">
+                TrustNest
+            </div>
+
+            <span class="logo-subtitle">
+                Insurance Intelligence
+            </span>
+        </div>
+
+    </a>
+
+    <div class="menu-title">
+        Main Menu
+    </div>
+
+    <ul class="sidebar-menu">
+
+        <li>
+            <a href="dashboard.html">
+                <span class="menu-icon">▦</span>
+                Dashboard
+            </a>
+        </li>
+
+        <li>
+            <a href="customers.html" class="active">
+                <span class="menu-icon">👥</span>
+                Customers
+            </a>
+        </li>
+
+        <li>
+            <a href="policies.html">
+                <span class="menu-icon">📋</span>
+                Policies
+            </a>
+        </li>
+
+        <li>
+            <a href="followups.html">
+                <span class="menu-icon">🔔</span>
+                Follow-ups
+            </a>
+        </li>
+
+        <li>
+            <a href="interactions.html">
+                <span class="menu-icon">💬</span>
+                Interactions
+            </a>
+        </li>
+
+    </ul>
+
+    <div class="menu-title">
+        Smart Features
+    </div>
+
+    <ul class="sidebar-menu">
+
+        <li>
+            <a href="recommendations.html">
+                <span class="menu-icon">✨</span>
+                Recommendations
+            </a>
+        </li>
+
+        <li>
+            <a href="leads.html">
+                <span class="menu-icon">🎯</span>
+                Smart Leads
+            </a>
+        </li>
+
+        <li>
+            <a href="sales-insights.html">
+                <span class="menu-icon">📊</span>
+                Sales Insights
+            </a>
+        </li>
+
+        <li>
+            <a href="notifications.html">
+                <span class="menu-icon">🔔</span>
+                Notifications
+            </a>
+        </li>
+
+    </ul>
+
+    <div class="menu-title">
+        Account
+    </div>
+
+    <ul class="sidebar-menu">
+
+        <li>
+            <a href="profile.html">
+                <span class="menu-icon">👤</span>
+                My Profile
+            </a>
+        </li>
+
+    </ul>
+
+    <div class="sidebar-bottom">
+
+        <a href="../login.html">
+            <span>⇥</span>
+            Logout
+        </a>
+
+    </div>
+
+</aside>
+
+<!-- MAIN -->
+
+<main class="main">
+
+<header class="topbar">
+
+    <div style="display:flex;align-items:center;">
+
+        <button
+            class="mobile-menu"
+            id="mobileMenu">
+            ☰
+        </button>
+
+        <div class="page-title">
+
+            <h1 id="pageTitle">
+                Add Customer
+            </h1>
+
+            <p id="pageSubtitle">
+                Register a new customer in your portfolio
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="topbar-right">
+
+        <a href="notifications.html"
+           class="notification">
+
+            🔔
+
+            <span class="notification-badge">
+                0
+            </span>
+
+        </a>
+
+        <div class="agent-profile-mini">
+
+            <div class="agent-avatar-small"
+                 id="agentAvatar">
+                --
+            </div>
+
+            <div class="agent-mini-info">
+
+                <strong id="agentName">
+                    Loading...
+                </strong>
+
+                <span>
+                    Insurance Agent
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+<div class="content">
+
+<!-- BREADCRUMB -->
+
+<div class="breadcrumb">
+
+    <a href="dashboard.html">
+        Dashboard
+    </a>
+
+    <span>/</span>
+
+    <a href="customers.html">
+        Customers
+    </a>
+
+    <span>/</span>
+
+    <span class="current"
+          id="breadcrumbCurrent">
+        Add Customer
+    </span>
+
+</div>
+
+<!-- HEADER -->
+
+<div class="form-header">
+
+    <div class="form-header-icon">
+        👤
+    </div>
+
+    <div>
+
+        <h2 id="formHeaderTitle">
+            Customer Registration
+        </h2>
+
+        <p id="formHeaderDescription">
+            Enter the customer's personal information,
+            contact details, branch and customer portal credentials.
+        </p>
+
+    </div>
+
+</div>
+
+<!-- FORM -->
+
+<form id="customerForm">
+
+<div class="form-card">
+
+<!-- =========================================
+     SECTION 1 - PERSONAL INFORMATION
+========================================= -->
+
+<section class="form-section">
+
+    <div class="section-title">
+
+        <div class="section-number">
+            1
+        </div>
+
+        <div>
+
+            <h3>
+                Personal Information
+            </h3>
+
+            <p>
+                Basic details of the customer
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="form-grid">
+
+        <!-- FULL NAME -->
+
+        <div class="form-group">
+
+            <label for="fullName">
+
+                Full Name
+                <span class="required">*</span>
+
+            </label>
+
+            <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                placeholder="Enter customer's full name"
+                required>
+
+        </div>
+
+        <!-- DOB -->
+
+        <div class="form-group">
+
+            <label for="dob">
+
+                Date of Birth
+                <span class="required">*</span>
+
+            </label>
+
+            <input
+                type="date"
+                id="dob"
+                name="dob"
+                required>
+
+        </div>
+
+        <!-- GENDER -->
+
+        <div class="form-group">
+
+            <label>
+
+                Gender
+                <span class="required">*</span>
+
+            </label>
+
+            <div class="radio-group">
+
+                <label class="radio-option">
+
+                    <input
+                        type="radio"
+                        name="gender"
+                        value="Male"
+                        required>
+
+                    Male
+
+                </label>
+
+                <label class="radio-option">
+
+                    <input
+                        type="radio"
+                        name="gender"
+                        value="Female">
+
+                    Female
+
+                </label>
+
+                <label class="radio-option">
+
+                    <input
+                        type="radio"
+                        name="gender"
+                        value="Other">
+
+                    Other
+
+                </label>
+
+            </div>
+
+        </div>
+
+        <!-- MARITAL STATUS -->
+
+        <div class="form-group">
+
+            <label for="maritalStatus">
+
+                Marital Status
+
+                <span class="required">*</span>
+
+            </label>
+
+            <select
+                id="maritalStatus"
+                name="maritalStatus"
+                required>
+
+                <option value="">
+                    Select marital status
+                </option>
+
+                <option value="Single">
+                    Single
+                </option>
+
+                <option value="Married">
+                    Married
+                </option>
+
+                <option value="Divorced">
+                    Divorced
+                </option>
+
+                <option value="Widowed">
+                    Widowed
+                </option>
+
+                <option value="Other">
+                    Other
+                </option>
+
+            </select>
+
+        </div>
+
+        <!-- OCCUPATION -->
+
+        <div class="form-group">
+
+            <label for="occupation">
+                Occupation
+            </label>
+
+            <input
+                type="text"
+                id="occupation"
+                name="occupation"
+                placeholder="e.g. Teacher, Engineer, Business">
+
+        </div>
+
+        <!-- ANNUAL INCOME -->
+
+        <div class="form-group">
+
+            <label for="income">
+
+                Annual Income
+
+            </label>
+
+            <select
+                id="income"
+                name="income">
+
+                <option value="">
+                    Select annual income range
+                </option>
+
+                <option value="below-3">
+                    Below ₹3 Lakhs
+                </option>
+
+                <option value="3-5">
+                    ₹3 – ₹5 Lakhs
+                </option>
+
+                <option value="5-10">
+                    ₹5 – ₹10 Lakhs
+                </option>
+
+                <option value="10-20">
+                    ₹10 – ₹20 Lakhs
+                </option>
+
+                <option value="above-20">
+                    Above ₹20 Lakhs
+                </option>
+
+            </select>
+
+            <span class="field-help">
+                Used by TrustNest for policy recommendation.
+            </span>
+
+        </div>
+
+        <!-- FAMILY SIZE -->
+
+        <div class="form-group">
+
+            <label for="familySize">
+                Family Size
+            </label>
+
+            <select
+                id="familySize"
+                name="familySize">
+
+                <option value="">
+                    Select family size
+                </option>
+
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6+">6 or more</option>
+
+            </select>
+
+        </div>
+
+        <!-- DEPENDENTS -->
+
+        <div class="form-group">
+
+            <label for="dependents">
+
+                Number of Dependents
+
+            </label>
+
+            <select
+                id="dependents"
+                name="dependents">
+
+                <option value="">
+                    Select number of dependents
+                </option>
+
+                <option value="0">
+                    0
+                </option>
+
+                <option value="1">
+                    1
+                </option>
+
+                <option value="2">
+                    2
+                </option>
+
+                <option value="3">
+                    3
+                </option>
+
+                <option value="4">
+                    4
+                </option>
+
+                <option value="5+">
+                    5 or more
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================================
+     SECTION 2 - CONTACT
+========================================= -->
+
+<section class="form-section">
+
+    <div class="section-title">
+
+        <div class="section-number">
+            2
+        </div>
+
+        <div>
+
+            <h3>
+                Contact Information
+            </h3>
+
+            <p>
+                Customer communication and branch details
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="form-grid">
+
+        <!-- MOBILE -->
+
+        <div class="form-group">
+
+            <label for="mobile">
+
+                Mobile Number
+                <span class="required">*</span>
+
+            </label>
+
+            <input
+                type="tel"
+                id="mobile"
+                name="mobile"
+                placeholder="Enter 10-digit mobile number"
+                maxlength="10"
+                required>
+
+        </div>
+
+        <!-- EMAIL -->
+
+        <div class="form-group">
+
+            <label for="email">
+                Email Address
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="customer@example.com">
+
+        </div>
+
+        <!-- ADDRESS -->
+
+        <div class="form-group full">
+
+            <label for="address">
+
+                Address
+                <span class="required">*</span>
+
+            </label>
+
+            <textarea
+                id="address"
+                name="address"
+                placeholder="Enter complete residential address"
+                required></textarea>
+
+        </div>
+
+        <!-- CITY -->
+
+        <div class="form-group">
+
+            <label for="city">
+
+                City
+                <span class="required">*</span>
+
+            </label>
+
+            <input
+                type="text"
+                id="city"
+                name="city"
+                placeholder="Enter city"
+                required>
+
+        </div>
+
+        <!-- STATE -->
+
+        <div class="form-group">
+
+            <label for="state">
+
+                State
+                <span class="required">*</span>
+
+            </label>
+
+            <select
+                id="state"
+                name="state"
+                required>
+
+                <option value="">
+                    Select state
+                </option>
+
+                <option value="Tamil Nadu">
+                    Tamil Nadu
+                </option>
+
+                <option value="Kerala">
+                    Kerala
+                </option>
+
+                <option value="Karnataka">
+                    Karnataka
+                </option>
+
+                <option value="Andhra Pradesh">
+                    Andhra Pradesh
+                </option>
+
+                <option value="Telangana">
+                    Telangana
+                </option>
+
+                <option value="Maharashtra">
+                    Maharashtra
+                </option>
+
+                <option value="Delhi">
+                    Delhi
+                </option>
+
+                <option value="Other">
+                    Other
+                </option>
+
+            </select>
+
+        </div>
+
+        <!-- PINCODE -->
+
+        <div class="form-group">
+
+            <label for="pincode">
+
+                PIN Code
+                <span class="required">*</span>
+
+            </label>
+
+            <input
+                type="text"
+                id="pincode"
+                name="pincode"
+                placeholder="6-digit PIN code"
+                maxlength="6"
+                required>
+
+        </div>
+
+        <!-- PREFERRED CONTACT -->
+
+        <div class="form-group">
+
+            <label for="preferredContact">
+                Preferred Contact Method
+            </label>
+
+            <select
+                id="preferredContact"
+                name="preferredContact">
+
+                <option value="phone">
+                    Phone Call
+                </option>
+
+                <option value="whatsapp">
+                    WhatsApp
+                </option>
+
+                <option value="sms">
+                    SMS
+                </option>
+
+                <option value="email">
+                    Email
+                </option>
+
+            </select>
+
+        </div>
+
+        <!-- BRANCH -->
+
+        <div class="form-group">
+
+            <label for="branch">
+
+                Branch
+
+            </label>
+
+            <input
+                type="text"
+                id="branch"
+                name="branch"
+                class="branch-input"
+                placeholder="Agent branch"
+                readonly>
+
+            <span class="field-help">
+                This branch is automatically taken from the
+                logged-in agent's profile.
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================================
+     SECTION 3 - LOGIN
+========================================= -->
+
+<section class="form-section password-section">
+
+    <div class="section-title">
+
+        <div class="section-number">
+            3
+        </div>
+
+        <div>
+
+            <h3>
+                Customer Login Credentials
+            </h3>
+
+            <p>
+                Credentials for the customer's read-only portal
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="password-box">
+
+        <div class="password-header">
+
+            <div class="password-icon">
+                🔐
+            </div>
+
+            <div>
+
+                <strong>
+                    Customer Portal Access
+                </strong>
+
+                <span>
+                    The customer can use these credentials
+                    to view their information.
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="form-grid">
+
+            <!-- LOGIN ID -->
+
+            <div class="form-group">
+
+                <label for="customerLoginId">
+
+                    Customer Username / Login ID
+
+                    <span class="required">
+                        *
+                    </span>
+
+                </label>
+
+                <input
+                    type="text"
+                    id="customerLoginId"
+                    name="customerLoginId"
+                    placeholder="Example: TN-CUST-1001"
+                    minlength="4"
+                    maxlength="50"
+                    required>
+
+                <span class="field-help">
+                    This username is used for customer portal login.
+                </span>
+
+            </div>
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="customerPassword">
+
+                    Customer Password
+
+                    <span class="required"
+                          id="passwordRequiredStar">
+                        *
+                    </span>
+
+                </label>
+
+                <div class="password-input-wrapper">
+
+                    <input
+                        type="password"
+                        id="customerPassword"
+                        name="customerPassword"
+                        placeholder="Create customer password"
+                        minlength="8"
+                        maxlength="100"
+                        required>
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        onclick="togglePassword(
+                            'customerPassword',
+                            this
+                        )">
+
+                        👁
+
+                    </button>
+
+                </div>
+
+                <span class="field-help"
+                      id="passwordHelp">
+
+                    Minimum 8 characters.
+
+                </span>
+
+            </div>
+
+            <!-- CONFIRM -->
+
+            <div class="form-group">
+
+                <label for="confirmPassword">
+
+                    Confirm Password
+
+                    <span class="required"
+                          id="confirmRequiredStar">
+                        *
+                    </span>
+
+                </label>
+
+                <div class="password-input-wrapper">
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        placeholder="Re-enter customer password"
+                        minlength="8"
+                        maxlength="100"
+                        required>
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        onclick="togglePassword(
+                            'confirmPassword',
+                            this
+                        )">
+
+                        👁
+
+                    </button>
+
+                </div>
+
+                <span
+                    class="error-message"
+                    id="passwordMatchError"
+                    style="display:none;color:#c94b4b;font-size:8px;margin-top:5px;">
+
+                    Passwords do not match.
+
+                </span>
+
+            </div>
+
+            <!-- PREVIEW -->
+
+            <div class="form-group">
+
+                <label>
+                    Customer Login Preview
+                </label>
+
+                <div class="login-id-preview">
+
+                    Username:
+
+                    <strong id="loginPreview">
+                        Not entered
+                    </strong>
+
+                    <br>
+
+                    Portal:
+
+                    <strong>
+                        Customer View Only
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="password-rules">
+
+            <div
+                class="password-rule invalid"
+                id="ruleLength">
+                ● At least 8 characters
+            </div>
+
+            <div
+                class="password-rule invalid"
+                id="ruleUpper">
+                ● One uppercase letter
+            </div>
+
+            <div
+                class="password-rule invalid"
+                id="ruleLower">
+                ● One lowercase letter
+            </div>
+
+            <div
+                class="password-rule invalid"
+                id="ruleNumber">
+                ● One number
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================================
+     SECTION 4 - DOCUMENTS
+========================================= -->
+
+<section class="form-section">
+
+    <div class="section-title">
+
+        <div class="section-number">
+            4
+        </div>
+
+        <div>
+
+            <h3>
+                Documents
+            </h3>
+
+            <p>
+                Upload customer identification documents
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="form-grid">
+
+        <div class="form-group">
+
+            <label>
+                Aadhaar / Identity Document
+            </label>
+
+            <label
+                class="upload-box"
+                for="aadhaar">
+
+                <div class="upload-icon">
+                    📄
+                </div>
+
+                <strong>
+                    Click to upload document
+                </strong>
+
+                <span>
+                    PDF, JPG or PNG • Max 5 MB
+                </span>
+
+                <span
+                    class="file-name"
+                    id="aadhaarName">
+                </span>
+
+            </label>
+
+            <input
+                type="file"
+                id="aadhaar"
+                name="aadhaar"
+                accept=".pdf,.jpg,.jpeg,.png">
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+                PAN Card
+            </label>
+
+            <label
+                class="upload-box"
+                for="pan">
+
+                <div class="upload-icon">
+                    🪪
+                </div>
+
+                <strong>
+                    Click to upload PAN
+                </strong>
+
+                <span>
+                    PDF, JPG or PNG • Max 5 MB
+                </span>
+
+                <span
+                    class="file-name"
+                    id="panName">
+                </span>
+
+            </label>
+
+            <input
+                type="file"
+                id="pan"
+                name="pan"
+                accept=".pdf,.jpg,.jpeg,.png">
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================================
+     SECTION 5 - ADDITIONAL
+========================================= -->
+
+<section class="form-section">
+
+    <div class="section-title">
+
+        <div class="section-number">
+            5
+        </div>
+
+        <div>
+
+            <h3>
+                Additional Information
+            </h3>
+
+            <p>
+                Information useful for smart assistance
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="form-grid">
+
+        <div class="form-group">
+
+            <label for="financialGoal">
+                Primary Financial Goal
+            </label>
+
+            <select
+                id="financialGoal"
+                name="financialGoal">
+
+                <option value="">
+                    Select financial goal
+                </option>
+
+                <option value="family-protection">
+                    Family Protection
+                </option>
+
+                <option value="child-education">
+                    Child Education
+                </option>
+
+                <option value="retirement">
+                    Retirement Planning
+                </option>
+
+                <option value="wealth">
+                    Wealth Creation
+                </option>
+
+                <option value="tax-saving">
+                    Tax Saving
+                </option>
+
+                <option value="savings">
+                    Long-Term Savings
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="leadSource">
+                Customer Source
+            </label>
+
+            <select
+                id="leadSource"
+                name="leadSource">
+
+                <option value="">
+                    Select source
+                </option>
+
+                <option value="Existing Customer">
+                    Existing Customer
+                </option>
+
+                <option value="Referral">
+                    Referral
+                </option>
+
+                <option value="Website">
+                    Website
+                </option>
+
+                <option value="Social Media">
+                    Social Media
+                </option>
+
+                <option value="Walk-in">
+                    Walk-in
+                </option>
+
+                <option value="Agent Reference">
+                    Agent Reference
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="form-group full">
+
+            <label for="notes">
+                Agent Notes
+            </label>
+
+            <textarea
+                id="notes"
+                name="notes"
+                placeholder="Enter important notes about the customer..."></textarea>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CONSENT -->
+
+<section class="form-section">
+
+    <div class="consent-box">
+
+        <input
+            type="checkbox"
+            id="consent"
+            name="consent"
+            required>
+
+        <label for="consent">
+
+            I confirm that the customer has provided
+            the necessary information and has given
+            permission for their details to be stored
+            and used for insurance-related communication
+            and customer service.
+
+        </label>
+
+    </div>
+
+</section>
+
+<!-- ACTIONS -->
+
+<div class="form-actions">
+
+    <div class="secure-note">
+
+        <span class="secure-icon">
+            🔒
+        </span>
+
+        Customer information and login credentials
+        are securely handled by TrustNest.
+
+    </div>
+
+    <div class="action-buttons">
+
+        <button
+            type="button"
+            class="btn btn-cancel"
+            onclick="cancelForm()">
+
+            Cancel
+
+        </button>
+
+        <button
+            type="submit"
+            class="btn btn-save"
+            id="saveCustomerButton">
+
+            <span id="saveButtonIcon">
+                ✓
+            </span>
+
+            <span id="saveButtonText">
+                Save Customer
+            </span>
+
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+
+</form>
+
+<!-- INFO -->
+
+<div class="info-card">
+
+    <div class="info-icon">
+        ✨
+    </div>
+
+    <div>
+
+        <h4>
+            TrustNest Smart Assistance
+        </h4>
+
+        <p>
+
+            TrustNest uses customer information such as
+            age, annual income, family size, dependents
+            and financial goals to support policy
+            recommendations, priority scoring and
+            follow-up suggestions.
+
+        </p>
+
+    </div>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+<script>
+
+/* =========================================
+   API
+========================================= */
+
+const API_URL =
+    window.TRUSTNEST_API_URL ||
+    "http://localhost:5000";
+
+
+/* =========================================
+   EDIT MODE
+========================================= */
+
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const customerId =
+    urlParams.get("id");
+
+const isEditMode =
+    Boolean(customerId);
+
+
+/* =========================================
+   AGENT ID
+========================================= */
+
+const loggedInAgentId =
+    localStorage.getItem("agentId");
+
+
+if (!loggedInAgentId) {
+
+    alert(
+        "Please login as an agent before continuing."
+    );
+
+    window.location.href =
+        "../login.html";
+
+}
+
+
+/* =========================================
+   MOBILE MENU
+========================================= */
+
+const mobileMenu =
+    document.getElementById("mobileMenu");
+
+const sidebar =
+    document.getElementById("sidebar");
+
+if (mobileMenu && sidebar) {
+
+    mobileMenu.addEventListener(
+        "click",
+        function () {
+
+            sidebar.classList.toggle("open");
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   PAGE MODE
+========================================= */
+
+function updatePageForMode() {
+
+    if (!isEditMode) {
+        return;
+    }
+
+    document.title =
+        "Edit Customer | TrustNest";
+
+    document.getElementById(
+        "pageTitle"
+    ).textContent =
+        "Edit Customer";
+
+    document.getElementById(
+        "pageSubtitle"
+    ).textContent =
+        "Update customer information in your portfolio";
+
+    document.getElementById(
+        "breadcrumbCurrent"
+    ).textContent =
+        "Edit Customer";
+
+    document.getElementById(
+        "formHeaderTitle"
+    ).textContent =
+        "Edit Customer Information";
+
+    document.getElementById(
+        "formHeaderDescription"
+    ).textContent =
+        "Update customer information including marital status, annual income, dependents and branch.";
+
+    document.getElementById(
+        "saveButtonText"
+    ).textContent =
+        "Update Customer";
+
+
+    /* Password is optional during editing */
+
+    document.getElementById(
+        "customerPassword"
+    ).required = false;
+
+    document.getElementById(
+        "confirmPassword"
+    ).required = false;
+
+
+    document.getElementById(
+        "passwordRequiredStar"
+    ).style.display = "none";
+
+    document.getElementById(
+        "confirmRequiredStar"
+    ).style.display = "none";
+
+    document.getElementById(
+        "passwordHelp"
+    ).textContent =
+        "Leave blank to keep the existing password. Enter a new password only if you want to change it.";
+
+}
+
+
+/* =========================================
+   LOAD AGENT
+========================================= */
+
+async function loadAgentInformation() {
+
+    if (!loggedInAgentId) {
+        return;
+    }
+
+    try {
+
+        const response =
+            await fetch(
+                API_URL +
+                "/api/dashboard?agentId=" +
+                encodeURIComponent(
+                    loggedInAgentId
+                )
+            );
+
+        const data =
+            await response.json();
+
+        if (
+            response.ok &&
+            data.success &&
+            data.agent
+        ) {
+
+            const agent =
+                data.agent;
+
+
+            /* AGENT NAME */
+
+            const agentName =
+                document.getElementById(
+                    "agentName"
+                );
+
+            if (agentName) {
+
+                agentName.textContent =
+                    agent.fullName || "Agent";
+
+            }
+
+
+            /* AVATAR */
+
+            const agentAvatar =
+                document.getElementById(
+                    "agentAvatar"
+                );
+
+            if (agentAvatar) {
+
+                const name =
+                    agent.fullName ||
+                    "Agent";
+
+                const parts =
+                    name.trim().split(/\s+/);
+
+                let initials = "";
+
+                if (parts.length >= 2) {
+
+                    initials =
+                        parts[0][0] +
+                        parts[parts.length - 1][0];
+
+                } else {
+
+                    initials =
+                        name.substring(0, 2);
+
+                }
+
+                agentAvatar.textContent =
+                    initials.toUpperCase();
+
+            }
+
+
+            /* =================================
+               BRANCH
+            ================================= */
+
+            const branchInput =
+                document.getElementById(
+                    "branch"
+                );
+
+
+            if (branchInput) {
+
+                /*
+                 * Supports common branch property
+                 * names used in the Agent model.
+                 */
+
+                const branch =
+                    agent.branch ||
+                    agent.branchName ||
+                    agent.branchDetails ||
+                    agent.officeBranch ||
+                    "";
+
+                branchInput.value =
+                    branch;
+
+            }
+
+        }
+
+    }
+    catch (error) {
+
+        console.error(
+            "Agent loading error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   SET VALUE
+========================================= */
+
+function setValue(
+    id,
+    value
+) {
+
+    const element =
+        document.getElementById(id);
+
+    if (!element) {
+        return;
+    }
+
+    element.value =
+        value === null ||
+        value === undefined
+            ? ""
+            : value;
+
+}
+
+
+/* =========================================
+   RADIO
+========================================= */
+
+function setRadioValue(
+    name,
+    value
+) {
+
+    const radios =
+        document.querySelectorAll(
+            'input[name="' + name + '"]'
+        );
+
+    radios.forEach(
+        radio => {
+
+            radio.checked =
+                radio.value === value;
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   LOAD CUSTOMER
+========================================= */
+
+async function loadCustomerForEdit() {
+
+    if (!isEditMode) {
+        return;
+    }
+
+    try {
+
+        const response =
+            await fetch(
+                API_URL +
+                "/api/customers/" +
+                encodeURIComponent(
+                    customerId
+                ) +
+                "?agentId=" +
+                encodeURIComponent(
+                    loggedInAgentId
+                )
+            );
+
+        const data =
+            await response.json();
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.message ||
+                "Unable to load customer."
+            );
+
+        }
+
+        if (
+            !data.success ||
+            !data.customer
+        ) {
+
+            throw new Error(
+                "Customer information could not be loaded."
+            );
+
+        }
+
+        const customer =
+            data.customer;
+
+
+        /* PERSONAL */
+
+        setValue(
+            "fullName",
+            customer.fullName
+        );
+
+        setValue(
+            "dob",
+            customer.dateOfBirth ||
+            customer.dob
+        );
+
+        setRadioValue(
+            "gender",
+            customer.gender
+        );
+
+        setValue(
+            "maritalStatus",
+            customer.maritalStatus
+        );
+
+        setValue(
+            "occupation",
+            customer.occupation
+        );
+
+        setValue(
+            "income",
+            customer.income
+        );
+
+        setValue(
+            "familySize",
+            customer.familySize
+        );
+
+        setValue(
+            "dependents",
+            customer.dependents
+        );
+
+
+        /* CONTACT */
+
+        setValue(
+            "mobile",
+            customer.phone ||
+            customer.mobile
+        );
+
+        setValue(
+            "email",
+            customer.email
+        );
+
+        setValue(
+            "address",
+            customer.address
+        );
+
+        setValue(
+            "city",
+            customer.city
+        );
+
+        setValue(
+            "state",
+            customer.state
+        );
+
+        setValue(
+            "pincode",
+            customer.pincode
+        );
+
+        setValue(
+            "preferredContact",
+            customer.preferredContact
+        );
+
+
+        /* BRANCH */
+
+        setValue(
+            "branch",
+            customer.branch
+        );
+
+
+        /* LOGIN */
+
+        setValue(
+            "customerLoginId",
+            customer.customerLoginId
+        );
+
+        updateLoginPreview();
+
+
+        /* ADDITIONAL */
+
+        setValue(
+            "financialGoal",
+            customer.financialGoal
+        );
+
+        setValue(
+            "leadSource",
+            customer.leadSource
+        );
+
+        setValue(
+            "notes",
+            customer.notes
+        );
+
+
+        /* CONSENT */
+
+        const consent =
+            document.getElementById(
+                "consent"
+            );
+
+        if (consent) {
+            consent.checked = true;
+        }
+
+
+        console.log(
+            "Customer loaded:",
+            customer
+        );
+
+    }
+    catch (error) {
+
+        console.error(
+            "Customer loading error:",
+            error
+        );
+
+        alert(
+            error.message ||
+            "Unable to load customer information."
+        );
+
+        window.location.href =
+            "customers.html";
+
+    }
+
+}
+
+
+/* =========================================
+   PASSWORD TOGGLE
+========================================= */
+
+function togglePassword(
+    inputId,
+    button
+) {
+
+    const input =
+        document.getElementById(
+            inputId
+        );
+
+    if (!input) {
+        return;
+    }
+
+    if (
+        input.type === "password"
+    ) {
+
+        input.type = "text";
+
+        button.textContent =
+            "🙈";
+
+    }
+    else {
+
+        input.type = "password";
+
+        button.textContent =
+            "👁";
+
+    }
+
+}
+
+
+/* =========================================
+   PASSWORD VALIDATION
+========================================= */
+
+const passwordInput =
+    document.getElementById(
+        "customerPassword"
+    );
+
+const confirmPasswordInput =
+    document.getElementById(
+        "confirmPassword"
+    );
+
+
+function updateRule(
+    id,
+    valid
+) {
+
+    const element =
+        document.getElementById(id);
+
+    if (!element) {
+        return;
+    }
+
+    element.classList.toggle(
+        "valid",
+        valid
+    );
+
+    element.classList.toggle(
+        "invalid",
+        !valid
+    );
+
+}
+
+
+function updatePasswordRules() {
+
+    if (!passwordInput) {
+        return;
+    }
+
+    const password =
+        passwordInput.value;
+
+    updateRule(
+        "ruleLength",
+        password.length >= 8
+    );
+
+    updateRule(
+        "ruleUpper",
+        /[A-Z]/.test(password)
+    );
+
+    updateRule(
+        "ruleLower",
+        /[a-z]/.test(password)
+    );
+
+    updateRule(
+        "ruleNumber",
+        /[0-9]/.test(password)
+    );
+
+}
+
+
+function checkPasswordMatch() {
+
+    if (
+        !passwordInput ||
+        !confirmPasswordInput
+    ) {
+        return true;
+    }
+
+    const password =
+        passwordInput.value;
+
+    const confirmPassword =
+        confirmPasswordInput.value;
+
+    const error =
+        document.getElementById(
+            "passwordMatchError"
+        );
+
+
+    if (
+        confirmPassword.length > 0 &&
+        password !== confirmPassword
+    ) {
+
+        if (error) {
+            error.style.display =
+                "block";
+        }
+
+        return false;
+
+    }
+
+
+    if (error) {
+        error.style.display =
+            "none";
+    }
+
+    return true;
+
+}
+
+
+if (passwordInput) {
+
+    passwordInput.addEventListener(
+        "input",
+        updatePasswordRules
+    );
+
+}
+
+if (confirmPasswordInput) {
+
+    confirmPasswordInput.addEventListener(
+        "input",
+        checkPasswordMatch
+    );
+
+}
+
+
+/* =========================================
+   LOGIN PREVIEW
+========================================= */
+
+const loginIdInput =
+    document.getElementById(
+        "customerLoginId"
+    );
+
+const loginPreview =
+    document.getElementById(
+        "loginPreview"
+    );
+
+
+function updateLoginPreview() {
+
+    if (
+        !loginIdInput ||
+        !loginPreview
+    ) {
+        return;
+    }
+
+    loginPreview.textContent =
+        loginIdInput.value.trim() ||
+        "Not entered";
+
+}
+
+
+if (loginIdInput) {
+
+    loginIdInput.addEventListener(
+        "input",
+        updateLoginPreview
+    );
+
+}
+
+
+/* =========================================
+   FILE DISPLAY
+========================================= */
+
+function displayFileName(
+    input,
+    targetId
+) {
+
+    const target =
+        document.getElementById(
+            targetId
+        );
+
+    if (
+        target &&
+        input.files.length > 0
+    ) {
+
+        const file =
+            input.files[0];
+
+        const maxSize =
+            5 * 1024 * 1024;
+
+        if (
+            file.size > maxSize
+        ) {
+
+            alert(
+                "File size must be less than 5 MB."
+            );
+
+            input.value = "";
+
+            target.textContent = "";
+
+            return;
+
+        }
+
+        target.textContent =
+            "✓ " + file.name;
+
+    }
+
+}
+
+
+document
+    .getElementById("aadhaar")
+    .addEventListener(
+        "change",
+        function () {
+
+            displayFileName(
+                this,
+                "aadhaarName"
+            );
+
+        }
+    );
+
+
+document
+    .getElementById("pan")
+    .addEventListener(
+        "change",
+        function () {
+
+            displayFileName(
+                this,
+                "panName"
+            );
+
+        }
+    );
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+document
+    .getElementById("mobile")
+    .addEventListener(
+        "input",
+        function () {
+
+            this.value =
+                this.value.replace(
+                    /[^0-9]/g,
+                    ""
+                );
+
+        }
+    );
+
+
+/* =========================================
+   PINCODE
+========================================= */
+
+document
+    .getElementById("pincode")
+    .addEventListener(
+        "input",
+        function () {
+
+            this.value =
+                this.value.replace(
+                    /[^0-9]/g,
+                    ""
+                );
+
+        }
+    );
+
+
+/* =========================================
+   SUBMIT
+========================================= */
+
+document
+    .getElementById("customerForm")
+    .addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            const agentId =
+                localStorage.getItem(
+                    "agentId"
+                );
+
+
+            if (!agentId) {
+
+                alert(
+                    "Agent session not found. Please login again."
+                );
+
+                window.location.href =
+                    "../login.html";
+
+                return;
+
+            }
+
+
+            /* BASIC VALUES */
+
+            const fullName =
+                document.getElementById(
+                    "fullName"
+                ).value.trim();
+
+            const dob =
+                document.getElementById(
+                    "dob"
+                ).value;
+
+            const genderElement =
+                document.querySelector(
+                    'input[name="gender"]:checked'
+                );
+
+            const gender =
+                genderElement
+                    ? genderElement.value
+                    : "";
+
+            const maritalStatus =
+                document.getElementById(
+                    "maritalStatus"
+                ).value;
+
+            const occupation =
+                document.getElementById(
+                    "occupation"
+                ).value.trim();
+
+            const income =
+                document.getElementById(
+                    "income"
+                ).value;
+
+            const familySize =
+                document.getElementById(
+                    "familySize"
+                ).value;
+
+            const dependents =
+                document.getElementById(
+                    "dependents"
+                ).value;
+
+
+            /* CONTACT */
+
+            const mobile =
+                document.getElementById(
+                    "mobile"
+                ).value.trim();
+
+            const email =
+                document.getElementById(
+                    "email"
+                ).value.trim();
+
+            const address =
+                document.getElementById(
+                    "address"
+                ).value.trim();
+
+            const city =
+                document.getElementById(
+                    "city"
+                ).value.trim();
+
+            const state =
+                document.getElementById(
+                    "state"
+                ).value;
+
+            const pincode =
+                document.getElementById(
+                    "pincode"
+                ).value.trim();
+
+            const preferredContact =
+                document.getElementById(
+                    "preferredContact"
+                ).value;
+
+            const branch =
+                document.getElementById(
+                    "branch"
+                ).value.trim();
+
+
+            /* LOGIN */
+
+            const customerLoginId =
+                document.getElementById(
+                    "customerLoginId"
+                ).value.trim();
+
+            const customerPassword =
+                document.getElementById(
+                    "customerPassword"
+                ).value;
+
+            const confirmPassword =
+                document.getElementById(
+                    "confirmPassword"
+                ).value;
+
+
+            /* ADDITIONAL */
+
+            const financialGoal =
+                document.getElementById(
+                    "financialGoal"
+                ).value;
+
+            const leadSource =
+                document.getElementById(
+                    "leadSource"
+                ).value;
+
+            const notes =
+                document.getElementById(
+                    "notes"
+                ).value.trim();
+
+
+            /* VALIDATION */
+
+            if (!fullName) {
+
+                alert(
+                    "Please enter the customer's full name."
+                );
+
+                return;
+
+            }
+
+            if (!dob) {
+
+                alert(
+                    "Please select the customer's date of birth."
+                );
+
+                return;
+
+            }
+
+            if (!gender) {
+
+                alert(
+                    "Please select the customer's gender."
+                );
+
+                return;
+
+            }
+
+            if (!maritalStatus) {
+
+                alert(
+                    "Please select marital status."
+                );
+
+                return;
+
+            }
+
+            if (
+                mobile.length !== 10
+            ) {
+
+                alert(
+                    "Please enter a valid 10-digit mobile number."
+                );
+
+                return;
+
+            }
+
+            if (!address) {
+
+                alert(
+                    "Please enter the customer's address."
+                );
+
+                return;
+
+            }
+
+            if (!city) {
+
+                alert(
+                    "Please enter the city."
+                );
+
+                return;
+
+            }
+
+            if (!state) {
+
+                alert(
+                    "Please select the state."
+                );
+
+                return;
+
+            }
+
+            if (
+                pincode.length !== 6
+            ) {
+
+                alert(
+                    "Please enter a valid 6-digit PIN code."
+                );
+
+                return;
+
+            }
+
+            if (
+                customerLoginId.length < 4
+            ) {
+
+                alert(
+                    "Customer username must contain at least 4 characters."
+                );
+
+                return;
+
+            }
+
+
+            /* PASSWORD */
+
+            if (
+                !isEditMode &&
+                customerPassword.length < 8
+            ) {
+
+                alert(
+                    "Customer password must contain at least 8 characters."
+                );
+
+                return;
+
+            }
+
+
+            if (
+                customerPassword.length > 0
+            ) {
+
+                const strongPassword =
+                    /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/;
+
+                if (
+                    !strongPassword.test(
+                        customerPassword
+                    )
+                ) {
+
+                    alert(
+                        "Password must contain at least 8 characters, one uppercase letter, one lowercase letter and one number."
+                    );
+
+                    return;
+
+                }
+
+                if (
+                    customerPassword !==
+                    confirmPassword
+                ) {
+
+                    alert(
+                        "Customer password and confirm password do not match."
+                    );
+
+                    return;
+
+                }
+
+            }
+
+
+            /* =================================
+               DATA SENT TO SERVER
+            ================================= */
+
+            const customerData = {
+
+                agentId: agentId,
+
+                fullName: fullName,
+
+                dob: dob,
+
+                gender: gender,
+
+                maritalStatus:
+                    maritalStatus,
+
+                occupation:
+                    occupation,
+
+                income:
+                    income,
+
+                familySize:
+                    familySize,
+
+                dependents:
+                    dependents,
+
+                mobile:
+                    mobile,
+
+                email:
+                    email,
+
+                address:
+                    address,
+
+                city:
+                    city,
+
+                state:
+                    state,
+
+                pincode:
+                    pincode,
+
+                preferredContact:
+                    preferredContact,
+
+                branch:
+                    branch,
+
+                financialGoal:
+                    financialGoal,
+
+                leadSource:
+                    leadSource,
+
+                notes:
+                    notes,
+
+                customerLoginId:
+                    customerLoginId
+
+            };
+
+
+            /* PASSWORD ONLY WHEN ENTERED */
+
+            if (
+                customerPassword.length > 0
+            ) {
+
+                customerData.customerPassword =
+                    customerPassword;
+
+            }
+
+
+            console.log(
+                "Customer data:",
+                {
+                    ...customerData,
+                    customerPassword:
+                        customerPassword
+                            ? "[PROTECTED]"
+                            : undefined
+                }
+            );
+
+
+            /* BUTTON */
+
+            const saveButton =
+                document.getElementById(
+                    "saveCustomerButton"
+                );
+
+            if (saveButton) {
+
+                saveButton.disabled =
+                    true;
+
+                saveButton.innerHTML =
+                    isEditMode
+                        ? "Updating..."
+                        : "Saving...";
+
+            }
+
+
+            /* URL */
+
+            const requestUrl =
+                isEditMode
+
+                    ? API_URL +
+                      "/api/customers/" +
+                      encodeURIComponent(
+                          customerId
+                      )
+
+                    : API_URL +
+                      "/api/customers";
+
+
+            const requestMethod =
+                isEditMode
+                    ? "PUT"
+                    : "POST";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        requestUrl,
+                        {
+
+                            method:
+                                requestMethod,
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json"
+
+                            },
+
+                            body:
+                                JSON.stringify(
+                                    customerData
+                                )
+
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.message ||
+                        (
+                            isEditMode
+                                ? "Unable to update customer."
+                                : "Unable to save customer."
+                        )
+                    );
+
+                }
+
+
+                if (data.success) {
+
+                    alert(
+                        isEditMode
+                            ? "Customer updated successfully!"
+                            : "Customer added successfully!"
+                    );
+
+                    window.location.href =
+                        "customers.html";
+
+                }
+                else {
+
+                    throw new Error(
+                        data.message ||
+                        "Customer operation failed."
+                    );
+
+                }
+
+            }
+            catch (error) {
+
+                console.error(
+                    "Customer save error:",
+                    error
+                );
+
+                alert(
+                    error.message ||
+                    "Unable to save customer."
+                );
+
+
+                if (saveButton) {
+
+                    saveButton.disabled =
+                        false;
+
+                    saveButton.innerHTML =
+                        isEditMode
+                            ? "<span>✓</span> Update Customer"
+                            : "<span>✓</span> Save Customer";
+
+                }
+
+            }
+
+        }
+    );
+
+
+/* =========================================
+   CANCEL
+========================================= */
+
+function cancelForm() {
+
+    if (
+        confirm(
+            "Are you sure you want to cancel? Unsaved information will be lost."
+        )
+    ) {
+
+        window.location.href =
+            "customers.html";
+
+    }
+
+}
+
+
+/* =========================================
+   INITIALIZE
+========================================= */
+
+updatePageForMode();
+
+loadAgentInformation();
+
+loadCustomerForEdit();
+
+
+console.log(
+    "TrustNest Customer page loaded.",
+    {
+        editMode: isEditMode,
+        customerId: customerId
+    }
+);
+
+</script>
+
+</body>
+
+</html>

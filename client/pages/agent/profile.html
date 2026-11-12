@@ -1,0 +1,3924 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile | TrustNest</title>
+
+    <meta name="description"
+          content="TrustNest Agent Profile">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Existing CSS -->
+    <link rel="stylesheet"
+          href="../../css/style.css">
+
+    <link rel="stylesheet"
+          href="../../css/dashboard.css">
+
+
+    <style>
+
+        /* =========================================
+           RESET
+        ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+
+            font-family: "Inter", sans-serif;
+
+            background: #f5f7fb;
+
+            color: #172033;
+
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font-family: inherit;
+        }
+
+
+        /* =========================================
+           DASHBOARD LAYOUT
+        ========================================= */
+
+        .dashboard {
+
+            display: flex;
+
+            min-height: 100vh;
+        }
+
+
+        /* =========================================
+           SIDEBAR
+        ========================================= */
+
+        .sidebar {
+
+            width: 250px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #061f42,
+                    #092b5c
+                );
+
+            color: white;
+
+            position: fixed;
+
+            left: 0;
+
+            top: 0;
+
+            bottom: 0;
+
+            z-index: 100;
+
+            display: flex;
+
+            flex-direction: column;
+
+            transition: 0.3s;
+        }
+
+
+        /* LOGO */
+
+        .sidebar-logo {
+
+            height: 85px;
+
+            display: flex;
+
+            align-items: center;
+
+            padding: 0 25px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.08);
+        }
+
+        .logo-icon {
+
+            width: 40px;
+
+            height: 40px;
+
+            border-radius: 50%;
+
+            background: white;
+
+            color: #092b5c;
+
+            border: 3px solid #c9a227;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: 800;
+
+            margin-right: 10px;
+        }
+
+        .logo-name {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 23px;
+
+            font-weight: 700;
+        }
+
+        .logo-subtitle {
+
+            display: block;
+
+            font-size: 7px;
+
+            letter-spacing: 1.5px;
+
+            color: #d6b23c;
+
+            margin-top: -2px;
+        }
+
+
+        /* MENU */
+
+        .menu-title {
+
+            padding:
+                25px 25px 10px;
+
+            color: #7f94ad;
+
+            font-size: 9px;
+
+            font-weight: 700;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+        }
+
+        .sidebar-menu {
+
+            list-style: none;
+
+            padding: 0 12px;
+        }
+
+        .sidebar-menu li {
+
+            margin-bottom: 4px;
+        }
+
+        .sidebar-menu a {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 11px 13px;
+
+            border-radius: 7px;
+
+            color: #b8c6d8;
+
+            font-size: 12px;
+
+            transition: 0.25s;
+        }
+
+        .sidebar-menu a:hover {
+
+            background:
+                rgba(255,255,255,0.07);
+
+            color: white;
+        }
+
+        .sidebar-menu a.active {
+
+            background:
+                rgba(255,255,255,0.12);
+
+            color: white;
+
+            border-left:
+                3px solid #c9a227;
+        }
+
+        .menu-icon {
+
+            width: 22px;
+
+            text-align: center;
+
+            font-size: 14px;
+        }
+
+
+        /* SIDEBAR BOTTOM */
+
+        .sidebar-bottom {
+
+            margin-top: auto;
+
+            padding: 15px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.08);
+        }
+
+        .sidebar-bottom a {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            color: #aebed0;
+
+            font-size: 11px;
+
+            padding: 10px;
+        }
+
+        .sidebar-bottom a:hover {
+
+            color: white;
+        }
+
+
+        /* =========================================
+           MAIN
+        ========================================= */
+
+        .main {
+
+            margin-left: 250px;
+
+            width: calc(100% - 250px);
+
+            min-height: 100vh;
+        }
+
+
+        /* =========================================
+           TOPBAR
+        ========================================= */
+
+        .topbar {
+
+            height: 75px;
+
+            background: white;
+
+            border-bottom:
+                1px solid #e8edf3;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding:
+                0 30px;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 50;
+        }
+
+        .mobile-menu {
+
+            display: none;
+
+            border: none;
+
+            background: none;
+
+            font-size: 22px;
+
+            cursor: pointer;
+        }
+
+        .page-title h1 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            color: #092b5c;
+
+            font-size: 24px;
+
+            margin-bottom: 2px;
+        }
+
+        .page-title p {
+
+            color: #8995a5;
+
+            font-size: 10px;
+        }
+
+
+        /* TOP RIGHT */
+
+        .topbar-right {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+        }
+
+        .notification {
+
+            position: relative;
+
+            font-size: 18px;
+
+            cursor: pointer;
+
+            color: #526071;
+        }
+
+        .notification-badge {
+
+            position: absolute;
+
+            top: -5px;
+
+            right: -6px;
+
+            width: 15px;
+
+            height: 15px;
+
+            border-radius: 50%;
+
+            background: #c9a227;
+
+            color: white;
+
+            font-size: 8px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: 700;
+        }
+
+        .agent-profile-mini {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+        .agent-avatar-small {
+
+            width: 38px;
+
+            height: 38px;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #092b5c,
+                    #1c518e
+                );
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: 700;
+
+            font-size: 13px;
+
+            border:
+                2px solid #d6b23c;
+        }
+
+        .agent-mini-info strong {
+
+            display: block;
+
+            font-size: 11px;
+
+            color: #172033;
+        }
+
+        .agent-mini-info span {
+
+            font-size: 9px;
+
+            color: #8995a5;
+        }
+
+
+        /* =========================================
+           CONTENT
+        ========================================= */
+
+        .content {
+
+            padding: 28px 30px;
+        }
+
+
+        /* =========================================
+           LOADING
+        ========================================= */
+
+        .loading-message {
+
+            background: white;
+
+            border:
+                1px solid #e7ecf2;
+
+            border-radius: 11px;
+
+            padding: 30px;
+
+            text-align: center;
+
+            color: #8995a5;
+
+            font-size: 11px;
+
+            margin-bottom: 20px;
+        }
+
+        .error-message {
+
+            display: none;
+
+            background: #fff5f5;
+
+            border:
+                1px solid #f2caca;
+
+            color: #b42318;
+
+            border-radius: 9px;
+
+            padding: 13px 15px;
+
+            font-size: 10px;
+
+            margin-bottom: 20px;
+        }
+
+
+        /* =========================================
+           PROFILE HEADER
+        ========================================= */
+
+        .profile-header {
+
+            background:
+                linear-gradient(
+                    120deg,
+                    #092b5c,
+                    #123f78
+                );
+
+            border-radius: 13px;
+
+            padding: 28px;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 20px;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .profile-header::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 300px;
+
+            height: 300px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            right: -120px;
+
+            top: -150px;
+        }
+
+        .profile-intro {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+        .profile-avatar {
+
+            width: 82px;
+
+            height: 82px;
+
+            border-radius: 50%;
+
+            background: white;
+
+            color: #092b5c;
+
+            border:
+                4px solid #d6b23c;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 24px;
+
+            font-weight: 800;
+        }
+
+        .profile-name h2 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 26px;
+
+            margin-bottom: 4px;
+        }
+
+        .profile-name p {
+
+            color: #c4d1df;
+
+            font-size: 11px;
+
+            margin-bottom: 7px;
+        }
+
+        .verified-badge {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 5px;
+
+            background:
+                rgba(255,255,255,0.1);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.15);
+
+            padding: 5px 9px;
+
+            border-radius: 20px;
+
+            font-size: 8px;
+
+            color: #e6c75a;
+        }
+
+        .agent-id-box {
+
+            position: relative;
+
+            z-index: 2;
+
+            text-align: right;
+        }
+
+        .agent-id-box span {
+
+            display: block;
+
+            color: #9fb2c8;
+
+            font-size: 8px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 4px;
+        }
+
+        .agent-id-box strong {
+
+            font-size: 15px;
+
+            letter-spacing: 1px;
+        }
+
+
+        /* =========================================
+           GRID
+        ========================================= */
+
+        .profile-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1.5fr 1fr;
+
+            gap: 20px;
+        }
+
+
+        /* =========================================
+           CARD
+        ========================================= */
+
+        .card {
+
+            background: white;
+
+            border:
+                1px solid #e7ecf2;
+
+            border-radius: 11px;
+
+            padding: 22px;
+
+            margin-bottom: 20px;
+        }
+
+        .card:last-child {
+
+            margin-bottom: 0;
+        }
+
+        .card-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding-bottom: 15px;
+
+            margin-bottom: 18px;
+
+            border-bottom:
+                1px solid #edf0f4;
+        }
+
+        .card-header h3 {
+
+            font-size: 14px;
+
+            color: #172033;
+        }
+
+        .card-header p {
+
+            color: #8995a5;
+
+            font-size: 9px;
+
+            margin-top: 3px;
+        }
+
+
+        /* =========================================
+           EDIT BUTTON
+        ========================================= */
+
+        .edit-btn {
+
+            border: none;
+
+            background: #f1f5fa;
+
+            color: #092b5c;
+
+            padding: 8px 13px;
+
+            border-radius: 6px;
+
+            font-size: 9px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .edit-btn:hover {
+
+            background: #092b5c;
+
+            color: white;
+        }
+
+
+        /* =========================================
+           INFORMATION GRID
+        ========================================= */
+
+        .info-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 18px 25px;
+        }
+
+        .info-item label {
+
+            display: block;
+
+            color: #8995a5;
+
+            font-size: 9px;
+
+            margin-bottom: 5px;
+        }
+
+        .info-item p {
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+            color: #344054;
+        }
+
+        .info-item p.light {
+
+            font-weight: 400;
+
+            color: #526071;
+        }
+
+
+        /* =========================================
+           BRANCH INFORMATION
+        ========================================= */
+
+        .branch-box {
+
+            background: #f8fafc;
+
+            border-radius: 9px;
+
+            padding: 15px;
+
+            display: flex;
+
+            gap: 13px;
+
+            margin-bottom: 15px;
+        }
+
+        .branch-icon {
+
+            width: 40px;
+
+            height: 40px;
+
+            flex-shrink: 0;
+
+            border-radius: 8px;
+
+            background: #eaf0f7;
+
+            color: #092b5c;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 18px;
+        }
+
+        .branch-details h4 {
+
+            font-size: 11px;
+
+            color: #172033;
+
+            margin-bottom: 4px;
+        }
+
+        .branch-details p {
+
+            color: #8995a5;
+
+            font-size: 9px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================================
+           VERIFICATION
+        ========================================= */
+
+        .verification-box {
+
+            border:
+                1px solid #d9eee2;
+
+            background: #f3fbf6;
+
+            border-radius: 9px;
+
+            padding: 15px;
+        }
+
+        .verification-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            margin-bottom: 9px;
+        }
+
+        .verification-icon {
+
+            width: 30px;
+
+            height: 30px;
+
+            border-radius: 50%;
+
+            background: #dff3e7;
+
+            color: #258351;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 14px;
+        }
+
+        .verification-title strong {
+
+            font-size: 10px;
+
+            color: #258351;
+        }
+
+        .verification-box p {
+
+            color: #668072;
+
+            font-size: 9px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================================
+           PERFORMANCE
+        ========================================= */
+
+        .performance-list {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 16px;
+        }
+
+        .performance-item {
+
+            display: grid;
+
+            grid-template-columns:
+                110px 1fr 40px;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+        .performance-label {
+
+            color: #526071;
+
+            font-size: 9px;
+        }
+
+        .performance-bar {
+
+            height: 7px;
+
+            background: #e8edf3;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+        }
+
+        .performance-fill {
+
+            height: 100%;
+
+            background: #c9a227;
+
+            border-radius: 10px;
+
+            transition: width 0.5s ease;
+        }
+
+        .performance-value {
+
+            font-size: 9px;
+
+            color: #092b5c;
+
+            font-weight: 700;
+
+            text-align: right;
+        }
+
+
+        /* =========================================
+           QUICK STATS
+        ========================================= */
+
+        .quick-stats {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 10px;
+        }
+
+        .quick-stat {
+
+            background: #f8fafc;
+
+            border-radius: 8px;
+
+            padding: 13px;
+        }
+
+        .quick-stat span {
+
+            display: block;
+
+            color: #8995a5;
+
+            font-size: 8px;
+
+            margin-bottom: 5px;
+        }
+
+        .quick-stat strong {
+
+            color: #092b5c;
+
+            font-size: 18px;
+        }
+
+
+        /* =========================================
+           CONTACT INFORMATION
+        ========================================= */
+
+        .contact-list {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+        }
+
+        .contact-item {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+        .contact-icon {
+
+            width: 32px;
+
+            height: 32px;
+
+            border-radius: 7px;
+
+            background: #edf3fa;
+
+            color: #092b5c;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 13px;
+        }
+
+        .contact-text span {
+
+            display: block;
+
+            color: #8995a5;
+
+            font-size: 8px;
+
+            margin-bottom: 2px;
+        }
+
+        .contact-text strong {
+
+            font-size: 10px;
+
+            color: #344054;
+        }
+
+
+        /* =========================================
+           ACTION BUTTONS
+        ========================================= */
+
+        .profile-actions {
+
+            display: flex;
+
+            gap: 10px;
+
+            margin-top: 20px;
+        }
+
+        .primary-btn,
+        .secondary-btn {
+
+            padding: 10px 16px;
+
+            border-radius: 7px;
+
+            font-size: 10px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            border: none;
+
+            transition: 0.2s;
+        }
+
+        .primary-btn {
+
+            background: #092b5c;
+
+            color: white;
+        }
+
+        .primary-btn:hover {
+
+            background: #061f42;
+        }
+
+        .secondary-btn {
+
+            background: #f0f3f7;
+
+            color: #526071;
+        }
+
+        .secondary-btn:hover {
+
+            background: #e5eaf0;
+        }
+
+
+        /* =========================================
+           MODAL
+        ========================================= */
+
+        .modal {
+
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(3,20,42,0.55);
+
+            z-index: 1000;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+        }
+
+        .modal.show {
+
+            display: flex;
+        }
+
+        .modal-content {
+
+            background: white;
+
+            width: 100%;
+
+            max-width: 500px;
+
+            border-radius: 12px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 20px 60px
+                rgba(0,0,0,0.2);
+        }
+
+        .modal-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 20px;
+        }
+
+        .modal-header h3 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            color: #092b5c;
+
+            font-size: 20px;
+        }
+
+        .close-modal {
+
+            border: none;
+
+            background: none;
+
+            font-size: 20px;
+
+            color: #8995a5;
+
+            cursor: pointer;
+        }
+
+        .form-group {
+
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+
+            display: block;
+
+            font-size: 9px;
+
+            font-weight: 600;
+
+            color: #526071;
+
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+
+            width: 100%;
+
+            border:
+                1px solid #dfe5ec;
+
+            border-radius: 7px;
+
+            padding: 10px;
+
+            outline: none;
+
+            font-size: 10px;
+
+            color: #344054;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+
+            border-color: #092b5c;
+
+            box-shadow:
+                0 0 0 2px
+                rgba(9,43,92,0.08);
+        }
+
+        .form-group textarea {
+
+            resize: vertical;
+
+            min-height: 70px;
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 1050px) {
+
+            .profile-grid {
+
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 850px) {
+
+            .sidebar {
+
+                transform:
+                    translateX(-100%);
+            }
+
+            .sidebar.open {
+
+                transform:
+                    translateX(0);
+            }
+
+            .main {
+
+                margin-left: 0;
+
+                width: 100%;
+            }
+
+            .mobile-menu {
+
+                display: block;
+            }
+
+            .topbar {
+
+                padding: 0 18px;
+            }
+
+            .content {
+
+                padding: 20px 18px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .profile-header {
+
+                align-items: flex-start;
+            }
+
+            .profile-intro {
+
+                gap: 12px;
+            }
+
+            .profile-avatar {
+
+                width: 65px;
+
+                height: 65px;
+
+                font-size: 19px;
+            }
+
+            .profile-name h2 {
+
+                font-size: 20px;
+            }
+
+            .agent-id-box {
+
+                display: none;
+            }
+
+            .info-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+            .performance-item {
+
+                grid-template-columns:
+                    90px 1fr 35px;
+            }
+
+            .agent-mini-info {
+
+                display: none;
+            }
+
+            .profile-actions {
+
+                flex-direction: column;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="dashboard">
+
+
+    <!-- =================================================
+         SIDEBAR
+    ================================================== -->
+
+    <aside class="sidebar"
+           id="sidebar">
+
+
+        <!-- LOGO -->
+
+        <a href="dashboard.html"
+           class="sidebar-logo">
+
+            <div class="logo-icon">
+                T
+            </div>
+
+            <div>
+
+                <div class="logo-name">
+                    TrustNest
+                </div>
+
+                <span class="logo-subtitle">
+                    Insurance Intelligence
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <!-- MAIN MENU -->
+
+        <div class="menu-title">
+            Main Menu
+        </div>
+
+
+        <ul class="sidebar-menu">
+
+            <li>
+
+                <a href="dashboard.html">
+
+                    <span class="menu-icon">
+                        ▦
+                    </span>
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="customers.html">
+
+                    <span class="menu-icon">
+                        👥
+                    </span>
+
+                    Customers
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="policies.html">
+
+                    <span class="menu-icon">
+                        📋
+                    </span>
+
+                    Policies
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="followups.html">
+
+                    <span class="menu-icon">
+                        🔔
+                    </span>
+
+                    Follow-ups
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="interactions.html">
+
+                    <span class="menu-icon">
+                        💬
+                    </span>
+
+                    Interactions
+
+                </a>
+
+            </li>
+
+        </ul>
+
+
+        <!-- SMART FEATURES -->
+
+        <div class="menu-title">
+            Smart Features
+        </div>
+
+
+        <ul class="sidebar-menu">
+
+            <li>
+
+                <a href="recommendations.html">
+
+                    <span class="menu-icon">
+                        ✨
+                    </span>
+
+                    Recommendations
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="leads.html">
+
+                    <span class="menu-icon">
+                        🎯
+                    </span>
+
+                    Smart Leads
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="sales-insights.html">
+
+                    <span class="menu-icon">
+                        📊
+                    </span>
+
+                    Sales Insights
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="notifications.html">
+
+                    <span class="menu-icon">
+                        🔔
+                    </span>
+
+                    Notifications
+
+                </a>
+
+            </li>
+
+        </ul>
+
+
+        <!-- ACCOUNT -->
+
+        <div class="menu-title">
+            Account
+        </div>
+
+
+        <ul class="sidebar-menu">
+
+            <li>
+
+                <a href="profile.html"
+                   class="active">
+
+                    <span class="menu-icon">
+                        👤
+                    </span>
+
+                    My Profile
+
+                </a>
+
+            </li>
+
+        </ul>
+
+
+        <!-- LOGOUT -->
+
+        <div class="sidebar-bottom">
+
+            <a href="../login.html"
+               onclick="logoutAgent()">
+
+                <span>
+                    ⇥
+                </span>
+
+                Logout
+
+            </a>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =================================================
+         MAIN
+    ================================================== -->
+
+    <main class="main">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+
+            <div style="display:flex; align-items:center;">
+
+                <button
+                    class="mobile-menu"
+                    id="mobileMenu">
+
+                    ☰
+
+                </button>
+
+
+                <div class="page-title">
+
+                    <h1>
+                        My Profile
+                    </h1>
+
+                    <p>
+                        Manage your TrustNest agent information
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+
+                <a href="notifications.html"
+                   class="notification">
+
+                    🔔
+
+                    <span class="notification-badge"
+                          id="notificationBadge">
+                        0
+                    </span>
+
+                </a>
+
+
+                <div class="agent-profile-mini">
+
+                    <div class="agent-avatar-small"
+                         id="topAgentAvatar">
+                        --
+                    </div>
+
+                    <div class="agent-mini-info">
+
+                        <strong id="topAgentName">
+                            Loading...
+                        </strong>
+
+                        <span>
+                            Insurance Agent
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =================================================
+             CONTENT
+        ================================================== -->
+
+        <div class="content">
+
+
+            <!-- ERROR -->
+
+            <div class="error-message"
+                 id="errorMessage">
+            </div>
+
+
+            <!-- LOADING -->
+
+            <div class="loading-message"
+                 id="loadingMessage">
+
+                Loading agent profile...
+
+            </div>
+
+
+            <!-- PROFILE CONTENT -->
+
+            <div id="profileContent"
+                 style="display:none;">
+
+
+                <!-- PROFILE HEADER -->
+
+                <section class="profile-header">
+
+
+                    <div class="profile-intro">
+
+
+                        <div class="profile-avatar"
+                             id="profileAvatar">
+                            --
+                        </div>
+
+
+                        <div class="profile-name">
+
+                            <h2 id="profileName">
+                                Agent
+                            </h2>
+
+                            <p id="profileRole">
+                                Insurance Agent
+                            </p>
+
+                            <span class="verified-badge"
+                                  id="verifiedBadge">
+                                ✓ Agent Account
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="agent-id-box">
+
+                        <span>
+                            Agent ID
+                        </span>
+
+                        <strong id="profileAgentId">
+                            --
+                        </strong>
+
+                    </div>
+
+
+                </section>
+
+
+
+                <!-- PROFILE GRID -->
+
+                <div class="profile-grid">
+
+
+                    <!-- =========================================
+                         LEFT COLUMN
+                    ========================================== -->
+
+                    <div>
+
+
+                        <!-- PERSONAL INFORMATION -->
+
+                        <section class="card">
+
+
+                            <div class="card-header">
+
+                                <div>
+
+                                    <h3>
+                                        Personal Information
+                                    </h3>
+
+                                    <p>
+                                        Your basic agent information
+                                    </p>
+
+                                </div>
+
+
+                                <button
+                                    class="edit-btn"
+                                    onclick="openModal()">
+
+                                    ✎ Edit Profile
+
+                                </button>
+
+                            </div>
+
+
+                            <div class="info-grid">
+
+
+                                <div class="info-item">
+
+                                    <label>
+                                        Full Name
+                                    </label>
+
+                                    <p id="infoFullName">
+                                        --
+                                    </p>
+
+                                </div>
+
+
+                                <div class="info-item">
+
+                                    <label>
+                                        Agent ID
+                                    </label>
+
+                                    <p id="infoAgentId">
+                                        --
+                                    </p>
+
+                                </div>
+
+
+                                <div class="info-item">
+
+                                    <label>
+                                        Date of Birth
+                                    </label>
+
+                                    <p id="infoDob">
+                                        Not provided
+                                    </p>
+
+                                </div>
+
+
+                                <div class="info-item">
+
+                                    <label>
+                                        Gender
+                                    </label>
+
+                                    <p id="infoGender">
+                                        Not provided
+                                    </p>
+
+                                </div>
+
+
+                                <div class="info-item">
+
+                                    <label>
+                                        Email Address
+                                    </label>
+
+                                    <p id="infoEmail">
+                                        Not provided
+                                    </p>
+
+                                </div>
+
+
+                                <div class="info-item">
+
+                                    <label>
+                                        Mobile Number
+                                    </label>
+
+                                    <p id="infoMobile">
+                                        Not provided
+                                    </p>
+
+                                </div>
+
+
+                                <div class="info-item">
+
+                                    <label>
+                                        Date of Joining
+                                    </label>
+
+                                    <p id="infoJoiningDate">
+                                        Not provided
+                                    </p>
+
+                                </div>
+
+
+                                <div class="info-item">
+
+                                    <label>
+                                        Experience
+                                    </label>
+
+                                    <p id="infoExperience">
+                                        Not provided
+                                    </p>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </section>
+
+
+
+                        <!-- BRANCH INFORMATION -->
+
+                        <section class="card">
+
+
+                            <div class="card-header">
+
+                                <div>
+
+                                    <h3>
+                                        Branch Information
+                                    </h3>
+
+                                    <p>
+                                        Official branch association
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="branch-box">
+
+
+                                <div class="branch-icon">
+                                    🏢
+                                </div>
+
+
+                                <div class="branch-details">
+
+                                    <h4 id="branchName">
+                                        Branch information not provided
+                                    </h4>
+
+                                    <p id="branchDetails">
+                                        Branch details will be loaded from your agent account.
+                                    </p>
+
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="verification-box">
+
+
+                                <div class="verification-title">
+
+                                    <div class="verification-icon">
+                                        ✓
+                                    </div>
+
+                                    <strong id="verificationTitle">
+                                        Agent Account
+                                    </strong>
+
+                                </div>
+
+
+                                <p id="verificationText">
+                                    Your TrustNest agent information is loaded from the account associated with your logged-in Agent ID.
+                                </p>
+
+                            </div>
+
+
+                        </section>
+
+
+
+                        <!-- PERFORMANCE -->
+
+                        <section class="card">
+
+
+                            <div class="card-header">
+
+                                <div>
+
+                                    <h3>
+                                        Performance Overview
+                                    </h3>
+
+                                    <p>
+                                        Current performance indicators
+                                    </p>
+
+                                </div>
+
+
+                                <a href="sales-insights.html"
+                                   class="edit-btn">
+
+                                    Detailed Insights
+
+                                </a>
+
+                            </div>
+
+
+                            <div class="performance-list">
+
+
+                                <div class="performance-item">
+
+                                    <span class="performance-label">
+                                        Customer Portfolio
+                                    </span>
+
+                                    <div class="performance-bar">
+
+                                        <div
+                                            class="performance-fill"
+                                            id="customerPerformance"
+                                            style="width:0%;">
+                                        </div>
+
+                                    </div>
+
+                                    <span class="performance-value"
+                                          id="customerPerformanceValue">
+                                        0%
+                                    </span>
+
+                                </div>
+
+
+                                <div class="performance-item">
+
+                                    <span class="performance-label">
+                                        Active Policies
+                                    </span>
+
+                                    <div class="performance-bar">
+
+                                        <div
+                                            class="performance-fill"
+                                            id="policyPerformance"
+                                            style="width:0%;">
+                                        </div>
+
+                                    </div>
+
+                                    <span class="performance-value"
+                                          id="policyPerformanceValue">
+                                        0%
+                                    </span>
+
+                                </div>
+
+
+                                <div class="performance-item">
+
+                                    <span class="performance-label">
+                                        Renewals
+                                    </span>
+
+                                    <div class="performance-bar">
+
+                                        <div
+                                            class="performance-fill"
+                                            id="renewalPerformance"
+                                            style="width:0%;">
+                                        </div>
+
+                                    </div>
+
+                                    <span class="performance-value"
+                                          id="renewalPerformanceValue">
+                                        0%
+                                    </span>
+
+                                </div>
+
+
+                                <div class="performance-item">
+
+                                    <span class="performance-label">
+                                        Follow-ups
+                                    </span>
+
+                                    <div class="performance-bar">
+
+                                        <div
+                                            class="performance-fill"
+                                            id="followupPerformance"
+                                            style="width:0%;">
+                                        </div>
+
+                                    </div>
+
+                                    <span class="performance-value"
+                                          id="followupPerformanceValue">
+                                        0%
+                                    </span>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </section>
+
+
+                    </div>
+
+
+
+                    <!-- =========================================
+                         RIGHT COLUMN
+                    ========================================== -->
+
+                    <div>
+
+
+                        <!-- QUICK STATS -->
+
+                        <section class="card">
+
+
+                            <div class="card-header">
+
+                                <div>
+
+                                    <h3>
+                                        Agent Statistics
+                                    </h3>
+
+                                    <p>
+                                        Portfolio summary
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="quick-stats">
+
+
+                                <div class="quick-stat">
+
+                                    <span>
+                                        Customers
+                                    </span>
+
+                                    <strong id="customerCount">
+                                        0
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="quick-stat">
+
+                                    <span>
+                                        Active Policies
+                                    </span>
+
+                                    <strong id="policyCount">
+                                        0
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="quick-stat">
+
+                                    <span>
+                                        Renewals
+                                    </span>
+
+                                    <strong id="renewalCount">
+                                        0
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="quick-stat">
+
+                                    <span>
+                                        Leads
+                                    </span>
+
+                                    <strong id="leadCount">
+                                        0
+                                    </strong>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </section>
+
+
+
+                        <!-- CONTACT INFORMATION -->
+
+                        <section class="card">
+
+
+                            <div class="card-header">
+
+                                <div>
+
+                                    <h3>
+                                        Contact Information
+                                    </h3>
+
+                                    <p>
+                                        Registered communication details
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="contact-list">
+
+
+                                <div class="contact-item">
+
+                                    <div class="contact-icon">
+                                        ✉
+                                    </div>
+
+                                    <div class="contact-text">
+
+                                        <span>
+                                            Email
+                                        </span>
+
+                                        <strong id="contactEmail">
+                                            Not provided
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="contact-item">
+
+                                    <div class="contact-icon">
+                                        ☎
+                                    </div>
+
+                                    <div class="contact-text">
+
+                                        <span>
+                                            Mobile
+                                        </span>
+
+                                        <strong id="contactMobile">
+                                            Not provided
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="contact-item">
+
+                                    <div class="contact-icon">
+                                        📍
+                                    </div>
+
+                                    <div class="contact-text">
+
+                                        <span>
+                                            Branch
+                                        </span>
+
+                                        <strong id="contactBranch">
+                                            Not provided
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </section>
+
+
+
+                        <!-- ACCOUNT STATUS -->
+
+                        <section class="card">
+
+
+                            <div class="card-header">
+
+                                <div>
+
+                                    <h3>
+                                        Account Status
+                                    </h3>
+
+                                    <p>
+                                        TrustNest account status
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="verification-box">
+
+
+                                <div class="verification-title">
+
+                                    <div class="verification-icon">
+                                        ✓
+                                    </div>
+
+                                    <strong id="accountStatus">
+                                        Account Loaded
+                                    </strong>
+
+                                </div>
+
+
+                                <p id="accountStatusText">
+                                    Your profile information is being loaded from your TrustNest agent account.
+                                </p>
+
+
+                            </div>
+
+
+                        </section>
+
+
+                        <!-- ACTIONS -->
+
+                        <div class="profile-actions">
+
+                            <button
+                                class="primary-btn"
+                                onclick="openModal()">
+
+                                ✎ Edit Profile
+
+                            </button>
+
+
+                            <a href="dashboard.html"
+                               class="secondary-btn">
+
+                                ← Dashboard
+
+                            </a>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =================================================
+     EDIT PROFILE MODAL
+================================================== -->
+
+<div class="modal"
+     id="editModal">
+
+
+    <div class="modal-content">
+
+
+        <div class="modal-header">
+
+            <h3>
+                Edit Profile
+            </h3>
+
+            <button
+                class="close-modal"
+                onclick="closeModal()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <form id="profileForm">
+
+
+            <div class="form-group">
+
+                <label>
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="fullName"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Mobile Number
+                </label>
+
+                <input
+                    type="tel"
+                    id="mobile"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Address
+                </label>
+
+                <textarea
+                    id="address"></textarea>
+
+            </div>
+
+
+            <div class="profile-actions">
+
+                <button
+                    type="submit"
+                    class="primary-btn">
+
+                    Save Changes
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="secondary-btn"
+                    onclick="closeModal()">
+
+                    Cancel
+
+                </button>
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+    /* =========================================
+       TRUSTNEST PROFILE PAGE
+    ========================================= */
+
+    const API_URL =
+        window.TRUSTNEST_API_URL ||
+        "http://localhost:5000";
+
+
+    /* =========================================
+       LOGGED-IN AGENT ID
+    ========================================= */
+
+    const loggedInAgentId =
+        localStorage.getItem("agentId");
+
+
+    /* =========================================
+       MOBILE SIDEBAR
+    ========================================= */
+
+    const mobileMenu =
+        document.getElementById("mobileMenu");
+
+    const sidebar =
+        document.getElementById("sidebar");
+
+
+    if (mobileMenu && sidebar) {
+
+        mobileMenu.addEventListener(
+            "click",
+            function () {
+
+                sidebar.classList.toggle("open");
+
+            }
+        );
+
+    }
+
+
+    /* =========================================
+       INITIALS
+    ========================================= */
+
+    function getInitials(name) {
+
+        if (!name) {
+
+            return "--";
+
+        }
+
+        const parts =
+            String(name)
+                .trim()
+                .split(/\s+/)
+                .filter(Boolean);
+
+
+        if (parts.length === 1) {
+
+            return parts[0]
+                .substring(0, 2)
+                .toUpperCase();
+
+        }
+
+
+        return (
+            parts[0].charAt(0) +
+            parts[parts.length - 1].charAt(0)
+        ).toUpperCase();
+
+    }
+
+
+    /* =========================================
+       SAFE VALUE
+    ========================================= */
+
+    function displayValue(
+        value,
+        fallback = "Not provided"
+    ) {
+
+        if (
+            value === null ||
+            value === undefined ||
+            value === ""
+        ) {
+
+            return fallback;
+
+        }
+
+        return String(value);
+
+    }
+
+
+    /* =========================================
+       DATE FORMAT
+    ========================================= */
+
+    function formatDate(value) {
+
+        if (!value) {
+
+            return "Not provided";
+
+        }
+
+
+        const date =
+            new Date(value);
+
+
+        if (Number.isNaN(date.getTime())) {
+
+            return String(value);
+
+        }
+
+
+        return date.toLocaleDateString(
+            "en-IN",
+            {
+                day: "2-digit",
+                month: "long",
+                year: "numeric"
+            }
+        );
+
+    }
+
+
+    /* =========================================
+       EXPERIENCE CALCULATION
+    ========================================= */
+
+    function calculateExperience(
+        joiningDate
+    ) {
+
+        if (!joiningDate) {
+
+            return "Not provided";
+
+        }
+
+
+        const date =
+            new Date(joiningDate);
+
+
+        if (Number.isNaN(date.getTime())) {
+
+            return "Not provided";
+
+        }
+
+
+        const today =
+            new Date();
+
+
+        let years =
+            today.getFullYear() -
+            date.getFullYear();
+
+
+        const monthDifference =
+            today.getMonth() -
+            date.getMonth();
+
+
+        if (
+            monthDifference < 0 ||
+            (
+                monthDifference === 0 &&
+                today.getDate() < date.getDate()
+            )
+        ) {
+
+            years--;
+
+        }
+
+
+        if (years < 0) {
+
+            return "Not provided";
+
+        }
+
+
+        return years + (
+            years === 1
+                ? " Year"
+                : " Years"
+        );
+
+    }
+
+
+    /* =========================================
+       FIND FIRST AVAILABLE VALUE
+    ========================================= */
+
+    function firstValue(
+        object,
+        keys,
+        fallback = ""
+    ) {
+
+        for (
+            let i = 0;
+            i < keys.length;
+            i++
+        ) {
+
+            const key =
+                keys[i];
+
+
+            if (
+                object &&
+                object[key] !== undefined &&
+                object[key] !== null &&
+                object[key] !== ""
+            ) {
+
+                return object[key];
+
+            }
+
+        }
+
+
+        return fallback;
+
+    }
+
+
+    /* =========================================
+       LOAD AGENT PROFILE
+    ========================================= */
+
+    async function loadAgentProfile() {
+
+        const loadingMessage =
+            document.getElementById(
+                "loadingMessage"
+            );
+
+        const profileContent =
+            document.getElementById(
+                "profileContent"
+            );
+
+        const errorMessage =
+            document.getElementById(
+                "errorMessage"
+            );
+
+
+        /* -----------------------------------------
+           CHECK LOGIN
+        ----------------------------------------- */
+
+        if (!loggedInAgentId) {
+
+            errorMessage.textContent =
+                "Your login session was not found. Please login again.";
+
+            errorMessage.style.display =
+                "block";
+
+            loadingMessage.style.display =
+                "none";
+
+            setTimeout(
+                function () {
+
+                    window.location.href =
+                        "../login.html";
+
+                },
+                1500
+            );
+
+            return;
+
+        }
+
+
+        /* -----------------------------------------
+           FETCH AGENT FROM BACKEND
+        ----------------------------------------- */
+
+        try {
+
+            const response =
+                await fetch(
+                    API_URL +
+                    "/api/dashboard?agentId=" +
+                    encodeURIComponent(
+                        loggedInAgentId
+                    )
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (
+                !response.ok ||
+                !data.success ||
+                !data.agent
+            ) {
+
+                throw new Error(
+                    data.message ||
+                    "Agent information could not be loaded."
+                );
+
+            }
+
+
+            const agent =
+                data.agent;
+
+
+            console.log(
+                "Logged-in agent loaded:",
+                agent
+            );
+
+
+            /* -----------------------------------------
+               NAME
+            ----------------------------------------- */
+
+            const agentName =
+                firstValue(
+                    agent,
+                    [
+                        "fullName",
+                        "name",
+                        "agentName"
+                    ],
+                    "Agent"
+                );
+
+
+            /* -----------------------------------------
+               AGENT ID
+            ----------------------------------------- */
+
+            const agentId =
+                firstValue(
+                    agent,
+                    [
+                        "agentId",
+                        "id",
+                        "_id"
+                    ],
+                    loggedInAgentId
+                );
+
+
+            /* -----------------------------------------
+               EMAIL
+            ----------------------------------------- */
+
+            const email =
+                firstValue(
+                    agent,
+                    [
+                        "email",
+                        "emailAddress"
+                    ],
+                    ""
+                );
+
+
+            /* -----------------------------------------
+               MOBILE
+            ----------------------------------------- */
+
+            const mobile =
+                firstValue(
+                    agent,
+                    [
+                        "phone",
+                        "mobile",
+                        "mobileNumber",
+                        "phoneNumber"
+                    ],
+                    ""
+                );
+
+
+            /* -----------------------------------------
+               DOB
+            ----------------------------------------- */
+
+            const dob =
+                firstValue(
+                    agent,
+                    [
+                        "dob",
+                        "dateOfBirth"
+                    ],
+                    ""
+                );
+
+
+            /* -----------------------------------------
+               GENDER
+            ----------------------------------------- */
+
+            const gender =
+                firstValue(
+                    agent,
+                    [
+                        "gender"
+                    ],
+                    ""
+                );
+
+
+            /* -----------------------------------------
+               JOINING DATE
+            ----------------------------------------- */
+
+            const joiningDate =
+                firstValue(
+                    agent,
+                    [
+                        "dateOfJoining",
+                        "joiningDate",
+                        "doj"
+                    ],
+                    ""
+                );
+
+
+            /* -----------------------------------------
+               BRANCH NAME
+            ----------------------------------------- */
+
+            const branchName =
+                firstValue(
+                    agent,
+                    [
+                        "branchName",
+                        "branch"
+                    ],
+                    ""
+                );
+
+
+            /* -----------------------------------------
+               BRANCH CODE
+            ----------------------------------------- */
+
+            const branchCode =
+                firstValue(
+                    agent,
+                    [
+                        "branchCode",
+                        "branchId"
+                    ],
+                    ""
+                );
+
+
+            /* -----------------------------------------
+               LOCATION
+            ----------------------------------------- */
+
+            const location =
+                firstValue(
+                    agent,
+                    [
+                        "location",
+                        "city",
+                        "branchLocation"
+                    ],
+                    ""
+                );
+
+
+            /* -----------------------------------------
+               STATE
+            ----------------------------------------- */
+
+            const state =
+                firstValue(
+                    agent,
+                    [
+                        "state"
+                    ],
+                    ""
+                );
+
+
+            /* -----------------------------------------
+               ROLE
+            ----------------------------------------- */
+
+            const role =
+                firstValue(
+                    agent,
+                    [
+                        "role",
+                        "designation",
+                        "position"
+                    ],
+                    "Insurance Agent"
+                );
+
+
+            /* -----------------------------------------
+               EXPERIENCE
+            ----------------------------------------- */
+
+            const experience =
+                firstValue(
+                    agent,
+                    [
+                        "experience"
+                    ],
+                    ""
+                );
+
+
+            /* -----------------------------------------
+               STATISTICS
+            ----------------------------------------- */
+
+            const customers =
+                Number(
+                    firstValue(
+                        agent,
+                        [
+                            "customerCount",
+                            "customersCount",
+                            "totalCustomers"
+                        ],
+                        data.customerCount || 0
+                    )
+                );
+
+
+            const policies =
+                Number(
+                    firstValue(
+                        agent,
+                        [
+                            "activePolicies",
+                            "policyCount",
+                            "policiesCount",
+                            "totalPolicies"
+                        ],
+                        data.activePolicies || 0
+                    )
+                );
+
+
+            const renewals =
+                Number(
+                    firstValue(
+                        agent,
+                        [
+                            "renewals",
+                            "renewalCount",
+                            "renewalsCount"
+                        ],
+                        data.renewals || 0
+                    )
+                );
+
+
+            const leads =
+                Number(
+                    firstValue(
+                        agent,
+                        [
+                            "leads",
+                            "leadCount",
+                            "leadsCount"
+                        ],
+                        data.leads || 0
+                    )
+                );
+
+
+            /* -----------------------------------------
+               PROFILE HEADER
+            ----------------------------------------- */
+
+            document.getElementById(
+                "profileName"
+            ).textContent =
+                displayValue(
+                    agentName,
+                    "Agent"
+                );
+
+
+            document.getElementById(
+                "profileRole"
+            ).textContent =
+                displayValue(
+                    role,
+                    "Insurance Agent"
+                );
+
+
+            document.getElementById(
+                "profileAgentId"
+            ).textContent =
+                displayValue(
+                    agentId,
+                    loggedInAgentId
+                );
+
+
+            document.getElementById(
+                "profileAvatar"
+            ).textContent =
+                getInitials(agentName);
+
+
+            /* -----------------------------------------
+               TOPBAR
+            ----------------------------------------- */
+
+            document.getElementById(
+                "topAgentName"
+            ).textContent =
+                displayValue(
+                    agentName,
+                    "Agent"
+                );
+
+
+            document.getElementById(
+                "topAgentAvatar"
+            ).textContent =
+                getInitials(agentName);
+
+
+            /* -----------------------------------------
+               PERSONAL INFORMATION
+            ----------------------------------------- */
+
+            document.getElementById(
+                "infoFullName"
+            ).textContent =
+                displayValue(agentName);
+
+
+            document.getElementById(
+                "infoAgentId"
+            ).textContent =
+                displayValue(
+                    agentId,
+                    loggedInAgentId
+                );
+
+
+            document.getElementById(
+                "infoDob"
+            ).textContent =
+                formatDate(dob);
+
+
+            document.getElementById(
+                "infoGender"
+            ).textContent =
+                displayValue(gender);
+
+
+            document.getElementById(
+                "infoEmail"
+            ).textContent =
+                displayValue(email);
+
+
+            document.getElementById(
+                "infoMobile"
+            ).textContent =
+                displayValue(mobile);
+
+
+            document.getElementById(
+                "infoJoiningDate"
+            ).textContent =
+                formatDate(joiningDate);
+
+
+            document.getElementById(
+                "infoExperience"
+            ).textContent =
+                experience
+                    ? displayValue(experience)
+                    : calculateExperience(
+                        joiningDate
+                    );
+
+
+            /* -----------------------------------------
+               BRANCH
+            ----------------------------------------- */
+
+            const finalBranchName =
+                branchName ||
+                "Branch information not provided";
+
+
+            let branchText = "";
+
+
+            if (location && state) {
+
+                branchText =
+                    location +
+                    ", " +
+                    state;
+
+            }
+
+            else if (location) {
+
+                branchText =
+                    location;
+
+            }
+
+            else if (state) {
+
+                branchText =
+                    state;
+
+            }
+
+            else {
+
+                branchText =
+                    "Branch location not provided";
+
+            }
+
+
+            if (branchCode) {
+
+                branchText +=
+                    "<br>Branch Code: " +
+                    branchCode;
+
+            }
+
+
+            document.getElementById(
+                "branchName"
+            ).textContent =
+                finalBranchName;
+
+
+            document.getElementById(
+                "branchDetails"
+            ).innerHTML =
+                branchText;
+
+
+            document.getElementById(
+                "contactBranch"
+            ).textContent =
+                location ||
+                branchName ||
+                "Not provided";
+
+
+            /* -----------------------------------------
+               CONTACT
+            ----------------------------------------- */
+
+            document.getElementById(
+                "contactEmail"
+            ).textContent =
+                displayValue(email);
+
+
+            document.getElementById(
+                "contactMobile"
+            ).textContent =
+                displayValue(mobile);
+
+
+            /* -----------------------------------------
+               STATISTICS
+            ----------------------------------------- */
+
+            document.getElementById(
+                "customerCount"
+            ).textContent =
+                customers;
+
+
+            document.getElementById(
+                "policyCount"
+            ).textContent =
+                policies;
+
+
+            document.getElementById(
+                "renewalCount"
+            ).textContent =
+                renewals;
+
+
+            document.getElementById(
+                "leadCount"
+            ).textContent =
+                leads;
+
+
+            /* -----------------------------------------
+               PERFORMANCE
+            ----------------------------------------- */
+
+            updatePerformance(
+                customers,
+                policies,
+                renewals,
+                leads
+            );
+
+
+            /* -----------------------------------------
+               VERIFICATION
+            ----------------------------------------- */
+
+            const verificationStatus =
+                firstValue(
+                    agent,
+                    [
+                        "verified",
+                        "isVerified",
+                        "verificationStatus"
+                    ],
+                    ""
+                );
+
+
+            if (
+                verificationStatus === true ||
+                verificationStatus === "true" ||
+                verificationStatus === "verified" ||
+                verificationStatus === "Verified"
+            ) {
+
+                document.getElementById(
+                    "verifiedBadge"
+                ).textContent =
+                    "✓ Verified Agent";
+
+
+                document.getElementById(
+                    "verificationTitle"
+                ).textContent =
+                    "Official Agent Verification";
+
+
+                document.getElementById(
+                    "accountStatus"
+                ).textContent =
+                    "Account Verified";
+
+
+                document.getElementById(
+                    "accountStatusText"
+                ).textContent =
+                    "Your TrustNest agent account has been successfully verified.";
+
+            }
+
+            else {
+
+                document.getElementById(
+                    "verifiedBadge"
+                ).textContent =
+                    "✓ Agent Account";
+
+
+                document.getElementById(
+                    "verificationTitle"
+                ).textContent =
+                    "Agent Account";
+
+
+                document.getElementById(
+                    "accountStatus"
+                ).textContent =
+                    "Account Active";
+
+
+                document.getElementById(
+                    "accountStatusText"
+                ).textContent =
+                    "Your TrustNest profile is linked to the currently logged-in agent account.";
+
+            }
+
+
+            document.getElementById(
+                "verificationText"
+            ).textContent =
+                "This profile displays the agent information associated with Agent ID " +
+                displayValue(
+                    agentId,
+                    loggedInAgentId
+                ) +
+                " from the TrustNest backend.";
+
+
+            /* -----------------------------------------
+               EDIT FORM
+            ----------------------------------------- */
+
+            document.getElementById(
+                "fullName"
+            ).value =
+                agentName || "";
+
+
+            document.getElementById(
+                "email"
+            ).value =
+                email || "";
+
+
+            document.getElementById(
+                "mobile"
+            ).value =
+                mobile || "";
+
+
+            document.getElementById(
+                "address"
+            ).value =
+                firstValue(
+                    agent,
+                    [
+                        "address"
+                    ],
+                    ""
+                );
+
+
+            /* -----------------------------------------
+               SHOW PROFILE
+            ----------------------------------------- */
+
+            loadingMessage.style.display =
+                "none";
+
+
+            profileContent.style.display =
+                "block";
+
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Agent profile loading error:",
+                error
+            );
+
+
+            loadingMessage.style.display =
+                "none";
+
+
+            errorMessage.textContent =
+                error.message ||
+                "Unable to load agent profile. Please make sure the TrustNest server is running.";
+
+
+            errorMessage.style.display =
+                "block";
+
+        }
+
+    }
+
+
+    /* =========================================
+       UPDATE PERFORMANCE
+    ========================================= */
+
+    function updatePerformance(
+        customers,
+        policies,
+        renewals,
+        leads
+    ) {
+
+        /*
+         * These are simple visual indicators.
+         * They are NOT hardcoded agent details.
+         */
+
+        const customerPercentage =
+            Math.min(
+                customers > 0
+                    ? Math.round(
+                        Math.min(
+                            customers / 250 * 100,
+                            100
+                        )
+                    )
+                    : 0,
+                100
+            );
+
+
+        const policyPercentage =
+            Math.min(
+                policies > 0
+                    ? Math.round(
+                        Math.min(
+                            policies / 250 * 100,
+                            100
+                        )
+                    )
+                    : 0,
+                100
+            );
+
+
+        const renewalPercentage =
+            policies > 0
+                ? Math.min(
+                    Math.round(
+                        renewals /
+                        policies *
+                        100
+                    ),
+                    100
+                )
+                : 0;
+
+
+        const leadPercentage =
+            Math.min(
+                leads > 0
+                    ? Math.round(
+                        Math.min(
+                            leads / 50 * 100,
+                            100
+                        )
+                    )
+                    : 0,
+                100
+            );
+
+
+        setPerformance(
+            "customerPerformance",
+            "customerPerformanceValue",
+            customerPercentage
+        );
+
+
+        setPerformance(
+            "policyPerformance",
+            "policyPerformanceValue",
+            policyPercentage
+        );
+
+
+        setPerformance(
+            "renewalPerformance",
+            "renewalPerformanceValue",
+            renewalPercentage
+        );
+
+
+        setPerformance(
+            "followupPerformance",
+            "followupPerformanceValue",
+            leadPercentage
+        );
+
+    }
+
+
+    /* =========================================
+       SET PERFORMANCE BAR
+    ========================================= */
+
+    function setPerformance(
+        barId,
+        valueId,
+        percentage
+    ) {
+
+        const bar =
+            document.getElementById(
+                barId
+            );
+
+        const value =
+            document.getElementById(
+                valueId
+            );
+
+
+        if (bar) {
+
+            bar.style.width =
+                percentage + "%";
+
+        }
+
+
+        if (value) {
+
+            value.textContent =
+                percentage + "%";
+
+        }
+
+    }
+
+
+    /* =========================================
+       EDIT PROFILE MODAL
+    ========================================= */
+
+    const editModal =
+        document.getElementById(
+            "editModal"
+        );
+
+
+    function openModal() {
+
+        editModal.classList.add(
+            "show"
+        );
+
+    }
+
+
+    function closeModal() {
+
+        editModal.classList.remove(
+            "show"
+        );
+
+    }
+
+
+    /* =========================================
+       CLOSE MODAL OUTSIDE
+    ========================================= */
+
+    editModal.addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                event.target ===
+                editModal
+            ) {
+
+                closeModal();
+
+            }
+
+        }
+    );
+
+
+    /* =========================================
+       PROFILE FORM
+    ========================================= */
+
+    const profileForm =
+        document.getElementById(
+            "profileForm"
+        );
+
+
+    profileForm.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            if (!loggedInAgentId) {
+
+                alert(
+                    "Your login session was not found. Please login again."
+                );
+
+                return;
+
+            }
+
+
+            const name =
+                document.getElementById(
+                    "fullName"
+                ).value.trim();
+
+
+            const email =
+                document.getElementById(
+                    "email"
+                ).value.trim();
+
+
+            const mobile =
+                document.getElementById(
+                    "mobile"
+                ).value.trim();
+
+
+            const address =
+                document.getElementById(
+                    "address"
+                ).value.trim();
+
+
+            /*
+             * At present your backend profile-update
+             * endpoint has not been provided.
+             *
+             * Therefore we do not pretend that
+             * MongoDB has been updated.
+             *
+             * This keeps the UI ready for the
+             * backend update API.
+             */
+
+            alert(
+                "Profile details entered successfully. Backend profile update API can be connected here."
+            );
+
+
+            closeModal();
+
+        }
+    );
+
+
+    /* =========================================
+       LOGOUT
+    ========================================= */
+
+    function logoutAgent() {
+
+        localStorage.removeItem(
+            "agentId"
+        );
+
+        localStorage.removeItem(
+            "agentName"
+        );
+
+    }
+
+
+    /* =========================================
+       PAGE LOAD
+    ========================================= */
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function() {
+
+            loadAgentProfile();
+
+        }
+    );
+
+
+</script>
+
+
+</body>
+
+</html>

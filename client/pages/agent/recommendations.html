@@ -1,0 +1,4033 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Recommendations | TrustNest</title>
+
+    <meta name="description"
+          content="TrustNest Smart Policy Recommendations">
+
+    <!-- =========================================
+         GOOGLE FONTS
+    ========================================== -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
+
+
+    <!-- =========================================
+         BOOTSTRAP ICONS
+    ========================================== -->
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+
+    <!-- =========================================
+         MAIN CSS
+    ========================================== -->
+
+    <link rel="stylesheet"
+          href="../../css/style.css">
+
+
+    <style>
+
+        /* =========================================
+           RESET
+        ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            font-family: "Inter", sans-serif;
+
+            background: #f5f7fb;
+
+            color: #172033;
+
+            min-height: 100vh;
+        }
+
+
+        a {
+
+            text-decoration: none;
+
+            color: inherit;
+        }
+
+
+        button {
+
+            font-family: inherit;
+        }
+
+
+        /* =========================================
+           MAIN LAYOUT
+        ========================================= */
+
+        .dashboard {
+
+            display: flex;
+
+            min-height: 100vh;
+        }
+
+
+        /* =========================================
+           SIDEBAR
+        ========================================= */
+
+        .sidebar {
+
+            width: 250px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #061f42,
+                    #092b5c
+                );
+
+            color: white;
+
+            position: fixed;
+
+            left: 0;
+
+            top: 0;
+
+            bottom: 0;
+
+            z-index: 100;
+
+            display: flex;
+
+            flex-direction: column;
+
+            transition: 0.3s;
+        }
+
+
+        /* =========================================
+           SIDEBAR LOGO
+        ========================================= */
+
+        .sidebar-logo {
+
+            height: 85px;
+
+            display: flex;
+
+            align-items: center;
+
+            padding: 0 25px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.08);
+        }
+
+
+        .logo-icon {
+
+            width: 40px;
+
+            height: 40px;
+
+            border-radius: 50%;
+
+            background: white;
+
+            color: #092b5c;
+
+            border: 3px solid #c9a227;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: 800;
+
+            margin-right: 10px;
+        }
+
+
+        .logo-name {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 23px;
+
+            font-weight: 700;
+        }
+
+
+        .logo-subtitle {
+
+            display: block;
+
+            font-size: 7px;
+
+            letter-spacing: 1.5px;
+
+            color: #d6b23c;
+
+            margin-top: -2px;
+        }
+
+
+        /* =========================================
+           MENU
+        ========================================== */
+
+        .menu-title {
+
+            padding:
+                25px 25px 10px;
+
+            color: #7f94ad;
+
+            font-size: 9px;
+
+            font-weight: 700;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+        }
+
+
+        .sidebar-menu {
+
+            list-style: none;
+
+            padding: 0 12px;
+        }
+
+
+        .sidebar-menu li {
+
+            margin-bottom: 4px;
+        }
+
+
+        .sidebar-menu a {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 11px 13px;
+
+            border-radius: 7px;
+
+            color: #b8c6d8;
+
+            font-size: 12px;
+
+            transition: 0.25s;
+        }
+
+
+        .sidebar-menu a:hover {
+
+            background:
+                rgba(255,255,255,0.07);
+
+            color: white;
+        }
+
+
+        .sidebar-menu a.active {
+
+            background:
+                rgba(255,255,255,0.12);
+
+            color: white;
+
+            border-left:
+                3px solid #c9a227;
+        }
+
+
+        .menu-icon {
+
+            width: 22px;
+
+            text-align: center;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================================
+           SIDEBAR BOTTOM
+        ========================================== */
+
+        .sidebar-bottom {
+
+            margin-top: auto;
+
+            padding: 15px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.08);
+        }
+
+
+        .sidebar-bottom a {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            color: #aebed0;
+
+            font-size: 11px;
+
+            padding: 10px;
+        }
+
+
+        .sidebar-bottom a:hover {
+
+            color: white;
+        }
+
+
+        /* =========================================
+           MAIN AREA
+        ========================================== */
+
+        .main {
+
+            margin-left: 250px;
+
+            width: calc(100% - 250px);
+
+            min-height: 100vh;
+        }
+
+
+        /* =========================================
+           TOPBAR
+        ========================================== */
+
+        .topbar {
+
+            height: 75px;
+
+            background: white;
+
+            border-bottom:
+                1px solid #e8edf3;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding:
+                0 30px;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 50;
+        }
+
+
+        .mobile-menu {
+
+            display: none;
+
+            border: none;
+
+            background: none;
+
+            font-size: 22px;
+
+            cursor: pointer;
+        }
+
+
+        .page-title h1 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            color: #092b5c;
+
+            font-size: 24px;
+
+            margin-bottom: 2px;
+        }
+
+
+        .page-title p {
+
+            color: #8995a5;
+
+            font-size: 10px;
+        }
+
+
+        /* =========================================
+           TOPBAR RIGHT
+        ========================================== */
+
+        .topbar-right {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+        }
+
+
+        .notification {
+
+            position: relative;
+
+            font-size: 18px;
+
+            cursor: pointer;
+
+            color: #526071;
+        }
+
+
+        .notification-badge {
+
+            position: absolute;
+
+            top: -5px;
+
+            right: -6px;
+
+            width: 15px;
+
+            height: 15px;
+
+            border-radius: 50%;
+
+            background: #c9a227;
+
+            color: white;
+
+            font-size: 8px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: 700;
+        }
+
+
+        .agent-profile {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            cursor: pointer;
+        }
+
+
+        .agent-avatar {
+
+            width: 38px;
+
+            height: 38px;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #092b5c,
+                    #1c518e
+                );
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: 700;
+
+            font-size: 13px;
+
+            border:
+                2px solid #d6b23c;
+        }
+
+
+        .agent-info strong {
+
+            display: block;
+
+            font-size: 11px;
+
+            color: #172033;
+        }
+
+
+        .agent-info span {
+
+            font-size: 9px;
+
+            color: #8995a5;
+        }
+
+
+        /* =========================================
+           CONTENT
+        ========================================== */
+
+        .content {
+
+            padding: 28px 30px;
+        }
+
+
+        /* =========================================
+           PAGE HEADER
+        ========================================== */
+
+        .recommendation-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 25px;
+        }
+
+
+        .recommendation-header h2 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            color: #092b5c;
+
+            font-size: 24px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .recommendation-header p {
+
+            color: #8995a5;
+
+            font-size: 11px;
+        }
+
+
+        .customers-btn {
+
+            border:
+                1px solid #092b5c;
+
+            color: #092b5c;
+
+            padding: 9px 16px;
+
+            border-radius: 8px;
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+            background: white;
+
+            transition: 0.25s;
+        }
+
+
+        .customers-btn:hover {
+
+            background: #092b5c;
+
+            color: white;
+        }
+
+
+        /* =========================================
+           CUSTOMER SELECT BOX
+        ========================================== */
+
+        .customer-box {
+
+            background: white;
+
+            border:
+                1px solid #e7ecf2;
+
+            border-radius: 11px;
+
+            padding: 22px;
+
+            box-shadow:
+                0 5px 20px
+                rgba(9,43,92,0.05);
+
+            margin-bottom: 22px;
+        }
+
+
+        .customer-box h5 {
+
+            font-size: 14px;
+
+            color: #172033;
+
+            margin-bottom: 18px;
+        }
+
+
+        .form-label {
+
+            font-size: 10px;
+
+            font-weight: 600;
+
+            color: #526071;
+
+            margin-bottom: 6px;
+        }
+
+
+        .form-control,
+        .form-select {
+
+            width: 100%;
+
+            border:
+                1px solid #dfe5ec;
+
+            border-radius: 8px;
+
+            padding: 10px 12px;
+
+            font-size: 11px;
+
+            color: #344054;
+
+            background: white;
+        }
+
+
+        .form-control:focus,
+        .form-select:focus {
+
+            outline: none;
+
+            border-color: #092b5c;
+
+            box-shadow:
+                0 0 0 2px
+                rgba(9,43,92,0.08);
+        }
+
+
+        .btn-trustnest {
+
+            background: #092b5c;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 8px;
+
+            padding: 10px 16px;
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+
+        .btn-trustnest:hover {
+
+            background: #123f78;
+
+            color: white;
+        }
+
+
+        .btn-trustnest:disabled {
+
+            opacity: 0.65;
+
+            cursor: not-allowed;
+        }
+
+
+        /* =========================================
+           CUSTOMER PROFILE
+        ========================================== */
+
+        #customerProfile {
+
+            display: none;
+        }
+
+
+        .profile-item strong {
+
+            display: block;
+
+            color: #8995a5;
+
+            font-size: 9px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.5px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .profile-item p {
+
+            color: #172033;
+
+            font-size: 12px;
+
+            font-weight: 600;
+        }
+
+
+        /* =========================================
+           AI STATUS
+        ========================================== */
+
+        .ai-status {
+
+            display: none;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding: 12px 15px;
+
+            margin-bottom: 20px;
+
+            border-radius: 9px;
+
+            background: #edf3fa;
+
+            color: #092b5c;
+
+            font-size: 10px;
+
+            border:
+                1px solid #dce7f3;
+        }
+
+
+        .ai-status i {
+
+            font-size: 16px;
+        }
+
+
+        .ai-status.active {
+
+            display: flex;
+        }
+
+
+        /* =========================================
+           RECOMMENDATION GRID
+        ========================================== */
+
+        .recommendation-container {
+
+            display: none;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+        }
+
+
+        .recommendation-container.show {
+
+            display: grid;
+        }
+
+
+        .recommendation-card {
+
+            border:
+                1px solid #e7ecf2;
+
+            border-radius: 11px;
+
+            background: white;
+
+            box-shadow:
+                0 5px 20px
+                rgba(9,43,92,0.06);
+
+            transition: 0.3s;
+
+            height: 100%;
+
+            padding: 22px;
+        }
+
+
+        .recommendation-card:hover {
+
+            transform:
+                translateY(-4px);
+
+            box-shadow:
+                0 12px 30px
+                rgba(9,43,92,0.10);
+        }
+
+
+        .icon-box {
+
+            width: 48px;
+
+            height: 48px;
+
+            border-radius: 10px;
+
+            background: #edf3fa;
+
+            color: #092b5c;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 21px;
+        }
+
+
+        .match-score {
+
+            background: #fdf7e5;
+
+            color: #8c6b08;
+
+            padding: 6px 10px;
+
+            border-radius: 20px;
+
+            font-size: 9px;
+
+            font-weight: 700;
+        }
+
+
+        .recommendation-card h5 {
+
+            font-size: 15px;
+
+            color: #172033;
+
+            margin-top: 16px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .recommendation-card p {
+
+            color: #8995a5;
+
+            font-size: 10px;
+
+            line-height: 1.6;
+
+            min-height: 52px;
+        }
+
+
+        .tag {
+
+            display: inline-block;
+
+            padding: 5px 9px;
+
+            border-radius: 20px;
+
+            background: #edf3fa;
+
+            color: #092b5c;
+
+            font-size: 8px;
+
+            margin: 3px 2px;
+        }
+
+
+        .reason-box {
+
+            background: #f8fafc;
+
+            border-radius: 8px;
+
+            padding: 10px;
+
+            margin-top: 12px;
+
+            min-height: 60px;
+        }
+
+
+        .reason-title {
+
+            font-size: 8px;
+
+            font-weight: 700;
+
+            color: #092b5c;
+
+            text-transform: uppercase;
+
+            margin-bottom: 5px;
+        }
+
+
+        .reason-text {
+
+            font-size: 9px;
+
+            line-height: 1.5;
+
+            color: #667085;
+        }
+
+
+        .premium-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            color: #8995a5;
+
+            font-size: 9px;
+
+            margin-top: 12px;
+        }
+
+
+        .premium-row strong {
+
+            color: #172033;
+
+            font-size: 11px;
+        }
+
+
+        .view-btn {
+
+            width: 100%;
+
+            margin-top: 15px;
+
+            padding: 9px;
+
+            border:
+                1px solid #092b5c;
+
+            border-radius: 8px;
+
+            background: white;
+
+            color: #092b5c;
+
+            font-size: 10px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+
+        .view-btn:hover {
+
+            background: #092b5c;
+
+            color: white;
+        }
+
+
+        /* =========================================
+           NO CUSTOMER MESSAGE
+        ========================================== */
+
+        .empty-message {
+
+            display: block;
+
+            background: white;
+
+            border:
+                1px solid #e7ecf2;
+
+            border-radius: 11px;
+
+            padding: 45px 20px;
+
+            text-align: center;
+
+            color: #8995a5;
+        }
+
+
+        .empty-message i {
+
+            font-size: 34px;
+
+            color: #092b5c;
+
+            opacity: 0.6;
+        }
+
+
+        .empty-message h5 {
+
+            font-size: 13px;
+
+            color: #526071;
+
+            margin-top: 12px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .empty-message p {
+
+            font-size: 10px;
+        }
+
+
+        /* =========================================
+           ERROR MESSAGE
+        ========================================== */
+
+        .error-message {
+
+            display: none;
+
+            background: #fff5f5;
+
+            border:
+                1px solid #f1caca;
+
+            color: #a33a3a;
+
+            border-radius: 9px;
+
+            padding: 14px;
+
+            margin-bottom: 20px;
+
+            font-size: 10px;
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================== */
+
+        @media (max-width: 1150px) {
+
+            .recommendation-container {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+        }
+
+
+        @media (max-width: 850px) {
+
+            .sidebar {
+
+                transform:
+                    translateX(-100%);
+            }
+
+
+            .sidebar.open {
+
+                transform:
+                    translateX(0);
+            }
+
+
+            .main {
+
+                margin-left: 0;
+
+                width: 100%;
+            }
+
+
+            .mobile-menu {
+
+                display: block;
+            }
+
+
+            .topbar {
+
+                padding:
+                    0 18px;
+            }
+
+
+            .page-title {
+
+                margin-left: 10px;
+            }
+
+
+            .content {
+
+                padding:
+                    20px 18px;
+            }
+        }
+
+
+        @media (max-width: 650px) {
+
+            .recommendation-container {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .recommendation-header {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+
+            .topbar-right .agent-info {
+
+                display: none;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="dashboard">
+
+
+    <!-- =================================================
+         SIDEBAR
+    ================================================== -->
+
+    <aside class="sidebar"
+           id="sidebar">
+
+
+        <!-- LOGO -->
+
+        <a href="dashboard.html"
+           class="sidebar-logo">
+
+            <div class="logo-icon">
+                T
+            </div>
+
+            <div>
+
+                <div class="logo-name">
+                    TrustNest
+                </div>
+
+                <span class="logo-subtitle">
+                    Insurance Intelligence
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <!-- MAIN MENU -->
+
+        <div class="menu-title">
+            Main Menu
+        </div>
+
+
+        <ul class="sidebar-menu">
+
+
+            <li>
+
+                <a href="dashboard.html">
+
+                    <span class="menu-icon">
+                        ▦
+                    </span>
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="customers.html">
+
+                    <span class="menu-icon">
+                        👥
+                    </span>
+
+                    Customers
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="policies.html">
+
+                    <span class="menu-icon">
+                        📋
+                    </span>
+
+                    Policies
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="followups.html">
+
+                    <span class="menu-icon">
+                        🔔
+                    </span>
+
+                    Follow-ups
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="interactions.html">
+
+                    <span class="menu-icon">
+                        💬
+                    </span>
+
+                    Interactions
+
+                </a>
+
+            </li>
+
+        </ul>
+
+
+        <!-- SMART FEATURES -->
+
+        <div class="menu-title">
+            Smart Features
+        </div>
+
+
+        <ul class="sidebar-menu">
+
+
+            <li>
+
+                <a href="recommendations.html"
+                   class="active">
+
+                    <span class="menu-icon">
+                        ✨
+                    </span>
+
+                    Recommendations
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="leads.html">
+
+                    <span class="menu-icon">
+                        🎯
+                    </span>
+
+                    Smart Leads
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="sales-insights.html">
+
+                    <span class="menu-icon">
+                        📊
+                    </span>
+
+                    Sales Insights
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="notifications.html">
+
+                    <span class="menu-icon">
+                        🔔
+                    </span>
+
+                    Notifications
+
+                </a>
+
+            </li>
+
+        </ul>
+
+
+        <!-- ACCOUNT -->
+
+        <div class="menu-title">
+            Account
+        </div>
+
+
+        <ul class="sidebar-menu">
+
+
+            <li>
+
+                <a href="profile.html">
+
+                    <span class="menu-icon">
+                        👤
+                    </span>
+
+                    My Profile
+
+                </a>
+
+            </li>
+
+        </ul>
+
+
+        <!-- LOGOUT -->
+
+        <div class="sidebar-bottom">
+
+            <a href="../login.html">
+
+                <span>
+                    ⇥
+                </span>
+
+                Logout
+
+            </a>
+
+        </div>
+
+
+    </aside>
+
+
+    <!-- =================================================
+         MAIN
+    ================================================== -->
+
+    <main class="main">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        <header class="topbar">
+
+
+            <div style="display:flex;
+                        align-items:center;">
+
+
+                <button
+                    class="mobile-menu"
+                    id="mobileMenu">
+
+                    ☰
+
+                </button>
+
+
+                <div class="page-title">
+
+                    <h1>
+                        Policy Recommendations
+                    </h1>
+
+                    <p>
+                        AI-assisted policy recommendations based on customer profile
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="topbar-right">
+
+
+                <!-- NOTIFICATION -->
+
+                <a href="notifications.html"
+                   class="notification">
+
+                    🔔
+
+                    <span
+                        class="notification-badge"
+                        id="notificationBadge">
+
+                        0
+
+                    </span>
+
+                </a>
+
+
+                <!-- AGENT -->
+
+                <a href="profile.html"
+                   class="agent-profile">
+
+
+                    <div class="agent-avatar"
+                         id="agentAvatar">
+
+                        --
+
+                    </div>
+
+
+                    <div class="agent-info">
+
+                        <strong id="agentName">
+
+                            Loading...
+
+                        </strong>
+
+                        <span>
+                            Insurance Agent
+                        </span>
+
+                    </div>
+
+
+                </a>
+
+
+            </div>
+
+
+        </header>
+
+
+        <!-- =================================================
+             CONTENT
+        ================================================== -->
+
+        <div class="content">
+
+
+            <!-- PAGE HEADER -->
+
+            <div class="recommendation-header">
+
+
+                <div>
+
+                    <h2>
+
+                        <i class="bi bi-stars"></i>
+
+                        Smart Policy Recommendations
+
+                    </h2>
+
+
+                    <p>
+
+                        Select a real customer to analyze their profile
+                        and identify suitable policy categories.
+
+                    </p>
+
+                </div>
+
+
+                <a href="customers.html"
+                   class="customers-btn">
+
+                    <i class="bi bi-people"></i>
+
+                    Customers
+
+                </a>
+
+
+            </div>
+
+
+            <!-- ERROR -->
+
+            <div id="errorMessage"
+                 class="error-message">
+
+            </div>
+
+
+            <!-- =================================================
+                 CUSTOMER SELECTION
+            ================================================== -->
+
+            <div class="customer-box">
+
+
+                <h5>
+
+                    <i class="bi bi-person-check"></i>
+
+                    Select Customer
+
+                </h5>
+
+
+                <div class="row g-3">
+
+
+                    <div class="col-md-6">
+
+
+                        <label
+                            class="form-label">
+
+                            Customer
+
+                        </label>
+
+
+                        <select
+                            class="form-select"
+                            id="customerSelect">
+
+
+                            <option value="">
+
+                                Loading customers...
+
+                            </option>
+
+
+                        </select>
+
+
+                    </div>
+
+
+                    <div class="col-md-3">
+
+
+                        <label
+                            class="form-label">
+
+                            Customer Age
+
+                        </label>
+
+
+                        <input
+                            type="number"
+                            id="customerAge"
+                            class="form-control"
+                            placeholder="Age"
+                            readonly>
+
+
+                    </div>
+
+
+                    <div class="col-md-3 d-flex align-items-end">
+
+
+                        <button
+                            class="btn-trustnest w-100"
+                            id="recommendButton"
+                            onclick="generateRecommendations()"
+                            disabled>
+
+
+                            <i class="bi bi-stars"></i>
+
+                            Analyze Customer
+
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 CUSTOMER PROFILE
+            ================================================== -->
+
+            <div id="customerProfile"
+                 class="customer-box">
+
+
+                <div class="row">
+
+
+                    <div class="col-md-3 profile-item">
+
+
+                        <strong>
+                            Customer
+                        </strong>
+
+
+                        <p id="profileName">
+                            -
+                        </p>
+
+
+                    </div>
+
+
+                    <div class="col-md-3 profile-item">
+
+
+                        <strong>
+                            Age
+                        </strong>
+
+
+                        <p id="profileAge">
+                            -
+                        </p>
+
+
+                    </div>
+
+
+                    <div class="col-md-3 profile-item">
+
+
+                        <strong>
+                            Family Members
+                        </strong>
+
+
+                        <p id="profileFamily">
+                            -
+                        </p>
+
+
+                    </div>
+
+
+                    <div class="col-md-3 profile-item">
+
+
+                        <strong>
+                            Yearly Paying Amount
+                        </strong>
+
+
+                        <p id="profileYearlyAmount">
+                            -
+                        </p>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="row mt-3">
+
+
+                    <div class="col-md-3 profile-item">
+
+
+                        <strong>
+                            Number of Years
+                        </strong>
+
+
+                        <p id="profileYears">
+                            -
+                        </p>
+
+
+                    </div>
+
+
+                    <div class="col-md-3 profile-item">
+
+
+                        <strong>
+                            Goal
+                        </strong>
+
+
+                        <p id="profileGoal">
+                            -
+                        </p>
+
+
+                    </div>
+
+
+                    <div class="col-md-6 profile-item">
+
+
+                        <strong>
+                            Existing Policies
+                        </strong>
+
+
+                        <p id="profilePolicies">
+                            -
+                        </p>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 AI STATUS
+            ================================================== -->
+
+            <div class="ai-status"
+                 id="aiStatus">
+
+
+                <i class="bi bi-stars"></i>
+
+
+                <span id="aiStatusText">
+
+                    Analyzing customer profile...
+
+                </span>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 RECOMMENDATIONS
+            ================================================== -->
+
+            <div
+                class="recommendation-container"
+                id="recommendationContainer">
+
+
+            </div>
+
+
+            <!-- =================================================
+                 EMPTY MESSAGE
+            ================================================== -->
+
+            <div
+                id="emptyMessage"
+                class="empty-message">
+
+
+                <i class="bi bi-person-search"></i>
+
+
+                <h5>
+
+                    Select a customer to generate recommendations
+
+                </h5>
+
+
+                <p>
+
+                    TrustNest will analyze age, family size,
+                    yearly premium capacity and policy duration.
+
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+
+<script>
+
+
+/* =====================================================
+   API CONFIGURATION
+===================================================== */
+
+const API_URL =
+    window.TRUSTNEST_API_URL ||
+    "http://localhost:5000";
+
+
+/* =====================================================
+   LOGGED-IN AGENT
+===================================================== */
+
+const loggedInAgentId =
+    localStorage.getItem("agentId");
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const customerSelect =
+    document.getElementById(
+        "customerSelect"
+    );
+
+
+const customerAge =
+    document.getElementById(
+        "customerAge"
+    );
+
+
+const customerProfile =
+    document.getElementById(
+        "customerProfile"
+    );
+
+
+const recommendationContainer =
+    document.getElementById(
+        "recommendationContainer"
+    );
+
+
+const emptyMessage =
+    document.getElementById(
+        "emptyMessage"
+    );
+
+
+const recommendButton =
+    document.getElementById(
+        "recommendButton"
+    );
+
+
+const aiStatus =
+    document.getElementById(
+        "aiStatus"
+    );
+
+
+const aiStatusText =
+    document.getElementById(
+        "aiStatusText"
+    );
+
+
+const errorMessage =
+    document.getElementById(
+        "errorMessage"
+    );
+
+
+/* =====================================================
+   STORE REAL CUSTOMERS
+===================================================== */
+
+let customers = [];
+
+
+/* =====================================================
+   MOBILE SIDEBAR
+===================================================== */
+
+const mobileMenu =
+    document.getElementById(
+        "mobileMenu"
+    );
+
+
+const sidebar =
+    document.getElementById(
+        "sidebar"
+    );
+
+
+if (mobileMenu && sidebar) {
+
+    mobileMenu.addEventListener(
+        "click",
+        function () {
+
+            sidebar.classList.toggle(
+                "open"
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   CLOSE MOBILE SIDEBAR
+===================================================== */
+
+document
+    .querySelectorAll(
+        ".sidebar-menu a"
+    )
+    .forEach(
+        function (link) {
+
+            link.addEventListener(
+                "click",
+                function () {
+
+                    if (
+                        window.innerWidth <= 850
+                    ) {
+
+                        sidebar.classList.remove(
+                            "open"
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   INITIAL LOGIN CHECK
+===================================================== */
+
+if (!loggedInAgentId) {
+
+    window.location.href =
+        "../login.html";
+
+}
+
+
+/* =====================================================
+   LOAD AGENT DETAILS
+===================================================== */
+
+async function loadAgentDetails() {
+
+
+    try {
+
+
+        const response =
+            await fetch(
+
+                API_URL +
+                "/api/dashboard?agentId=" +
+                encodeURIComponent(
+                    loggedInAgentId
+                )
+
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Unable to load agent details."
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        const agent =
+            data.agent;
+
+
+        if (!agent) {
+
+            return;
+
+        }
+
+
+        /* AGENT NAME */
+
+        const agentName =
+            document.getElementById(
+                "agentName"
+            );
+
+
+        if (agentName) {
+
+            agentName.textContent =
+                agent.fullName || "Agent";
+
+        }
+
+
+        /* AVATAR */
+
+        const agentAvatar =
+            document.getElementById(
+                "agentAvatar"
+            );
+
+
+        if (agentAvatar) {
+
+
+            const fullName =
+                agent.fullName ||
+                "Agent";
+
+
+            const parts =
+                fullName
+                    .trim()
+                    .split(/\s+/);
+
+
+            let initials;
+
+
+            if (
+                parts.length >= 2
+            ) {
+
+                initials =
+                    parts[0]
+                        .charAt(0)
+                        .toUpperCase()
+                    +
+                    parts[
+                        parts.length - 1
+                    ]
+                        .charAt(0)
+                        .toUpperCase();
+
+            }
+
+            else {
+
+                initials =
+                    fullName
+                        .substring(0, 2)
+                        .toUpperCase();
+
+            }
+
+
+            agentAvatar.textContent =
+                initials;
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Agent loading error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   LOAD REAL CUSTOMERS
+===================================================== */
+
+async function loadCustomers() {
+
+
+    if (!loggedInAgentId) {
+
+        return;
+
+    }
+
+
+    try {
+
+
+        customerSelect.innerHTML = `
+
+            <option value="">
+                Loading customers...
+            </option>
+
+        `;
+
+
+        const response =
+            await fetch(
+
+                API_URL +
+                "/api/customers?agentId=" +
+                encodeURIComponent(
+                    loggedInAgentId
+                )
+
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Unable to load customers."
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        /*
+           Support different backend response formats.
+        */
+
+        if (Array.isArray(data)) {
+
+            customers = data;
+
+        }
+
+        else if (
+            Array.isArray(data.customers)
+        ) {
+
+            customers =
+                data.customers;
+
+        }
+
+        else {
+
+            customers = [];
+
+        }
+
+
+        customerSelect.innerHTML = `
+
+            <option value="">
+                Select a customer
+            </option>
+
+        `;
+
+
+        if (
+            customers.length === 0
+        ) {
+
+
+            customerSelect.innerHTML = `
+
+                <option value="">
+                    No customers found
+                </option>
+
+            `;
+
+
+            recommendButton.disabled =
+                true;
+
+
+            showError(
+                "No customers are available for this agent. Please add a customer first."
+            );
+
+
+            return;
+
+        }
+
+
+        /* =========================================
+           ADD REAL CUSTOMERS TO DROPDOWN
+        ========================================= */
+
+
+        customers.forEach(
+            function (customer) {
+
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+
+                option.value =
+                    customer._id ||
+                    customer.id;
+
+
+                option.textContent =
+                    customer.fullName ||
+                    customer.name ||
+                    "Unnamed Customer";
+
+
+                customerSelect.appendChild(
+                    option
+                );
+
+            }
+        );
+
+
+        recommendButton.disabled =
+            false;
+
+
+        hideError();
+
+    }
+
+
+    catch (error) {
+
+
+        console.error(
+            "Customer loading error:",
+            error
+        );
+
+
+        customerSelect.innerHTML = `
+
+            <option value="">
+                Unable to load customers
+            </option>
+
+        `;
+
+
+        recommendButton.disabled =
+            true;
+
+
+        showError(
+
+            "Unable to load customer data. Make sure your TrustNest server is running on port 5000."
+
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   CUSTOMER SELECT CHANGE
+===================================================== */
+
+customerSelect.addEventListener(
+    "change",
+    function () {
+
+
+        const selectedId =
+            this.value;
+
+
+        if (!selectedId) {
+
+
+            customerProfile.style.display =
+                "none";
+
+
+            recommendationContainer.classList.remove(
+                "show"
+            );
+
+
+            emptyMessage.style.display =
+                "block";
+
+
+            customerAge.value =
+                "";
+
+
+            return;
+
+        }
+
+
+        const customer =
+            customers.find(
+                function (item) {
+
+                    return String(
+                        item._id ||
+                        item.id
+                    ) === String(
+                        selectedId
+                    );
+
+                }
+            );
+
+
+        if (!customer) {
+
+            return;
+
+        }
+
+
+        displayCustomerProfile(
+            customer
+        );
+
+
+        recommendationContainer.classList.remove(
+            "show"
+        );
+
+
+        emptyMessage.style.display =
+            "block";
+
+    }
+);
+
+
+/* =====================================================
+   DISPLAY CUSTOMER PROFILE
+===================================================== */
+
+function displayCustomerProfile(
+    customer
+) {
+
+
+    const age =
+        getCustomerAge(
+            customer
+        );
+
+
+    customerAge.value =
+        age || "";
+
+
+    document.getElementById(
+        "profileName"
+    ).textContent =
+        customer.fullName ||
+        customer.name ||
+        "-";
+
+
+    document.getElementById(
+        "profileAge"
+    ).textContent =
+        age
+            ? age + " years"
+            : "Not available";
+
+
+    const familyMembers =
+        getFamilyMembers(
+            customer
+        );
+
+
+    document.getElementById(
+        "profileFamily"
+    ).textContent =
+        familyMembers !== null
+            ? familyMembers
+            : "Not available";
+
+
+    const yearlyAmount =
+        getYearlyPayingAmount(
+            customer
+        );
+
+
+    document.getElementById(
+        "profileYearlyAmount"
+    ).textContent =
+        yearlyAmount !== null
+            ? formatCurrency(
+                yearlyAmount
+            )
+            : "Not available";
+
+
+    const years =
+        getNumberOfYears(
+            customer
+        );
+
+
+    document.getElementById(
+        "profileYears"
+    ).textContent =
+        years !== null
+            ? years + " years"
+            : "Not available";
+
+
+    const goal =
+        customer.goal ||
+        customer.goals ||
+        customer.financialGoal ||
+        "General Protection";
+
+
+    document.getElementById(
+        "profileGoal"
+    ).textContent =
+        Array.isArray(goal)
+            ? goal.join(", ")
+            : goal;
+
+
+    const existingPolicies =
+        getExistingPolicies(
+            customer
+        );
+
+
+    document.getElementById(
+        "profilePolicies"
+    ).textContent =
+        existingPolicies.length > 0
+            ? existingPolicies.length +
+              " existing policy/policies"
+            : "No existing policies";
+
+
+    customerProfile.style.display =
+        "block";
+
+}
+
+
+/* =====================================================
+   GET CUSTOMER AGE
+===================================================== */
+
+function getCustomerAge(
+    customer
+) {
+
+
+    if (
+        customer.age !== undefined &&
+        customer.age !== null &&
+        customer.age !== ""
+    ) {
+
+        return Number(
+            customer.age
+        );
+
+    }
+
+
+    const dob =
+        customer.dateOfBirth;
+
+
+    if (!dob) {
+
+        return null;
+
+    }
+
+
+    const birthDate =
+        new Date(dob);
+
+
+    if (
+        Number.isNaN(
+            birthDate.getTime()
+        )
+    ) {
+
+        return null;
+
+    }
+
+
+    const today =
+        new Date();
+
+
+    let age =
+        today.getFullYear() -
+        birthDate.getFullYear();
+
+
+    const monthDifference =
+        today.getMonth() -
+        birthDate.getMonth();
+
+
+    if (
+        monthDifference < 0 ||
+        (
+            monthDifference === 0 &&
+            today.getDate() <
+            birthDate.getDate()
+        )
+    ) {
+
+        age--;
+
+    }
+
+
+    return age;
+
+}
+
+
+/* =====================================================
+   GET FAMILY MEMBERS
+===================================================== */
+
+function getFamilyMembers(
+    customer
+) {
+
+
+    const value =
+        customer.familyMembers ??
+        customer.familySize ??
+        customer.numberOfFamilyMembers ??
+        customer.members;
+
+
+    if (
+        value === undefined ||
+        value === null ||
+        value === ""
+    ) {
+
+        return null;
+
+    }
+
+
+    return Number(value);
+
+}
+
+
+/* =====================================================
+   GET YEARLY PAYING AMOUNT
+===================================================== */
+
+function getYearlyPayingAmount(
+    customer
+) {
+
+
+    /*
+       Direct yearly amount.
+    */
+
+    const directAmount =
+        customer.yearlyPayingAmount ??
+        customer.yearlyPremium ??
+        customer.annualPremium ??
+        customer.yearlyAmount;
+
+
+    if (
+        directAmount !== undefined &&
+        directAmount !== null &&
+        directAmount !== ""
+    ) {
+
+        return Number(
+            String(directAmount)
+                .replace(/[^0-9.]/g, "")
+        );
+
+    }
+
+
+    /*
+       Try to calculate from existing policies.
+    */
+
+    const policies =
+        getExistingPolicies(
+            customer
+        );
+
+
+    if (
+        policies.length === 0
+    ) {
+
+        return null;
+
+    }
+
+
+    let total =
+        0;
+
+
+    let found =
+        false;
+
+
+    policies.forEach(
+        function (policy) {
+
+
+            const amount =
+                Number(
+                    policy.premiumAmount
+                );
+
+
+            if (!Number.isNaN(amount))
+            {
+
+
+                const frequency =
+                    String(
+                        policy.premiumFrequency ||
+                        "yearly"
+                    )
+                    .toLowerCase();
+
+
+                if (
+                    frequency.includes(
+                        "month"
+                    )
+                ) {
+
+                    total +=
+                        amount * 12;
+
+                }
+
+                else if (
+                    frequency.includes(
+                        "quarter"
+                    )
+                ) {
+
+                    total +=
+                        amount * 4;
+
+                }
+
+                else if (
+                    frequency.includes(
+                        "half"
+                    )
+                ) {
+
+                    total +=
+                        amount * 2;
+
+                }
+
+                else {
+
+                    total +=
+                        amount;
+
+                }
+
+
+                found =
+                    true;
+
+            }
+
+        }
+    );
+
+
+    return found
+        ? total
+        : null;
+
+}
+
+
+/* =====================================================
+   GET NUMBER OF YEARS
+===================================================== */
+
+function getNumberOfYears(
+    customer
+) {
+
+
+    /*
+       Direct fields if your backend
+       already stores the value.
+    */
+
+    const directYears =
+        customer.numberOfYears ??
+        customer.years ??
+        customer.policyYears ??
+        customer.payingYears ??
+        customer.durationYears;
+
+
+    if (
+        directYears !== undefined &&
+        directYears !== null &&
+        directYears !== ""
+    ) {
+
+        return Number(
+            directYears
+        );
+
+    }
+
+
+    /*
+       If no direct field exists,
+       calculate the duration from
+       the earliest policy start date.
+    */
+
+    const policies =
+        getExistingPolicies(
+            customer
+        );
+
+
+    if (
+        policies.length === 0
+    ) {
+
+        return null;
+
+    }
+
+
+    const dates =
+        policies
+            .map(
+                function (policy) {
+
+                    return policy.startDate;
+
+                }
+            )
+            .filter(Boolean)
+            .map(
+                function (date) {
+
+                    return new Date(date);
+
+                }
+            )
+            .filter(
+                function (date) {
+
+                    return !Number.isNaN(
+                        date.getTime()
+                    );
+
+                }
+            );
+
+
+    if (
+        dates.length === 0
+    ) {
+
+        return null;
+
+    }
+
+
+    const earliestDate =
+        new Date(
+            Math.min(
+                ...dates.map(
+                    function (date) {
+
+                        return date.getTime();
+
+                    }
+                )
+            )
+        );
+
+
+    const today =
+        new Date();
+
+
+    const milliseconds =
+        today.getTime() -
+        earliestDate.getTime();
+
+
+    const years =
+        milliseconds /
+        (
+            1000 *
+            60 *
+            60 *
+            24 *
+            365.25
+        );
+
+
+    return Math.max(
+        0,
+        Math.floor(years)
+    );
+
+}
+
+
+/* =====================================================
+   EXISTING POLICIES
+===================================================== */
+
+function getExistingPolicies(
+    customer
+) {
+
+
+    if (
+        Array.isArray(
+            customer.policies
+        )
+    ) {
+
+        return customer.policies;
+
+    }
+
+
+    if (
+        Array.isArray(
+            customer.policy
+        )
+    ) {
+
+        return customer.policy;
+
+    }
+
+
+    return [];
+
+}
+
+
+/* =====================================================
+   FORMAT CURRENCY
+===================================================== */
+
+function formatCurrency(
+    amount
+) {
+
+
+    if (
+        amount === null ||
+        amount === undefined ||
+        Number.isNaN(
+            Number(amount)
+        )
+    ) {
+
+        return "Not available";
+
+    }
+
+
+    return new Intl.NumberFormat(
+        "en-IN",
+        {
+            style: "currency",
+            currency: "INR",
+            maximumFractionDigits: 0
+        }
+    ).format(
+        Number(amount)
+    );
+
+}
+
+
+/* =====================================================
+   GENERATE AI RECOMMENDATIONS
+===================================================== */
+
+async function generateRecommendations() {
+
+
+    const selectedId =
+        customerSelect.value;
+
+
+    if (!selectedId) {
+
+        alert(
+            "Please select a customer first."
+        );
+
+        return;
+
+    }
+
+
+    const customer =
+        customers.find(
+            function (item) {
+
+                return String(
+                    item._id ||
+                    item.id
+                ) === String(
+                    selectedId
+                );
+
+            }
+        );
+
+
+    if (!customer) {
+
+        alert(
+            "Customer information could not be found."
+        );
+
+        return;
+
+    }
+
+
+    /* =========================================
+       SHOW AI ANALYSIS
+    ========================================= */
+
+    aiStatus.classList.add(
+        "active"
+    );
+
+
+    aiStatusText.textContent =
+        "AI is analyzing age, family size, yearly paying amount and policy duration...";
+
+
+    recommendButton.disabled =
+        true;
+
+
+    recommendationContainer.classList.remove(
+        "show"
+    );
+
+
+    emptyMessage.style.display =
+        "none";
+
+
+    /*
+       Small delay makes the AI analysis
+       visually understandable in the UI.
+    */
+
+    await wait(800);
+
+
+    const recommendations =
+        calculateRecommendations(
+            customer
+        );
+
+
+    await wait(500);
+
+
+    aiStatusText.textContent =
+        "Analysis completed. Suitable policy categories identified.";
+
+
+    renderRecommendations(
+        recommendations
+    );
+
+
+    recommendButton.disabled =
+        false;
+
+
+    setTimeout(
+        function () {
+
+            aiStatus.classList.remove(
+                "active"
+            );
+
+        },
+        1500
+    );
+
+}
+
+
+/* =====================================================
+   SMART RECOMMENDATION ENGINE
+===================================================== */
+
+function calculateRecommendations(
+    customer
+) {
+
+
+    const age =
+        getCustomerAge(
+            customer
+        ) || 0;
+
+
+    const family =
+        getFamilyMembers(
+            customer
+        ) || 0;
+
+
+    const yearlyAmount =
+        getYearlyPayingAmount(
+            customer
+        ) || 0;
+
+
+    const years =
+        getNumberOfYears(
+            customer
+        ) || 0;
+
+
+    const goal =
+        String(
+            customer.goal ||
+            customer.goals ||
+            customer.financialGoal ||
+            ""
+        ).toLowerCase();
+
+
+    /*
+       ---------------------------------------
+       TERM INSURANCE
+       ---------------------------------------
+    */
+
+    let termScore = 40;
+
+    let termReasons = [];
+
+
+    if (
+        age >= 25 &&
+        age <= 50
+    ) {
+
+        termScore += 15;
+
+        termReasons.push(
+            "Age is within a common working-life protection range."
+        );
+
+    }
+
+
+    if (
+        family >= 3
+    ) {
+
+        termScore += 20;
+
+        termReasons.push(
+            "Larger family size increases the need for financial protection."
+        );
+
+    }
+
+
+    if (
+        yearlyAmount > 0 &&
+        yearlyAmount <= 100000
+    ) {
+
+        termScore += 10;
+
+        termReasons.push(
+            "The yearly premium capacity is compatible with a protection-focused option."
+        );
+
+    }
+
+
+    if (
+        goal.includes("family") ||
+        goal.includes("protection") ||
+        goal.includes("life")
+    ) {
+
+        termScore += 15;
+
+        termReasons.push(
+            "Customer goal indicates family or life protection."
+        );
+
+    }
+
+
+    termScore =
+        Math.min(
+            99,
+            termScore
+        );
+
+
+    /*
+       ---------------------------------------
+       ENDOWMENT / SAVINGS
+       ---------------------------------------
+    */
+
+    let endowmentScore = 40;
+
+    let endowmentReasons = [];
+
+
+    if (
+        age >= 25 &&
+        age <= 55
+    ) {
+
+        endowmentScore += 15;
+
+        endowmentReasons.push(
+            "Age supports a longer-term savings and protection horizon."
+        );
+
+    }
+
+
+    if (
+        yearlyAmount >= 50000
+    ) {
+
+        endowmentScore += 15;
+
+        endowmentReasons.push(
+            "Yearly paying capacity supports considering a savings-oriented policy."
+        );
+
+    }
+
+
+    if (
+        years >= 5
+    ) {
+
+        endowmentScore += 10;
+
+        endowmentReasons.push(
+            "Longer policy duration aligns with long-term savings objectives."
+        );
+
+    }
+
+
+    if (
+        goal.includes("saving") ||
+        goal.includes("investment") ||
+        goal.includes("wealth")
+    ) {
+
+        endowmentScore += 15;
+
+        endowmentReasons.push(
+            "Customer profile indicates a savings or wealth-building goal."
+        );
+
+    }
+
+
+    endowmentScore =
+        Math.min(
+            99,
+            endowmentScore
+        );
+
+
+    /*
+       ---------------------------------------
+       CHILD EDUCATION
+       ---------------------------------------
+    */
+
+    let childScore = 30;
+
+    let childReasons = [];
+
+
+    if (
+        family >= 3
+    ) {
+
+        childScore += 15;
+
+        childReasons.push(
+            "Family size suggests possible dependent-related financial responsibilities."
+        );
+
+    }
+
+
+    if (
+        age >= 25 &&
+        age <= 50
+    ) {
+
+        childScore += 15;
+
+        childReasons.push(
+            "Customer age can align with planning for a child's future."
+        );
+
+    }
+
+
+    if (
+        yearlyAmount >= 30000
+    ) {
+
+        childScore += 10;
+
+        childReasons.push(
+            "The available yearly premium capacity supports considering a dedicated savings goal."
+        );
+
+    }
+
+
+    if (
+        goal.includes("child") ||
+        goal.includes("education") ||
+        goal.includes("future")
+    ) {
+
+        childScore += 25;
+
+        childReasons.push(
+            "Customer goal specifically relates to child education or future planning."
+        );
+
+    }
+
+
+    childScore =
+        Math.min(
+            99,
+            childScore
+        );
+
+
+    /*
+       ---------------------------------------
+       RETIREMENT / LONG-TERM
+       ---------------------------------------
+    */
+
+    let retirementScore = 30;
+
+    let retirementReasons = [];
+
+
+    if (
+        age >= 35
+    ) {
+
+        retirementScore += 20;
+
+        retirementReasons.push(
+            "Customer age makes long-term retirement planning relevant."
+        );
+
+    }
+
+
+    if (
+        years >= 5
+    ) {
+
+        retirementScore += 15;
+
+        retirementReasons.push(
+            "Existing policy duration indicates willingness to maintain long-term financial planning."
+        );
+
+    }
+
+
+    if (
+        yearlyAmount >= 50000
+    ) {
+
+        retirementScore += 15;
+
+        retirementReasons.push(
+            "Yearly premium capacity supports considering long-term financial planning."
+        );
+
+    }
+
+
+    if (
+        goal.includes("retirement") ||
+        goal.includes("pension") ||
+        goal.includes("future")
+    ) {
+
+        retirementScore += 15;
+
+        retirementReasons.push(
+            "Customer goal indicates future or retirement planning."
+        );
+
+    }
+
+
+    retirementScore =
+        Math.min(
+            99,
+            retirementScore
+        );
+
+
+    /*
+       ---------------------------------------
+       RETURN RESULTS
+       ---------------------------------------
+    */
+
+    return [
+
+        {
+
+            name:
+                "Term Insurance",
+
+            icon:
+                "bi-shield-fill-check",
+
+            score:
+                termScore,
+
+            description:
+                "Protection-focused insurance suitable for customers seeking financial security for their dependents.",
+
+            tags:
+                [
+                    "Life Protection",
+                    "Family",
+                    "Security"
+                ],
+
+            premium:
+                estimatePremium(
+                    yearlyAmount,
+                    "term"
+                ),
+
+            reasons:
+                termReasons
+
+        },
+
+
+        {
+
+            name:
+                "Endowment / Savings Plan",
+
+            icon:
+                "bi-piggy-bank-fill",
+
+            score:
+                endowmentScore,
+
+            description:
+                "A long-term savings and protection category for customers who want disciplined financial planning.",
+
+            tags:
+                [
+                    "Savings",
+                    "Long Term",
+                    "Protection"
+                ],
+
+            premium:
+                estimatePremium(
+                    yearlyAmount,
+                    "savings"
+                ),
+
+            reasons:
+                endowmentReasons
+
+        },
+
+
+        {
+
+            name:
+                "Child Education Plan",
+
+            icon:
+                "bi-mortarboard-fill",
+
+            score:
+                childScore,
+
+            description:
+                "A goal-oriented category for customers planning financially for a child's future education.",
+
+            tags:
+                [
+                    "Child Future",
+                    "Education",
+                    "Savings"
+                ],
+
+            premium:
+                estimatePremium(
+                    yearlyAmount,
+                    "child"
+                ),
+
+            reasons:
+                childReasons
+
+        },
+
+
+        {
+
+            name:
+                "Retirement / Long-Term Plan",
+
+            icon:
+                "bi-calendar-check-fill",
+
+            score:
+                retirementScore,
+
+            description:
+                "A long-term planning category for customers considering retirement and future financial security.",
+
+            tags:
+                [
+                    "Retirement",
+                    "Future",
+                    "Long Term"
+                ],
+
+            premium:
+                estimatePremium(
+                    yearlyAmount,
+                    "retirement"
+                ),
+
+            reasons:
+                retirementReasons
+
+        }
+
+    ]
+    .sort(
+        function (a, b) {
+
+            return b.score -
+                   a.score;
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   PREMIUM DISPLAY
+===================================================== */
+
+function estimatePremium(
+    yearlyAmount,
+    type
+) {
+
+
+    /*
+       This is only a UI estimate.
+       It is NOT an actual LIC premium quote.
+    */
+
+    if (
+        !yearlyAmount ||
+        yearlyAmount <= 0
+    ) {
+
+        return "Based on eligibility";
+
+    }
+
+
+    let suggested;
+
+
+    if (
+        type === "term"
+    ) {
+
+        suggested =
+            yearlyAmount * 0.35;
+
+    }
+
+    else if (
+        type === "savings"
+    ) {
+
+        suggested =
+            yearlyAmount * 0.75;
+
+    }
+
+    else if (
+        type === "child"
+    ) {
+
+        suggested =
+            yearlyAmount * 0.60;
+
+    }
+
+    else {
+
+        suggested =
+            yearlyAmount * 0.65;
+
+    }
+
+
+    return formatCurrency(
+        suggested
+    ) +
+    " / year*";
+
+}
+
+
+/* =====================================================
+   RENDER RECOMMENDATIONS
+===================================================== */
+
+function renderRecommendations(
+    recommendations
+) {
+
+
+    recommendationContainer.innerHTML =
+        "";
+
+
+    /*
+       Show top 3 recommendations.
+    */
+
+    const topRecommendations =
+        recommendations.slice(
+            0,
+            3
+        );
+
+
+    topRecommendations.forEach(
+        function (recommendation) {
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "recommendation-card";
+
+
+            const reasons =
+                recommendation.reasons.length > 0
+                    ? recommendation.reasons
+                        .slice(0, 3)
+                        .join(" ")
+                    : "Based on the available customer profile information.";
+
+
+            card.innerHTML = `
+
+                <div class="d-flex
+                            justify-content-between
+                            align-items-start">
+
+                    <div class="icon-box">
+
+                        <i class="bi ${recommendation.icon}"></i>
+
+                    </div>
+
+                    <span class="match-score">
+
+                        ${recommendation.score}% Match
+
+                    </span>
+
+                </div>
+
+
+                <h5>
+
+                    ${recommendation.name}
+
+                </h5>
+
+
+                <p>
+
+                    ${recommendation.description}
+
+                </p>
+
+
+                <div class="mb-2">
+
+                    ${recommendation.tags
+                        .map(
+                            function(tag) {
+
+                                return `
+                                    <span class="tag">
+                                        ${tag}
+                                    </span>
+                                `;
+
+                            }
+                        )
+                        .join("")
+                    }
+
+                </div>
+
+
+                <div class="reason-box">
+
+                    <div class="reason-title">
+
+                        <i class="bi bi-stars"></i>
+
+                        Why TrustNest Suggested This
+
+                    </div>
+
+                    <div class="reason-text">
+
+                        ${reasons}
+
+                    </div>
+
+                </div>
+
+
+                <div class="premium-row">
+
+                    <span>
+                        Suggested Premium Range
+                    </span>
+
+                    <strong>
+                        ${recommendation.premium}
+                    </strong>
+
+                </div>
+
+
+                <button
+                    class="view-btn"
+                    onclick="viewPolicy('${escapeQuotes(recommendation.name)}')">
+
+                    View Recommendation
+
+                </button>
+
+            `;
+
+
+            recommendationContainer.appendChild(
+                card
+            );
+
+        }
+    );
+
+
+    recommendationContainer.classList.add(
+        "show"
+    );
+
+
+    emptyMessage.style.display =
+        "none";
+
+}
+
+
+/* =====================================================
+   VIEW POLICY
+===================================================== */
+
+function viewPolicy(
+    policyName
+) {
+
+
+    const customerId =
+        customerSelect.value;
+
+
+    const customer =
+        customers.find(
+            function (item) {
+
+                return String(
+                    item._id ||
+                    item.id
+                ) === String(
+                    customerId
+                );
+
+            }
+        );
+
+
+    const customerName =
+        customer
+            ? (
+                customer.fullName ||
+                customer.name
+            )
+            : "Customer";
+
+
+    alert(
+
+        "Recommendation\n\n" +
+
+        "Customer: " +
+        customerName +
+
+        "\nPolicy Category: " +
+        policyName +
+
+        "\n\n" +
+
+        "You can discuss this recommendation with the customer after checking the actual policy eligibility, benefits, terms and premium quotation."
+
+    );
+
+}
+
+
+/* =====================================================
+   ESCAPE QUOTES
+===================================================== */
+
+function escapeQuotes(
+    value
+) {
+
+    return String(
+        value
+    )
+    .replace(
+        /'/g,
+        "\\'"
+    );
+
+}
+
+
+/* =====================================================
+   WAIT
+===================================================== */
+
+function wait(
+    milliseconds
+) {
+
+    return new Promise(
+        function (resolve) {
+
+            setTimeout(
+                resolve,
+                milliseconds
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   ERROR HANDLING
+===================================================== */
+
+function showError(
+    message
+) {
+
+
+    errorMessage.textContent =
+        message;
+
+
+    errorMessage.style.display =
+        "block";
+
+}
+
+
+function hideError() {
+
+    errorMessage.style.display =
+        "none";
+
+}
+
+
+/* =====================================================
+   INITIALIZE PAGE
+===================================================== */
+
+async function initializePage() {
+
+
+    await loadAgentDetails();
+
+    await loadCustomers();
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+if (loggedInAgentId) {
+
+    initializePage();
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
+```

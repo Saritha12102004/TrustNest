@@ -1,0 +1,2479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Verify Agent | TrustNest</title>
+
+    <meta
+        name="description"
+        content="Verify your TrustNest insurance agent."
+    >
+
+
+    <!-- Google Fonts -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+            margin: 0;
+
+            color: #172033;
+
+            background: #f5f7fb;
+
+            font-family: "Inter", sans-serif;
+        }
+
+
+        a {
+            color: inherit;
+
+            text-decoration: none;
+        }
+
+
+        button,
+        input {
+            font: inherit;
+        }
+
+
+        .layout {
+            display: flex;
+
+            min-height: 100vh;
+        }
+
+
+        /* =====================================================
+           SIDEBAR
+        ===================================================== */
+
+        .sidebar {
+            width: 250px;
+
+            position: fixed;
+
+            inset: 0 auto 0 0;
+
+            z-index: 10;
+
+            display: flex;
+
+            flex-direction: column;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #061f42,
+                    #092b5c
+                );
+
+            color: #fff;
+        }
+
+
+        .brand {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            height: 85px;
+
+            padding: 0 25px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.08);
+        }
+
+
+        .brand-mark {
+            display: grid;
+
+            place-items: center;
+
+            width: 40px;
+
+            height: 40px;
+
+            border:
+                3px solid
+                #c9a227;
+
+            border-radius: 50%;
+
+            background: #fff;
+
+            color: #092b5c;
+
+            font-weight: 800;
+        }
+
+
+        .brand-name {
+            font:
+                700 23px
+                "Playfair Display",
+                serif;
+        }
+
+
+        .brand-subtitle {
+            display: block;
+
+            margin-top: -2px;
+
+            color: #d6b23c;
+
+            font-size: 7px;
+
+            letter-spacing: 1.5px;
+        }
+
+
+        .menu-label {
+            padding:
+                25px
+                25px
+                10px;
+
+            color: #7f94ad;
+
+            font-size: 9px;
+
+            font-weight: 700;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+        }
+
+
+        .menu {
+            margin: 0;
+
+            padding: 0 12px;
+
+            list-style: none;
+        }
+
+
+        .menu li {
+            margin-bottom: 4px;
+        }
+
+
+        .menu a {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding:
+                11px
+                13px;
+
+            border-radius: 7px;
+
+            color: #b8c6d8;
+
+            font-size: 12px;
+        }
+
+
+        .menu a:hover,
+        .menu a.active {
+            background:
+                rgba(255,255,255,.12);
+
+            color: #fff;
+        }
+
+
+        .menu a.active {
+            border-left:
+                3px solid
+                #c9a227;
+        }
+
+
+        .menu-icon {
+            width: 22px;
+
+            text-align: center;
+
+            font-size: 14px;
+        }
+
+
+        .logout {
+            margin-top: auto;
+
+            padding:
+                20px
+                25px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,.08);
+
+            color: #b8c6d8;
+
+            font-size: 12px;
+        }
+
+
+        .logout a {
+            cursor: pointer;
+        }
+
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        .main {
+            width:
+                calc(100% - 250px);
+
+            margin-left: 250px;
+        }
+
+
+        .topbar {
+            min-height: 85px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding:
+                0
+                34px;
+
+            background: #fff;
+
+            border-bottom:
+                1px solid
+                #e8edf4;
+        }
+
+
+        .mobile-menu {
+            display: none;
+
+            border: 0;
+
+            background: transparent;
+
+            color: #092b5c;
+
+            font-size: 24px;
+
+            cursor: pointer;
+        }
+
+
+        .heading h1 {
+            margin: 0;
+
+            font-size: 22px;
+        }
+
+
+        .heading p {
+            margin:
+                5px
+                0
+                0;
+
+            color: #7b8798;
+
+            font-size: 12px;
+        }
+
+
+        .profile {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+
+        .avatar {
+            display: grid;
+
+            place-items: center;
+
+            width: 36px;
+
+            height: 36px;
+
+            border-radius: 50%;
+
+            background: #e8eef8;
+
+            color: #092b5c;
+
+            font-size: 11px;
+
+            font-weight: 700;
+        }
+
+
+        .profile strong,
+        .profile span {
+            display: block;
+        }
+
+
+        .profile strong {
+            font-size: 12px;
+        }
+
+
+        .profile span {
+            margin-top: 3px;
+
+            color: #8b95a4;
+
+            font-size: 10px;
+        }
+
+
+        .content {
+            max-width: 1100px;
+
+            padding:
+                32px
+                34px;
+        }
+
+
+        /* =====================================================
+           ERROR BOX
+        ===================================================== */
+
+        .error-box {
+            display: none;
+
+            margin-bottom: 20px;
+
+            padding:
+                14px
+                17px;
+
+            border-left:
+                3px solid
+                #c0392b;
+
+            border-radius: 4px;
+
+            background: #fff0ef;
+
+            color: #a93226;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+           PAGE HEADER
+        ===================================================== */
+
+        .page-actions {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            margin-bottom: 24px;
+        }
+
+
+        .page-actions h2 {
+            margin:
+                0
+                0
+                7px;
+
+            font-size: 21px;
+        }
+
+
+        .page-actions p {
+            margin: 0;
+
+            color: #7b8798;
+
+            font-size: 13px;
+        }
+
+
+        .button {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 7px;
+
+            padding:
+                11px
+                15px;
+
+            border: 0;
+
+            border-radius: 6px;
+
+            background: #092b5c;
+
+            color: #fff;
+
+            cursor: pointer;
+
+            font-size: 11px;
+
+            font-weight: 600;
+        }
+
+
+        .button:hover {
+            background: #061f42;
+        }
+
+
+        /* =====================================================
+           VERIFICATION CARD
+        ===================================================== */
+
+        .verification-card {
+            max-width: 760px;
+
+            margin: 0 auto;
+
+            padding: 28px;
+
+            background: #fff;
+
+            border:
+                1px solid
+                #edf0f5;
+
+            border-radius: 8px;
+
+            box-shadow:
+                0 5px 18px
+                rgba(24,42,70,.04);
+        }
+
+
+        .verification-header {
+            text-align: center;
+
+            margin-bottom: 27px;
+        }
+
+
+        .verification-icon {
+            display: grid;
+
+            place-items: center;
+
+            width: 58px;
+
+            height: 58px;
+
+            margin:
+                0
+                auto
+                15px;
+
+            border-radius: 50%;
+
+            background: #e8eef8;
+
+            color: #31588e;
+
+            font-size: 25px;
+        }
+
+
+        .verification-header h3 {
+            margin:
+                0
+                0
+                7px;
+
+            color: #25344b;
+
+            font-size: 19px;
+        }
+
+
+        .verification-header p {
+            max-width: 530px;
+
+            margin:
+                0
+                auto;
+
+            color: #7b8798;
+
+            font-size: 11px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =====================================================
+           FORM
+        ===================================================== */
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+
+        .form-label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #334155;
+
+            font-size: 11px;
+
+            font-weight: 600;
+        }
+
+
+        .input-wrapper {
+            position: relative;
+        }
+
+
+        .input-icon {
+            position: absolute;
+
+            top: 50%;
+
+            left: 13px;
+
+            transform:
+                translateY(-50%);
+
+            color: #8b95a4;
+
+            font-size: 13px;
+        }
+
+
+        .form-input {
+            width: 100%;
+
+            padding:
+                11px
+                13px
+                11px
+                38px;
+
+            border:
+                1px solid
+                #dfe5ed;
+
+            border-radius: 6px;
+
+            outline: none;
+
+            color: #334155;
+
+            background: #fff;
+
+            font-size: 11px;
+        }
+
+
+        .form-input:focus {
+            border-color: #31588e;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(49,88,142,.1);
+        }
+
+
+        .input-help {
+            margin-top: 6px;
+
+            color: #8b95a4;
+
+            font-size: 9px;
+        }
+
+
+        .verify-button {
+            width: 100%;
+
+            padding: 12px;
+
+            border: 0;
+
+            border-radius: 6px;
+
+            background: #092b5c;
+
+            color: #fff;
+
+            cursor: pointer;
+
+            font-size: 11px;
+
+            font-weight: 600;
+        }
+
+
+        .verify-button:hover {
+            background: #061f42;
+        }
+
+
+        .verify-button:disabled {
+            opacity: .65;
+
+            cursor: not-allowed;
+        }
+
+
+        /* =====================================================
+           RESULT
+        ===================================================== */
+
+        .result {
+            display: none;
+
+            margin-top: 24px;
+
+            padding: 20px;
+
+            border:
+                1px solid
+                #dcefe5;
+
+            border-radius: 7px;
+
+            background: #f7fcf9;
+        }
+
+
+        .result.show {
+            display: block;
+        }
+
+
+        .result-header {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 17px;
+        }
+
+
+        .result-icon {
+            display: grid;
+
+            place-items: center;
+
+            width: 39px;
+
+            height: 39px;
+
+            border-radius: 50%;
+
+            background: #e2f4eb;
+
+            color: #23794d;
+
+            font-size: 17px;
+        }
+
+
+        .result-header strong {
+            display: block;
+
+            color: #23794d;
+
+            font-size: 13px;
+        }
+
+
+        .result-header span {
+            display: block;
+
+            margin-top: 3px;
+
+            color: #7b8798;
+
+            font-size: 9px;
+        }
+
+
+        .details {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 12px;
+        }
+
+
+        .detail-box {
+            padding: 12px;
+
+            border:
+                1px solid
+                #e8eee9;
+
+            border-radius: 5px;
+
+            background: #fff;
+        }
+
+
+        .detail-box span {
+            display: block;
+
+            margin-bottom: 5px;
+
+            color: #8b95a4;
+
+            font-size: 9px;
+        }
+
+
+        .detail-box strong {
+            color: #334155;
+
+            font-size: 11px;
+
+            word-break: break-word;
+        }
+
+
+        /* =====================================================
+           VERIFICATION FAILED
+        ===================================================== */
+
+        .failed-result {
+            display: none;
+
+            margin-top: 24px;
+
+            padding: 20px;
+
+            border:
+                1px solid
+                #f1d7d4;
+
+            border-radius: 7px;
+
+            background: #fff8f7;
+        }
+
+
+        .failed-result.show {
+            display: block;
+        }
+
+
+        .failed-header {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+
+        .failed-icon {
+            display: grid;
+
+            place-items: center;
+
+            width: 39px;
+
+            height: 39px;
+
+            border-radius: 50%;
+
+            background: #fde8e6;
+
+            color: #b43b30;
+
+            font-size: 17px;
+        }
+
+
+        .failed-header strong {
+            display: block;
+
+            color: #a93226;
+
+            font-size: 13px;
+        }
+
+
+        .failed-header span {
+            display: block;
+
+            margin-top: 3px;
+
+            color: #7b8798;
+
+            font-size: 9px;
+        }
+
+
+        /* =====================================================
+           INFO CARDS
+        ===================================================== */
+
+        .info-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 16px;
+
+            margin-top: 22px;
+        }
+
+
+        .info-card {
+            padding: 18px;
+
+            background: #fff;
+
+            border:
+                1px solid
+                #edf0f5;
+
+            border-radius: 8px;
+
+            box-shadow:
+                0 5px 18px
+                rgba(24,42,70,.04);
+        }
+
+
+        .info-icon {
+            display: grid;
+
+            place-items: center;
+
+            width: 38px;
+
+            height: 38px;
+
+            margin-bottom: 12px;
+
+            border-radius: 8px;
+
+            background: #e8eef8;
+
+            color: #31588e;
+
+            font-size: 16px;
+        }
+
+
+        .info-card strong {
+            display: block;
+
+            margin-bottom: 6px;
+
+            color: #25344b;
+
+            font-size: 11px;
+        }
+
+
+        .info-card p {
+            margin: 0;
+
+            color: #8b95a4;
+
+            font-size: 9px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =====================================================
+           NOTICE
+        ===================================================== */
+
+        .notice {
+            margin-top: 20px;
+
+            padding:
+                14px
+                17px;
+
+            border-left:
+                3px solid
+                #c9a227;
+
+            border-radius: 4px;
+
+            background: #fffaf0;
+
+            color: #725d28;
+
+            font-size: 10px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =====================================================
+           LOADING
+        ===================================================== */
+
+        .page-loading {
+            padding: 30px;
+
+            color: #7b8798;
+
+            text-align: center;
+
+            font-size: 11px;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 850px) {
+
+            .sidebar {
+                transform:
+                    translateX(-100%);
+
+                transition:
+                    transform .2s ease;
+            }
+
+
+            .sidebar.open {
+                transform:
+                    translateX(0);
+            }
+
+
+            .main {
+                width: 100%;
+
+                margin-left: 0;
+            }
+
+
+            .mobile-menu {
+                display: block;
+
+                margin-right: 14px;
+            }
+
+
+            .topbar {
+                padding:
+                    0
+                    18px;
+            }
+
+
+            .content {
+                padding:
+                    22px
+                    18px;
+            }
+
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .page-actions {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+
+            .button {
+                width: 100%;
+
+                justify-content: center;
+            }
+
+
+            .verification-card {
+                padding: 20px;
+            }
+
+
+            .details {
+                grid-template-columns: 1fr;
+            }
+
+
+            .profile span {
+                display: none;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ===================================================== -->
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+    >
+
+
+        <a
+            href="dashboard.html"
+            class="brand"
+        >
+
+            <div class="brand-mark">
+                T
+            </div>
+
+
+            <div>
+
+                <div class="brand-name">
+                    TrustNest
+                </div>
+
+                <span class="brand-subtitle">
+                    Insurance Intelligence
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <div class="menu-label">
+            My Account
+        </div>
+
+
+        <ul class="menu">
+
+
+            <li>
+
+                <a href="dashboard.html">
+
+                    <span class="menu-icon">
+                        &#9638;
+                    </span>
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="policies.html">
+
+                    <span class="menu-icon">
+                        &#128203;
+                    </span>
+
+                    My Policies
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a
+                    href="verify-agent.html"
+                    class="active"
+                >
+
+                    <span class="menu-icon">
+                        &#10003;
+                    </span>
+
+                    Verify Agent
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="agent-details.html">
+
+                    <span class="menu-icon">
+                        &#128100;
+                    </span>
+
+                    Agent Details
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="branch-details.html">
+
+                    <span class="menu-icon">
+                        &#127970;
+                    </span>
+
+                    Branch Details
+
+                </a>
+
+            </li>
+
+
+        </ul>
+
+        <div class="logout">
+
+            <a
+                href="#"
+                id="logoutBtn"
+            >
+
+                &#8617;&nbsp;&nbsp;Logout
+
+            </a>
+
+        </div>
+
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+    ===================================================== -->
+
+    <main class="main">
+
+
+        <!-- =================================================
+             TOP BAR
+        ================================================= -->
+
+        <header class="topbar">
+
+
+            <div
+                style="
+                    display:flex;
+                    align-items:center;
+                "
+            >
+
+
+                <button
+                    class="mobile-menu"
+                    id="mobileMenu"
+                    aria-label="Open navigation"
+                >
+
+                    &#9776;
+
+                </button>
+
+
+                <div class="heading">
+
+                    <h1>
+                        Verify Agent
+                    </h1>
+
+                    <p>
+                        Verify your insurance agent and branch details
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- CUSTOMER PROFILE -->
+
+            <div class="profile">
+
+
+                <div
+                    class="avatar"
+                    id="profileAvatar"
+                >
+                    --
+                </div>
+
+
+                <div>
+
+                    <strong id="profileName">
+                        Loading...
+                    </strong>
+
+                    <span>
+                        TrustNest Customer
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </header>
+
+
+        <!-- =================================================
+             CONTENT
+        ================================================= -->
+
+        <div class="content">
+
+
+            <!-- ERROR -->
+
+            <div
+                class="error-box"
+                id="errorBox"
+            ></div>
+
+
+            <!-- PAGE HEADER -->
+
+            <section class="page-actions">
+
+
+                <div>
+
+                    <h2>
+                        Agent Verification
+                    </h2>
+
+
+                    <p>
+                        Confirm that your insurance agent is registered
+                        and associated with your TrustNest account.
+                    </p>
+
+
+                </div>
+
+
+                <a
+                    class="button"
+                    href="dashboard.html"
+                >
+
+                    &#8592; Dashboard
+
+                </a>
+
+
+            </section>
+
+
+            <!-- =================================================
+                 VERIFICATION CARD
+            ================================================= -->
+
+            <section class="verification-card">
+
+
+                <div class="verification-header">
+
+
+                    <div class="verification-icon">
+                        &#10003;
+                    </div>
+
+
+                    <h3>
+                        Verify Your Agent
+                    </h3>
+
+
+                    <p>
+                        Enter the Agent ID provided by your insurance agent.
+                        TrustNest will compare it with the agent associated
+                        with your customer account.
+                    </p>
+
+
+                </div>
+
+
+                <!-- FORM -->
+
+                <form id="verifyForm">
+
+
+                    <div class="form-group">
+
+
+                        <label
+                            class="form-label"
+                            for="agentId"
+                        >
+
+                            Agent ID / Registration Number
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+
+                            <span class="input-icon">
+                                &#128100;
+                            </span>
+
+
+                            <input
+                                type="text"
+                                id="agentId"
+                                class="form-input"
+                                placeholder="Enter agent ID"
+                                autocomplete="off"
+                                required
+                            >
+
+
+                        </div>
+
+
+                        <div class="input-help">
+
+                            Enter the Agent ID exactly as provided by your agent.
+
+                        </div>
+
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="verify-button"
+                        id="verifyButton"
+                    >
+
+                        Verify Agent
+
+                    </button>
+
+
+                </form>
+
+
+                <!-- =================================================
+                     SUCCESS RESULT
+                ================================================= -->
+
+                <div
+                    class="result"
+                    id="verificationResult"
+                >
+
+
+                    <div class="result-header">
+
+
+                        <div class="result-icon">
+                            &#10003;
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+                                Agent Verified Successfully
+                            </strong>
+
+
+                            <span>
+                                The entered Agent ID matches your registered agent.
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="details">
+
+
+                        <div class="detail-box">
+
+                            <span>
+                                Agent Name
+                            </span>
+
+                            <strong id="verifiedAgentName">
+                                --
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-box">
+
+                            <span>
+                                Agent ID
+                            </span>
+
+                            <strong id="verifiedAgentId">
+                                --
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-box">
+
+                            <span>
+                                Branch
+                            </span>
+
+                            <strong id="verifiedBranch">
+                                --
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-box">
+
+                            <span>
+                                City
+                            </span>
+
+                            <strong id="verifiedCity">
+                                --
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-box">
+
+                            <span>
+                                Phone
+                            </span>
+
+                            <strong id="verifiedPhone">
+                                --
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-box">
+
+                            <span>
+                                Verification Status
+                            </span>
+
+                            <strong id="verifiedStatus">
+                                Verified
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     FAILED RESULT
+                ================================================= -->
+
+                <div
+                    class="failed-result"
+                    id="failedResult"
+                >
+
+
+                    <div class="failed-header">
+
+
+                        <div class="failed-icon">
+                            &#10007;
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+                                Agent Verification Failed
+                            </strong>
+
+
+                            <span id="failedMessage">
+
+                                The entered Agent ID does not match
+                                your registered agent.
+
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =================================================
+                 INFORMATION CARDS
+            ================================================= -->
+
+            <div class="info-grid">
+
+
+                <div class="info-card">
+
+
+                    <div class="info-icon">
+                        &#128100;
+                    </div>
+
+
+                    <strong>
+                        Agent Details
+                    </strong>
+
+
+                    <p>
+                        Verify the registered name and identification
+                        details of the insurance agent associated with
+                        your account.
+                    </p>
+
+
+                </div>
+
+
+                <div class="info-card">
+
+
+                    <div class="info-icon">
+                        &#127970;
+                    </div>
+
+
+                    <strong>
+                        Branch Information
+                    </strong>
+
+
+                    <p>
+                        Check the branch and city associated with your
+                        verified insurance agent.
+                    </p>
+
+
+                </div>
+
+
+                <div class="info-card">
+
+
+                    <div class="info-icon">
+                        &#128274;
+                    </div>
+
+
+                    <strong>
+                        Secure Verification
+                    </strong>
+
+
+                    <p>
+                        Your customer login session is used for verification.
+                        No password or OTP is requested on this page.
+                    </p>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 SAFETY NOTICE
+            ================================================= -->
+
+            <div class="notice">
+
+
+                <strong>
+                    Safety reminder:
+                </strong>
+
+
+                Never share your password, OTP, PIN or other confidential
+                information with anyone. Verify your agent and branch before
+                sharing documents or making an insurance payment.
+
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+<script>
+
+
+    /* =====================================================
+       CONFIGURATION
+    ===================================================== */
+
+    const API_BASE =
+        "http://localhost:5000";
+
+
+    /* =====================================================
+       GET CUSTOMER TOKEN
+    ===================================================== */
+
+    function getCustomerToken() {
+
+        return (
+            localStorage.getItem("customerToken") ||
+            localStorage.getItem("token")
+        );
+
+    }
+
+
+    const token =
+        getCustomerToken();
+
+
+    /* =====================================================
+       ELEMENTS
+    ===================================================== */
+
+    const profileName =
+        document.getElementById(
+            "profileName"
+        );
+
+
+    const profileAvatar =
+        document.getElementById(
+            "profileAvatar"
+        );
+
+
+    const errorBox =
+        document.getElementById(
+            "errorBox"
+        );
+
+
+    const verifyForm =
+        document.getElementById(
+            "verifyForm"
+        );
+
+
+    const agentIdInput =
+        document.getElementById(
+            "agentId"
+        );
+
+
+    const verifyButton =
+        document.getElementById(
+            "verifyButton"
+        );
+
+
+    const verificationResult =
+        document.getElementById(
+            "verificationResult"
+        );
+
+
+    const failedResult =
+        document.getElementById(
+            "failedResult"
+        );
+
+
+    const failedMessage =
+        document.getElementById(
+            "failedMessage"
+        );
+
+
+    /* =====================================================
+       CUSTOMER / AGENT DATA
+    ===================================================== */
+
+    let customerData = null;
+
+    let agentData = null;
+
+
+    /* =====================================================
+       GET INITIALS
+    ===================================================== */
+
+    function getInitials(name) {
+
+        if (!name) {
+
+            return "--";
+
+        }
+
+
+        const parts =
+            name
+                .trim()
+                .split(/\s+/)
+                .filter(Boolean);
+
+
+        if (parts.length === 1) {
+
+            return parts[0]
+                .substring(0, 2)
+                .toUpperCase();
+
+        }
+
+
+        return (
+            parts[0][0] +
+            parts[parts.length - 1][0]
+        ).toUpperCase();
+
+    }
+
+
+    /* =====================================================
+       ESCAPE HTML
+    ===================================================== */
+
+    function escapeHTML(value) {
+
+        return String(
+            value ?? ""
+        )
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+            .replace(
+                /</g,
+                "&lt;"
+            )
+            .replace(
+                />/g,
+                "&gt;"
+            )
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+    }
+
+
+    /* =====================================================
+       SHOW ERROR
+    ===================================================== */
+
+    function showError(message) {
+
+        errorBox.textContent =
+            message;
+
+        errorBox.style.display =
+            "block";
+
+    }
+
+
+    /* =====================================================
+       HIDE ERROR
+    ===================================================== */
+
+    function hideError() {
+
+        errorBox.textContent =
+            "";
+
+        errorBox.style.display =
+            "none";
+
+    }
+
+
+    /* =====================================================
+       LOGOUT
+    ===================================================== */
+
+    function logoutCustomer() {
+
+        localStorage.removeItem(
+            "customerToken"
+        );
+
+        localStorage.removeItem(
+            "token"
+        );
+
+        localStorage.removeItem(
+            "customerName"
+        );
+
+        localStorage.removeItem(
+            "customerLoginId"
+        );
+
+        localStorage.removeItem(
+            "customerBranch"
+        );
+
+        localStorage.removeItem(
+            "customerAgentName"
+        );
+
+        localStorage.removeItem(
+            "customerAgentBranch"
+        );
+
+
+        window.location.href =
+            "../login.html";
+
+    }
+
+
+    /* =====================================================
+       LOGIN PROTECTION
+    ===================================================== */
+
+    if (!token) {
+
+        window.location.href =
+            "../login.html";
+
+    }
+
+
+    /* =====================================================
+       LOAD CUSTOMER + AGENT
+    ===================================================== */
+
+    async function loadCustomerData() {
+
+        try {
+
+            hideError();
+
+
+            /*
+             * Get customer information
+             * from the authenticated session.
+             *
+             * We DO NOT send customerId.
+             */
+
+            const response =
+                await fetch(
+                    `${API_BASE}/api/customer-portal/me`,
+                    {
+                        method: "GET",
+
+                        headers: {
+                            "Authorization":
+                                `Bearer ${token}`
+                        }
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            /* =========================
+               INVALID SESSION
+            ========================= */
+
+            if (
+                response.status === 401 ||
+                response.status === 403
+            ) {
+
+                logoutCustomer();
+
+                return;
+
+            }
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.message ||
+                    "Unable to load your account details."
+                );
+
+            }
+
+
+            /* =========================
+               CUSTOMER
+            ========================= */
+
+            customerData =
+                data.customer || null;
+
+
+            /* =========================
+               AGENT
+            ========================= */
+
+            agentData =
+                data.agent || null;
+
+
+            if (!customerData) {
+
+                throw new Error(
+                    "Customer information was not found."
+                );
+
+            }
+
+
+            if (!agentData) {
+
+                throw new Error(
+                    "No agent is currently associated with your account."
+                );
+
+            }
+
+
+            /* =========================
+               CUSTOMER PROFILE
+            ========================= */
+
+            const customerName =
+                customerData.fullName ||
+                "Customer";
+
+
+            profileName.textContent =
+                customerName;
+
+
+            profileAvatar.textContent =
+                getInitials(
+                    customerName
+                );
+
+
+            /* =========================
+               SAVE CUSTOMER DETAILS
+            ========================= */
+
+            localStorage.setItem(
+                "customerName",
+                customerName
+            );
+
+
+            if (
+                customerData.customerLoginId
+            ) {
+
+                localStorage.setItem(
+                    "customerLoginId",
+                    customerData.customerLoginId
+                );
+
+            }
+
+
+            if (
+                customerData.branch
+            ) {
+
+                localStorage.setItem(
+                    "customerBranch",
+                    customerData.branch
+                );
+
+            }
+
+
+            /* =========================
+               SAVE AGENT DETAILS
+            ========================= */
+
+            if (
+                agentData.fullName
+            ) {
+
+                localStorage.setItem(
+                    "customerAgentName",
+                    agentData.fullName
+                );
+
+            }
+
+
+            if (
+                agentData.branch
+            ) {
+
+                localStorage.setItem(
+                    "customerAgentBranch",
+                    agentData.branch
+                );
+
+            }
+
+
+            /*
+             * Optional:
+             *
+             * If your backend already returns
+             * the customer's agent ID, we can
+             * automatically use it as a placeholder.
+             */
+
+            if (
+                agentData.agentId
+            ) {
+
+                agentIdInput.placeholder =
+                    `Example: ${agentData.agentId}`;
+
+            }
+
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Customer / agent loading error:",
+                error
+            );
+
+
+            showError(
+                error.message ||
+                "Unable to load agent information."
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       VERIFY AGENT
+    ===================================================== */
+
+    verifyForm.addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+
+            hideError();
+
+
+            /* =========================
+               GET ENTERED ID
+            ========================= */
+
+            const enteredAgentId =
+                agentIdInput.value
+                    .trim();
+
+
+            if (!enteredAgentId) {
+
+                showError(
+                    "Please enter your Agent ID."
+                );
+
+                return;
+
+            }
+
+
+            /* =========================
+               CHECK AGENT DATA
+            ========================= */
+
+            if (!agentData) {
+
+                showError(
+                    "Agent information is not available. Please refresh the page."
+                );
+
+                return;
+
+            }
+
+
+            const registeredAgentId =
+                String(
+                    agentData.agentId || ""
+                )
+                    .trim();
+
+
+            if (!registeredAgentId) {
+
+                showError(
+                    "Your assigned agent does not have an Agent ID registered."
+                );
+
+                return;
+
+            }
+
+
+            /* =========================
+               COMPARE AGENT IDs
+            ========================= */
+
+            const enteredNormalized =
+                enteredAgentId
+                    .toLowerCase();
+
+
+            const registeredNormalized =
+                registeredAgentId
+                    .toLowerCase();
+
+
+            const isVerified =
+                enteredNormalized ===
+                registeredNormalized;
+
+
+            /* =========================
+               HIDE OLD RESULTS
+            ========================= */
+
+            verificationResult
+                .classList
+                .remove("show");
+
+
+            failedResult
+                .classList
+                .remove("show");
+
+
+            /* =========================
+               VERIFIED
+            ========================= */
+
+            if (isVerified) {
+
+                showVerifiedAgent();
+
+                return;
+
+            }
+
+
+            /* =========================
+               FAILED
+            ========================= */
+
+            failedMessage.textContent =
+                "The entered Agent ID does not match the agent associated with your TrustNest account.";
+
+
+            failedResult
+                .classList
+                .add("show");
+
+        }
+    );
+
+
+    /* =====================================================
+       SHOW VERIFIED AGENT
+    ===================================================== */
+
+    function showVerifiedAgent() {
+
+        const name =
+            agentData.fullName ||
+            "Not available";
+
+
+        const agentId =
+            agentData.agentId ||
+            "Not available";
+
+
+        const branch =
+            agentData.branch ||
+            customerData?.branch ||
+            "Not available";
+
+
+        const city =
+            agentData.city ||
+            customerData?.city ||
+            "Not available";
+
+
+        const phone =
+            agentData.phone ||
+            "Not available";
+
+
+        const status =
+            agentData.status ||
+            "Verified";
+
+
+        document.getElementById(
+            "verifiedAgentName"
+        ).textContent =
+            name;
+
+
+        document.getElementById(
+            "verifiedAgentId"
+        ).textContent =
+            agentId;
+
+
+        document.getElementById(
+            "verifiedBranch"
+        ).textContent =
+            branch;
+
+
+        document.getElementById(
+            "verifiedCity"
+        ).textContent =
+            city;
+
+
+        document.getElementById(
+            "verifiedPhone"
+        ).textContent =
+            phone;
+
+
+        document.getElementById(
+            "verifiedStatus"
+        ).textContent =
+            status;
+
+
+        verificationResult
+            .classList
+            .add("show");
+
+
+        failedResult
+            .classList
+            .remove("show");
+
+    }
+
+
+    /* =====================================================
+       MOBILE MENU
+    ===================================================== */
+
+    document
+        .getElementById("mobileMenu")
+        .addEventListener(
+            "click",
+            function() {
+
+                document
+                    .getElementById("sidebar")
+                    .classList.toggle(
+                        "open"
+                    );
+
+            }
+        );
+
+
+    /* =====================================================
+       LOGOUT
+    ===================================================== */
+
+    document
+        .getElementById("logoutBtn")
+        .addEventListener(
+            "click",
+            function(event) {
+
+                event.preventDefault();
+
+                logoutCustomer();
+
+            }
+        );
+
+
+    /* =====================================================
+       INITIALIZE
+    ===================================================== */
+
+    async function initializePage() {
+
+        if (!token) {
+
+            return;
+
+        }
+
+
+        await loadCustomerData();
+
+    }
+
+
+    initializePage();
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,4303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Interactions | TrustNest</title>
+
+    <meta name="description"
+          content="Manage customer interactions and communication history in TrustNest">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
+
+
+    <!-- Project CSS -->
+
+    <link rel="stylesheet"
+          href="../../css/style.css">
+
+    <link rel="stylesheet"
+          href="../../css/dashboard.css">
+
+    <link rel="stylesheet"
+          href="../../css/forms.css">
+
+    <link rel="stylesheet"
+          href="../../css/responsive.css">
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+            min-height: 100vh;
+        }
+
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+        button,
+        input,
+        select,
+        textarea {
+            font-family: inherit;
+        }
+
+
+        /* =====================================================
+           DASHBOARD
+        ====================================================== */
+
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+        }
+
+
+        /* =====================================================
+           SIDEBAR
+        ====================================================== */
+
+        .sidebar {
+
+            width: 250px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #061f42,
+                    #092b5c
+                );
+
+            color: white;
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+            bottom: 0;
+
+            z-index: 100;
+
+            display: flex;
+            flex-direction: column;
+
+            transition: 0.3s;
+        }
+
+
+        .sidebar-logo {
+
+            height: 85px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 25px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.08);
+        }
+
+
+        .logo-icon {
+
+            width: 40px;
+            height: 40px;
+
+            border-radius: 50%;
+
+            background: white;
+            color: #092b5c;
+
+            border: 3px solid #c9a227;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: 800;
+
+            margin-right: 10px;
+        }
+
+
+        .logo-name {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 23px;
+            font-weight: 700;
+        }
+
+
+        .logo-subtitle {
+
+            display: block;
+
+            font-size: 7px;
+
+            letter-spacing: 1.5px;
+
+            color: #d6b23c;
+
+            margin-top: -2px;
+        }
+
+
+        .menu-title {
+
+            padding:
+                25px 25px 10px;
+
+            color: #7f94ad;
+
+            font-size: 9px;
+
+            font-weight: 700;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+        }
+
+
+        .sidebar-menu {
+
+            list-style: none;
+
+            padding: 0 12px;
+        }
+
+
+        .sidebar-menu li {
+            margin-bottom: 4px;
+        }
+
+
+        .sidebar-menu a {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 11px 13px;
+
+            border-radius: 7px;
+
+            color: #b8c6d8;
+
+            font-size: 12px;
+
+            transition: 0.25s;
+        }
+
+
+        .sidebar-menu a:hover {
+
+            background:
+                rgba(255,255,255,0.07);
+
+            color: white;
+        }
+
+
+        .sidebar-menu a.active {
+
+            background:
+                rgba(255,255,255,0.12);
+
+            color: white;
+
+            border-left:
+                3px solid #c9a227;
+        }
+
+
+        .menu-icon {
+
+            width: 22px;
+
+            text-align: center;
+
+            font-size: 14px;
+        }
+
+
+        .sidebar-bottom {
+
+            margin-top: auto;
+
+            padding: 15px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.08);
+        }
+
+
+        .sidebar-bottom a {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            color: #aebed0;
+
+            font-size: 11px;
+
+            padding: 10px;
+        }
+
+
+        .sidebar-bottom a:hover {
+            color: white;
+        }
+
+
+        /* =====================================================
+           MAIN
+        ====================================================== */
+
+        .main {
+
+            margin-left: 250px;
+
+            width: calc(100% - 250px);
+
+            min-height: 100vh;
+        }
+
+
+        /* =====================================================
+           TOPBAR
+        ====================================================== */
+
+        .topbar {
+
+            height: 75px;
+
+            background: white;
+
+            border-bottom:
+                1px solid #e8edf3;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 30px;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 50;
+        }
+
+
+        .mobile-menu {
+
+            display: none;
+
+            border: none;
+
+            background: none;
+
+            font-size: 22px;
+
+            cursor: pointer;
+
+            margin-right: 10px;
+        }
+
+
+        .page-title h1 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            color: #092b5c;
+
+            font-size: 24px;
+
+            margin-bottom: 2px;
+        }
+
+
+        .page-title p {
+
+            color: #8995a5;
+
+            font-size: 10px;
+        }
+
+
+        .topbar-right {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+        }
+
+
+        .notification {
+
+            position: relative;
+
+            font-size: 18px;
+
+            color: #526071;
+        }
+
+
+        .notification-badge {
+
+            position: absolute;
+
+            top: -5px;
+            right: -6px;
+
+            width: 15px;
+            height: 15px;
+
+            border-radius: 50%;
+
+            background: #c9a227;
+
+            color: white;
+
+            font-size: 8px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-weight: 700;
+        }
+
+
+        .agent-profile-mini {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+
+        .agent-avatar-small {
+
+            width: 38px;
+            height: 38px;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #092b5c,
+                    #1c518e
+                );
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-weight: 700;
+
+            font-size: 13px;
+
+            border:
+                2px solid #d6b23c;
+        }
+
+
+        .agent-mini-info strong {
+
+            display: block;
+
+            font-size: 11px;
+
+            color: #172033;
+        }
+
+
+        .agent-mini-info span {
+
+            font-size: 9px;
+
+            color: #8995a5;
+        }
+
+
+        /* =====================================================
+           CONTENT
+        ====================================================== */
+
+        .content {
+
+            padding: 28px 30px;
+
+            max-width: 1400px;
+
+            margin: auto;
+        }
+
+
+        .content-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 22px;
+        }
+
+
+        .content-header h2 {
+
+            color: #172033;
+
+            font-size: 18px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .content-header p {
+
+            color: #8995a5;
+
+            font-size: 9px;
+        }
+
+
+        .add-btn {
+
+            background: #092b5c;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 7px;
+
+            padding: 11px 17px;
+
+            font-size: 9px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            transition: 0.2s;
+        }
+
+
+        .add-btn:hover {
+
+            background: #061f42;
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =====================================================
+           STAT CARDS
+        ====================================================== */
+
+        .stats-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 15px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .stat-card {
+
+            background: white;
+
+            border:
+                1px solid #e5eaf0;
+
+            border-radius: 9px;
+
+            padding: 17px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+        }
+
+
+        .stat-info span {
+
+            display: block;
+
+            color: #8995a5;
+
+            font-size: 8px;
+
+            margin-bottom: 6px;
+        }
+
+
+        .stat-info strong {
+
+            display: block;
+
+            color: #172033;
+
+            font-size: 21px;
+
+            font-weight: 800;
+        }
+
+
+        .stat-info small {
+
+            display: block;
+
+            margin-top: 5px;
+
+            color: #8c97a5;
+
+            font-size: 7px;
+        }
+
+
+        .stat-icon {
+
+            width: 43px;
+            height: 43px;
+
+            border-radius: 9px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 17px;
+        }
+
+
+        .total-icon {
+            background: #edf4ff;
+            color: #2865ad;
+        }
+
+
+        .calls-icon {
+            background: #edf9f2;
+            color: #258351;
+        }
+
+
+        .meeting-icon {
+            background: #fff8e5;
+            color: #9b7913;
+        }
+
+
+        .positive-icon {
+            background: #f1edff;
+            color: #6846a8;
+        }
+
+
+        /* =====================================================
+           AI INSIGHT
+        ====================================================== */
+
+        .smart-banner {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #092b5c,
+                    #0d3b78
+                );
+
+            border-radius: 10px;
+
+            color: white;
+
+            padding: 17px 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .smart-icon {
+
+            width: 40px;
+            height: 40px;
+
+            border-radius: 8px;
+
+            background:
+                rgba(255,255,255,0.12);
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 17px;
+
+            flex-shrink: 0;
+        }
+
+
+        .smart-content {
+            flex: 1;
+        }
+
+
+        .smart-content strong {
+
+            display: block;
+
+            font-size: 10px;
+
+            margin-bottom: 4px;
+
+            color: #e8d17c;
+        }
+
+
+        .smart-content p {
+
+            font-size: 8px;
+
+            line-height: 1.5;
+
+            color: #c8d5e5;
+        }
+
+
+        .smart-score {
+
+            text-align: center;
+
+            padding-left: 15px;
+
+            border-left:
+                1px solid
+                rgba(255,255,255,0.15);
+        }
+
+
+        .smart-score strong {
+
+            display: block;
+
+            font-size: 19px;
+
+            color: white;
+        }
+
+
+        .smart-score span {
+
+            color: #aebed0;
+
+            font-size: 7px;
+        }
+
+
+        /* =====================================================
+           FILTER BAR
+        ====================================================== */
+
+        .toolbar {
+
+            background: white;
+
+            border:
+                1px solid #e5eaf0;
+
+            border-radius: 9px;
+
+            padding: 13px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            margin-bottom: 15px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .search-box {
+
+            position: relative;
+
+            flex: 1;
+
+            min-width: 220px;
+        }
+
+
+        .search-box span {
+
+            position: absolute;
+
+            left: 11px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            color: #9aa4b1;
+
+            font-size: 12px;
+        }
+
+
+        .search-box input {
+
+            width: 100%;
+
+            height: 37px;
+
+            border:
+                1px solid #e0e5eb;
+
+            border-radius: 6px;
+
+            padding:
+                0 12px 0 32px;
+
+            outline: none;
+
+            font-size: 9px;
+
+            color: #344054;
+        }
+
+
+        .search-box input:focus {
+
+            border-color: #092b5c;
+
+            box-shadow:
+                0 0 0 2px
+                rgba(9,43,92,0.08);
+        }
+
+
+        .filter-group {
+
+            display: flex;
+
+            gap: 7px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .filter-select {
+
+            height: 37px;
+
+            border:
+                1px solid #e0e5eb;
+
+            border-radius: 6px;
+
+            padding: 0 10px;
+
+            background: white;
+
+            color: #526071;
+
+            font-size: 8px;
+
+            outline: none;
+
+            cursor: pointer;
+        }
+
+
+        /* =====================================================
+           INTERACTION CARD
+        ====================================================== */
+
+        .interaction-card {
+
+            background: white;
+
+            border:
+                1px solid #e5eaf0;
+
+            border-radius: 9px;
+
+            overflow: hidden;
+        }
+
+
+        .card-header {
+
+            padding: 15px 18px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            border-bottom:
+                1px solid #edf0f4;
+        }
+
+
+        .card-header h3 {
+
+            font-size: 12px;
+
+            color: #172033;
+        }
+
+
+        .card-header span {
+
+            color: #8995a5;
+
+            font-size: 8px;
+        }
+
+
+        .interaction-list {
+            width: 100%;
+        }
+
+
+        .interaction-item {
+
+            padding: 17px 18px;
+
+            border-bottom:
+                1px solid #edf0f4;
+
+            display: grid;
+
+            grid-template-columns:
+                42px 1.4fr 1fr 1fr 1.5fr auto;
+
+            align-items: center;
+
+            gap: 15px;
+
+            transition: 0.2s;
+        }
+
+
+        .interaction-item:last-child {
+            border-bottom: none;
+        }
+
+
+        .interaction-item:hover {
+            background: #fafbfd;
+        }
+
+
+        .interaction-type {
+
+            width: 38px;
+            height: 38px;
+
+            border-radius: 8px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 15px;
+        }
+
+
+        .type-call {
+            background: #edf9f2;
+            color: #258351;
+        }
+
+
+        .type-whatsapp {
+            background: #edf9f2;
+            color: #198754;
+        }
+
+
+        .type-meeting {
+            background: #fff8e5;
+            color: #9b7913;
+        }
+
+
+        .type-email {
+            background: #edf4ff;
+            color: #2865ad;
+        }
+
+
+        .customer-cell {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+        }
+
+
+        .customer-avatar {
+
+            width: 34px;
+            height: 34px;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #092b5c,
+                    #245b95
+                );
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+            flex-shrink: 0;
+        }
+
+
+        .customer-info strong {
+
+            display: block;
+
+            color: #344054;
+
+            font-size: 8px;
+
+            margin-bottom: 3px;
+        }
+
+
+        .customer-info span {
+
+            display: block;
+
+            color: #9aa4b1;
+
+            font-size: 7px;
+        }
+
+
+        .policy-info strong {
+
+            display: block;
+
+            color: #344054;
+
+            font-size: 8px;
+
+            margin-bottom: 3px;
+        }
+
+
+        .policy-info span {
+
+            color: #9aa4b1;
+
+            font-size: 7px;
+        }
+
+
+        .date-info strong {
+
+            display: block;
+
+            color: #344054;
+
+            font-size: 8px;
+
+            margin-bottom: 3px;
+        }
+
+
+        .date-info span {
+
+            color: #9aa4b1;
+
+            font-size: 7px;
+        }
+
+
+        .sentiment {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            padding: 5px 8px;
+
+            border-radius: 12px;
+
+            font-size: 7px;
+
+            font-weight: 700;
+        }
+
+
+        .sentiment-positive {
+            background: #edf9f2;
+            color: #258351;
+        }
+
+
+        .sentiment-neutral {
+            background: #f1f3f5;
+            color: #697586;
+        }
+
+
+        .sentiment-interested {
+            background: #edf4ff;
+            color: #2865ad;
+        }
+
+
+        .sentiment-negative {
+            background: #fff0f0;
+            color: #c54d4d;
+        }
+
+
+        .sentiment-dot {
+
+            width: 5px;
+            height: 5px;
+
+            border-radius: 50%;
+
+            background: currentColor;
+        }
+
+
+        .notes-cell {
+
+            color: #697586;
+
+            font-size: 8px;
+
+            line-height: 1.5;
+
+            max-width: 250px;
+        }
+
+
+        .actions {
+
+            display: flex;
+
+            gap: 5px;
+
+            justify-content: flex-end;
+        }
+
+
+        .action-btn {
+
+            width: 29px;
+            height: 29px;
+
+            border:
+                1px solid #e0e5eb;
+
+            border-radius: 5px;
+
+            background: white;
+
+            color: #526071;
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 11px;
+
+            transition: 0.2s;
+        }
+
+
+        .action-btn:hover {
+
+            border-color: #092b5c;
+
+            color: #092b5c;
+
+            background: #f7f9fb;
+        }
+
+
+        .delete-btn:hover {
+
+            border-color: #c54d4d;
+
+            color: #c54d4d;
+
+            background: #fff5f5;
+        }
+
+
+        /* =====================================================
+           EMPTY STATE
+        ====================================================== */
+
+        .empty-state {
+
+            text-align: center;
+
+            padding: 55px 20px;
+
+            color: #8995a5;
+        }
+
+
+        .empty-state-icon {
+
+            font-size: 38px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .empty-state strong {
+
+            display: block;
+
+            color: #526071;
+
+            font-size: 12px;
+
+            margin-bottom: 6px;
+        }
+
+
+        .empty-state span {
+
+            font-size: 8px;
+        }
+
+
+        .no-results {
+
+            text-align: center;
+
+            padding: 45px 20px;
+
+            color: #8995a5;
+
+            display: none;
+        }
+
+
+        .no-results-icon {
+
+            font-size: 30px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .no-results strong {
+
+            display: block;
+
+            color: #526071;
+
+            font-size: 11px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .no-results span {
+            font-size: 8px;
+        }
+
+
+        /* =====================================================
+           MODAL
+        ====================================================== */
+
+        .modal-overlay {
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(6,31,66,0.55);
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            z-index: 500;
+
+            padding: 20px;
+        }
+
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+
+        .modal {
+
+            width: 100%;
+
+            max-width: 520px;
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            background: white;
+
+            border-radius: 11px;
+
+            box-shadow:
+                0 20px 60px
+                rgba(0,0,0,0.18);
+
+            animation:
+                modalIn 0.2s ease;
+        }
+
+
+        @keyframes modalIn {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(10px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+
+            }
+
+        }
+
+
+        .modal-header {
+
+            padding: 17px 20px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            border-bottom:
+                1px solid #edf0f4;
+        }
+
+
+        .modal-header h3 {
+
+            font-size: 13px;
+
+            color: #172033;
+        }
+
+
+        .modal-close {
+
+            width: 28px;
+            height: 28px;
+
+            border: none;
+
+            background: #f5f7fa;
+
+            border-radius: 5px;
+
+            cursor: pointer;
+
+            color: #526071;
+
+            font-size: 14px;
+        }
+
+
+        .modal-body {
+            padding: 20px;
+        }
+
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            color: #526071;
+
+            font-size: 8px;
+
+            font-weight: 700;
+
+            margin-bottom: 6px;
+        }
+
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+
+            width: 100%;
+
+            border:
+                1px solid #dfe5eb;
+
+            border-radius: 6px;
+
+            padding: 10px;
+
+            outline: none;
+
+            font-size: 9px;
+
+            color: #344054;
+
+            background: white;
+        }
+
+
+        .form-group textarea {
+
+            resize: vertical;
+
+            min-height: 100px;
+
+            line-height: 1.5;
+        }
+
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+
+            border-color: #092b5c;
+
+            box-shadow:
+                0 0 0 2px
+                rgba(9,43,92,0.07);
+        }
+
+
+        .form-row {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 12px;
+        }
+
+
+        .voice-note {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            background: #f7f9fb;
+
+            border:
+                1px solid #e5eaf0;
+
+            padding: 9px;
+
+            border-radius: 6px;
+
+            margin-top: 7px;
+        }
+
+
+        .voice-note span {
+
+            font-size: 7px;
+
+            color: #8995a5;
+        }
+
+
+        .voice-btn {
+
+            border: none;
+
+            background: #092b5c;
+
+            color: white;
+
+            width: 29px;
+            height: 29px;
+
+            border-radius: 5px;
+
+            cursor: pointer;
+
+            font-size: 12px;
+        }
+
+
+        .modal-footer {
+
+            padding: 14px 20px;
+
+            border-top:
+                1px solid #edf0f4;
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 8px;
+        }
+
+
+        .cancel-btn {
+
+            border:
+                1px solid #dfe5eb;
+
+            background: white;
+
+            color: #526071;
+
+            border-radius: 6px;
+
+            padding: 9px 14px;
+
+            font-size: 8px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+
+        .save-btn {
+
+            border: none;
+
+            background: #092b5c;
+
+            color: white;
+
+            border-radius: 6px;
+
+            padding: 9px 15px;
+
+            font-size: 8px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 1150px) {
+
+            .interaction-item {
+
+                grid-template-columns:
+                    42px 1.5fr 1fr 1fr auto;
+            }
+
+
+            .notes-cell {
+                display: none;
+            }
+
+        }
+
+
+        @media (max-width: 1100px) {
+
+            .stats-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 950px) {
+
+            .sidebar {
+
+                transform:
+                    translateX(-100%);
+            }
+
+
+            .sidebar.open {
+
+                transform:
+                    translateX(0);
+            }
+
+
+            .main {
+
+                margin-left: 0;
+
+                width: 100%;
+            }
+
+
+            .mobile-menu {
+
+                display: block;
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .interaction-item {
+
+                grid-template-columns:
+                    42px 1fr auto;
+
+                gap: 10px;
+            }
+
+
+            .policy-info,
+            .date-info,
+            .sentiment {
+
+                display: none;
+            }
+
+
+            .content {
+
+                padding: 20px 15px;
+            }
+
+
+            .topbar {
+
+                padding: 0 15px;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .stats-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .content-header {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+
+            .toolbar {
+
+                align-items: stretch;
+            }
+
+
+            .filter-group {
+
+                width: 100%;
+            }
+
+
+            .filter-select {
+
+                flex: 1;
+            }
+
+
+            .smart-banner {
+
+                align-items: flex-start;
+            }
+
+
+            .smart-score {
+
+                display: none;
+            }
+
+
+            .agent-mini-info {
+
+                display: none;
+            }
+
+
+            .form-row {
+
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="dashboard">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar"
+           id="sidebar">
+
+
+        <a href="dashboard.html"
+           class="sidebar-logo">
+
+            <div class="logo-icon">
+                T
+            </div>
+
+            <div>
+
+                <div class="logo-name">
+                    TrustNest
+                </div>
+
+                <span class="logo-subtitle">
+                    Insurance Intelligence
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <div class="menu-title">
+            Main Menu
+        </div>
+
+
+        <ul class="sidebar-menu">
+
+            <li>
+                <a href="dashboard.html">
+                    <span class="menu-icon">▦</span>
+                    Dashboard
+                </a>
+            </li>
+
+
+            <li>
+                <a href="customers.html">
+                    <span class="menu-icon">👥</span>
+                    Customers
+                </a>
+            </li>
+
+
+            <li>
+                <a href="policies.html">
+                    <span class="menu-icon">📋</span>
+                    Policies
+                </a>
+            </li>
+
+
+            <li>
+                <a href="followups.html">
+                    <span class="menu-icon">🔔</span>
+                    Follow-ups
+                </a>
+            </li>
+
+
+            <li>
+                <a href="interactions.html"
+                   class="active">
+
+                    <span class="menu-icon">
+                        💬
+                    </span>
+
+                    Interactions
+
+                </a>
+            </li>
+
+        </ul>
+
+
+        <div class="menu-title">
+            Smart Features
+        </div>
+
+
+        <ul class="sidebar-menu">
+
+            <li>
+                <a href="recommendations.html">
+                    <span class="menu-icon">✨</span>
+                    Recommendations
+                </a>
+            </li>
+
+
+            <li>
+                <a href="leads.html">
+                    <span class="menu-icon">🎯</span>
+                    Smart Leads
+                </a>
+            </li>
+
+
+            <li>
+                <a href="sales-insights.html">
+                    <span class="menu-icon">📊</span>
+                    Sales Insights
+                </a>
+            </li>
+
+
+            <li>
+                <a href="notifications.html">
+                    <span class="menu-icon">🔔</span>
+                    Notifications
+                </a>
+            </li>
+
+        </ul>
+
+
+        <div class="menu-title">
+            Account
+        </div>
+
+
+        <ul class="sidebar-menu">
+
+            <li>
+
+                <a href="profile.html">
+
+                    <span class="menu-icon">
+                        👤
+                    </span>
+
+                    My Profile
+
+                </a>
+
+            </li>
+
+        </ul>
+
+
+        <div class="sidebar-bottom">
+
+            <a href="../login.html">
+
+                <span>
+                    ⇥
+                </span>
+
+                Logout
+
+            </a>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="main">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div style="display:flex;align-items:center;">
+
+                <button
+                    class="mobile-menu"
+                    id="mobileMenu">
+
+                    ☰
+
+                </button>
+
+
+                <div class="page-title">
+
+                    <h1>
+                        Interactions
+                    </h1>
+
+                    <p>
+                        Track every customer conversation in one place
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+                <a href="notifications.html"
+                   class="notification">
+
+                    🔔
+
+                    <span
+                        class="notification-badge"
+                        id="notificationBadge">
+
+                        0
+
+                    </span>
+
+                </a>
+
+
+                <div class="agent-profile-mini">
+
+                    <div
+                        class="agent-avatar-small"
+                        id="agentAvatar">
+
+                        A
+
+                    </div>
+
+
+                    <div class="agent-mini-info">
+
+                        <strong id="agentName">
+                            Insurance Agent
+                        </strong>
+
+                        <span>
+                            Insurance Agent
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =====================================================
+             CONTENT
+        ====================================================== -->
+
+        <div class="content">
+
+
+            <div class="content-header">
+
+                <div>
+
+                    <h2>
+                        Customer Interaction History
+                    </h2>
+
+                    <p>
+                        Record and analyze every conversation with your customers
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="add-btn"
+                    onclick="openModal()">
+
+                    <span>
+                        +
+                    </span>
+
+                    Add Interaction
+
+                </button>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 STATISTICS
+            ================================================== -->
+
+            <div class="stats-grid">
+
+
+                <div class="stat-card">
+
+                    <div class="stat-info">
+
+                        <span>
+                            Total Interactions
+                        </span>
+
+                        <strong id="totalInteractions">
+                            0
+                        </strong>
+
+                        <small>
+                            Recorded interactions
+                        </small>
+
+                    </div>
+
+
+                    <div class="stat-icon total-icon">
+                        💬
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="stat-info">
+
+                        <span>
+                            Phone Calls
+                        </span>
+
+                        <strong id="phoneCalls">
+                            0
+                        </strong>
+
+                        <small id="phonePercentage">
+                            0% of interactions
+                        </small>
+
+                    </div>
+
+
+                    <div class="stat-icon calls-icon">
+                        📞
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="stat-info">
+
+                        <span>
+                            Meetings
+                        </span>
+
+                        <strong id="meetings">
+                            0
+                        </strong>
+
+                        <small id="meetingPercentage">
+                            0% of interactions
+                        </small>
+
+                    </div>
+
+
+                    <div class="stat-icon meeting-icon">
+                        🤝
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="stat-info">
+
+                        <span>
+                            Positive Responses
+                        </span>
+
+                        <strong id="positivePercentage">
+                            0%
+                        </strong>
+
+                        <small>
+                            Customer sentiment
+                        </small>
+
+                    </div>
+
+
+                    <div class="stat-icon positive-icon">
+                        😊
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 AI INSIGHT
+            ================================================== -->
+
+            <div class="smart-banner">
+
+                <div class="smart-icon">
+                    ✨
+                </div>
+
+
+                <div class="smart-content">
+
+                    <strong>
+                        AI Interaction Insight
+                    </strong>
+
+                    <p id="aiInsight">
+
+                        No interaction data available yet.
+                        Add customer interactions to generate insights.
+
+                    </p>
+
+                </div>
+
+
+                <div class="smart-score">
+
+                    <strong id="smartScore">
+                        0%
+                    </strong>
+
+                    <span>
+                        Positive sentiment
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 FILTER TOOLBAR
+            ================================================== -->
+
+            <div class="toolbar">
+
+
+                <div class="search-box">
+
+                    <span>
+                        🔍
+                    </span>
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search customer, policy or notes..."
+                        onkeyup="filterInteractions()">
+
+                </div>
+
+
+                <div class="filter-group">
+
+
+                    <select
+                        class="filter-select"
+                        id="typeFilter"
+                        onchange="filterInteractions()">
+
+                        <option value="all">
+                            All Types
+                        </option>
+
+                        <option value="call">
+                            Phone Call
+                        </option>
+
+                        <option value="whatsapp">
+                            WhatsApp
+                        </option>
+
+                        <option value="meeting">
+                            Meeting
+                        </option>
+
+                        <option value="email">
+                            Email
+                        </option>
+
+                    </select>
+
+
+                    <select
+                        class="filter-select"
+                        id="sentimentFilter"
+                        onchange="filterInteractions()">
+
+                        <option value="all">
+                            All Sentiments
+                        </option>
+
+                        <option value="positive">
+                            Positive
+                        </option>
+
+                        <option value="interested">
+                            Interested
+                        </option>
+
+                        <option value="neutral">
+                            Neutral
+                        </option>
+
+                        <option value="negative">
+                            Needs Attention
+                        </option>
+
+                    </select>
+
+
+                    <select
+                        class="filter-select"
+                        id="dateFilter"
+                        onchange="filterInteractions()">
+
+                        <option value="all">
+                            All Dates
+                        </option>
+
+                        <option value="today">
+                            Today
+                        </option>
+
+                        <option value="week">
+                            This Week
+                        </option>
+
+                        <option value="month">
+                            This Month
+                        </option>
+
+                    </select>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 INTERACTION LIST
+            ================================================== -->
+
+            <section class="interaction-card">
+
+
+                <div class="card-header">
+
+                    <h3>
+                        Recent Customer Interactions
+                    </h3>
+
+                    <span id="interactionCount">
+                        0 interactions
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="interaction-list"
+                    id="interactionList">
+
+                    <!-- Dynamically generated -->
+
+                </div>
+
+
+                <div
+                    class="no-results"
+                    id="noResults">
+
+                    <div class="no-results-icon">
+                        🔍
+                    </div>
+
+                    <strong>
+                        No interactions found
+                    </strong>
+
+                    <span>
+                        Try changing your search or filters.
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="empty-state"
+                    id="emptyState">
+
+                    <div class="empty-state-icon">
+                        💬
+                    </div>
+
+                    <strong>
+                        No interactions recorded yet
+                    </strong>
+
+                    <span>
+                        Click "Add Interaction" to record your first customer conversation.
+                    </span>
+
+                </div>
+
+
+            </section>
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     ADD INTERACTION MODAL
+====================================================== -->
+
+<div
+    class="modal-overlay"
+    id="interactionModal">
+
+
+    <div class="modal">
+
+
+        <div class="modal-header">
+
+            <h3>
+                Add Customer Interaction
+            </h3>
+
+
+            <button
+                class="modal-close"
+                onclick="closeModal()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <form
+            id="interactionForm"
+            onsubmit="saveInteraction(event)">
+
+
+            <div class="modal-body">
+
+
+                <!-- CUSTOMER -->
+
+                <div class="form-group">
+
+                    <label>
+                        Customer
+                    </label>
+
+                    <input
+                        type="text"
+                        id="customerName"
+                        placeholder="Enter customer name"
+                        required>
+
+                </div>
+
+
+
+                <!-- PHONE -->
+
+                <div class="form-group">
+
+                    <label>
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="text"
+                        id="customerPhone"
+                        placeholder="Enter phone number">
+
+                </div>
+
+
+
+                <!-- POLICY -->
+
+                <div class="form-group">
+
+                    <label>
+                        Policy
+                    </label>
+
+                    <input
+                        type="text"
+                        id="policyName"
+                        placeholder="Example: Jeevan Anand">
+
+                </div>
+
+
+
+                <!-- POLICY NUMBER -->
+
+                <div class="form-group">
+
+                    <label>
+                        Policy Number
+                    </label>
+
+                    <input
+                        type="text"
+                        id="policyNumber"
+                        placeholder="Example: LIC-12345678">
+
+                </div>
+
+
+
+                <!-- TYPE + DATE -->
+
+                <div class="form-row">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Interaction Type
+                        </label>
+
+                        <select
+                            id="interactionType"
+                            required>
+
+                            <option value="">
+                                Select type
+                            </option>
+
+                            <option value="call">
+                                Phone Call
+                            </option>
+
+                            <option value="whatsapp">
+                                WhatsApp
+                            </option>
+
+                            <option value="meeting">
+                                Meeting
+                            </option>
+
+                            <option value="email">
+                                Email
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Interaction Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="interactionDate"
+                            required>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- TIME + SENTIMENT -->
+
+                <div class="form-row">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Time
+                        </label>
+
+                        <input
+                            type="time"
+                            id="interactionTime"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Customer Sentiment
+                        </label>
+
+                        <select
+                            id="interactionSentiment"
+                            required>
+
+                            <option value="">
+                                Select sentiment
+                            </option>
+
+                            <option value="positive">
+                                Positive
+                            </option>
+
+                            <option value="interested">
+                                Interested
+                            </option>
+
+                            <option value="neutral">
+                                Neutral
+                            </option>
+
+                            <option value="negative">
+                                Needs Attention
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- NOTES -->
+
+                <div class="form-group">
+
+                    <label>
+                        Interaction Notes
+                    </label>
+
+                    <textarea
+                        id="interactionNotes"
+                        placeholder="Describe the conversation, customer requirements, concerns and next steps..."
+                        required></textarea>
+
+
+                    <div class="voice-note">
+
+                        <span>
+                            🎙 Voice-to-text notes can be connected here
+                        </span>
+
+
+                        <button
+                            type="button"
+                            class="voice-btn"
+                            onclick="startVoiceInput()">
+
+                            🎙
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- FOLLOW-UP -->
+
+                <div class="form-group">
+
+                    <label>
+                        Next Follow-up
+                    </label>
+
+                    <input
+                        type="date"
+                        id="nextFollowup">
+
+                </div>
+
+
+            </div>
+
+
+            <div class="modal-footer">
+
+
+                <button
+                    type="button"
+                    class="cancel-btn"
+                    onclick="closeModal()">
+
+                    Cancel
+
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="save-btn">
+
+                    Save Interaction
+
+                </button>
+
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+    /* =====================================================
+       STORAGE
+    ====================================================== */
+
+    const INTERACTION_STORAGE_KEY =
+        "trustnest_interactions";
+
+
+    /* =====================================================
+       MOBILE SIDEBAR
+    ====================================================== */
+
+    const mobileMenu =
+        document.getElementById("mobileMenu");
+
+
+    const sidebar =
+        document.getElementById("sidebar");
+
+
+    mobileMenu.addEventListener(
+        "click",
+        function () {
+
+            sidebar.classList.toggle("open");
+
+        }
+    );
+
+
+    /* =====================================================
+       GET STORED INTERACTIONS
+    ====================================================== */
+
+    function getInteractions() {
+
+        try {
+
+            const data =
+                JSON.parse(
+                    localStorage.getItem(
+                        INTERACTION_STORAGE_KEY
+                    ) || "[]"
+                );
+
+
+            return Array.isArray(data)
+                ? data
+                : [];
+
+        } catch (error) {
+
+            console.error(
+                "Unable to read interactions:",
+                error
+            );
+
+            return [];
+
+        }
+
+    }
+
+
+    /* =====================================================
+       SAVE INTERACTIONS
+    ====================================================== */
+
+    function saveInteractions(interactions) {
+
+        localStorage.setItem(
+            INTERACTION_STORAGE_KEY,
+            JSON.stringify(interactions)
+        );
+
+    }
+
+
+    /* =====================================================
+       MODAL
+    ====================================================== */
+
+    const modal =
+        document.getElementById(
+            "interactionModal"
+        );
+
+
+    function openModal() {
+
+        modal.classList.add("show");
+
+
+        setDefaultDateAndTime();
+
+    }
+
+
+    function closeModal() {
+
+        modal.classList.remove("show");
+
+    }
+
+
+    modal.addEventListener(
+        "click",
+        function(event) {
+
+            if (event.target === modal) {
+
+                closeModal();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       DEFAULT DATE AND TIME
+    ====================================================== */
+
+    function setDefaultDateAndTime() {
+
+        const now =
+            new Date();
+
+
+        const year =
+            now.getFullYear();
+
+
+        const month =
+            String(
+                now.getMonth() + 1
+            ).padStart(2, "0");
+
+
+        const day =
+            String(
+                now.getDate()
+            ).padStart(2, "0");
+
+
+        const hours =
+            String(
+                now.getHours()
+            ).padStart(2, "0");
+
+
+        const minutes =
+            String(
+                now.getMinutes()
+            ).padStart(2, "0");
+
+
+        document.getElementById(
+            "interactionDate"
+        ).value =
+            `${year}-${month}-${day}`;
+
+
+        document.getElementById(
+            "interactionTime"
+        ).value =
+            `${hours}:${minutes}`;
+
+    }
+
+
+    /* =====================================================
+       SAVE INTERACTION
+    ====================================================== */
+
+    function saveInteraction(event) {
+
+        event.preventDefault();
+
+
+        const customerName =
+            document.getElementById(
+                "customerName"
+            ).value.trim();
+
+
+        const customerPhone =
+            document.getElementById(
+                "customerPhone"
+            ).value.trim();
+
+
+        const policyName =
+            document.getElementById(
+                "policyName"
+            ).value.trim();
+
+
+        const policyNumber =
+            document.getElementById(
+                "policyNumber"
+            ).value.trim();
+
+
+        const type =
+            document.getElementById(
+                "interactionType"
+            ).value;
+
+
+        const date =
+            document.getElementById(
+                "interactionDate"
+            ).value;
+
+
+        const time =
+            document.getElementById(
+                "interactionTime"
+            ).value;
+
+
+        const sentiment =
+            document.getElementById(
+                "interactionSentiment"
+            ).value;
+
+
+        const notes =
+            document.getElementById(
+                "interactionNotes"
+            ).value.trim();
+
+
+        const nextFollowup =
+            document.getElementById(
+                "nextFollowup"
+            ).value;
+
+
+        if (
+            !customerName ||
+            !type ||
+            !date ||
+            !time ||
+            !sentiment ||
+            !notes
+        ) {
+
+            alert(
+                "Please fill all required fields."
+            );
+
+            return;
+
+        }
+
+
+        const interactions =
+            getInteractions();
+
+
+        const newInteraction = {
+
+            id:
+                Date.now().toString(),
+
+            customerName:
+                customerName,
+
+            phone:
+                customerPhone,
+
+            policyName:
+                policyName || "No policy",
+
+            policyNumber:
+                policyNumber || "Not provided",
+
+            type:
+                type,
+
+            date:
+                date,
+
+            time:
+                time,
+
+            sentiment:
+                sentiment,
+
+            notes:
+                notes,
+
+            nextFollowup:
+                nextFollowup || "",
+
+            createdAt:
+                new Date().toISOString()
+
+        };
+
+
+        interactions.push(
+            newInteraction
+        );
+
+
+        saveInteractions(
+            interactions
+        );
+
+
+        alert(
+            "Customer interaction saved successfully!"
+        );
+
+
+        document
+            .getElementById(
+                "interactionForm"
+            )
+            .reset();
+
+
+        closeModal();
+
+
+        renderInteractions();
+
+        updateStatistics();
+
+        updateAIInsight();
+
+    }
+
+
+    /* =====================================================
+       GET TYPE INFORMATION
+    ====================================================== */
+
+    function getTypeInfo(type) {
+
+        if (type === "call") {
+
+            return {
+                icon: "📞",
+                className: "type-call",
+                label: "Phone Call"
+            };
+
+        }
+
+
+        if (type === "whatsapp") {
+
+            return {
+                icon: "💬",
+                className: "type-whatsapp",
+                label: "WhatsApp"
+            };
+
+        }
+
+
+        if (type === "meeting") {
+
+            return {
+                icon: "🤝",
+                className: "type-meeting",
+                label: "Meeting"
+            };
+
+        }
+
+
+        return {
+
+            icon: "✉",
+            className: "type-email",
+            label: "Email"
+
+        };
+
+    }
+
+
+    /* =====================================================
+       GET SENTIMENT INFORMATION
+    ====================================================== */
+
+    function getSentimentInfo(sentiment) {
+
+        if (sentiment === "positive") {
+
+            return {
+                className: "sentiment-positive",
+                label: "Positive"
+            };
+
+        }
+
+
+        if (sentiment === "interested") {
+
+            return {
+                className: "sentiment-interested",
+                label: "Interested"
+            };
+
+        }
+
+
+        if (sentiment === "neutral") {
+
+            return {
+                className: "sentiment-neutral",
+                label: "Neutral"
+            };
+
+        }
+
+
+        return {
+
+            className: "sentiment-negative",
+            label: "Needs Attention"
+
+        };
+
+    }
+
+
+    /* =====================================================
+       FORMAT DATE
+    ====================================================== */
+
+    function formatDate(dateString) {
+
+        if (!dateString) {
+            return "—";
+        }
+
+
+        const date =
+            new Date(
+                dateString + "T00:00:00"
+            );
+
+
+        return date.toLocaleDateString(
+            "en-IN",
+            {
+                day: "2-digit",
+                month: "short",
+                year: "numeric"
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       FORMAT TIME
+    ====================================================== */
+
+    function formatTime(timeString) {
+
+        if (!timeString) {
+            return "";
+        }
+
+
+        const parts =
+            timeString.split(":");
+
+
+        let hours =
+            parseInt(parts[0], 10);
+
+
+        const minutes =
+            parts[1];
+
+
+        const ampm =
+            hours >= 12
+                ? "PM"
+                : "AM";
+
+
+        hours =
+            hours % 12 || 12;
+
+
+        return (
+            hours +
+            ":" +
+            minutes +
+            " " +
+            ampm
+        );
+
+    }
+
+
+    /* =====================================================
+       GET AVATAR INITIALS
+    ====================================================== */
+
+    function getInitials(name) {
+
+        if (!name) {
+            return "CU";
+        }
+
+
+        const parts =
+            name.trim().split(/\s+/);
+
+
+        if (parts.length === 1) {
+
+            return parts[0]
+                .substring(0, 2)
+                .toUpperCase();
+
+        }
+
+
+        return (
+            parts[0][0] +
+            parts[parts.length - 1][0]
+        ).toUpperCase();
+
+    }
+
+
+    /* =====================================================
+       ESCAPE HTML
+    ====================================================== */
+
+    function escapeHtml(value) {
+
+        return String(value || "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+    /* =====================================================
+       RENDER INTERACTIONS
+    ====================================================== */
+
+    function renderInteractions() {
+
+        const interactions =
+            getInteractions();
+
+
+        const list =
+            document.getElementById(
+                "interactionList"
+            );
+
+
+        const emptyState =
+            document.getElementById(
+                "emptyState"
+            );
+
+
+        const noResults =
+            document.getElementById(
+                "noResults"
+            );
+
+
+        list.innerHTML = "";
+
+
+        if (interactions.length === 0) {
+
+            emptyState.style.display =
+                "block";
+
+            noResults.style.display =
+                "none";
+
+            document.getElementById(
+                "interactionCount"
+            ).textContent =
+                "0 interactions";
+
+            return;
+
+        }
+
+
+        emptyState.style.display =
+            "none";
+
+
+        interactions
+            .slice()
+            .reverse()
+            .forEach(
+                function(interaction) {
+
+                    const typeInfo =
+                        getTypeInfo(
+                            interaction.type
+                        );
+
+
+                    const sentimentInfo =
+                        getSentimentInfo(
+                            interaction.sentiment
+                        );
+
+
+                    const item =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    item.className =
+                        "interaction-item";
+
+
+                    item.dataset.type =
+                        interaction.type;
+
+
+                    item.dataset.sentiment =
+                        interaction.sentiment;
+
+
+                    item.dataset.date =
+                        getDateFilterValue(
+                            interaction.date
+                        );
+
+
+                    item.dataset.searchText =
+                        (
+                            interaction.customerName +
+                            " " +
+                            interaction.phone +
+                            " " +
+                            interaction.policyName +
+                            " " +
+                            interaction.policyNumber +
+                            " " +
+                            interaction.notes
+                        ).toLowerCase();
+
+
+                    item.innerHTML = `
+
+                        <div class="interaction-type ${typeInfo.className}">
+                            ${typeInfo.icon}
+                        </div>
+
+
+                        <div class="customer-cell">
+
+                            <div class="customer-avatar">
+                                ${escapeHtml(
+                                    getInitials(
+                                        interaction.customerName
+                                    )
+                                )}
+                            </div>
+
+                            <div class="customer-info">
+
+                                <strong>
+                                    ${escapeHtml(
+                                        interaction.customerName
+                                    )}
+                                </strong>
+
+                                <span>
+                                    ${escapeHtml(
+                                        interaction.phone ||
+                                        "Phone not provided"
+                                    )}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="policy-info">
+
+                            <strong>
+                                ${escapeHtml(
+                                    interaction.policyName ||
+                                    "No policy"
+                                )}
+                            </strong>
+
+                            <span>
+                                ${escapeHtml(
+                                    interaction.policyNumber ||
+                                    "Not provided"
+                                )}
+                            </span>
+
+                        </div>
+
+
+                        <div class="date-info">
+
+                            <strong>
+                                ${escapeHtml(
+                                    formatDate(
+                                        interaction.date
+                                    )
+                                )}
+                            </strong>
+
+                            <span>
+                                ${escapeHtml(
+                                    formatTime(
+                                        interaction.time
+                                    )
+                                )}
+                            </span>
+
+                        </div>
+
+
+                        <div>
+
+                            <span class="sentiment ${sentimentInfo.className}">
+
+                                <span class="sentiment-dot"></span>
+
+                                ${sentimentInfo.label}
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="notes-cell">
+
+                            ${escapeHtml(
+                                interaction.notes
+                            )}
+
+                        </div>
+
+
+                        <div class="actions">
+
+                            <button
+                                class="action-btn"
+                                title="View Customer"
+                                onclick="viewCustomer('${escapeJs(
+                                    interaction.customerName
+                                )}')">
+
+                                👁
+
+                            </button>
+
+
+                            <button
+                                class="action-btn"
+                                title="Schedule Follow-up"
+                                onclick="scheduleFollowup('${escapeJs(
+                                    interaction.customerName
+                                )}')">
+
+                                📅
+
+                            </button>
+
+
+                            <button
+                                class="action-btn delete-btn"
+                                title="Delete Interaction"
+                                onclick="deleteInteraction('${escapeJs(
+                                    interaction.id
+                                )}')">
+
+                                🗑
+
+                            </button>
+
+                        </div>
+
+                    `;
+
+
+                    list.appendChild(item);
+
+                }
+            );
+
+
+        filterInteractions();
+
+    }
+
+
+    /* =====================================================
+       ESCAPE JAVASCRIPT STRING
+    ====================================================== */
+
+    function escapeJs(value) {
+
+        return String(value || "")
+            .replace(/\\/g, "\\\\")
+            .replace(/'/g, "\\'")
+            .replace(/"/g, '\\"')
+            .replace(/\n/g, "\\n")
+            .replace(/\r/g, "\\r");
+
+    }
+
+
+    /* =====================================================
+       DATE FILTER VALUE
+    ====================================================== */
+
+    function getDateFilterValue(dateString) {
+
+        if (!dateString) {
+            return "month";
+        }
+
+
+        const interactionDate =
+            new Date(
+                dateString + "T00:00:00"
+            );
+
+
+        const today =
+            new Date();
+
+
+        today.setHours(
+            0, 0, 0, 0
+        );
+
+
+        const currentMonth =
+            today.getMonth();
+
+
+        const currentYear =
+            today.getFullYear();
+
+
+        if (
+            interactionDate.getTime() ===
+            today.getTime()
+        ) {
+
+            return "today";
+
+        }
+
+
+        const sevenDaysAgo =
+            new Date(today);
+
+
+        sevenDaysAgo.setDate(
+            today.getDate() - 7
+        );
+
+
+        if (
+            interactionDate >=
+            sevenDaysAgo
+        ) {
+
+            return "week";
+
+        }
+
+
+        if (
+            interactionDate.getMonth() ===
+                currentMonth &&
+            interactionDate.getFullYear() ===
+                currentYear
+        ) {
+
+            return "month";
+
+        }
+
+
+        return "month";
+
+    }
+
+
+    /* =====================================================
+       FILTER INTERACTIONS
+    ====================================================== */
+
+    function filterInteractions() {
+
+        const search =
+            document
+                .getElementById(
+                    "searchInput"
+                )
+                .value
+                .toLowerCase()
+                .trim();
+
+
+        const type =
+            document
+                .getElementById(
+                    "typeFilter"
+                )
+                .value;
+
+
+        const sentiment =
+            document
+                .getElementById(
+                    "sentimentFilter"
+                )
+                .value;
+
+
+        const date =
+            document
+                .getElementById(
+                    "dateFilter"
+                )
+                .value;
+
+
+        const items =
+            document.querySelectorAll(
+                ".interaction-item"
+            );
+
+
+        let visibleCount = 0;
+
+
+        items.forEach(
+            function(item) {
+
+                const matchesSearch =
+                    !search ||
+                    item.dataset.searchText
+                        .includes(search);
+
+
+                const matchesType =
+                    type === "all" ||
+                    item.dataset.type === type;
+
+
+                const matchesSentiment =
+                    sentiment === "all" ||
+                    item.dataset.sentiment === sentiment;
+
+
+                const matchesDate =
+                    date === "all" ||
+                    item.dataset.date === date;
+
+
+                if (
+                    matchesSearch &&
+                    matchesType &&
+                    matchesSentiment &&
+                    matchesDate
+                ) {
+
+                    item.style.display =
+                        "grid";
+
+                    visibleCount++;
+
+                } else {
+
+                    item.style.display =
+                        "none";
+
+                }
+
+            }
+        );
+
+
+        document.getElementById(
+            "interactionCount"
+        ).textContent =
+            visibleCount +
+            (
+                visibleCount === 1
+                    ? " interaction"
+                    : " interactions"
+            );
+
+
+        const noResults =
+            document.getElementById(
+                "noResults"
+            );
+
+
+        const emptyState =
+            document.getElementById(
+                "emptyState"
+            );
+
+
+        if (
+            getInteractions().length > 0 &&
+            visibleCount === 0
+        ) {
+
+            noResults.style.display =
+                "block";
+
+            emptyState.style.display =
+                "none";
+
+        } else {
+
+            noResults.style.display =
+                "none";
+
+        }
+
+    }
+
+
+    /* =====================================================
+       UPDATE STATISTICS
+    ====================================================== */
+
+    function updateStatistics() {
+
+        const interactions =
+            getInteractions();
+
+
+        const total =
+            interactions.length;
+
+
+        const phoneCalls =
+            interactions.filter(
+                function(item) {
+
+                    return item.type === "call";
+
+                }
+            ).length;
+
+
+        const meetings =
+            interactions.filter(
+                function(item) {
+
+                    return item.type === "meeting";
+
+                }
+            ).length;
+
+
+        const positive =
+            interactions.filter(
+                function(item) {
+
+                    return (
+                        item.sentiment ===
+                        "positive"
+                    );
+
+                }
+            ).length;
+
+
+        const positivePercentage =
+            total > 0
+                ? Math.round(
+                    (
+                        positive /
+                        total
+                    ) * 100
+                )
+                : 0;
+
+
+        const phonePercentage =
+            total > 0
+                ? Math.round(
+                    (
+                        phoneCalls /
+                        total
+                    ) * 100
+                )
+                : 0;
+
+
+        const meetingPercentage =
+            total > 0
+                ? Math.round(
+                    (
+                        meetings /
+                        total
+                    ) * 100
+                )
+                : 0;
+
+
+        document.getElementById(
+            "totalInteractions"
+        ).textContent =
+            total;
+
+
+        document.getElementById(
+            "phoneCalls"
+        ).textContent =
+            phoneCalls;
+
+
+        document.getElementById(
+            "meetings"
+        ).textContent =
+            meetings;
+
+
+        document.getElementById(
+            "positivePercentage"
+        ).textContent =
+            positivePercentage + "%";
+
+
+        document.getElementById(
+            "smartScore"
+        ).textContent =
+            positivePercentage + "%";
+
+
+        document.getElementById(
+            "phonePercentage"
+        ).textContent =
+            phonePercentage +
+            "% of interactions";
+
+
+        document.getElementById(
+            "meetingPercentage"
+        ).textContent =
+            meetingPercentage +
+            "% of interactions";
+
+    }
+
+
+    /* =====================================================
+       AI INSIGHT
+    ====================================================== */
+
+    function updateAIInsight() {
+
+        const interactions =
+            getInteractions();
+
+
+        const insight =
+            document.getElementById(
+                "aiInsight"
+            );
+
+
+        if (interactions.length === 0) {
+
+            insight.textContent =
+                "No interaction data available yet. Add customer interactions to generate insights.";
+
+            return;
+
+        }
+
+
+        const positive =
+            interactions.filter(
+                function(item) {
+
+                    return item.sentiment ===
+                        "positive";
+
+                }
+            ).length;
+
+
+        const interested =
+            interactions.filter(
+                function(item) {
+
+                    return item.sentiment ===
+                        "interested";
+
+                }
+            ).length;
+
+
+        const attention =
+            interactions.filter(
+                function(item) {
+
+                    return item.sentiment ===
+                        "negative";
+
+                }
+            ).length;
+
+
+        const total =
+            interactions.length;
+
+
+        const positiveRate =
+            Math.round(
+                (
+                    positive /
+                    total
+                ) * 100
+            );
+
+
+        if (interested > 0) {
+
+            insight.innerHTML =
+                `Based on ${total} recorded interaction${total > 1 ? "s" : ""}, ${interested} customer${interested > 1 ? "s have" : " has"} shown interest in insurance discussions. Positive sentiment is currently ${positiveRate}%.`;
+
+        } else if (attention > 0) {
+
+            insight.innerHTML =
+                `There ${attention === 1 ? "is" : "are"} ${attention} interaction${attention > 1 ? "s" : ""} requiring attention. Review customer concerns and schedule suitable follow-ups.`;
+
+        } else {
+
+            insight.innerHTML =
+                `Customer responses are currently positive in ${positiveRate}% of recorded interactions. Continue maintaining regular communication.`;
+
+        }
+
+    }
+
+
+    /* =====================================================
+       DELETE INTERACTION
+    ====================================================== */
+
+    function deleteInteraction(id) {
+
+        const confirmDelete =
+            confirm(
+                "Are you sure you want to delete this interaction?"
+            );
+
+
+        if (!confirmDelete) {
+            return;
+        }
+
+
+        const interactions =
+            getInteractions();
+
+
+        const updated =
+            interactions.filter(
+                function(item) {
+
+                    return item.id !== id;
+
+                }
+            );
+
+
+        saveInteractions(
+            updated
+        );
+
+
+        renderInteractions();
+
+        updateStatistics();
+
+        updateAIInsight();
+
+    }
+
+
+    /* =====================================================
+       VIEW CUSTOMER
+    ====================================================== */
+
+    function viewCustomer(customer) {
+
+        window.location.href =
+            "customer-details.html?customer=" +
+            encodeURIComponent(
+                customer
+            );
+
+    }
+
+
+    /* =====================================================
+       SCHEDULE FOLLOW-UP
+    ====================================================== */
+
+    function scheduleFollowup(customer) {
+
+        window.location.href =
+            "followups.html?customer=" +
+            encodeURIComponent(
+                customer
+            );
+
+    }
+
+
+    /* =====================================================
+       VOICE TO TEXT
+    ====================================================== */
+
+    function startVoiceInput() {
+
+        const SpeechRecognition =
+            window.SpeechRecognition ||
+            window.webkitSpeechRecognition;
+
+
+        if (!SpeechRecognition) {
+
+            alert(
+                "Voice-to-text is not supported in this browser."
+            );
+
+            return;
+
+        }
+
+
+        const recognition =
+            new SpeechRecognition();
+
+
+        recognition.lang =
+            "en-IN";
+
+
+        recognition.continuous =
+            false;
+
+
+        recognition.interimResults =
+            false;
+
+
+        recognition.start();
+
+
+        recognition.onstart =
+            function() {
+
+                alert(
+                    "Listening... Please speak your interaction notes."
+                );
+
+            };
+
+
+        recognition.onresult =
+            function(event) {
+
+                const text =
+                    event.results[0][0]
+                        .transcript;
+
+
+                const notes =
+                    document.getElementById(
+                        "interactionNotes"
+                    );
+
+
+                notes.value +=
+                    (
+                        notes.value
+                            ? " "
+                            : ""
+                    ) +
+                    text;
+
+            };
+
+
+        recognition.onerror =
+            function() {
+
+                alert(
+                    "Unable to capture voice. Please try again."
+                );
+
+            };
+
+    }
+
+
+    /* =====================================================
+       LOAD AGENT NAME
+    ====================================================== */
+
+    function loadAgentName() {
+
+        const agentName =
+            localStorage.getItem(
+                "agentName"
+            );
+
+
+        if (!agentName) {
+            return;
+        }
+
+
+        document.getElementById(
+            "agentName"
+        ).textContent =
+            agentName;
+
+
+        document.getElementById(
+            "agentAvatar"
+        ).textContent =
+            getInitials(
+                agentName
+            );
+
+    }
+
+
+    /* =====================================================
+       UPDATE NOTIFICATION BADGE
+    ====================================================== */
+
+    function updateNotificationBadge() {
+
+        const followups =
+            JSON.parse(
+                localStorage.getItem(
+                    "trustnest_followups"
+                ) || "[]"
+            );
+
+
+        const pending =
+            Array.isArray(followups)
+                ? followups.filter(
+                    function(item) {
+
+                        return (
+                            item.status !==
+                            "completed"
+                        );
+
+                    }
+                ).length
+                : 0;
+
+
+        document.getElementById(
+            "notificationBadge"
+        ).textContent =
+            pending;
+
+    }
+
+
+    /* =====================================================
+       ESCAPE KEY
+    ====================================================== */
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                closeModal();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       INITIAL LOAD
+    ====================================================== */
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function() {
+
+            loadAgentName();
+
+            renderInteractions();
+
+            updateStatistics();
+
+            updateAIInsight();
+
+            updateNotificationBadge();
+
+        }
+    );
+
+
+    console.log(
+        "TrustNest Interactions module loaded successfully."
+    );
+
+</script>
+
+
+</body>
+
+</html>

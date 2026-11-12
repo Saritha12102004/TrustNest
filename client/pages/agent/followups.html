@@ -1,0 +1,4904 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Follow-ups | TrustNest</title>
+
+    <meta name="description"
+          content="Smart customer follow-up management for TrustNest agents">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Project CSS -->
+    <link rel="stylesheet"
+          href="../../css/style.css">
+
+    <link rel="stylesheet"
+          href="../../css/dashboard.css">
+
+    <link rel="stylesheet"
+          href="../../css/forms.css">
+
+    <link rel="stylesheet"
+          href="../../css/responsive.css">
+
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+
+    font-family: "Inter", sans-serif;
+
+    background: #f5f7fb;
+
+    color: #172033;
+
+    min-height: 100vh;
+}
+
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
+
+/* =====================================================
+   LAYOUT
+===================================================== */
+
+.dashboard {
+
+    display: flex;
+
+    min-height: 100vh;
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.sidebar {
+
+    width: 250px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #061f42,
+            #092b5c
+        );
+
+    color: white;
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    bottom: 0;
+
+    z-index: 100;
+
+    display: flex;
+
+    flex-direction: column;
+
+    transition: 0.3s;
+}
+
+
+.sidebar-logo {
+
+    height: 85px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 25px;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,0.08);
+}
+
+
+.logo-icon {
+
+    width: 40px;
+
+    height: 40px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    color: #092b5c;
+
+    border: 3px solid #c9a227;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: 800;
+
+    margin-right: 10px;
+}
+
+
+.logo-name {
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 23px;
+
+    font-weight: 700;
+}
+
+
+.logo-subtitle {
+
+    display: block;
+
+    font-size: 7px;
+
+    letter-spacing: 1.5px;
+
+    color: #d6b23c;
+
+    margin-top: -2px;
+}
+
+
+.menu-title {
+
+    padding:
+        25px 25px 10px;
+
+    color: #7f94ad;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+}
+
+
+.sidebar-menu {
+
+    list-style: none;
+
+    padding: 0 12px;
+}
+
+
+.sidebar-menu li {
+
+    margin-bottom: 4px;
+}
+
+
+.sidebar-menu a {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 11px 13px;
+
+    border-radius: 7px;
+
+    color: #b8c6d8;
+
+    font-size: 12px;
+
+    transition: 0.25s;
+}
+
+
+.sidebar-menu a:hover {
+
+    background:
+        rgba(255,255,255,0.07);
+
+    color: white;
+}
+
+
+.sidebar-menu a.active {
+
+    background:
+        rgba(255,255,255,0.12);
+
+    color: white;
+
+    border-left:
+        3px solid #c9a227;
+}
+
+
+.menu-icon {
+
+    width: 22px;
+
+    text-align: center;
+
+    font-size: 14px;
+}
+
+
+.sidebar-bottom {
+
+    margin-top: auto;
+
+    padding: 15px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,0.08);
+}
+
+
+.sidebar-bottom a {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: #aebed0;
+
+    font-size: 11px;
+
+    padding: 10px;
+}
+
+
+.sidebar-bottom a:hover {
+
+    color: white;
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.main {
+
+    margin-left: 250px;
+
+    width: calc(100% - 250px);
+
+    min-height: 100vh;
+}
+
+
+/* =====================================================
+   TOPBAR
+===================================================== */
+
+.topbar {
+
+    height: 75px;
+
+    background: white;
+
+    border-bottom:
+        1px solid #e8edf3;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 30px;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 50;
+}
+
+
+.mobile-menu {
+
+    display: none;
+
+    border: none;
+
+    background: none;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    margin-right: 10px;
+}
+
+
+.page-title h1 {
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    color: #092b5c;
+
+    font-size: 24px;
+
+    margin-bottom: 2px;
+}
+
+
+.page-title p {
+
+    color: #8995a5;
+
+    font-size: 10px;
+}
+
+
+.topbar-right {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+
+.notification {
+
+    position: relative;
+
+    font-size: 18px;
+
+    color: #526071;
+}
+
+
+.notification-badge {
+
+    position: absolute;
+
+    top: -5px;
+
+    right: -6px;
+
+    min-width: 15px;
+
+    height: 15px;
+
+    padding: 0 3px;
+
+    border-radius: 50%;
+
+    background: #c9a227;
+
+    color: white;
+
+    font-size: 8px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: 700;
+}
+
+
+.agent-profile-mini {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.agent-avatar-small {
+
+    width: 38px;
+
+    height: 38px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #092b5c,
+            #1c518e
+        );
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: 700;
+
+    font-size: 13px;
+
+    border:
+        2px solid #d6b23c;
+}
+
+
+.agent-mini-info strong {
+
+    display: block;
+
+    font-size: 11px;
+
+    color: #172033;
+}
+
+
+.agent-mini-info span {
+
+    font-size: 9px;
+
+    color: #8995a5;
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.content {
+
+    padding: 28px 30px;
+
+    max-width: 1400px;
+
+    margin: auto;
+}
+
+
+/* =====================================================
+   PAGE HEADER
+===================================================== */
+
+.content-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 22px;
+
+    gap: 15px;
+}
+
+
+.content-header h2 {
+
+    color: #172033;
+
+    font-size: 18px;
+
+    margin-bottom: 5px;
+}
+
+
+.content-header p {
+
+    color: #8995a5;
+
+    font-size: 9px;
+}
+
+
+.add-btn {
+
+    background: #092b5c;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 7px;
+
+    padding: 11px 17px;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    transition: 0.2s;
+}
+
+
+.add-btn:hover {
+
+    background: #061f42;
+
+    transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   STAT CARDS
+===================================================== */
+
+.stats-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+
+.stat-card {
+
+    background: white;
+
+    border:
+        1px solid #e5eaf0;
+
+    border-radius: 9px;
+
+    padding: 17px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+
+.stat-info span {
+
+    display: block;
+
+    color: #8995a5;
+
+    font-size: 8px;
+
+    margin-bottom: 6px;
+}
+
+
+.stat-info strong {
+
+    display: block;
+
+    color: #172033;
+
+    font-size: 21px;
+
+    font-weight: 800;
+}
+
+
+.stat-info small {
+
+    display: block;
+
+    margin-top: 5px;
+
+    color: #8c97a5;
+
+    font-size: 7px;
+}
+
+
+.stat-icon {
+
+    width: 43px;
+
+    height: 43px;
+
+    border-radius: 9px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 17px;
+}
+
+
+.today-icon {
+
+    background: #edf4ff;
+
+    color: #2865ad;
+}
+
+
+.upcoming-icon {
+
+    background: #fff8e5;
+
+    color: #aa8615;
+}
+
+
+.overdue-icon {
+
+    background: #fff0f0;
+
+    color: #c54d4d;
+}
+
+
+.completed-icon {
+
+    background: #edf9f2;
+
+    color: #258351;
+}
+
+
+/* =====================================================
+   SMART BANNER
+===================================================== */
+
+.smart-banner {
+
+    background:
+        linear-gradient(
+            135deg,
+            #092b5c,
+            #0d3b78
+        );
+
+    border-radius: 10px;
+
+    color: white;
+
+    padding: 17px 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 20px;
+}
+
+
+.smart-icon {
+
+    width: 40px;
+
+    height: 40px;
+
+    border-radius: 8px;
+
+    background:
+        rgba(255,255,255,0.12);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 17px;
+
+    flex-shrink: 0;
+}
+
+
+.smart-content {
+
+    flex: 1;
+}
+
+
+.smart-content strong {
+
+    display: block;
+
+    font-size: 10px;
+
+    margin-bottom: 4px;
+
+    color: #e8d17c;
+}
+
+
+.smart-content p {
+
+    font-size: 8px;
+
+    line-height: 1.5;
+
+    color: #c8d5e5;
+}
+
+
+.smart-content p strong {
+
+    display: inline;
+
+    font-size: inherit;
+
+    margin: 0;
+
+    color: #ffffff;
+}
+
+
+.smart-score {
+
+    text-align: center;
+
+    padding-left: 15px;
+
+    border-left:
+        1px solid
+        rgba(255,255,255,0.15);
+}
+
+
+.smart-score strong {
+
+    display: block;
+
+    font-size: 19px;
+
+    color: white;
+}
+
+
+.smart-score span {
+
+    color: #aebed0;
+
+    font-size: 7px;
+}
+
+
+/* =====================================================
+   TOOLBAR
+===================================================== */
+
+.toolbar {
+
+    background: white;
+
+    border:
+        1px solid #e5eaf0;
+
+    border-radius: 9px;
+
+    padding: 13px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-bottom: 15px;
+
+    flex-wrap: wrap;
+}
+
+
+.search-box {
+
+    position: relative;
+
+    flex: 1;
+
+    min-width: 220px;
+}
+
+
+.search-box span {
+
+    position: absolute;
+
+    left: 11px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #9aa4b1;
+
+    font-size: 12px;
+}
+
+
+.search-box input {
+
+    width: 100%;
+
+    height: 37px;
+
+    border:
+        1px solid #e0e5eb;
+
+    border-radius: 6px;
+
+    padding: 0 12px 0 32px;
+
+    outline: none;
+
+    font-size: 9px;
+
+    color: #344054;
+}
+
+
+.search-box input:focus {
+
+    border-color: #092b5c;
+
+    box-shadow:
+        0 0 0 2px
+        rgba(9,43,92,0.08);
+}
+
+
+.filter-group {
+
+    display: flex;
+
+    gap: 7px;
+}
+
+
+.filter-select {
+
+    height: 37px;
+
+    border:
+        1px solid #e0e5eb;
+
+    border-radius: 6px;
+
+    padding: 0 10px;
+
+    background: white;
+
+    color: #526071;
+
+    font-size: 8px;
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.followup-card {
+
+    background: white;
+
+    border:
+        1px solid #e5eaf0;
+
+    border-radius: 9px;
+
+    overflow: hidden;
+}
+
+
+.followup-card-header {
+
+    padding: 15px 18px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    border-bottom:
+        1px solid #edf0f4;
+}
+
+
+.followup-card-header h3 {
+
+    font-size: 12px;
+
+    color: #172033;
+}
+
+
+.followup-count {
+
+    font-size: 8px;
+
+    color: #8995a5;
+}
+
+
+.followup-table-wrapper {
+
+    overflow-x: auto;
+}
+
+
+.followup-table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 850px;
+}
+
+
+.followup-table th {
+
+    background: #f8fafc;
+
+    color: #8995a5;
+
+    text-transform: uppercase;
+
+    font-size: 7px;
+
+    letter-spacing: 0.4px;
+
+    font-weight: 700;
+
+    text-align: left;
+
+    padding: 11px 13px;
+}
+
+
+.followup-table td {
+
+    padding: 13px;
+
+    border-top:
+        1px solid #edf0f4;
+
+    color: #526071;
+
+    font-size: 8px;
+
+    vertical-align: middle;
+}
+
+
+.followup-table tbody tr {
+
+    transition: 0.2s;
+}
+
+
+.followup-table tbody tr:hover {
+
+    background: #fafbfd;
+}
+
+
+/* =====================================================
+   CUSTOMER
+===================================================== */
+
+.customer-cell {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+}
+
+
+.customer-avatar {
+
+    width: 33px;
+
+    height: 33px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #092b5c,
+            #245b95
+        );
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    flex-shrink: 0;
+}
+
+
+.customer-cell strong {
+
+    display: block;
+
+    color: #344054;
+
+    font-size: 8px;
+
+    margin-bottom: 3px;
+}
+
+
+.customer-cell span {
+
+    display: block;
+
+    color: #9aa4b1;
+
+    font-size: 7px;
+}
+
+
+/* =====================================================
+   POLICY
+===================================================== */
+
+.policy-cell strong {
+
+    display: block;
+
+    color: #344054;
+
+    font-size: 8px;
+
+    margin-bottom: 3px;
+}
+
+
+.policy-cell span {
+
+    color: #9aa4b1;
+
+    font-size: 7px;
+}
+
+
+/* =====================================================
+   PRIORITY
+===================================================== */
+
+.priority {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    padding: 4px 7px;
+
+    border-radius: 12px;
+
+    font-size: 7px;
+
+    font-weight: 700;
+}
+
+
+.priority-high {
+
+    background: #fff0f0;
+
+    color: #c54d4d;
+}
+
+
+.priority-medium {
+
+    background: #fff8e5;
+
+    color: #9b7913;
+}
+
+
+.priority-low {
+
+    background: #edf5ff;
+
+    color: #2865ad;
+}
+
+
+.priority-dot {
+
+    width: 5px;
+
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: currentColor;
+}
+
+
+/* =====================================================
+   DATE
+===================================================== */
+
+.date-cell strong {
+
+    display: block;
+
+    color: #344054;
+
+    font-size: 8px;
+
+    margin-bottom: 3px;
+}
+
+
+.date-cell span {
+
+    color: #9aa4b1;
+
+    font-size: 7px;
+}
+
+
+.date-overdue strong {
+
+    color: #c54d4d;
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.status {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 4px 8px;
+
+    border-radius: 12px;
+
+    font-size: 7px;
+
+    font-weight: 700;
+}
+
+
+.status-pending {
+
+    background: #fff8e5;
+
+    color: #9b7913;
+}
+
+
+.status-overdue {
+
+    background: #fff0f0;
+
+    color: #c54d4d;
+}
+
+
+.status-completed {
+
+    background: #edf9f2;
+
+    color: #258351;
+}
+
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.actions {
+
+    display: flex;
+
+    gap: 5px;
+}
+
+
+.action-btn {
+
+    width: 28px;
+
+    height: 28px;
+
+    border:
+        1px solid #e0e5eb;
+
+    border-radius: 5px;
+
+    background: white;
+
+    color: #526071;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 11px;
+
+    transition: 0.2s;
+}
+
+
+.action-btn:hover {
+
+    border-color: #092b5c;
+
+    color: #092b5c;
+
+    background: #f7f9fb;
+}
+
+
+.action-btn.complete:hover {
+
+    border-color: #258351;
+
+    color: #258351;
+
+    background: #edf9f2;
+}
+
+
+/* =====================================================
+   EMPTY STATE
+===================================================== */
+
+.no-results {
+
+    text-align: center;
+
+    padding: 45px 20px;
+
+    color: #8995a5;
+
+    display: none;
+}
+
+
+.no-results-icon {
+
+    font-size: 30px;
+
+    margin-bottom: 10px;
+}
+
+
+.no-results strong {
+
+    display: block;
+
+    color: #526071;
+
+    font-size: 11px;
+
+    margin-bottom: 5px;
+}
+
+
+.no-results span {
+
+    font-size: 8px;
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(6,31,66,0.55);
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 500;
+
+    padding: 20px;
+}
+
+
+.modal-overlay.show {
+
+    display: flex;
+}
+
+
+.modal {
+
+    width: 100%;
+
+    max-width: 480px;
+
+    background: white;
+
+    border-radius: 11px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,0.18);
+
+    animation:
+        modalIn 0.2s ease;
+}
+
+
+@keyframes modalIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(10px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+
+}
+
+
+.modal-header {
+
+    padding: 17px 20px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    border-bottom:
+        1px solid #edf0f4;
+}
+
+
+.modal-header h3 {
+
+    font-size: 13px;
+
+    color: #172033;
+}
+
+
+.modal-close {
+
+    width: 28px;
+
+    height: 28px;
+
+    border: none;
+
+    background: #f5f7fa;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    color: #526071;
+
+    font-size: 14px;
+}
+
+
+.modal-body {
+
+    padding: 20px;
+}
+
+
+.form-group {
+
+    margin-bottom: 15px;
+}
+
+
+.form-group label {
+
+    display: block;
+
+    color: #526071;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    margin-bottom: 6px;
+}
+
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+
+    width: 100%;
+
+    border:
+        1px solid #dfe5eb;
+
+    border-radius: 6px;
+
+    padding: 10px;
+
+    outline: none;
+
+    font-size: 9px;
+
+    color: #344054;
+
+    background: white;
+}
+
+
+.form-group textarea {
+
+    resize: vertical;
+
+    min-height: 70px;
+}
+
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+
+    border-color: #092b5c;
+
+    box-shadow:
+        0 0 0 2px
+        rgba(9,43,92,0.07);
+}
+
+
+.form-row {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 12px;
+}
+
+
+.modal-footer {
+
+    padding: 14px 20px;
+
+    border-top:
+        1px solid #edf0f4;
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 8px;
+}
+
+
+.cancel-btn {
+
+    border:
+        1px solid #dfe5eb;
+
+    background: white;
+
+    color: #526071;
+
+    border-radius: 6px;
+
+    padding: 9px 14px;
+
+    font-size: 8px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+.save-btn {
+
+    border: none;
+
+    background: #092b5c;
+
+    color: white;
+
+    border-radius: 6px;
+
+    padding: 9px 15px;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1100px) {
+
+    .stats-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 950px) {
+
+    .sidebar {
+
+        transform:
+            translateX(-100%);
+    }
+
+
+    .sidebar.open {
+
+        transform:
+            translateX(0);
+    }
+
+
+    .main {
+
+        margin-left: 0;
+
+        width: 100%;
+    }
+
+
+    .mobile-menu {
+
+        display: block;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .content {
+
+        padding: 20px 15px;
+    }
+
+
+    .topbar {
+
+        padding: 0 15px;
+    }
+
+
+    .stats-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .content-header {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .toolbar {
+
+        align-items: stretch;
+    }
+
+
+    .filter-group {
+
+        width: 100%;
+
+        flex-wrap: wrap;
+    }
+
+
+    .filter-select {
+
+        flex: 1;
+
+        min-width: 100px;
+    }
+
+
+    .smart-banner {
+
+        align-items: flex-start;
+    }
+
+
+    .smart-score {
+
+        display: none;
+    }
+
+
+    .form-row {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .agent-mini-info {
+
+        display: none;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="dashboard">
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar"
+       id="sidebar">
+
+
+    <a href="dashboard.html"
+       class="sidebar-logo">
+
+        <div class="logo-icon">
+            T
+        </div>
+
+        <div>
+
+            <div class="logo-name">
+                TrustNest
+            </div>
+
+            <span class="logo-subtitle">
+                Insurance Intelligence
+            </span>
+
+        </div>
+
+    </a>
+
+
+    <div class="menu-title">
+        Main Menu
+    </div>
+
+
+    <ul class="sidebar-menu">
+
+        <li>
+
+            <a href="dashboard.html">
+
+                <span class="menu-icon">
+                    ▦
+                </span>
+
+                Dashboard
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="customers.html">
+
+                <span class="menu-icon">
+                    👥
+                </span>
+
+                Customers
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="policies.html">
+
+                <span class="menu-icon">
+                    📋
+                </span>
+
+                Policies
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="followups.html"
+               class="active">
+
+                <span class="menu-icon">
+                    🔔
+                </span>
+
+                Follow-ups
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="interactions.html">
+
+                <span class="menu-icon">
+                    💬
+                </span>
+
+                Interactions
+
+            </a>
+
+        </li>
+
+    </ul>
+
+
+    <div class="menu-title">
+        Smart Features
+    </div>
+
+
+    <ul class="sidebar-menu">
+
+        <li>
+
+            <a href="recommendations.html">
+
+                <span class="menu-icon">
+                    ✨
+                </span>
+
+                Recommendations
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="leads.html">
+
+                <span class="menu-icon">
+                    🎯
+                </span>
+
+                Smart Leads
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="sales-insights.html">
+
+                <span class="menu-icon">
+                    📊
+                </span>
+
+                Sales Insights
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="notifications.html">
+
+                <span class="menu-icon">
+                    🔔
+                </span>
+
+                Notifications
+
+            </a>
+
+        </li>
+
+    </ul>
+
+
+    <div class="menu-title">
+        Account
+    </div>
+
+
+    <ul class="sidebar-menu">
+
+        <li>
+
+            <a href="profile.html">
+
+                <span class="menu-icon">
+                    👤
+                </span>
+
+                My Profile
+
+            </a>
+
+        </li>
+
+    </ul>
+
+
+    <div class="sidebar-bottom">
+
+        <a href="../login.html">
+
+            <span>
+                ⇥
+            </span>
+
+            Logout
+
+        </a>
+
+    </div>
+
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+
+        <div style="display:flex;align-items:center;">
+
+            <button
+                class="mobile-menu"
+                id="mobileMenu">
+
+                ☰
+
+            </button>
+
+
+            <div class="page-title">
+
+                <h1>
+                    Follow-ups
+                </h1>
+
+                <p>
+                    Manage customer follow-ups intelligently
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+
+            <a href="notifications.html"
+               class="notification">
+
+                🔔
+
+                <span
+                    class="notification-badge"
+                    id="notificationBadge">
+
+                    0
+
+                </span>
+
+            </a>
+
+
+            <div class="agent-profile-mini">
+
+                <div
+                    class="agent-avatar-small"
+                    id="agentAvatar">
+
+                    A
+
+                </div>
+
+
+                <div class="agent-mini-info">
+
+                    <strong id="agentName">
+                        Agent
+                    </strong>
+
+                    <span>
+                        Insurance Agent
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         CONTENT
+    ===================================================== -->
+
+    <div class="content">
+
+
+        <!-- PAGE HEADER -->
+
+        <div class="content-header">
+
+
+            <div>
+
+                <h2>
+                    Follow-up Management
+                </h2>
+
+                <p>
+                    Never miss an important customer interaction
+                </p>
+
+            </div>
+
+
+            <button
+                class="add-btn"
+                onclick="openModal()">
+
+                <span>
+                    +
+                </span>
+
+                Add Follow-up
+
+            </button>
+
+        </div>
+
+
+
+        <!-- =================================================
+             STATISTICS
+        ================================================= -->
+
+        <div class="stats-grid">
+
+
+            <!-- TODAY -->
+
+            <div class="stat-card">
+
+                <div class="stat-info">
+
+                    <span>
+                        Today's Follow-ups
+                    </span>
+
+                    <strong id="todayFollowupCount">
+                        0
+                    </strong>
+
+                    <small id="todayHighPriority">
+                        0 high priority
+                    </small>
+
+                </div>
+
+
+                <div class="stat-icon today-icon">
+                    📅
+                </div>
+
+            </div>
+
+
+
+            <!-- UPCOMING -->
+
+            <div class="stat-card">
+
+                <div class="stat-info">
+
+                    <span>
+                        Upcoming
+                    </span>
+
+                    <strong id="upcomingFollowupCount">
+                        0
+                    </strong>
+
+                    <small>
+                        Next 7 days
+                    </small>
+
+                </div>
+
+
+                <div class="stat-icon upcoming-icon">
+                    ⏰
+                </div>
+
+            </div>
+
+
+
+            <!-- OVERDUE -->
+
+            <div class="stat-card">
+
+                <div class="stat-info">
+
+                    <span>
+                        Overdue
+                    </span>
+
+                    <strong id="overdueFollowupCount">
+                        0
+                    </strong>
+
+                    <small>
+                        Requires attention
+                    </small>
+
+                </div>
+
+
+                <div class="stat-icon overdue-icon">
+                    ⚠
+                </div>
+
+            </div>
+
+
+
+            <!-- COMPLETED -->
+
+            <div class="stat-card">
+
+                <div class="stat-info">
+
+                    <span>
+                        Completed
+                    </span>
+
+                    <strong id="completedFollowupCount">
+                        0
+                    </strong>
+
+                    <small>
+                        This month
+                    </small>
+
+                </div>
+
+
+                <div class="stat-icon completed-icon">
+                    ✓
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             SMART INSIGHT
+        ================================================= -->
+
+        <div class="smart-banner">
+
+
+            <div class="smart-icon">
+                ✨
+            </div>
+
+
+            <div class="smart-content">
+
+                <strong>
+                    AI Follow-up Assistant
+                </strong>
+
+                <p id="smartMessage">
+
+                    No follow-ups are scheduled yet.
+                    Add a follow-up to start managing customer
+                    interactions.
+
+                </p>
+
+            </div>
+
+
+            <div class="smart-score">
+
+                <strong id="efficiencyScore">
+                    0%
+                </strong>
+
+                <span>
+                    Follow-up efficiency
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             TOOLBAR
+        ================================================= -->
+
+        <div class="toolbar">
+
+
+            <div class="search-box">
+
+                <span>
+                    🔍
+                </span>
+
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search customer, policy or follow-up..."
+                    onkeyup="filterFollowups()">
+
+            </div>
+
+
+            <div class="filter-group">
+
+
+                <select
+                    id="statusFilter"
+                    class="filter-select"
+                    onchange="filterFollowups()">
+
+                    <option value="all">
+                        All Status
+                    </option>
+
+                    <option value="pending">
+                        Pending
+                    </option>
+
+                    <option value="overdue">
+                        Overdue
+                    </option>
+
+                    <option value="completed">
+                        Completed
+                    </option>
+
+                </select>
+
+
+                <select
+                    id="priorityFilter"
+                    class="filter-select"
+                    onchange="filterFollowups()">
+
+                    <option value="all">
+                        All Priority
+                    </option>
+
+                    <option value="high">
+                        High
+                    </option>
+
+                    <option value="medium">
+                        Medium
+                    </option>
+
+                    <option value="low">
+                        Low
+                    </option>
+
+                </select>
+
+
+                <select
+                    id="dateFilter"
+                    class="filter-select"
+                    onchange="filterFollowups()">
+
+                    <option value="all">
+                        All Dates
+                    </option>
+
+                    <option value="today">
+                        Today
+                    </option>
+
+                    <option value="upcoming">
+                        Upcoming
+                    </option>
+
+                    <option value="overdue">
+                        Overdue
+                    </option>
+
+                </select>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             TABLE
+        ================================================= -->
+
+        <section class="followup-card">
+
+
+            <div class="followup-card-header">
+
+                <h3>
+                    Customer Follow-ups
+                </h3>
+
+
+                <span
+                    class="followup-count"
+                    id="followupCount">
+
+                    0 follow-ups
+
+                </span>
+
+            </div>
+
+
+            <div class="followup-table-wrapper">
+
+
+                <table
+                    class="followup-table"
+                    id="followupTable">
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Customer
+                            </th>
+
+                            <th>
+                                Policy
+                            </th>
+
+                            <th>
+                                Follow-up Date
+                            </th>
+
+                            <th>
+                                Priority
+                            </th>
+
+                            <th>
+                                Reason
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="followupTableBody">
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+            <div
+                class="no-results"
+                id="noResults">
+
+                <div class="no-results-icon">
+                    📅
+                </div>
+
+                <strong id="emptyTitle">
+                    No follow-ups yet
+                </strong>
+
+                <span id="emptyMessage">
+                    Click "Add Follow-up" to create your first follow-up.
+                </span>
+
+            </div>
+
+
+        </section>
+
+
+    </div>
+
+
+</main>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     ADD FOLLOW-UP MODAL
+===================================================== -->
+
+<div
+    class="modal-overlay"
+    id="followupModal">
+
+
+    <div class="modal">
+
+
+        <div class="modal-header">
+
+            <h3>
+                Add New Follow-up
+            </h3>
+
+
+            <button
+                class="modal-close"
+                onclick="closeModal()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <form
+            id="followupForm"
+            onsubmit="saveFollowup(event)">
+
+
+            <div class="modal-body">
+
+
+                <!-- CUSTOMER -->
+
+                <div class="form-group">
+
+                    <label>
+                        Customer
+                    </label>
+
+
+                    <select
+                        id="customerSelect"
+                        required>
+
+                        <option value="">
+                            Loading customers...
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- DATE + TIME -->
+
+                <div class="form-row">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Follow-up Date
+                        </label>
+
+
+                        <input
+                            type="date"
+                            id="followupDate"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Time
+                        </label>
+
+
+                        <input
+                            type="time"
+                            id="followupTime"
+                            required>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- PRIORITY + TYPE -->
+
+                <div class="form-row">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Priority
+                        </label>
+
+
+                        <select
+                            id="followupPriority"
+                            required>
+
+                            <option value="">
+                                Select priority
+                            </option>
+
+                            <option value="high">
+                                High
+                            </option>
+
+                            <option value="medium">
+                                Medium
+                            </option>
+
+                            <option value="low">
+                                Low
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Follow-up Type
+                        </label>
+
+
+                        <select
+                            id="followupType"
+                            required>
+
+                            <option value="Phone Call">
+                                Phone Call
+                            </option>
+
+                            <option value="WhatsApp">
+                                WhatsApp
+                            </option>
+
+                            <option value="Meeting">
+                                Meeting
+                            </option>
+
+                            <option value="Policy Renewal">
+                                Policy Renewal
+                            </option>
+
+                            <option value="Premium Reminder">
+                                Premium Reminder
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- POLICY -->
+
+                <div class="form-group">
+
+                    <label>
+                        Policy / Reason
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="followupReason"
+                        placeholder="Example: Premium Renewal">
+
+                </div>
+
+
+
+                <!-- NOTES -->
+
+                <div class="form-group">
+
+                    <label>
+                        Notes
+                    </label>
+
+
+                    <textarea
+                        id="followupNotes"
+                        placeholder="Enter follow-up notes..."></textarea>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="modal-footer">
+
+
+                <button
+                    type="button"
+                    class="cancel-btn"
+                    onclick="closeModal()">
+
+                    Cancel
+
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="save-btn">
+
+                    Save Follow-up
+
+                </button>
+
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+/* =====================================================
+   API
+===================================================== */
+
+const API_URL =
+    window.TRUSTNEST_API_URL ||
+    "http://localhost:5000";
+
+
+/* =====================================================
+   STORAGE
+===================================================== */
+
+const STORAGE_KEY =
+    "trustnest_followups";
+
+
+let followups = [];
+
+
+let customers = [];
+
+
+/* =====================================================
+   MOBILE SIDEBAR
+===================================================== */
+
+const mobileMenu =
+    document.getElementById("mobileMenu");
+
+
+const sidebar =
+    document.getElementById("sidebar");
+
+
+mobileMenu.addEventListener(
+    "click",
+    function () {
+
+        sidebar.classList.toggle("open");
+
+    }
+);
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+const modal =
+    document.getElementById("followupModal");
+
+
+function openModal() {
+
+    loadCustomers();
+
+    modal.classList.add("show");
+
+}
+
+
+function closeModal() {
+
+    modal.classList.remove("show");
+
+}
+
+
+modal.addEventListener(
+    "click",
+    function (event) {
+
+        if (event.target === modal) {
+
+            closeModal();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   LOAD FOLLOW-UPS FROM LOCAL STORAGE
+===================================================== */
+
+function loadFollowups() {
+
+    try {
+
+        const saved =
+            localStorage.getItem(
+                STORAGE_KEY
+            );
+
+
+        if (saved) {
+
+            followups =
+                JSON.parse(saved);
+
+        } else {
+
+            followups = [];
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Unable to load follow-ups:",
+            error
+        );
+
+        followups = [];
+
+    }
+
+
+    updateFollowupStatuses();
+
+    renderFollowups();
+
+    updateStatistics();
+
+}
+
+
+/* =====================================================
+   SAVE FOLLOW-UPS
+===================================================== */
+
+function saveFollowupsToStorage() {
+
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(followups)
+    );
+
+}
+
+
+/* =====================================================
+   LOAD CUSTOMERS FROM MONGODB API
+===================================================== */
+
+async function loadCustomers() {
+
+    const select =
+        document.getElementById(
+            "customerSelect"
+        );
+
+
+    select.innerHTML =
+        `
+        <option value="">
+            Loading customers...
+        </option>
+        `;
+
+
+    const agentId =
+        localStorage.getItem("agentId");
+
+
+    if (!agentId) {
+
+        select.innerHTML =
+            `
+            <option value="">
+                No agent logged in
+            </option>
+            `;
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                API_URL +
+                "/api/customers?agentId=" +
+                encodeURIComponent(agentId)
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Customer API failed"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        customers =
+            Array.isArray(data)
+                ? data
+                : (
+                    data.customers ||
+                    data.data ||
+                    []
+                );
+
+
+        select.innerHTML =
+            `
+            <option value="">
+                Select customer
+            </option>
+            `;
+
+
+        customers.forEach(
+            function(customer) {
+
+
+                const id =
+                    customer._id ||
+                    customer.id;
+
+
+                const name =
+                    customer.fullName ||
+                    customer.name ||
+                    customer.customerName ||
+                    "Unnamed Customer";
+
+
+                if (!id) {
+                    return;
+                }
+
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+
+                option.value = id;
+
+                option.textContent = name;
+
+
+                select.appendChild(option);
+
+            }
+        );
+
+
+        if (customers.length === 0) {
+
+            select.innerHTML =
+                `
+                <option value="">
+                    No customers available
+                </option>
+                `;
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Customer loading error:",
+            error
+        );
+
+
+        select.innerHTML =
+            `
+            <option value="">
+                Unable to load customers
+            </option>
+            `;
+
+
+        /*
+         * The page can still be used if the API
+         * is temporarily unavailable.
+         */
+
+    }
+
+}
+
+
+/* =====================================================
+   GET CUSTOMER INFORMATION
+===================================================== */
+
+function getCustomerById(customerId) {
+
+    return customers.find(
+        function(customer) {
+
+            return String(
+                customer._id ||
+                customer.id
+            ) === String(customerId);
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   SAVE NEW FOLLOW-UP
+===================================================== */
+
+function saveFollowup(event) {
+
+    event.preventDefault();
+
+
+    const customerId =
+        document.getElementById(
+            "customerSelect"
+        ).value;
+
+
+    const date =
+        document.getElementById(
+            "followupDate"
+        ).value;
+
+
+    const time =
+        document.getElementById(
+            "followupTime"
+        ).value;
+
+
+    const priority =
+        document.getElementById(
+            "followupPriority"
+        ).value;
+
+
+    const type =
+        document.getElementById(
+            "followupType"
+        ).value;
+
+
+    const reason =
+        document.getElementById(
+            "followupReason"
+        ).value.trim();
+
+
+    const notes =
+        document.getElementById(
+            "followupNotes"
+        ).value.trim();
+
+
+    if (
+        !customerId ||
+        !date ||
+        !time ||
+        !priority
+    ) {
+
+        alert(
+            "Please fill all required fields."
+        );
+
+        return;
+
+    }
+
+
+    const customer =
+        getCustomerById(customerId);
+
+
+    const customerName =
+        customer?.fullName ||
+        customer?.name ||
+        customer?.customerName ||
+        "Customer";
+
+
+    const phone =
+        customer?.phone ||
+        customer?.mobile ||
+        customer?.mobileNumber ||
+        "";
+
+
+    const newFollowup = {
+
+        id:
+            Date.now().toString(),
+
+        customerId:
+            customerId,
+
+        customerName:
+            customerName,
+
+        phone:
+            phone,
+
+        policy:
+            "—",
+
+        policyNumber:
+            "—",
+
+        date:
+            date,
+
+        time:
+            time,
+
+        priority:
+            priority,
+
+        type:
+            type,
+
+        reason:
+            reason ||
+            type,
+
+        notes:
+            notes,
+
+        status:
+            "pending",
+
+        createdAt:
+            new Date().toISOString(),
+
+        completedAt:
+            null
+
+    };
+
+
+    followups.push(
+        newFollowup
+    );
+
+
+    saveFollowupsToStorage();
+
+
+    document
+        .getElementById(
+            "followupForm"
+        )
+        .reset();
+
+
+    closeModal();
+
+
+    updateFollowupStatuses();
+
+    renderFollowups();
+
+    updateStatistics();
+
+
+    alert(
+        "Follow-up created successfully!"
+    );
+
+}
+
+
+/* =====================================================
+   UPDATE AUTOMATIC STATUS
+===================================================== */
+
+function updateFollowupStatuses() {
+
+    const now =
+        new Date();
+
+
+    followups.forEach(
+        function(item) {
+
+
+            /*
+             * Do not change completed follow-ups.
+             */
+
+            if (
+                item.status ===
+                "completed"
+            ) {
+
+                return;
+
+            }
+
+
+            const followupDate =
+                new Date(
+                    item.date +
+                    "T" +
+                    (
+                        item.time ||
+                        "00:00"
+                    )
+                );
+
+
+            /*
+             * If the date/time has passed,
+             * automatically mark as overdue.
+             */
+
+            if (
+                followupDate < now
+            ) {
+
+                item.status =
+                    "overdue";
+
+            } else {
+
+                item.status =
+                    "pending";
+
+            }
+
+        }
+    );
+
+
+    saveFollowupsToStorage();
+
+}
+
+
+/* =====================================================
+   DATE HELPERS
+===================================================== */
+
+function getDateOnly(date) {
+
+    return new Date(
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate()
+    );
+
+}
+
+
+function getTodayString() {
+
+    const today =
+        new Date();
+
+
+    const year =
+        today.getFullYear();
+
+
+    const month =
+        String(
+            today.getMonth() + 1
+        ).padStart(2, "0");
+
+
+    const day =
+        String(
+            today.getDate()
+        ).padStart(2, "0");
+
+
+    return (
+        year +
+        "-" +
+        month +
+        "-" +
+        day
+    );
+
+}
+
+
+function isToday(dateString) {
+
+    return (
+        dateString ===
+        getTodayString()
+    );
+
+}
+
+
+function isUpcoming(dateString) {
+
+    const today =
+        getDateOnly(
+            new Date()
+        );
+
+
+    const date =
+        getDateOnly(
+            new Date(
+                dateString +
+                "T00:00:00"
+            )
+        );
+
+
+    const sevenDaysLater =
+        new Date(today);
+
+
+    sevenDaysLater.setDate(
+        sevenDaysLater.getDate() + 7
+    );
+
+
+    return (
+        date > today &&
+        date <= sevenDaysLater
+    );
+
+}
+
+
+function isOverdue(item) {
+
+    return (
+        item.status ===
+        "overdue"
+    );
+
+}
+
+
+/* =====================================================
+   FORMAT DATE
+===================================================== */
+
+function formatDate(dateString) {
+
+    if (!dateString) {
+
+        return "—";
+
+    }
+
+
+    const date =
+        new Date(
+            dateString +
+            "T00:00:00"
+        );
+
+
+    return date.toLocaleDateString(
+        "en-IN",
+        {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        }
+    );
+
+}
+
+
+/* =====================================================
+   FORMAT TIME
+===================================================== */
+
+function formatTime(time) {
+
+    if (!time) {
+
+        return "";
+
+    }
+
+
+    const parts =
+        time.split(":");
+
+
+    let hour =
+        Number(parts[0]);
+
+
+    const minute =
+        parts[1] || "00";
+
+
+    const suffix =
+        hour >= 12
+            ? "PM"
+            : "AM";
+
+
+    hour =
+        hour % 12 || 12;
+
+
+    return (
+        hour +
+        ":" +
+        minute +
+        " " +
+        suffix
+    );
+
+}
+
+
+/* =====================================================
+   GET DATE LABEL
+===================================================== */
+
+function getDateLabel(item) {
+
+    if (isToday(item.date)) {
+
+        return "Today";
+
+    }
+
+
+    if (isOverdue(item)) {
+
+        const today =
+            getDateOnly(
+                new Date()
+            );
+
+
+        const date =
+            getDateOnly(
+                new Date(
+                    item.date +
+                    "T00:00:00"
+                )
+            );
+
+
+        const difference =
+            Math.floor(
+                (
+                    today - date
+                ) /
+                (1000 * 60 * 60 * 24)
+            );
+
+
+        return (
+            difference +
+            (
+                difference === 1
+                    ? " day overdue"
+                    : " days overdue"
+            )
+        );
+
+    }
+
+
+    return formatDate(
+        item.date
+    );
+
+}
+
+
+/* =====================================================
+   RENDER TABLE
+===================================================== */
+
+function renderFollowups() {
+
+    const tbody =
+        document.getElementById(
+            "followupTableBody"
+        );
+
+
+    tbody.innerHTML = "";
+
+
+    if (followups.length === 0) {
+
+        showEmptyState(
+            true,
+            "No follow-ups yet",
+            'Click "Add Follow-up" to create your first follow-up.'
+        );
+
+
+        document.getElementById(
+            "followupCount"
+        ).textContent =
+            "0 follow-ups";
+
+
+        return;
+
+    }
+
+
+    showEmptyState(
+        false
+    );
+
+
+    followups
+        .slice()
+        .sort(
+            function(a, b) {
+
+                return (
+                    new Date(
+                        a.date +
+                        "T" +
+                        (
+                            a.time ||
+                            "00:00"
+                        )
+                    ) -
+                    new Date(
+                        b.date +
+                        "T" +
+                        (
+                            b.time ||
+                            "00:00"
+                        )
+                    )
+                );
+
+            }
+        )
+        .forEach(
+            function(item) {
+
+                const row =
+                    createFollowupRow(
+                        item
+                    );
+
+
+                tbody.appendChild(
+                    row
+                );
+
+            }
+        );
+
+
+    filterFollowups();
+
+}
+
+
+/* =====================================================
+   CREATE TABLE ROW
+===================================================== */
+
+function createFollowupRow(item) {
+
+    const row =
+        document.createElement("tr");
+
+
+    row.dataset.id =
+        item.id;
+
+
+    row.dataset.status =
+        item.status;
+
+
+    row.dataset.priority =
+        item.priority;
+
+
+    if (isToday(item.date)) {
+
+        row.dataset.date =
+            "today";
+
+    } else if (isOverdue(item)) {
+
+        row.dataset.date =
+            "overdue";
+
+    } else if (isUpcoming(item.date)) {
+
+        row.dataset.date =
+            "upcoming";
+
+    } else {
+
+        row.dataset.date =
+            "all";
+
+    }
+
+
+    const initials =
+        getInitials(
+            item.customerName
+        );
+
+
+    let statusClass =
+        "status-pending";
+
+
+    let statusText =
+        "Pending";
+
+
+    if (
+        item.status ===
+        "overdue"
+    ) {
+
+        statusClass =
+            "status-overdue";
+
+        statusText =
+            "Overdue";
+
+    }
+
+
+    if (
+        item.status ===
+        "completed"
+    ) {
+
+        statusClass =
+            "status-completed";
+
+        statusText =
+            "Completed";
+
+    }
+
+
+    const priorityClass =
+        "priority-" +
+        (
+            item.priority ||
+            "medium"
+        );
+
+
+    const completedAction =
+        item.status ===
+        "completed"
+            ?
+
+            `
+            <button
+                class="action-btn"
+                title="View"
+                onclick="viewFollowup('${item.id}')">
+
+                👁
+
+            </button>
+            `
+
+            :
+
+            `
+            <button
+                class="action-btn complete"
+                title="Complete"
+                onclick="completeFollowup('${item.id}')">
+
+                ✓
+
+            </button>
+            `;
+
+
+    row.innerHTML = `
+
+        <td>
+
+            <div class="customer-cell">
+
+                <div class="customer-avatar">
+                    ${escapeHtml(initials)}
+                </div>
+
+                <div>
+
+                    <strong>
+                        ${escapeHtml(item.customerName)}
+                    </strong>
+
+                    <span>
+                        ${escapeHtml(item.phone || "No phone number")}
+                    </span>
+
+                </div>
+
+            </div>
+
+        </td>
+
+
+        <td>
+
+            <div class="policy-cell">
+
+                <strong>
+                    ${escapeHtml(item.policy || "—")}
+                </strong>
+
+                <span>
+                    ${escapeHtml(item.policyNumber || "No policy linked")}
+                </span>
+
+            </div>
+
+        </td>
+
+
+        <td>
+
+            <div class="date-cell
+                ${item.status === "overdue" ? "date-overdue" : ""}">
+
+                <strong>
+                    ${escapeHtml(getDateLabel(item))}
+                </strong>
+
+                <span>
+                    ${escapeHtml(formatTime(item.time))}
+                </span>
+
+            </div>
+
+        </td>
+
+
+        <td>
+
+            <span class="priority ${priorityClass}">
+
+                <span class="priority-dot"></span>
+
+                ${escapeHtml(
+                    capitalize(
+                        item.priority ||
+                        "medium"
+                    )
+                )}
+
+            </span>
+
+        </td>
+
+
+        <td>
+
+            ${escapeHtml(
+                item.reason ||
+                item.type ||
+                "Follow-up"
+            )}
+
+        </td>
+
+
+        <td>
+
+            <span class="status ${statusClass}">
+
+                ${statusText}
+
+            </span>
+
+        </td>
+
+
+        <td>
+
+            <div class="actions">
+
+
+                <button
+                    class="action-btn"
+                    title="Call"
+                    onclick="callCustomer('${item.id}')">
+
+                    📞
+
+                </button>
+
+
+                <button
+                    class="action-btn"
+                    title="WhatsApp"
+                    onclick="whatsappCustomer('${item.id}')">
+
+                    💬
+
+                </button>
+
+
+                ${completedAction}
+
+
+            </div>
+
+        </td>
+
+    `;
+
+
+    return row;
+
+}
+
+
+/* =====================================================
+   FILTER
+===================================================== */
+
+function filterFollowups() {
+
+    const search =
+        document
+            .getElementById(
+                "searchInput"
+            )
+            .value
+            .toLowerCase()
+            .trim();
+
+
+    const status =
+        document
+            .getElementById(
+                "statusFilter"
+            )
+            .value;
+
+
+    const priority =
+        document
+            .getElementById(
+                "priorityFilter"
+            )
+            .value;
+
+
+    const date =
+        document
+            .getElementById(
+                "dateFilter"
+            )
+            .value;
+
+
+    const rows =
+        document.querySelectorAll(
+            "#followupTableBody tr"
+        );
+
+
+    let visibleCount = 0;
+
+
+    rows.forEach(
+        function(row) {
+
+
+            const rowText =
+                row.textContent
+                    .toLowerCase();
+
+
+            const rowStatus =
+                row.dataset.status;
+
+
+            const rowPriority =
+                row.dataset.priority;
+
+
+            const rowDate =
+                row.dataset.date;
+
+
+            const matchesSearch =
+                rowText.includes(
+                    search
+                );
+
+
+            const matchesStatus =
+                status === "all" ||
+                rowStatus === status;
+
+
+            const matchesPriority =
+                priority === "all" ||
+                rowPriority === priority;
+
+
+            const matchesDate =
+                date === "all" ||
+                rowDate === date;
+
+
+            const visible =
+                matchesSearch &&
+                matchesStatus &&
+                matchesPriority &&
+                matchesDate;
+
+
+            row.style.display =
+                visible
+                    ? ""
+                    : "none";
+
+
+            if (visible) {
+
+                visibleCount++;
+
+            }
+
+        }
+    );
+
+
+    document.getElementById(
+        "followupCount"
+    ).textContent =
+
+        visibleCount +
+
+        (
+            visibleCount === 1
+                ? " follow-up"
+                : " follow-ups"
+        );
+
+
+    if (
+        followups.length === 0
+    ) {
+
+        showEmptyState(
+            true,
+            "No follow-ups yet",
+            'Click "Add Follow-up" to create your first follow-up.'
+        );
+
+        return;
+
+    }
+
+
+    if (
+        visibleCount === 0
+    ) {
+
+        showEmptyState(
+            true,
+            "No follow-ups found",
+            "Try changing your search or filters."
+        );
+
+    } else {
+
+        showEmptyState(
+            false
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   UPDATE STATISTICS
+===================================================== */
+
+function updateStatistics() {
+
+    updateFollowupStatuses();
+
+
+    const today =
+        getTodayString();
+
+
+    let todayCount = 0;
+
+    let todayHigh = 0;
+
+    let upcomingCount = 0;
+
+    let overdueCount = 0;
+
+    let completedCount = 0;
+
+
+    followups.forEach(
+        function(item) {
+
+
+            /*
+             * Completed
+             */
+
+            if (
+                item.status ===
+                "completed"
+            ) {
+
+                completedCount++;
+
+                return;
+
+            }
+
+
+            /*
+             * Overdue
+             */
+
+            if (
+                item.status ===
+                "overdue"
+            ) {
+
+                overdueCount++;
+
+                return;
+
+            }
+
+
+            /*
+             * Today's follow-ups
+             */
+
+            if (
+                item.date ===
+                today
+            ) {
+
+                todayCount++;
+
+
+                if (
+                    item.priority ===
+                    "high"
+                ) {
+
+                    todayHigh++;
+
+                }
+
+            }
+
+
+            /*
+             * Upcoming = next 7 days
+             */
+
+            if (
+                isUpcoming(
+                    item.date
+                )
+            ) {
+
+                upcomingCount++;
+
+            }
+
+        }
+    );
+
+
+    document.getElementById(
+        "todayFollowupCount"
+    ).textContent =
+        todayCount;
+
+
+    document.getElementById(
+        "todayHighPriority"
+    ).textContent =
+        todayHigh +
+        " high priority";
+
+
+    document.getElementById(
+        "upcomingFollowupCount"
+    ).textContent =
+        upcomingCount;
+
+
+    document.getElementById(
+        "overdueFollowupCount"
+    ).textContent =
+        overdueCount;
+
+
+    document.getElementById(
+        "completedFollowupCount"
+    ).textContent =
+        completedCount;
+
+
+    updateSmartBanner();
+
+    updateNotificationBadge();
+
+}
+
+
+/* =====================================================
+   SMART BANNER
+===================================================== */
+
+function updateSmartBanner() {
+
+    const today =
+        getTodayString();
+
+
+    const todayItems =
+        followups.filter(
+            function(item) {
+
+                return (
+                    item.date === today &&
+                    item.status !== "completed"
+                );
+
+            }
+        );
+
+
+    const highPriority =
+        todayItems.filter(
+            function(item) {
+
+                return (
+                    item.priority ===
+                    "high"
+                );
+
+            }
+        ).length;
+
+
+    const pending =
+        followups.filter(
+            function(item) {
+
+                return (
+                    item.status ===
+                    "pending"
+                );
+
+            }
+        ).length;
+
+
+    const completed =
+        followups.filter(
+            function(item) {
+
+                return (
+                    item.status ===
+                    "completed"
+                );
+
+            }
+        ).length;
+
+
+    const total =
+        followups.length;
+
+
+    let efficiency = 0;
+
+
+    if (total > 0) {
+
+        efficiency =
+            Math.round(
+                (
+                    completed /
+                    total
+                ) * 100
+            );
+
+    }
+
+
+    document.getElementById(
+        "efficiencyScore"
+    ).textContent =
+        efficiency + "%";
+
+
+    const message =
+        document.getElementById(
+            "smartMessage"
+        );
+
+
+    if (total === 0) {
+
+        message.innerHTML =
+            "No follow-ups are scheduled yet. Add a follow-up to start managing customer interactions.";
+
+        return;
+
+    }
+
+
+    if (
+        todayItems.length > 0
+    ) {
+
+        message.innerHTML =
+            "You have <strong>" +
+            todayItems.length +
+            "</strong> follow-up(s) scheduled today. " +
+            (
+                highPriority > 0
+                    ? "<strong>" +
+                      highPriority +
+                      "</strong> high-priority follow-up(s) should be contacted first."
+                    : "Complete today's follow-ups to keep your customer relationships on track."
+            );
+
+        return;
+
+    }
+
+
+    if (
+        pending > 0
+    ) {
+
+        message.innerHTML =
+            "You currently have <strong>" +
+            pending +
+            "</strong> pending follow-up(s). Check the upcoming schedule and contact customers on time.";
+
+        return;
+
+    }
+
+
+    message.innerHTML =
+        "All current follow-ups have been completed. Add new follow-ups when customers need another interaction.";
+
+}
+
+
+/* =====================================================
+   NOTIFICATION BADGE
+===================================================== */
+
+function updateNotificationBadge() {
+
+    const count =
+        followups.filter(
+            function(item) {
+
+                return (
+                    item.status !==
+                    "completed"
+                );
+
+            }
+        ).length;
+
+
+    document.getElementById(
+        "notificationBadge"
+    ).textContent =
+        count;
+
+}
+
+
+/* =====================================================
+   COMPLETE FOLLOW-UP
+===================================================== */
+
+function completeFollowup(id) {
+
+    const item =
+        followups.find(
+            function(followup) {
+
+                return (
+                    String(
+                        followup.id
+                    ) === String(id)
+                );
+
+            }
+        );
+
+
+    if (!item) {
+
+        return;
+
+    }
+
+
+    const confirmation =
+        confirm(
+            "Mark follow-up for " +
+            item.customerName +
+            " as completed?"
+        );
+
+
+    if (!confirmation) {
+
+        return;
+
+    }
+
+
+    item.status =
+        "completed";
+
+
+    item.completedAt =
+        new Date().toISOString();
+
+
+    saveFollowupsToStorage();
+
+
+    renderFollowups();
+
+    updateStatistics();
+
+
+    alert(
+        "Follow-up marked as completed."
+    );
+
+}
+
+
+/* =====================================================
+   CALL CUSTOMER
+===================================================== */
+
+function callCustomer(id) {
+
+    const item =
+        followups.find(
+            function(followup) {
+
+                return (
+                    String(
+                        followup.id
+                    ) === String(id)
+                );
+
+            }
+        );
+
+
+    if (!item) {
+
+        return;
+
+    }
+
+
+    if (!item.phone) {
+
+        alert(
+            "Phone number is not available for " +
+            item.customerName
+        );
+
+        return;
+
+    }
+
+
+    const phone =
+        item.phone
+            .replace(
+                /[^0-9+]/g,
+                ""
+            );
+
+
+    window.location.href =
+        "tel:" + phone;
+
+}
+
+
+/* =====================================================
+   WHATSAPP
+===================================================== */
+
+function whatsappCustomer(id) {
+
+    const item =
+        followups.find(
+            function(followup) {
+
+                return (
+                    String(
+                        followup.id
+                    ) === String(id)
+                );
+
+            }
+        );
+
+
+    if (!item) {
+
+        return;
+
+    }
+
+
+    const message =
+        "Hello " +
+        item.customerName +
+        ", this is your insurance agent from TrustNest. " +
+        "I would like to follow up regarding your insurance policy.";
+
+
+    let whatsappUrl;
+
+
+    if (item.phone) {
+
+        const phone =
+            item.phone
+                .replace(
+                    /[^0-9]/g,
+                    ""
+                );
+
+
+        whatsappUrl =
+            "https://wa.me/" +
+            phone +
+            "?text=" +
+            encodeURIComponent(
+                message
+            );
+
+    } else {
+
+        whatsappUrl =
+            "https://wa.me/?text=" +
+            encodeURIComponent(
+                message
+            );
+
+    }
+
+
+    window.open(
+        whatsappUrl,
+        "_blank"
+    );
+
+}
+
+
+/* =====================================================
+   VIEW FOLLOW-UP
+===================================================== */
+
+function viewFollowup(id) {
+
+    const item =
+        followups.find(
+            function(followup) {
+
+                return (
+                    String(
+                        followup.id
+                    ) === String(id)
+                );
+
+            }
+        );
+
+
+    if (!item) {
+
+        return;
+
+    }
+
+
+    alert(
+        "Customer: " +
+        item.customerName +
+        "\n\n" +
+
+        "Follow-up Type: " +
+        item.type +
+        "\n\n" +
+
+        "Reason: " +
+        item.reason +
+        "\n\n" +
+
+        "Date: " +
+        formatDate(item.date) +
+        "\n\n" +
+
+        "Time: " +
+        formatTime(item.time) +
+        "\n\n" +
+
+        "Status: " +
+        capitalize(item.status) +
+        "\n\n" +
+
+        "Notes: " +
+        (
+            item.notes ||
+            "No notes"
+        )
+    );
+
+}
+
+
+/* =====================================================
+   EMPTY STATE
+===================================================== */
+
+function showEmptyState(
+    show,
+    title,
+    message
+) {
+
+    const noResults =
+        document.getElementById(
+            "noResults"
+        );
+
+
+    noResults.style.display =
+        show
+            ? "block"
+            : "none";
+
+
+    if (title) {
+
+        document.getElementById(
+            "emptyTitle"
+        ).textContent =
+            title;
+
+    }
+
+
+    if (message) {
+
+        document.getElementById(
+            "emptyMessage"
+        ).textContent =
+            message;
+
+    }
+
+}
+
+
+/* =====================================================
+   INITIALS
+===================================================== */
+
+function getInitials(name) {
+
+    if (!name) {
+
+        return "C";
+
+    }
+
+
+    const words =
+        name.trim().split(/\s+/);
+
+
+    if (words.length === 1) {
+
+        return words[0]
+            .substring(0, 2)
+            .toUpperCase();
+
+    }
+
+
+    return (
+        words[0][0] +
+        words[words.length - 1][0]
+    ).toUpperCase();
+
+}
+
+
+/* =====================================================
+   CAPITALIZE
+===================================================== */
+
+function capitalize(value) {
+
+    if (!value) {
+
+        return "";
+
+    }
+
+
+    return (
+        value.charAt(0).toUpperCase() +
+        value.slice(1)
+    );
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHtml(value) {
+
+    if (value === null ||
+        value === undefined) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =====================================================
+   AGENT INFORMATION
+===================================================== */
+
+function loadAgentInformation() {
+
+    const storedName =
+        localStorage.getItem(
+            "agentName"
+        );
+
+
+    if (
+        storedName &&
+        storedName.trim()
+    ) {
+
+        const name =
+            storedName.trim();
+
+
+        document.getElementById(
+            "agentName"
+        ).textContent =
+            name;
+
+
+        document.getElementById(
+            "agentAvatar"
+        ).textContent =
+            getInitials(name);
+
+    }
+
+}
+
+
+/* =====================================================
+   SET MINIMUM DATE
+===================================================== */
+
+function setMinimumDate() {
+
+    const dateInput =
+        document.getElementById(
+            "followupDate"
+        );
+
+
+    dateInput.min =
+        getTodayString();
+
+}
+
+
+/* =====================================================
+   CLOSE WITH ESC
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key ===
+            "Escape"
+        ) {
+
+            closeModal();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   PAGE INITIALIZATION
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        loadAgentInformation();
+
+        setMinimumDate();
+
+        loadFollowups();
+
+    }
+);
+
+
+/*
+ * Recalculate overdue follow-ups periodically.
+ * This means if the page remains open and a follow-up
+ * time passes, its status can update automatically.
+ */
+
+setInterval(
+    function() {
+
+        updateFollowupStatuses();
+
+        renderFollowups();
+
+        updateStatistics();
+
+    },
+    60000
+);
+
+
+console.log(
+    "TrustNest Follow-ups loaded successfully."
+);
+
+</script>
+
+
+</body>
+
+</html>

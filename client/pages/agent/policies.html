@@ -1,0 +1,3704 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Policies | TrustNest</title>
+
+    <meta name="description"
+          content="Manage customer insurance policies with TrustNest">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Project CSS -->
+    <link rel="stylesheet"
+          href="../../css/style.css">
+
+    <link rel="stylesheet"
+          href="../../css/dashboard.css">
+
+    <link rel="stylesheet"
+          href="../../css/forms.css">
+
+    <link rel="stylesheet"
+          href="../../css/responsive.css">
+
+
+    <style>
+
+        /* =========================================
+           RESET
+        ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+
+        /* =========================================
+           LAYOUT
+        ========================================= */
+
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+        }
+
+
+        /* =========================================
+           SIDEBAR
+        ========================================= */
+
+        .sidebar {
+            width: 250px;
+            background:
+                linear-gradient(
+                    180deg,
+                    #061f42,
+                    #092b5c
+                );
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            transition: 0.3s;
+        }
+
+        .sidebar-logo {
+            height: 85px;
+            display: flex;
+            align-items: center;
+            padding: 0 25px;
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.08);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            color: #092b5c;
+            border: 3px solid #c9a227;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            margin-right: 10px;
+        }
+
+        .logo-name {
+            font-family:
+                "Playfair Display",
+                serif;
+            font-size: 23px;
+            font-weight: 700;
+        }
+
+        .logo-subtitle {
+            display: block;
+            font-size: 7px;
+            letter-spacing: 1.5px;
+            color: #d6b23c;
+            margin-top: -2px;
+        }
+
+        .menu-title {
+            padding:
+                25px 25px 10px;
+            color: #7f94ad;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0 12px;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 4px;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 11px 13px;
+            border-radius: 7px;
+            color: #b8c6d8;
+            font-size: 12px;
+            transition: 0.25s;
+        }
+
+        .sidebar-menu a:hover {
+            background:
+                rgba(255,255,255,0.07);
+            color: white;
+        }
+
+        .sidebar-menu a.active {
+            background:
+                rgba(255,255,255,0.12);
+            color: white;
+            border-left:
+                3px solid #c9a227;
+        }
+
+        .menu-icon {
+            width: 22px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .sidebar-bottom {
+            margin-top: auto;
+            padding: 15px;
+            border-top:
+                1px solid
+                rgba(255,255,255,0.08);
+        }
+
+        .sidebar-bottom a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #aebed0;
+            font-size: 11px;
+            padding: 10px;
+        }
+
+        .sidebar-bottom a:hover {
+            color: white;
+        }
+
+
+        /* =========================================
+           MAIN
+        ========================================= */
+
+        .main {
+            margin-left: 250px;
+            width: calc(100% - 250px);
+            min-height: 100vh;
+        }
+
+
+        /* =========================================
+           TOPBAR
+        ========================================= */
+
+        .topbar {
+            height: 75px;
+            background: white;
+            border-bottom:
+                1px solid #e8edf3;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .mobile-menu {
+            display: none;
+            border: none;
+            background: none;
+            font-size: 22px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .page-title h1 {
+            font-family:
+                "Playfair Display",
+                serif;
+            color: #092b5c;
+            font-size: 24px;
+            margin-bottom: 2px;
+        }
+
+        .page-title p {
+            color: #8995a5;
+            font-size: 10px;
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .notification {
+            position: relative;
+            font-size: 18px;
+            color: #526071;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -6px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #c9a227;
+            color: white;
+            font-size: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .agent-profile-mini {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .agent-avatar-small {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background:
+                linear-gradient(
+                    135deg,
+                    #092b5c,
+                    #1c518e
+                );
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 13px;
+            border:
+                2px solid #d6b23c;
+        }
+
+        .agent-mini-info strong {
+            display: block;
+            font-size: 11px;
+            color: #172033;
+        }
+
+        .agent-mini-info span {
+            font-size: 9px;
+            color: #8995a5;
+        }
+
+
+        /* =========================================
+           CONTENT
+        ========================================= */
+
+        .content {
+            padding: 28px 30px;
+            max-width: 1400px;
+            margin: auto;
+        }
+
+
+        /* =========================================
+           PAGE HEADER
+        ========================================= */
+
+        .page-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 22px;
+        }
+
+        .page-heading h2 {
+            color: #092b5c;
+            font-family:
+                "Playfair Display",
+                serif;
+            font-size: 23px;
+            margin-bottom: 5px;
+        }
+
+        .page-heading p {
+            color: #8995a5;
+            font-size: 9px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 7px;
+            padding: 10px 15px;
+            font-size: 9px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .btn-primary {
+            background: #092b5c;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #061f42;
+            transform: translateY(-1px);
+        }
+
+        .btn-gold {
+            background: #c9a227;
+            color: white;
+        }
+
+        .btn-gold:hover {
+            background: #b08d18;
+        }
+
+        .btn-secondary {
+            background: #edf1f5;
+            color: #526071;
+        }
+
+        .btn-secondary:hover {
+            background: #e2e6eb;
+        }
+
+
+        /* =========================================
+           SUMMARY CARDS
+        ========================================= */
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .summary-card {
+            background: white;
+            border:
+                1px solid #e5eaf0;
+            border-radius: 10px;
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .summary-label {
+            color: #8995a5;
+            font-size: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            margin-bottom: 7px;
+        }
+
+        .summary-number {
+            color: #092b5c;
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .summary-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            background: #eef3f9;
+        }
+
+        .summary-card:nth-child(2)
+        .summary-icon {
+            background: #eaf7f0;
+        }
+
+        .summary-card:nth-child(3)
+        .summary-icon {
+            background: #fff6df;
+        }
+
+        .summary-card:nth-child(4)
+        .summary-icon {
+            background: #f2edf9;
+        }
+
+
+        /* =========================================
+           SEARCH + FILTER
+        ========================================= */
+
+        .filter-card {
+            background: white;
+            border:
+                1px solid #e5eaf0;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 18px;
+        }
+
+        .filter-row {
+            display: grid;
+            grid-template-columns:
+                2fr 1fr 1fr 1fr auto;
+            gap: 9px;
+            align-items: center;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box span {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform:
+                translateY(-50%);
+            color: #9aa4b1;
+            font-size: 13px;
+        }
+
+        .search-box input,
+        .filter-select {
+            width: 100%;
+            height: 39px;
+            border:
+                1px solid #dce3eb;
+            border-radius: 7px;
+            outline: none;
+            background: #fff;
+            color: #344054;
+            font-size: 9px;
+            padding: 0 12px;
+        }
+
+        .search-box input {
+            padding-left: 34px;
+        }
+
+        .search-box input:focus,
+        .filter-select:focus {
+            border-color: #092b5c;
+            box-shadow:
+                0 0 0 2px
+                rgba(9,43,92,0.06);
+        }
+
+
+        /* =========================================
+           TABLE CARD
+        ========================================= */
+
+        .table-card {
+            background: white;
+            border:
+                1px solid #e5eaf0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .table-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 17px 20px;
+            border-bottom:
+                1px solid #edf0f4;
+        }
+
+        .table-title {
+            color: #172033;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .table-count {
+            color: #8995a5;
+            font-size: 8px;
+            margin-top: 3px;
+        }
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 850px;
+        }
+
+        thead {
+            background: #f8fafc;
+        }
+
+        th {
+            text-align: left;
+            padding: 12px 15px;
+            color: #8995a5;
+            font-size: 7px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+            white-space: nowrap;
+            border-bottom:
+                1px solid #edf0f4;
+        }
+
+        td {
+            padding: 14px 15px;
+            border-bottom:
+                1px solid #f0f2f5;
+            font-size: 9px;
+            color: #526071;
+            vertical-align: middle;
+        }
+
+        tbody tr {
+            transition: 0.2s;
+        }
+
+        tbody tr:hover {
+            background: #fafbfd;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+
+        /* =========================================
+           CUSTOMER CELL
+        ========================================= */
+
+        .customer-cell {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .customer-avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background:
+                linear-gradient(
+                    135deg,
+                    #092b5c,
+                    #1c518e
+                );
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .customer-info strong {
+            display: block;
+            color: #344054;
+            font-size: 9px;
+            margin-bottom: 3px;
+        }
+
+        .customer-info span {
+            color: #9aa4b1;
+            font-size: 7px;
+        }
+
+
+        /* =========================================
+           POLICY
+        ========================================= */
+
+        .policy-number {
+            color: #092b5c;
+            font-weight: 700;
+            font-size: 9px;
+            margin-bottom: 3px;
+        }
+
+        .policy-name {
+            color: #8995a5;
+            font-size: 7px;
+        }
+
+        .amount {
+            color: #344054;
+            font-weight: 700;
+        }
+
+
+        /* =========================================
+           STATUS
+        ========================================= */
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 8px;
+            border-radius: 20px;
+            font-size: 7px;
+            font-weight: 700;
+        }
+
+        .status-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+        }
+
+        .status-active {
+            background: #eaf7f0;
+            color: #258351;
+        }
+
+        .status-active .status-dot {
+            background: #258351;
+        }
+
+        .status-due {
+            background: #fff6df;
+            color: #a47600;
+        }
+
+        .status-due .status-dot {
+            background: #c9a227;
+        }
+
+        .status-lapsed {
+            background: #fdeeee;
+            color: #b84747;
+        }
+
+        .status-lapsed .status-dot {
+            background: #b84747;
+        }
+
+
+        /* =========================================
+           ACTION BUTTONS
+        ========================================= */
+
+        .action-buttons {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .action-btn {
+            width: 29px;
+            height: 29px;
+            border:
+                1px solid #e1e6ec;
+            border-radius: 6px;
+            background: white;
+            color: #526071;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            transition: 0.2s;
+        }
+
+        .action-btn:hover {
+            background: #f1f4f8;
+            border-color: #cbd5e0;
+            color: #092b5c;
+        }
+
+
+        /* =========================================
+           DUE DATE
+        ========================================= */
+
+        .due-date {
+            font-size: 8px;
+            font-weight: 600;
+            color: #526071;
+        }
+
+        .due-date.warning {
+            color: #a47600;
+        }
+
+        .due-date.danger {
+            color: #b84747;
+        }
+
+
+        /* =========================================
+           TABLE FOOTER
+        ========================================= */
+
+        .table-footer {
+            padding: 14px 18px;
+            border-top:
+                1px solid #edf0f4;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #8995a5;
+            font-size: 8px;
+        }
+
+        .pagination {
+            display: flex;
+            gap: 5px;
+        }
+
+        .page-btn {
+            width: 28px;
+            height: 28px;
+            border:
+                1px solid #dce3eb;
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 8px;
+            color: #526071;
+        }
+
+        .page-btn.active {
+            background: #092b5c;
+            color: white;
+            border-color: #092b5c;
+        }
+
+        .page-btn:hover:not(.active) {
+            background: #f3f5f8;
+        }
+
+
+        /* =========================================
+           EMPTY STATE
+        ========================================= */
+
+        .empty-state {
+            display: none;
+            text-align: center;
+            padding: 55px 20px;
+            color: #8995a5;
+        }
+
+        .empty-icon {
+            font-size: 35px;
+            margin-bottom: 12px;
+        }
+
+        .empty-state h3 {
+            color: #526071;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .empty-state p {
+            font-size: 8px;
+        }
+
+
+        /* =========================================
+           LOADING
+        ========================================= */
+
+        .loading-state {
+            text-align: center;
+            padding: 45px 20px;
+            color: #8995a5;
+            font-size: 9px;
+        }
+
+
+        /* =========================================
+           ERROR
+        ========================================= */
+
+        .error-message {
+            display: none;
+            background: #fdeeee;
+            color: #b84747;
+            border:
+                1px solid #f2cccc;
+            padding: 12px 15px;
+            border-radius: 7px;
+            margin-bottom: 18px;
+            font-size: 9px;
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 1100px) {
+
+            .summary-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .filter-row {
+                grid-template-columns:
+                    2fr 1fr 1fr;
+            }
+
+            .filter-row .btn {
+                width: 100%;
+            }
+
+        }
+
+
+        @media (max-width: 950px) {
+
+            .sidebar {
+                transform:
+                    translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform:
+                    translateX(0);
+            }
+
+            .main {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .content {
+                padding: 20px 15px;
+            }
+
+            .topbar {
+                padding: 0 15px;
+            }
+
+            .page-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .header-actions {
+                width: 100%;
+            }
+
+            .header-actions .btn {
+                flex: 1;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-row {
+                grid-template-columns: 1fr;
+            }
+
+            .agent-mini-info {
+                display: none;
+            }
+
+            .table-footer {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="dashboard">
+
+
+    <!-- =================================================
+         SIDEBAR
+    ================================================== -->
+
+    <aside class="sidebar"
+           id="sidebar">
+
+
+        <!-- LOGO -->
+
+        <a href="dashboard.html"
+           class="sidebar-logo">
+
+            <div class="logo-icon">
+                T
+            </div>
+
+            <div>
+
+                <div class="logo-name">
+                    TrustNest
+                </div>
+
+                <span class="logo-subtitle">
+                    Insurance Intelligence
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <!-- MAIN MENU -->
+
+        <div class="menu-title">
+            Main Menu
+        </div>
+
+
+        <ul class="sidebar-menu">
+
+
+            <li>
+
+                <a href="dashboard.html">
+
+                    <span class="menu-icon">
+                        ▦
+                    </span>
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="customers.html">
+
+                    <span class="menu-icon">
+                        👥
+                    </span>
+
+                    Customers
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="policies.html"
+                   class="active">
+
+                    <span class="menu-icon">
+                        📋
+                    </span>
+
+                    Policies
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="followups.html">
+
+                    <span class="menu-icon">
+                        🔔
+                    </span>
+
+                    Follow-ups
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="interactions.html">
+
+                    <span class="menu-icon">
+                        💬
+                    </span>
+
+                    Interactions
+
+                </a>
+
+            </li>
+
+        </ul>
+
+
+        <!-- SMART FEATURES -->
+
+        <div class="menu-title">
+            Smart Features
+        </div>
+
+
+        <ul class="sidebar-menu">
+
+
+            <li>
+
+                <a href="recommendations.html">
+
+                    <span class="menu-icon">
+                        ✨
+                    </span>
+
+                    Recommendations
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="leads.html">
+
+                    <span class="menu-icon">
+                        🎯
+                    </span>
+
+                    Smart Leads
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="sales-insights.html">
+
+                    <span class="menu-icon">
+                        📊
+                    </span>
+
+                    Sales Insights
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="notifications.html">
+
+                    <span class="menu-icon">
+                        🔔
+                    </span>
+
+                    Notifications
+
+                </a>
+
+            </li>
+
+        </ul>
+
+
+        <!-- ACCOUNT -->
+
+        <div class="menu-title">
+            Account
+        </div>
+
+
+        <ul class="sidebar-menu">
+
+            <li>
+
+                <a href="profile.html">
+
+                    <span class="menu-icon">
+                        👤
+                    </span>
+
+                    My Profile
+
+                </a>
+
+            </li>
+
+        </ul>
+
+
+        <!-- LOGOUT -->
+
+        <div class="sidebar-bottom">
+
+            <a href="../login.html">
+
+                <span>
+                    ⇥
+                </span>
+
+                Logout
+
+            </a>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =================================================
+         MAIN
+    ================================================== -->
+
+    <main class="main">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+
+            <div style="display:flex;align-items:center;">
+
+
+                <button
+                    class="mobile-menu"
+                    id="mobileMenu">
+
+                    ☰
+
+                </button>
+
+
+                <div class="page-title">
+
+                    <h1>
+                        Policies
+                    </h1>
+
+                    <p>
+                        Manage and monitor customer insurance policies
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="topbar-right">
+
+
+                <a href="notifications.html"
+                   class="notification">
+
+                    🔔
+
+                    <span class="notification-badge">
+                        4
+                    </span>
+
+                </a>
+
+
+                <div class="agent-profile-mini">
+
+                    <div class="agent-avatar-small"
+                         id="agentAvatar">
+
+                        A
+
+                    </div>
+
+
+                    <div class="agent-mini-info">
+
+                        <strong id="agentName">
+                            Agent
+                        </strong>
+
+                        <span>
+                            Insurance Agent
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =================================================
+             CONTENT
+        ================================================== -->
+
+        <div class="content">
+
+
+            <!-- PAGE HEADER -->
+
+            <div class="page-header">
+
+
+                <div class="page-heading">
+
+                    <h2>
+                        Policy Management
+                    </h2>
+
+                    <p>
+                        Track customer policies, premium payments,
+                        renewals and policy status.
+                    </p>
+
+                </div>
+
+
+                <div class="header-actions">
+
+
+                    <button
+                        class="btn btn-secondary"
+                        onclick="exportPolicies()">
+
+                        📥 Export
+
+                    </button>
+
+
+                    <button
+                        class="btn btn-gold"
+                        onclick="sendBulkReminder()">
+
+                        🔔 Send Reminders
+
+                    </button>
+
+
+                    <button
+                        class="btn btn-primary"
+                        onclick="addPolicy()">
+
+                        + Add Policy
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- ERROR MESSAGE -->
+
+            <div class="error-message"
+                 id="errorMessage">
+
+            </div>
+
+
+
+            <!-- =================================================
+                 SUMMARY CARDS
+            ================================================== -->
+
+            <div class="summary-grid">
+
+
+                <!-- TOTAL -->
+
+                <div class="summary-card">
+
+                    <div>
+
+                        <div class="summary-label">
+                            Total Policies
+                        </div>
+
+                        <div class="summary-number"
+                             id="totalPolicies">
+
+                            0
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="summary-icon">
+                        📋
+                    </div>
+
+                </div>
+
+
+                <!-- ACTIVE -->
+
+                <div class="summary-card">
+
+                    <div>
+
+                        <div class="summary-label">
+                            Active Policies
+                        </div>
+
+                        <div class="summary-number"
+                             id="activePolicies">
+
+                            0
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="summary-icon">
+                        ✓
+                    </div>
+
+                </div>
+
+
+                <!-- DUE -->
+
+                <div class="summary-card">
+
+                    <div>
+
+                        <div class="summary-label">
+                            Due This Month
+                        </div>
+
+                        <div class="summary-number"
+                             id="duePolicies">
+
+                            0
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="summary-icon">
+                        ⏰
+                    </div>
+
+                </div>
+
+
+                <!-- LAPSED -->
+
+                <div class="summary-card">
+
+                    <div>
+
+                        <div class="summary-label">
+                            Lapsed
+                        </div>
+
+                        <div class="summary-number"
+                             id="lapsedPolicies">
+
+                            0
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="summary-icon">
+                        ⚠️
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 FILTERS
+            ================================================== -->
+
+            <div class="filter-card">
+
+
+                <div class="filter-row">
+
+
+                    <!-- SEARCH -->
+
+                    <div class="search-box">
+
+                        <span>
+                            🔍
+                        </span>
+
+                        <input
+                            type="text"
+                            id="searchInput"
+                            placeholder="Search policy number, customer name...">
+
+                    </div>
+
+
+                    <!-- STATUS -->
+
+                    <select
+                        class="filter-select"
+                        id="statusFilter">
+
+                        <option value="all">
+                            All Status
+                        </option>
+
+                        <option value="active">
+                            Active
+                        </option>
+
+                        <option value="due">
+                            Due Soon
+                        </option>
+
+                        <option value="lapsed">
+                            Lapsed
+                        </option>
+
+                    </select>
+
+
+                    <!-- POLICY TYPE -->
+
+                    <select
+                        class="filter-select"
+                        id="policyFilter">
+
+                        <option value="all">
+                            All Plans
+                        </option>
+
+                    </select>
+
+
+                    <!-- SORT -->
+
+                    <select
+                        class="filter-select"
+                        id="sortFilter">
+
+                        <option value="latest">
+                            Latest
+                        </option>
+
+                        <option value="due">
+                            Due Date
+                        </option>
+
+                        <option value="premium">
+                            Premium
+                        </option>
+
+                        <option value="name">
+                            Customer Name
+                        </option>
+
+                    </select>
+
+
+                    <button
+                        class="btn btn-primary"
+                        onclick="applyFilters()">
+
+                        Filter
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 POLICY TABLE
+            ================================================== -->
+
+            <section class="table-card">
+
+
+                <div class="table-header">
+
+
+                    <div>
+
+                        <div class="table-title">
+                            Customer Policies
+                        </div>
+
+                        <div class="table-count"
+                             id="tableCount">
+
+                            Loading policies...
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="btn btn-secondary"
+                        onclick="resetFilters()">
+
+                        Reset
+
+                    </button>
+
+
+                </div>
+
+
+
+                <div class="table-wrapper">
+
+
+                    <table>
+
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Customer
+                                </th>
+
+                                <th>
+                                    Policy
+                                </th>
+
+                                <th>
+                                    Premium
+                                </th>
+
+                                <th>
+                                    Sum Assured
+                                </th>
+
+                                <th>
+                                    Next Due
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    Actions
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="policyTableBody">
+
+                        </tbody>
+
+                    </table>
+
+
+                    <!-- LOADING -->
+
+                    <div class="loading-state"
+                         id="loadingState">
+
+                        Loading policies...
+
+                    </div>
+
+
+                    <!-- EMPTY -->
+
+                    <div class="empty-state"
+                         id="emptyState">
+
+                        <div class="empty-icon">
+                            📋
+                        </div>
+
+                        <h3>
+                            No Policies Found
+                        </h3>
+
+                        <p>
+                            No policies have been added for this agent yet.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- TABLE FOOTER -->
+
+                <div class="table-footer">
+
+
+                    <span id="footerCount">
+                        Showing 0 policies
+                    </span>
+
+
+                    <div class="pagination">
+
+                        <button
+                            class="page-btn"
+                            id="previousPageBtn"
+                            onclick="previousPage()">
+
+                            ‹
+
+                        </button>
+
+                        <button
+                            class="page-btn active"
+                            id="currentPageBtn">
+
+                            1
+
+                        </button>
+
+                        <button
+                            class="page-btn"
+                            id="nextPageBtn"
+                            onclick="nextPage()">
+
+                            ›
+
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+
+<script>
+
+    /* =========================================
+       API
+    ========================================= */
+
+    const API_BASE =
+        window.TRUSTNEST_API_URL ||
+        "http://localhost:5000";
+
+
+    /* =========================================
+       GLOBAL DATA
+    ========================================= */
+
+    let allPolicies = [];
+
+    let filteredPolicies = [];
+
+    let currentPage = 1;
+
+    const policiesPerPage = 8;
+
+
+    /* =========================================
+       DOM ELEMENTS
+    ========================================= */
+
+    const policyTableBody =
+        document.getElementById(
+            "policyTableBody"
+        );
+
+    const loadingState =
+        document.getElementById(
+            "loadingState"
+        );
+
+    const emptyState =
+        document.getElementById(
+            "emptyState"
+        );
+
+    const errorMessage =
+        document.getElementById(
+            "errorMessage"
+        );
+
+
+    /* =========================================
+       MOBILE SIDEBAR
+    ========================================= */
+
+    const mobileMenu =
+        document.getElementById(
+            "mobileMenu"
+        );
+
+    const sidebar =
+        document.getElementById(
+            "sidebar"
+        );
+
+
+    mobileMenu.addEventListener(
+        "click",
+        function () {
+
+            sidebar.classList.toggle(
+                "open"
+            );
+
+        }
+    );
+
+
+    /* =========================================
+       LOAD AGENT INFORMATION
+    ========================================= */
+
+    function loadAgentInfo() {
+
+        const agentName =
+            localStorage.getItem(
+                "agentName"
+            );
+
+
+        if (!agentName) {
+            return;
+        }
+
+
+        document.getElementById(
+            "agentName"
+        ).textContent = agentName;
+
+
+        const initials =
+            getInitials(agentName);
+
+
+        document.getElementById(
+            "agentAvatar"
+        ).textContent = initials;
+
+    }
+
+
+    /* =========================================
+       GET INITIALS
+    ========================================= */
+
+    function getInitials(name) {
+
+        if (!name) {
+            return "A";
+        }
+
+
+        const parts =
+            name.trim().split(/\s+/);
+
+
+        if (parts.length === 1) {
+
+            return parts[0]
+                .substring(0, 2)
+                .toUpperCase();
+
+        }
+
+
+        return (
+            parts[0][0] +
+            parts[parts.length - 1][0]
+        ).toUpperCase();
+
+    }
+
+
+    /* =========================================
+       LOAD POLICIES
+    ========================================= */
+
+    async function loadPolicies() {
+
+        const agentId =
+            localStorage.getItem(
+                "agentId"
+            );
+
+
+        if (!agentId) {
+
+            showError(
+                "Agent login information was not found. Please login again."
+            );
+
+            finishLoading();
+
+            return;
+
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    API_BASE +
+                    "/api/policies?agentId=" +
+                    encodeURIComponent(
+                        agentId
+                    )
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.message ||
+                    "Unable to load policies."
+                );
+
+            }
+
+
+            if (
+                data.success &&
+                Array.isArray(
+                    data.policies
+                )
+            ) {
+
+                allPolicies =
+                    data.policies;
+
+            }
+            else {
+
+                allPolicies = [];
+
+            }
+
+
+            populatePolicyFilter();
+
+            updateSummary();
+
+            applyFilters();
+
+            finishLoading();
+
+        }
+        catch (error) {
+
+            console.error(
+                "Policy loading error:",
+                error
+            );
+
+
+            allPolicies = [];
+
+            filteredPolicies = [];
+
+
+            updateSummary();
+
+            renderPolicies();
+
+
+            showError(
+                "Unable to load policies from the server. Please make sure the TrustNest backend and Policy API are running."
+            );
+
+
+            finishLoading();
+
+        }
+
+    }
+
+
+    /* =========================================
+       FINISH LOADING
+    ========================================= */
+
+    function finishLoading() {
+
+        loadingState.style.display =
+            "none";
+
+    }
+
+
+    /* =========================================
+       SHOW ERROR
+    ========================================= */
+
+    function showError(message) {
+
+        errorMessage.textContent =
+            message;
+
+        errorMessage.style.display =
+            "block";
+
+    }
+
+
+    /* =========================================
+       HIDE ERROR
+    ========================================= */
+
+    function hideError() {
+
+        errorMessage.style.display =
+            "none";
+
+    }
+
+
+    /* =========================================
+       UPDATE SUMMARY
+    ========================================= */
+
+    function updateSummary() {
+
+        const total =
+            allPolicies.length;
+
+
+        const active =
+            allPolicies.filter(
+                function(policy) {
+
+                    return normalizeStatus(
+                        policy.status
+                    ) === "active";
+
+                }
+            ).length;
+
+
+        const due =
+            allPolicies.filter(
+                function(policy) {
+
+                    return normalizeStatus(
+                        policy.status
+                    ) === "due";
+
+                }
+            ).length;
+
+
+        const lapsed =
+            allPolicies.filter(
+                function(policy) {
+
+                    return normalizeStatus(
+                        policy.status
+                    ) === "lapsed";
+
+                }
+            ).length;
+
+
+        document.getElementById(
+            "totalPolicies"
+        ).textContent = total;
+
+
+        document.getElementById(
+            "activePolicies"
+        ).textContent = active;
+
+
+        document.getElementById(
+            "duePolicies"
+        ).textContent = due;
+
+
+        document.getElementById(
+            "lapsedPolicies"
+        ).textContent = lapsed;
+
+    }
+
+
+    /* =========================================
+       NORMALIZE STATUS
+    ========================================= */
+
+    function normalizeStatus(status) {
+
+        const value =
+            String(
+                status || ""
+            )
+            .toLowerCase()
+            .trim();
+
+
+        if (
+            value === "active"
+        ) {
+
+            return "active";
+
+        }
+
+
+        if (
+            value === "due" ||
+            value === "due soon" ||
+            value === "duesoon"
+        ) {
+
+            return "due";
+
+        }
+
+
+        if (
+            value === "lapsed"
+        ) {
+
+            return "lapsed";
+
+        }
+
+
+        return value;
+
+    }
+
+
+    /* =========================================
+       POPULATE POLICY FILTER
+    ========================================= */
+
+    function populatePolicyFilter() {
+
+        const select =
+            document.getElementById(
+                "policyFilter"
+            );
+
+
+        const currentValue =
+            select.value;
+
+
+        select.innerHTML =
+            '<option value="all">All Plans</option>';
+
+
+        const plans =
+            [
+                ...new Set(
+                    allPolicies
+                        .map(
+                            function(policy) {
+
+                                return getPolicyType(
+                                    policy
+                                );
+
+                            }
+                        )
+                        .filter(Boolean)
+                )
+            ]
+            .sort();
+
+
+        plans.forEach(
+            function(plan) {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+
+                option.value = plan;
+
+                option.textContent = plan;
+
+
+                select.appendChild(
+                    option
+                );
+
+            }
+        );
+
+
+        if (
+            plans.includes(
+                currentValue
+            )
+        ) {
+
+            select.value =
+                currentValue;
+
+        }
+
+    }
+
+
+    /* =========================================
+       GET POLICY TYPE
+    ========================================= */
+
+    function getPolicyType(policy) {
+
+        return (
+            policy.policyType ||
+            policy.planName ||
+            policy.policyName ||
+            policy.plan ||
+            ""
+        );
+
+    }
+
+
+    /* =========================================
+       GET CUSTOMER
+    ========================================= */
+
+    function getCustomer(policy) {
+
+        if (
+            policy.customerId &&
+            typeof policy.customerId === "object"
+        ) {
+
+            return policy.customerId;
+
+        }
+
+
+        if (
+            policy.customer &&
+            typeof policy.customer === "object"
+        ) {
+
+            return policy.customer;
+
+        }
+
+
+        if (
+            policy.customerDetails &&
+            typeof policy.customerDetails === "object"
+        ) {
+
+            return policy.customerDetails;
+
+        }
+
+
+        return null;
+
+    }
+
+
+    /* =========================================
+       GET CUSTOMER NAME
+    ========================================= */
+
+    function getCustomerName(policy) {
+
+        const customer =
+            getCustomer(policy);
+
+
+        if (customer) {
+
+            return (
+                customer.fullName ||
+                customer.name ||
+                "Unknown Customer"
+            );
+
+        }
+
+
+        return (
+            policy.customerName ||
+            "Unknown Customer"
+        );
+
+    }
+
+
+    /* =========================================
+       GET CUSTOMER ID
+    ========================================= */
+
+    function getCustomerId(policy) {
+
+        const customer =
+            getCustomer(policy);
+
+
+        if (customer) {
+
+            return (
+                customer._id ||
+                customer.id ||
+                ""
+            );
+
+        }
+
+
+        if (
+            typeof policy.customerId ===
+            "string"
+        ) {
+
+            return policy.customerId;
+
+        }
+
+
+        return "";
+
+    }
+
+
+    /* =========================================
+       GET POLICY NUMBER
+    ========================================= */
+
+    function getPolicyNumber(policy) {
+
+        return (
+            policy.policyNumber ||
+            policy.policyNo ||
+            policy.number ||
+            "N/A"
+        );
+
+    }
+
+
+    /* =========================================
+       GET PREMIUM
+    ========================================= */
+
+    function getPremium(policy) {
+
+        return Number(
+            policy.premium ||
+            policy.annualPremium ||
+            policy.premiumAmount ||
+            0
+        );
+
+    }
+
+
+    /* =========================================
+       GET SUM ASSURED
+    ========================================= */
+
+    function getSumAssured(policy) {
+
+        return Number(
+            policy.sumAssured ||
+            policy.coverAmount ||
+            policy.insuredAmount ||
+            0
+        );
+
+    }
+
+
+    /* =========================================
+       GET DUE DATE
+    ========================================= */
+
+    function getDueDate(policy) {
+
+        return (
+            policy.nextDueDate ||
+            policy.dueDate ||
+            policy.premiumDueDate ||
+            ""
+        );
+
+    }
+
+
+    /* =========================================
+       FORMAT CURRENCY
+    ========================================= */
+
+    function formatCurrency(amount) {
+
+        return new Intl.NumberFormat(
+            "en-IN",
+            {
+                style: "currency",
+                currency: "INR",
+                maximumFractionDigits: 0
+            }
+        ).format(
+            Number(amount) || 0
+        );
+
+    }
+
+
+    /* =========================================
+       FORMAT DATE
+    ========================================= */
+
+    function formatDate(dateValue) {
+
+        if (!dateValue) {
+            return "N/A";
+        }
+
+
+        const date =
+            new Date(dateValue);
+
+
+        if (
+            Number.isNaN(
+                date.getTime()
+            )
+        ) {
+
+            return String(
+                dateValue
+            );
+
+        }
+
+
+        return date.toLocaleDateString(
+            "en-IN",
+            {
+                day: "2-digit",
+                month: "short",
+                year: "numeric"
+            }
+        );
+
+    }
+
+
+    /* =========================================
+       GET AVATAR
+    ========================================= */
+
+    function getAvatar(name) {
+
+        return getInitials(name);
+
+    }
+
+
+    /* =========================================
+       DUE DATE CLASS
+    ========================================= */
+
+    function getDueDateClass(policy) {
+
+        const status =
+            normalizeStatus(
+                policy.status
+            );
+
+
+        if (
+            status === "lapsed"
+        ) {
+
+            return "danger";
+
+        }
+
+
+        if (
+            status === "due"
+        ) {
+
+            return "warning";
+
+        }
+
+
+        return "";
+
+    }
+
+
+    /* =========================================
+       STATUS HTML
+    ========================================= */
+
+    function getStatusHTML(status) {
+
+        const normalized =
+            normalizeStatus(status);
+
+
+        let label =
+            "Unknown";
+
+        let cssClass =
+            "status-active";
+
+
+        if (
+            normalized === "active"
+        ) {
+
+            label = "Active";
+
+            cssClass =
+                "status-active";
+
+        }
+        else if (
+            normalized === "due"
+        ) {
+
+            label = "Due Soon";
+
+            cssClass =
+                "status-due";
+
+        }
+        else if (
+            normalized === "lapsed"
+        ) {
+
+            label = "Lapsed";
+
+            cssClass =
+                "status-lapsed";
+
+        }
+        else {
+
+            label =
+                status ||
+                "Unknown";
+
+        }
+
+
+        return `
+            <span class="status ${cssClass}">
+                <span class="status-dot"></span>
+                ${escapeHTML(label)}
+            </span>
+        `;
+
+    }
+
+
+    /* =========================================
+       ESCAPE HTML
+    ========================================= */
+
+    function escapeHTML(value) {
+
+        return String(
+            value ?? ""
+        )
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+    }
+
+
+    /* =========================================
+       APPLY FILTERS
+    ========================================= */
+
+    function applyFilters() {
+
+        hideError();
+
+
+        const search =
+            document.getElementById(
+                "searchInput"
+            ).value
+            .toLowerCase()
+            .trim();
+
+
+        const status =
+            document.getElementById(
+                "statusFilter"
+            ).value;
+
+
+        const policyType =
+            document.getElementById(
+                "policyFilter"
+            ).value;
+
+
+        filteredPolicies =
+            allPolicies.filter(
+                function(policy) {
+
+                    const customerName =
+                        getCustomerName(
+                            policy
+                        );
+
+
+                    const policyNumber =
+                        getPolicyNumber(
+                            policy
+                        );
+
+
+                    const plan =
+                        getPolicyType(
+                            policy
+                        );
+
+
+                    const searchableText =
+                        (
+                            customerName +
+                            " " +
+                            policyNumber +
+                            " " +
+                            plan
+                        )
+                        .toLowerCase();
+
+
+                    const matchesSearch =
+                        search === "" ||
+                        searchableText.includes(
+                            search
+                        );
+
+
+                    const matchesStatus =
+                        status === "all" ||
+                        normalizeStatus(
+                            policy.status
+                        ) === status;
+
+
+                    const matchesPolicy =
+                        policyType === "all" ||
+                        plan === policyType;
+
+
+                    return (
+                        matchesSearch &&
+                        matchesStatus &&
+                        matchesPolicy
+                    );
+
+                }
+            );
+
+
+        applySorting();
+
+
+        currentPage = 1;
+
+
+        renderPolicies();
+
+    }
+
+
+    /* =========================================
+       SORT
+    ========================================= */
+
+    function applySorting() {
+
+        const sort =
+            document.getElementById(
+                "sortFilter"
+            ).value;
+
+
+        if (
+            sort === "name"
+        ) {
+
+            filteredPolicies.sort(
+                function(a, b) {
+
+                    return getCustomerName(a)
+                        .localeCompare(
+                            getCustomerName(b)
+                        );
+
+                }
+            );
+
+        }
+
+
+        else if (
+            sort === "premium"
+        ) {
+
+            filteredPolicies.sort(
+                function(a, b) {
+
+                    return (
+                        getPremium(b) -
+                        getPremium(a)
+                    );
+
+                }
+            );
+
+        }
+
+
+        else if (
+            sort === "due"
+        ) {
+
+            filteredPolicies.sort(
+                function(a, b) {
+
+                    const dateA =
+                        new Date(
+                            getDueDate(a)
+                        ).getTime() || 0;
+
+
+                    const dateB =
+                        new Date(
+                            getDueDate(b)
+                        ).getTime() || 0;
+
+
+                    return dateA - dateB;
+
+                }
+            );
+
+        }
+
+
+        else {
+
+            filteredPolicies.sort(
+                function(a, b) {
+
+                    const dateA =
+                        new Date(
+                            a.createdAt ||
+                            a.updatedAt ||
+                            0
+                        ).getTime();
+
+
+                    const dateB =
+                        new Date(
+                            b.createdAt ||
+                            b.updatedAt ||
+                            0
+                        ).getTime();
+
+
+                    return dateB - dateA;
+
+                }
+            );
+
+        }
+
+    }
+
+
+    /* =========================================
+       RENDER POLICIES
+    ========================================= */
+
+    function renderPolicies() {
+
+        policyTableBody.innerHTML =
+            "";
+
+
+        const total =
+            filteredPolicies.length;
+
+
+        const totalPages =
+            Math.max(
+                1,
+                Math.ceil(
+                    total /
+                    policiesPerPage
+                )
+            );
+
+
+        if (
+            currentPage >
+            totalPages
+        ) {
+
+            currentPage =
+                totalPages;
+
+        }
+
+
+        const startIndex =
+            (
+                currentPage - 1
+            ) *
+            policiesPerPage;
+
+
+        const endIndex =
+            startIndex +
+            policiesPerPage;
+
+
+        const pagePolicies =
+            filteredPolicies.slice(
+                startIndex,
+                endIndex
+            );
+
+
+        if (
+            pagePolicies.length === 0
+        ) {
+
+            emptyState.style.display =
+                "block";
+
+        }
+        else {
+
+            emptyState.style.display =
+                "none";
+
+
+            pagePolicies.forEach(
+                function(policy) {
+
+                    policyTableBody.appendChild(
+                        createPolicyRow(
+                            policy
+                        )
+                    );
+
+                }
+            );
+
+        }
+
+
+        document.getElementById(
+            "tableCount"
+        ).textContent =
+            "Showing " +
+            pagePolicies.length +
+            " of " +
+            total +
+            " matching policies";
+
+
+        if (total === 0) {
+
+            document.getElementById(
+                "footerCount"
+            ).textContent =
+                "Showing 0 policies";
+
+        }
+        else {
+
+            document.getElementById(
+                "footerCount"
+            ).textContent =
+                "Showing " +
+                (
+                    startIndex + 1
+                ) +
+                "–" +
+                Math.min(
+                    endIndex,
+                    total
+                ) +
+                " of " +
+                total +
+                " policies";
+
+        }
+
+
+        updatePagination(
+            totalPages
+        );
+
+    }
+
+
+    /* =========================================
+       CREATE POLICY ROW
+    ========================================= */
+
+    function createPolicyRow(policy) {
+
+        const row =
+            document.createElement(
+                "tr"
+            );
+
+
+        const customerName =
+            getCustomerName(
+                policy
+            );
+
+
+        const customerId =
+            getCustomerId(
+                policy
+            );
+
+
+        const policyNumber =
+            getPolicyNumber(
+                policy
+            );
+
+
+        const policyType =
+            getPolicyType(
+                policy
+            );
+
+
+        const premium =
+            getPremium(
+                policy
+            );
+
+
+        const sumAssured =
+            getSumAssured(
+                policy
+            );
+
+
+        const dueDate =
+            getDueDate(
+                policy
+            );
+
+
+        const status =
+            normalizeStatus(
+                policy.status
+            );
+
+
+        row.dataset.status =
+            status;
+
+
+        row.dataset.policy =
+            policyType;
+
+
+        row.dataset.name =
+            customerName;
+
+
+        row.dataset.premium =
+            premium;
+
+
+        row.dataset.dueDate =
+            dueDate;
+
+
+        row.innerHTML = `
+
+            <td>
+
+                <div class="customer-cell">
+
+                    <div class="customer-avatar">
+
+                        ${escapeHTML(
+                            getAvatar(
+                                customerName
+                            )
+                        )}
+
+                    </div>
+
+                    <div class="customer-info">
+
+                        <strong>
+                            ${escapeHTML(
+                                customerName
+                            )}
+                        </strong>
+
+                        <span>
+                            ${escapeHTML(
+                                customerId ||
+                                "Customer"
+                            )}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </td>
+
+
+            <td>
+
+                <div class="policy-number">
+
+                    ${escapeHTML(
+                        policyNumber
+                    )}
+
+                </div>
+
+                <div class="policy-name">
+
+                    ${escapeHTML(
+                        policyType ||
+                        "Insurance Policy"
+                    )}
+
+                </div>
+
+            </td>
+
+
+            <td>
+
+                <span class="amount">
+
+                    ${formatCurrency(
+                        premium
+                    )}
+                    / Year
+
+                </span>
+
+            </td>
+
+
+            <td>
+
+                ${formatCurrency(
+                    sumAssured
+                )}
+
+            </td>
+
+
+            <td>
+
+                <span class="due-date ${getDueDateClass(policy)}">
+
+                    ${escapeHTML(
+                        formatDate(
+                            dueDate
+                        )
+                    )}
+
+                </span>
+
+            </td>
+
+
+            <td>
+
+                ${getStatusHTML(
+                    policy.status
+                )}
+
+            </td>
+
+
+            <td>
+
+                <div class="action-buttons">
+
+
+                    <button
+                        class="action-btn"
+                        title="View Policy"
+                        onclick="viewPolicy('${escapeHTML(String(policy._id || ""))}')">
+
+                        👁
+
+                    </button>
+
+
+                    <button
+                        class="action-btn"
+                        title="Customer"
+                        onclick="viewCustomer('${escapeHTML(String(customerId || ""))}')">
+
+                        👤
+
+                    </button>
+
+
+                    <button
+                        class="action-btn"
+                        title="Reminder"
+                        onclick="sendReminder('${escapeHTML(customerName)}')">
+
+                        🔔
+
+                    </button>
+
+
+                </div>
+
+            </td>
+
+        `;
+
+
+        return row;
+
+    }
+
+
+    /* =========================================
+       UPDATE PAGINATION
+    ========================================= */
+
+    function updatePagination(
+        totalPages
+    ) {
+
+        const previousButton =
+            document.getElementById(
+                "previousPageBtn"
+            );
+
+
+        const nextButton =
+            document.getElementById(
+                "nextPageBtn"
+            );
+
+
+        const currentPageButton =
+            document.getElementById(
+                "currentPageBtn"
+            );
+
+
+        currentPageButton.textContent =
+            currentPage;
+
+
+        previousButton.disabled =
+            currentPage <= 1;
+
+
+        nextButton.disabled =
+            currentPage >= totalPages;
+
+
+        if (
+            currentPage <= 1
+        ) {
+
+            previousButton.style.opacity =
+                "0.5";
+
+        }
+        else {
+
+            previousButton.style.opacity =
+                "1";
+
+        }
+
+
+        if (
+            currentPage >= totalPages
+        ) {
+
+            nextButton.style.opacity =
+                "0.5";
+
+        }
+        else {
+
+            nextButton.style.opacity =
+                "1";
+
+        }
+
+    }
+
+
+    /* =========================================
+       PREVIOUS PAGE
+    ========================================= */
+
+    function previousPage() {
+
+        if (
+            currentPage > 1
+        ) {
+
+            currentPage--;
+
+            renderPolicies();
+
+        }
+
+    }
+
+
+    /* =========================================
+       NEXT PAGE
+    ========================================= */
+
+    function nextPage() {
+
+        const totalPages =
+            Math.max(
+                1,
+                Math.ceil(
+                    filteredPolicies.length /
+                    policiesPerPage
+                )
+            );
+
+
+        if (
+            currentPage <
+            totalPages
+        ) {
+
+            currentPage++;
+
+            renderPolicies();
+
+        }
+
+    }
+
+
+    /* =========================================
+       RESET FILTERS
+    ========================================= */
+
+    function resetFilters() {
+
+        document.getElementById(
+            "searchInput"
+        ).value = "";
+
+
+        document.getElementById(
+            "statusFilter"
+        ).value = "all";
+
+
+        document.getElementById(
+            "policyFilter"
+        ).value = "all";
+
+
+        document.getElementById(
+            "sortFilter"
+        ).value = "latest";
+
+
+        applyFilters();
+
+    }
+
+
+    /* =========================================
+       SEARCH EVENT
+    ========================================= */
+
+    document.getElementById(
+        "searchInput"
+    ).addEventListener(
+        "input",
+        applyFilters
+    );
+
+
+    /* =========================================
+       SORT EVENT
+    ========================================= */
+
+    document.getElementById(
+        "sortFilter"
+    ).addEventListener(
+        "change",
+        applyFilters
+    );
+
+
+    /* =========================================
+       VIEW POLICY
+    ========================================= */
+
+    function viewPolicy(policyId) {
+
+        if (!policyId) {
+
+            alert(
+                "Policy ID is not available."
+            );
+
+            return;
+
+        }
+
+
+        window.location.href =
+            "policy-details.html?id=" +
+            encodeURIComponent(
+                policyId
+            );
+
+    }
+
+
+    /* =========================================
+       VIEW CUSTOMER
+    ========================================= */
+
+    function viewCustomer(customerId) {
+
+        if (!customerId) {
+
+            alert(
+                "Customer ID is not available."
+            );
+
+            return;
+
+        }
+
+
+        window.location.href =
+            "customer-details.html?id=" +
+            encodeURIComponent(
+                customerId
+            );
+
+    }
+
+
+    /* =========================================
+       ADD POLICY
+    ========================================= */
+
+    function addPolicy() {
+
+        window.location.href =
+            "add-policy.html";
+
+    }
+
+
+    /* =========================================
+       SEND INDIVIDUAL REMINDER
+    ========================================= */
+
+    function sendReminder(
+        customerName
+    ) {
+
+        alert(
+            "Premium reminder prepared for " +
+            customerName +
+            "."
+        );
+
+    }
+
+
+    /* =========================================
+       BULK REMINDER
+    ========================================= */
+
+    function sendBulkReminder() {
+
+        const duePolicies =
+            allPolicies.filter(
+                function(policy) {
+
+                    return normalizeStatus(
+                        policy.status
+                    ) === "due";
+
+                }
+            );
+
+
+        if (
+            duePolicies.length === 0
+        ) {
+
+            alert(
+                "There are no policies currently due."
+            );
+
+            return;
+
+        }
+
+
+        alert(
+            "Premium reminders prepared for " +
+            duePolicies.length +
+            " customers."
+        );
+
+    }
+
+
+    /* =========================================
+       EXPORT POLICIES
+    ========================================= */
+
+    function exportPolicies() {
+
+        if (
+            filteredPolicies.length === 0
+        ) {
+
+            alert(
+                "There are no policies to export."
+            );
+
+            return;
+
+        }
+
+
+        const headers = [
+            "Customer Name",
+            "Customer ID",
+            "Policy Number",
+            "Policy Type",
+            "Premium",
+            "Sum Assured",
+            "Next Due Date",
+            "Status"
+        ];
+
+
+        const rows =
+            filteredPolicies.map(
+                function(policy) {
+
+                    return [
+                        getCustomerName(
+                            policy
+                        ),
+
+                        getCustomerId(
+                            policy
+                        ),
+
+                        getPolicyNumber(
+                            policy
+                        ),
+
+                        getPolicyType(
+                            policy
+                        ),
+
+                        getPremium(
+                            policy
+                        ),
+
+                        getSumAssured(
+                            policy
+                        ),
+
+                        formatDate(
+                            getDueDate(
+                                policy
+                            )
+                        ),
+
+                        policy.status ||
+                        ""
+                    ];
+
+                }
+            );
+
+
+        let csv =
+            headers.join(",") +
+            "\n";
+
+
+        rows.forEach(
+            function(row) {
+
+                csv +=
+                    row.map(
+                        function(value) {
+
+                            return '"' +
+                                String(
+                                    value
+                                ).replace(
+                                    /"/g,
+                                    '""'
+                                ) +
+                                '"';
+
+                        }
+                    ).join(",") +
+                    "\n";
+
+            }
+        );
+
+
+        const blob =
+            new Blob(
+                [csv],
+                {
+                    type:
+                        "text/csv;charset=utf-8;"
+                }
+            );
+
+
+        const url =
+            URL.createObjectURL(
+                blob
+            );
+
+
+        const link =
+            document.createElement(
+                "a"
+            );
+
+
+        link.href =
+            url;
+
+
+        link.download =
+            "trustnest-policies.csv";
+
+
+        document.body.appendChild(
+            link
+        );
+
+
+        link.click();
+
+
+        document.body.removeChild(
+            link
+        );
+
+
+        URL.revokeObjectURL(
+            url
+        );
+
+    }
+
+
+    /* =========================================
+       INITIALIZE
+    ========================================= */
+
+    loadAgentInfo();
+
+    loadPolicies();
+
+
+    console.log(
+        "TrustNest Policies page loaded successfully."
+    );
+
+</script>
+
+
+</body>
+
+</html>

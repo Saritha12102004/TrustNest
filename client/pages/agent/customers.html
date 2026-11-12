@@ -1,0 +1,4820 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Customers | TrustNest</title>
+
+    <meta name="description"
+          content="TrustNest Agent Customer Management">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Existing CSS -->
+    <link rel="stylesheet"
+          href="../../css/style.css">
+
+    <link rel="stylesheet"
+          href="../../css/dashboard.css">
+
+
+    <style>
+
+        /* =========================================
+           RESET
+        ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+
+        /* =========================================
+           DASHBOARD LAYOUT
+        ========================================= */
+
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+        }
+
+
+        /* =========================================
+           SIDEBAR
+        ========================================= */
+
+        .sidebar {
+            width: 250px;
+            background:
+                linear-gradient(
+                    180deg,
+                    #061f42,
+                    #092b5c
+                );
+            color: white;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            transition: 0.3s;
+        }
+
+
+        .sidebar-logo {
+            height: 85px;
+            display: flex;
+            align-items: center;
+            padding: 0 25px;
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.08);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            color: #092b5c;
+            border: 3px solid #c9a227;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            margin-right: 10px;
+        }
+
+        .logo-name {
+            font-family:
+                "Playfair Display",
+                serif;
+            font-size: 23px;
+            font-weight: 700;
+        }
+
+        .logo-subtitle {
+            display: block;
+            font-size: 7px;
+            letter-spacing: 1.5px;
+            color: #d6b23c;
+            margin-top: -2px;
+        }
+
+
+        .menu-title {
+            padding:
+                25px 25px 10px;
+            color: #7f94ad;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0 12px;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 4px;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 11px 13px;
+            border-radius: 7px;
+            color: #b8c6d8;
+            font-size: 12px;
+            transition: 0.25s;
+        }
+
+        .sidebar-menu a:hover {
+            background:
+                rgba(255,255,255,0.07);
+            color: white;
+        }
+
+        .sidebar-menu a.active {
+            background:
+                rgba(255,255,255,0.12);
+            color: white;
+            border-left:
+                3px solid #c9a227;
+        }
+
+        .menu-icon {
+            width: 22px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+
+        .sidebar-bottom {
+            margin-top: auto;
+            padding: 15px;
+            border-top:
+                1px solid
+                rgba(255,255,255,0.08);
+        }
+
+        .sidebar-bottom a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #aebed0;
+            font-size: 11px;
+            padding: 10px;
+        }
+
+        .sidebar-bottom a:hover {
+            color: white;
+        }
+
+
+        /* =========================================
+           MAIN
+        ========================================= */
+
+        .main {
+            margin-left: 250px;
+            width: calc(100% - 250px);
+            min-height: 100vh;
+        }
+
+
+        /* =========================================
+           TOPBAR
+        ========================================= */
+
+        .topbar {
+            height: 75px;
+            background: white;
+            border-bottom:
+                1px solid #e8edf3;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding:
+                0 30px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .mobile-menu {
+            display: none;
+            border: none;
+            background: none;
+            font-size: 22px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .page-title h1 {
+            font-family:
+                "Playfair Display",
+                serif;
+            color: #092b5c;
+            font-size: 24px;
+            margin-bottom: 2px;
+        }
+
+        .page-title p {
+            color: #8995a5;
+            font-size: 10px;
+        }
+
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .notification {
+            position: relative;
+            font-size: 18px;
+            cursor: pointer;
+            color: #526071;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -6px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #c9a227;
+            color: white;
+            font-size: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .agent-profile-mini {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .agent-avatar-small {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background:
+                linear-gradient(
+                    135deg,
+                    #092b5c,
+                    #1c518e
+                );
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 13px;
+            border:
+                2px solid #d6b23c;
+        }
+
+        .agent-mini-info strong {
+            display: block;
+            font-size: 11px;
+            color: #172033;
+        }
+
+        .agent-mini-info span {
+            font-size: 9px;
+            color: #8995a5;
+        }
+
+
+        /* =========================================
+           CONTENT
+        ========================================= */
+
+        .content {
+            padding: 28px 30px;
+        }
+
+
+        .page-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 22px;
+        }
+
+        .page-description h2 {
+            font-size: 16px;
+            color: #172033;
+            margin-bottom: 4px;
+        }
+
+        .page-description p {
+            font-size: 10px;
+            color: #8995a5;
+        }
+
+        .add-customer-btn {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            background: #092b5c;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 7px;
+            font-size: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .add-customer-btn:hover {
+            background: #061f42;
+            transform: translateY(-1px);
+        }
+
+
+        /* =========================================
+           STATISTICS
+        ========================================= */
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 22px;
+        }
+
+        .stat-card {
+            background: white;
+            border:
+                1px solid #e7ecf2;
+            border-radius: 10px;
+            padding: 17px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .stat-info span {
+            display: block;
+            color: #8995a5;
+            font-size: 9px;
+            margin-bottom: 7px;
+        }
+
+        .stat-info strong {
+            color: #092b5c;
+            font-size: 22px;
+        }
+
+        .stat-info small {
+            display: block;
+            margin-top: 5px;
+            font-size: 8px;
+            color: #6d7a89;
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 9px;
+            background: #edf3fa;
+            color: #092b5c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 17px;
+        }
+
+        .stat-icon.gold {
+            background: #faf5df;
+            color: #aa8a16;
+        }
+
+        .stat-icon.green {
+            background: #eaf7ef;
+            color: #258351;
+        }
+
+        .stat-icon.red {
+            background: #fff0f0;
+            color: #c94b4b;
+        }
+
+
+        /* =========================================
+           CUSTOMER CARD
+        ========================================= */
+
+        .customer-container {
+            background: white;
+            border:
+                1px solid #e7ecf2;
+            border-radius: 11px;
+            overflow: hidden;
+        }
+
+
+        .customer-toolbar {
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            border-bottom:
+                1px solid #edf0f4;
+        }
+
+        .search-box {
+            position: relative;
+            width: 320px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding:
+                10px 12px 10px 35px;
+            border:
+                1px solid #dfe5ec;
+            border-radius: 7px;
+            outline: none;
+            font-size: 10px;
+            color: #344054;
+        }
+
+        .search-box input:focus {
+            border-color: #092b5c;
+            box-shadow:
+                0 0 0 2px
+                rgba(9,43,92,0.07);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 9px;
+            color: #8995a5;
+            font-size: 13px;
+        }
+
+        .filters {
+            display: flex;
+            gap: 8px;
+        }
+
+        .filter-select {
+            border:
+                1px solid #dfe5ec;
+            background: white;
+            color: #526071;
+            padding: 9px 10px;
+            border-radius: 7px;
+            font-size: 9px;
+            outline: none;
+            cursor: pointer;
+        }
+
+
+        /* =========================================
+           TABLE
+        ========================================= */
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .customer-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 850px;
+        }
+
+        .customer-table th {
+            background: #f8fafc;
+            color: #8995a5;
+            text-align: left;
+            font-size: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding:
+                13px 15px;
+            border-bottom:
+                1px solid #edf0f4;
+        }
+
+        .customer-table td {
+            padding:
+                14px 15px;
+            border-bottom:
+                1px solid #f0f2f5;
+            font-size: 10px;
+            color: #526071;
+            vertical-align: middle;
+        }
+
+        .customer-table tbody tr {
+            transition: 0.2s;
+        }
+
+        .customer-table tbody tr:hover {
+            background: #fafbfd;
+        }
+
+        .customer-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+
+        .customer-name {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .customer-avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background:
+                linear-gradient(
+                    135deg,
+                    #e9eef5,
+                    #d7e1ed
+                );
+            color: #092b5c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .customer-name strong {
+            display: block;
+            color: #172033;
+            font-size: 10px;
+            margin-bottom: 2px;
+        }
+
+        .customer-name span {
+            color: #8995a5;
+            font-size: 8px;
+        }
+
+
+        .policy-number {
+            font-size: 9px;
+            font-weight: 600;
+            color: #092b5c;
+        }
+
+        .policy-type {
+            display: block;
+            color: #8995a5;
+            font-size: 8px;
+            margin-top: 3px;
+        }
+
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 8px;
+            border-radius: 20px;
+            font-size: 8px;
+            font-weight: 600;
+        }
+
+        .status::before {
+            content: "";
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+        }
+
+        .status.active {
+            background: #eaf7ef;
+            color: #258351;
+        }
+
+        .status.active::before {
+            background: #258351;
+        }
+
+        .status.due {
+            background: #fff7df;
+            color: #a98214;
+        }
+
+        .status.due::before {
+            background: #c9a227;
+        }
+
+        .status.expired {
+            background: #fff0f0;
+            color: #c94b4b;
+        }
+
+        .status.expired::before {
+            background: #c94b4b;
+        }
+
+        .status.none {
+            background: #f1f4f8;
+            color: #6d7a89;
+        }
+
+        .status.none::before {
+            background: #8995a5;
+        }
+
+
+        .priority {
+            display: inline-block;
+            padding: 4px 7px;
+            border-radius: 5px;
+            font-size: 8px;
+            font-weight: 600;
+        }
+
+        .priority.high {
+            background: #fff0f0;
+            color: #c94b4b;
+        }
+
+        .priority.medium {
+            background: #fff7df;
+            color: #a98214;
+        }
+
+        .priority.low {
+            background: #edf3fa;
+            color: #52769c;
+        }
+
+
+        .action-buttons {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .action-btn {
+            width: 28px;
+            height: 28px;
+            border: none;
+            border-radius: 6px;
+            background: #f1f4f8;
+            color: #526071;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 11px;
+            transition: 0.2s;
+        }
+
+        .action-btn:hover {
+            background: #092b5c;
+            color: white;
+        }
+
+        .action-btn.gold:hover {
+            background: #c9a227;
+            color: white;
+        }
+
+
+        /* =========================================
+           PAGINATION
+        ========================================= */
+
+        .table-footer {
+            padding:
+                15px 20px;
+            border-top:
+                1px solid #edf0f4;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .showing-text {
+            color: #8995a5;
+            font-size: 9px;
+        }
+
+        .pagination {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .page-btn {
+            width: 28px;
+            height: 28px;
+            border:
+                1px solid #e0e5eb;
+            background: white;
+            color: #526071;
+            border-radius: 5px;
+            font-size: 9px;
+            cursor: pointer;
+        }
+
+        .page-btn:hover {
+            border-color: #092b5c;
+            color: #092b5c;
+        }
+
+        .page-btn.active {
+            background: #092b5c;
+            border-color: #092b5c;
+            color: white;
+        }
+
+
+        /* =========================================
+           EMPTY STATE
+        ========================================= */
+
+        .empty-state {
+            display: none;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .empty-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: #edf3fa;
+            color: #092b5c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 22px;
+        }
+
+        .empty-state h3 {
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #344054;
+        }
+
+        .empty-state p {
+            color: #8995a5;
+            font-size: 9px;
+        }
+
+
+        /* =========================================
+           MODAL
+        ========================================= */
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background:
+                rgba(3,20,42,0.55);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            width: 100%;
+            max-width: 520px;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow:
+                0 20px 60px
+                rgba(0,0,0,0.2);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h3 {
+            font-family:
+                "Playfair Display",
+                serif;
+            color: #092b5c;
+            font-size: 20px;
+        }
+
+        .close-modal {
+            border: none;
+            background: none;
+            color: #8995a5;
+            font-size: 21px;
+            cursor: pointer;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns:
+                1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 5px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            color: #526071;
+            font-size: 9px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border:
+                1px solid #dfe5ec;
+            border-radius: 7px;
+            outline: none;
+            font-size: 10px;
+            color: #344054;
+            background: white;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 75px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #092b5c;
+            box-shadow:
+                0 0 0 2px
+                rgba(9,43,92,0.07);
+        }
+
+        .selected-customer-info {
+            background: #f5f8fc;
+            border: 1px solid #e4eaf1;
+            border-radius: 8px;
+            padding: 11px 12px;
+            margin-bottom: 15px;
+        }
+
+        .selected-customer-info strong {
+            display: block;
+            color: #092b5c;
+            font-size: 11px;
+            margin-bottom: 3px;
+        }
+
+        .selected-customer-info span {
+            color: #8995a5;
+            font-size: 9px;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            margin-top: 22px;
+        }
+
+        .modal-btn {
+            padding: 9px 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 9px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .modal-btn.cancel {
+            background: #f0f3f7;
+            color: #526071;
+        }
+
+        .modal-btn.save {
+            background: #092b5c;
+            color: white;
+        }
+
+        .modal-btn.save:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+
+        /* =========================================
+           FOLLOW-UP SUCCESS MESSAGE
+        ========================================= */
+
+        .followup-success {
+            display: none;
+            background: #eaf7ef;
+            color: #258351;
+            border: 1px solid #cdebd9;
+            border-radius: 7px;
+            padding: 10px 12px;
+            margin-bottom: 15px;
+            font-size: 9px;
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 1100px) {
+
+            .stats-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .customer-toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+
+            .filters {
+                width: 100%;
+            }
+
+            .filter-select {
+                flex: 1;
+            }
+        }
+
+
+        @media (max-width: 850px) {
+
+            .sidebar {
+                transform:
+                    translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform:
+                    translateX(0);
+            }
+
+            .main {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .topbar {
+                padding: 0 18px;
+            }
+
+            .content {
+                padding: 20px 18px;
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-actions {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .add-customer-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .filters {
+                flex-direction: column;
+            }
+
+            .filter-select {
+                width: 100%;
+            }
+
+            .table-footer {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
+
+            .agent-mini-info {
+                display: none;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="dashboard">
+
+
+    <!-- =================================================
+         SIDEBAR
+    ================================================== -->
+
+    <aside class="sidebar"
+           id="sidebar">
+
+
+        <a href="dashboard.html"
+           class="sidebar-logo">
+
+            <div class="logo-icon">
+                T
+            </div>
+
+            <div>
+
+                <div class="logo-name">
+                    TrustNest
+                </div>
+
+                <span class="logo-subtitle">
+                    Insurance Intelligence
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <div class="menu-title">
+            Main Menu
+        </div>
+
+
+        <ul class="sidebar-menu">
+
+            <li>
+                <a href="dashboard.html">
+                    <span class="menu-icon">▦</span>
+                    Dashboard
+                </a>
+            </li>
+
+
+            <li>
+                <a href="customers.html"
+                   class="active">
+                    <span class="menu-icon">👥</span>
+                    Customers
+                </a>
+            </li>
+
+
+            <li>
+                <a href="policies.html">
+                    <span class="menu-icon">📋</span>
+                    Policies
+                </a>
+            </li>
+
+
+            <li>
+                <a href="followups.html">
+                    <span class="menu-icon">🔔</span>
+                    Follow-ups
+                </a>
+            </li>
+
+
+            <li>
+                <a href="interactions.html">
+                    <span class="menu-icon">💬</span>
+                    Interactions
+                </a>
+            </li>
+
+        </ul>
+
+
+        <div class="menu-title">
+            Smart Features
+        </div>
+
+
+        <ul class="sidebar-menu">
+
+            <li>
+                <a href="recommendations.html">
+                    <span class="menu-icon">✨</span>
+                    Recommendations
+                </a>
+            </li>
+
+
+            <li>
+                <a href="leads.html">
+                    <span class="menu-icon">🎯</span>
+                    Smart Leads
+                </a>
+            </li>
+
+
+            <li>
+                <a href="sales-insights.html">
+                    <span class="menu-icon">📊</span>
+                    Sales Insights
+                </a>
+            </li>
+
+
+            <li>
+                <a href="notifications.html">
+                    <span class="menu-icon">🔔</span>
+                    Notifications
+                </a>
+            </li>
+
+        </ul>
+
+
+        <div class="menu-title">
+            Account
+        </div>
+
+
+        <ul class="sidebar-menu">
+
+            <li>
+                <a href="profile.html">
+                    <span class="menu-icon">👤</span>
+                    My Profile
+                </a>
+            </li>
+
+        </ul>
+
+
+        <div class="sidebar-bottom">
+
+            <a href="../login.html">
+
+                <span>
+                    ⇥
+                </span>
+
+                Logout
+
+            </a>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =================================================
+         MAIN
+    ================================================== -->
+
+    <main class="main">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div style="display:flex; align-items:center;">
+
+                <button
+                    class="mobile-menu"
+                    id="mobileMenu">
+
+                    ☰
+
+                </button>
+
+
+                <div class="page-title">
+
+                    <h1>
+                        Customers
+                    </h1>
+
+                    <p>
+                        Manage and monitor your customer portfolio
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+                <a href="notifications.html"
+                   class="notification">
+
+                    🔔
+
+                    <span
+                        class="notification-badge"
+                        id="notificationBadge">
+                        0
+                    </span>
+
+                </a>
+
+
+                <div class="agent-profile-mini">
+
+                    <div class="agent-avatar-small">
+                        RK
+                    </div>
+
+                    <div class="agent-mini-info">
+
+                        <strong>
+                            R. Kumar
+                        </strong>
+
+                        <span>
+                            Insurance Agent
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- CONTENT -->
+
+        <div class="content">
+
+
+            <div class="page-actions">
+
+                <div class="page-description">
+
+                    <h2>
+                        Customer Portfolio
+                    </h2>
+
+                    <p>
+                        View customer details, policies,
+                        payment status and follow-up priority.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="add-customer-btn"
+                    onclick="window.location.href='add-customer.html'">
+
+                    <span>
+                        +
+                    </span>
+
+                    Add Customer
+
+                </button>
+
+            </div>
+
+
+
+            <!-- STATISTICS -->
+
+            <div class="stats-grid">
+
+
+                <div class="stat-card">
+
+                    <div class="stat-info">
+
+                        <span>
+                            Total Customers
+                        </span>
+
+                        <strong id="totalCustomers">
+                            0
+                        </strong>
+
+                        <small>
+                            All registered customers
+                        </small>
+
+                    </div>
+
+                    <div class="stat-icon">
+                        👥
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-info">
+
+                        <span>
+                            Active Policies
+                        </span>
+
+                        <strong id="activePolicies">
+                            0
+                        </strong>
+
+                        <small>
+                            Currently active
+                        </small>
+
+                    </div>
+
+                    <div class="stat-icon green">
+                        ✓
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-info">
+
+                        <span>
+                            Renewals Due
+                        </span>
+
+                        <strong id="renewalsDue">
+                            0
+                        </strong>
+
+                        <small>
+                            Require follow-up
+                        </small>
+
+                    </div>
+
+                    <div class="stat-icon gold">
+                        ⏰
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-info">
+
+                        <span>
+                            High Priority
+                        </span>
+
+                        <strong id="highPriority">
+                            0
+                        </strong>
+
+                        <small>
+                            Smart priority score
+                        </small>
+
+                    </div>
+
+                    <div class="stat-icon red">
+                        !
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CUSTOMER TABLE -->
+
+            <section class="customer-container">
+
+
+                <div class="customer-toolbar">
+
+
+                    <div class="search-box">
+
+                        <span class="search-icon">
+                            🔍
+                        </span>
+
+                        <input
+                            type="text"
+                            id="searchInput"
+                            placeholder="Search customer name, mobile or policy number..."
+                            onkeyup="searchCustomers">
+
+                    </div>
+
+
+                    <div class="filters">
+
+
+                        <select
+                            class="filter-select"
+                            id="policyFilter"
+                            onchange="filterCustomers()">
+
+                            <option value="all">
+                                All Policies
+                            </option>
+
+                            <option value="active">
+                                Active
+                            </option>
+
+                            <option value="due">
+                                Renewal Due
+                            </option>
+
+                            <option value="expired">
+                                Expired
+                            </option>
+
+                        </select>
+
+
+                        <select
+                            class="filter-select"
+                            id="priorityFilter"
+                            onchange="filterCustomers()">
+
+                            <option value="all">
+                                All Priorities
+                            </option>
+
+                            <option value="high">
+                                High Priority
+                            </option>
+
+                            <option value="medium">
+                                Medium Priority
+                            </option>
+
+                            <option value="low">
+                                Low Priority
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="table-wrapper">
+
+
+                    <table
+                        class="customer-table"
+                        id="customerTable">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Customer
+                                </th>
+
+                                <th>
+                                    Contact
+                                </th>
+
+                                <th>
+                                    Policy
+                                </th>
+
+                                <th>
+                                    Premium
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    Priority
+                                </th>
+
+                                <th>
+                                    Next Follow-up
+                                </th>
+
+                                <th>
+                                    Actions
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody
+                            id="customerTableBody">
+                        </tbody>
+
+                    </table>
+
+
+                    <div
+                        class="empty-state"
+                        id="emptyState">
+
+                        <div class="empty-icon">
+                            👥
+                        </div>
+
+                        <h3>
+                            No customers found
+                        </h3>
+
+                        <p>
+                            Try changing your search or filter.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="table-footer">
+
+                    <span
+                        class="showing-text"
+                        id="showingText">
+
+                        Showing 0 of 0 customers
+
+                    </span>
+
+
+                    <div class="pagination">
+
+                        <button class="page-btn">
+                            ‹
+                        </button>
+
+                        <button class="page-btn active">
+                            1
+                        </button>
+
+                        <button class="page-btn">
+                            2
+                        </button>
+
+                        <button class="page-btn">
+                            3
+                        </button>
+
+                        <button class="page-btn">
+                            4
+                        </button>
+
+                        <button class="page-btn">
+                            5
+                        </button>
+
+                        <button class="page-btn">
+                            ›
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+
+<!-- =================================================
+     ADD FOLLOW-UP MODAL
+================================================== -->
+
+<div
+    class="modal"
+    id="followupModal">
+
+
+    <div class="modal-content">
+
+
+        <div class="modal-header">
+
+            <h3>
+                Create Follow-up
+            </h3>
+
+            <button
+                class="close-modal"
+                onclick="closeFollowupModal()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <div
+            class="followup-success"
+            id="followupSuccess">
+
+            Follow-up created successfully.
+
+        </div>
+
+
+        <!-- SELECTED CUSTOMER -->
+
+        <div
+            class="selected-customer-info"
+            id="selectedCustomerInfo">
+
+            <strong id="selectedCustomerName">
+                Customer
+            </strong>
+
+            <span id="selectedCustomerPhone">
+                Customer details
+            </span>
+
+        </div>
+
+
+        <form id="followupForm">
+
+
+            <input
+                type="hidden"
+                id="followupCustomerId">
+
+
+            <input
+                type="hidden"
+                id="followupCustomerName">
+
+
+            <input
+                type="hidden"
+                id="followupCustomerPhone">
+
+
+            <input
+                type="hidden"
+                id="followupPolicyNumber">
+
+
+            <input
+                type="hidden"
+                id="followupPolicyName">
+
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Follow-up Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="followupDate"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Follow-up Time
+                    </label>
+
+                    <input
+                        type="time"
+                        id="followupTime"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Priority
+                    </label>
+
+                    <select
+                        id="followupPriority"
+                        required>
+
+                        <option value="high">
+                            High
+                        </option>
+
+                        <option
+                            value="medium"
+                            selected>
+
+                            Medium
+
+                        </option>
+
+                        <option value="low">
+                            Low
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Follow-up Type
+                    </label>
+
+                    <select
+                        id="followupType"
+                        required>
+
+                        <option value="Phone Call">
+                            Phone Call
+                        </option>
+
+                        <option value="WhatsApp">
+                            WhatsApp
+                        </option>
+
+                        <option value="Meeting">
+                            Meeting
+                        </option>
+
+                        <option value="Policy Renewal">
+                            Policy Renewal
+                        </option>
+
+                        <option value="Premium Reminder">
+                            Premium Reminder
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label>
+                        Notes
+                    </label>
+
+                    <textarea
+                        id="followupNotes"
+                        placeholder="Enter follow-up notes..."></textarea>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="modal-btn cancel"
+                    onclick="closeFollowupModal()">
+
+                    Cancel
+
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="modal-btn save"
+                    id="saveFollowupButton">
+
+                    Create Follow-up
+
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+    /* =========================================
+       TRUSTNEST CUSTOMER PAGE
+    ========================================= */
+
+    const API_URL =
+        window.TRUSTNEST_API_URL ||
+        "http://localhost:5000";
+
+
+    const loggedInAgentId =
+        localStorage.getItem("agentId");
+
+
+    /*
+     * IMPORTANT:
+     * This is the same storage key that
+     * followups.html must use.
+     */
+    const FOLLOWUP_STORAGE_KEY =
+        "trustnest_followups";
+
+
+    /* =========================================
+       DATA
+    ========================================= */
+
+    let allCustomers = [];
+
+    let allPolicies = [];
+
+    let policiesByCustomer = {};
+
+
+    /* =========================================
+       CURRENT FOLLOW-UP CUSTOMER
+    ========================================= */
+
+    let selectedFollowupCustomer = null;
+
+
+    /* =========================================
+       MOBILE SIDEBAR
+    ========================================= */
+
+    const mobileMenu =
+        document.getElementById(
+            "mobileMenu"
+        );
+
+
+    const sidebar =
+        document.getElementById(
+            "sidebar"
+        );
+
+
+    if (mobileMenu) {
+
+        mobileMenu.addEventListener(
+            "click",
+            function () {
+
+                sidebar.classList.toggle(
+                    "open"
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =========================================
+       LOAD AGENT DETAILS
+    ========================================= */
+
+    function loadAgentDetails() {
+
+        const agentName =
+            localStorage.getItem(
+                "agentName"
+            ) ||
+            "Agent";
+
+
+        const nameElement =
+            document.querySelector(
+                ".agent-mini-info strong"
+            );
+
+
+        const avatarElement =
+            document.querySelector(
+                ".agent-avatar-small"
+            );
+
+
+        if (nameElement) {
+
+            nameElement.textContent =
+                agentName;
+
+        }
+
+
+        if (avatarElement) {
+
+            const parts =
+                agentName
+                    .trim()
+                    .split(/\s+/);
+
+
+            let initials =
+                parts[0]
+                    ? parts[0].charAt(0)
+                    : "A";
+
+
+            if (parts.length > 1) {
+
+                initials +=
+                    parts[
+                        parts.length - 1
+                    ].charAt(0);
+
+            }
+
+
+            avatarElement.textContent =
+                initials.toUpperCase();
+
+        }
+
+    }
+
+
+    /* =========================================
+       LOAD CUSTOMERS
+    ========================================= */
+
+    async function loadCustomers() {
+
+        if (!loggedInAgentId) {
+
+            allCustomers = [];
+
+            allPolicies = [];
+
+            policiesByCustomer = {};
+
+
+            updateStatistics(
+                [],
+                []
+            );
+
+
+            showEmptyState(
+                "Please login again to view your customers."
+            );
+
+
+            return;
+
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    API_URL +
+                    "/api/customers?agentId=" +
+                    encodeURIComponent(
+                        loggedInAgentId
+                    )
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (
+                !response.ok ||
+                !data.success
+            ) {
+
+                throw new Error(
+                    data.message ||
+                    "Unable to load customers."
+                );
+
+            }
+
+
+            allCustomers =
+                Array.isArray(
+                    data.customers
+                )
+                    ? data.customers
+                    : [];
+
+
+            await loadPolicies();
+
+
+        } catch (error) {
+
+            console.error(
+                "Customer loading error:",
+                error
+            );
+
+
+            allCustomers = [];
+
+            allPolicies = [];
+
+            policiesByCustomer = {};
+
+
+            updateStatistics(
+                [],
+                []
+            );
+
+
+            const tbody =
+                document.getElementById(
+                    "customerTableBody"
+                );
+
+
+            tbody.innerHTML = "";
+
+
+            showEmptyState(
+                "Unable to load customers. Make sure the TrustNest server is running."
+            );
+
+
+            updateShowingText(
+                0,
+                0
+            );
+
+        }
+
+    }
+
+
+    /* =========================================
+       LOAD POLICIES
+    ========================================= */
+
+    async function loadPolicies() {
+
+        allPolicies = [];
+
+        policiesByCustomer = {};
+
+
+        try {
+
+            const response =
+                await fetch(
+                    API_URL +
+                    "/api/policies?agentId=" +
+                    encodeURIComponent(
+                        loggedInAgentId
+                    )
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (
+                !response.ok ||
+                !data.success
+            ) {
+
+                console.warn(
+                    "Policy API response:",
+                    data.message ||
+                    "Unable to load policies."
+                );
+
+
+                updateStatistics(
+                    allCustomers,
+                    []
+                );
+
+
+                renderCustomers(
+                    allCustomers
+                );
+
+
+                return;
+
+            }
+
+
+            allPolicies =
+                Array.isArray(
+                    data.policies
+                )
+                    ? data.policies
+                    : [];
+
+
+            allPolicies.forEach(
+                function(policy) {
+
+                    const customerId =
+                        getPolicyCustomerId(
+                            policy
+                        );
+
+
+                    if (!customerId) {
+                        return;
+                    }
+
+
+                    if (
+                        !policiesByCustomer[
+                            customerId
+                        ]
+                    ) {
+
+                        policiesByCustomer[
+                            customerId
+                        ] = [];
+
+                    }
+
+
+                    policiesByCustomer[
+                        customerId
+                    ].push(policy);
+
+                }
+            );
+
+
+            updateStatistics(
+                allCustomers,
+                allPolicies
+            );
+
+
+            renderCustomers(
+                allCustomers
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Policy loading error:",
+                error
+            );
+
+
+            allPolicies = [];
+
+            policiesByCustomer = {};
+
+
+            updateStatistics(
+                allCustomers,
+                []
+            );
+
+
+            renderCustomers(
+                allCustomers
+            );
+
+        }
+
+    }
+
+
+    /* =========================================
+       GET POLICY CUSTOMER ID
+    ========================================= */
+
+    function getPolicyCustomerId(
+        policy
+    ) {
+
+        if (!policy) {
+            return "";
+        }
+
+
+        if (policy.customerId) {
+
+            if (
+                typeof policy.customerId ===
+                "object"
+            ) {
+
+                return String(
+                    policy.customerId._id ||
+                    policy.customerId.id ||
+                    ""
+                );
+
+            }
+
+
+            return String(
+                policy.customerId
+            );
+
+        }
+
+
+        if (policy.customer) {
+
+            if (
+                typeof policy.customer ===
+                "object"
+            ) {
+
+                return String(
+                    policy.customer._id ||
+                    policy.customer.id ||
+                    ""
+                );
+
+            }
+
+
+            return String(
+                policy.customer
+            );
+
+        }
+
+
+        return "";
+
+    }
+
+
+    /* =========================================
+       GET CUSTOMER POLICIES
+    ========================================= */
+
+    function getCustomerPolicies(
+        customer
+    ) {
+
+        if (!customer) {
+            return [];
+        }
+
+
+        const customerId =
+            String(
+                customer._id || ""
+            );
+
+
+        if (!customerId) {
+            return [];
+        }
+
+
+        return (
+            policiesByCustomer[
+                customerId
+            ] || []
+        );
+
+    }
+
+
+    /* =========================================
+       UPDATE STATISTICS
+    ========================================= */
+
+    function updateStatistics(
+        customers,
+        policies
+    ) {
+
+        customers =
+            Array.isArray(customers)
+                ? customers
+                : [];
+
+
+        policies =
+            Array.isArray(policies)
+                ? policies
+                : [];
+
+
+        document.getElementById(
+            "totalCustomers"
+        ).textContent =
+            customers.length;
+
+
+        const activePolicyCount =
+            policies.filter(
+                function(policy) {
+
+                    return (
+                        getPolicyStatus(
+                            policy
+                        ) === "active"
+                    );
+
+                }
+            ).length;
+
+
+        document.getElementById(
+            "activePolicies"
+        ).textContent =
+            activePolicyCount;
+
+
+        const renewalDueCount =
+            policies.filter(
+                function(policy) {
+
+                    return isRenewalDue(
+                        policy
+                    );
+
+                }
+            ).length;
+
+
+        document.getElementById(
+            "renewalsDue"
+        ).textContent =
+            renewalDueCount;
+
+
+        let highPriorityCustomers = 0;
+
+
+        customers.forEach(
+            function(customer) {
+
+                const customerPolicies =
+                    getCustomerPolicies(
+                        customer
+                    );
+
+
+                const hasHighPriorityPolicy =
+                    customerPolicies.some(
+                        function(policy) {
+
+                            const status =
+                                getPolicyStatus(
+                                    policy
+                                );
+
+
+                            return (
+                                status ===
+                                    "expired" ||
+                                isRenewalDue(
+                                    policy
+                                )
+                            );
+
+                        }
+                    );
+
+
+                if (
+                    hasHighPriorityPolicy
+                ) {
+
+                    highPriorityCustomers++;
+
+                }
+
+            }
+        );
+
+
+        document.getElementById(
+            "highPriority"
+        ).textContent =
+            highPriorityCustomers;
+
+    }
+
+
+    /* =========================================
+       RENDER CUSTOMERS
+    ========================================= */
+
+    function renderCustomers(
+        customers
+    ) {
+
+        const tbody =
+            document.getElementById(
+                "customerTableBody"
+            );
+
+
+        tbody.innerHTML = "";
+
+
+        if (!customers.length) {
+
+            showEmptyState(
+                "No customers have been added yet."
+            );
+
+
+            updateShowingText(
+                0,
+                0
+            );
+
+
+            return;
+
+        }
+
+
+        customers.forEach(
+            function(customer) {
+
+                const row =
+                    document.createElement(
+                        "tr"
+                    );
+
+
+                const name =
+                    customer.fullName ||
+                    customer.name ||
+                    "Unnamed Customer";
+
+
+                const initials =
+                    getInitials(name);
+
+
+                const customerId =
+                    customer._id || "";
+
+
+                const phone =
+                    customer.phone ||
+                    customer.mobile ||
+                    customer.mobileNumber ||
+                    "—";
+
+
+                const email =
+                    customer.email ||
+                    "—";
+
+
+                const customerDisplayId =
+                    customerId
+                        ? "ID: " +
+                          customerId
+                            .substring(
+                                Math.max(
+                                    0,
+                                    customerId.length - 8
+                                )
+                            )
+                            .toUpperCase()
+                        : "Customer";
+
+
+                const customerPolicies =
+                    getCustomerPolicies(
+                        customer
+                    );
+
+
+                const policy =
+                    customerPolicies.length
+                        ? customerPolicies[0]
+                        : null;
+
+
+                const policyNumber =
+                    policy
+                        ? getPolicyNumber(
+                            policy
+                        )
+                        : "";
+
+
+                const policyType =
+                    policy
+                        ? getPolicyType(
+                            policy
+                        )
+                        : "";
+
+
+                const premium =
+                    policy
+                        ? getPolicyPremium(
+                            policy
+                        )
+                        : "";
+
+
+                const status =
+                    policy
+                        ? getPolicyStatus(
+                            policy
+                        )
+                        : "none";
+
+
+                const priority =
+                    calculateCustomerPriority(
+                        customerPolicies
+                    );
+
+
+                /*
+                 * IMPORTANT:
+                 * Get the next follow-up from
+                 * actual created follow-ups.
+                 */
+                const followUpDate =
+                    getCustomerNextFollowup(
+                        customerId
+                    );
+
+
+                row.dataset.status =
+                    status;
+
+
+                row.dataset.priority =
+                    priority;
+
+
+                row.dataset.search =
+                    (
+                        name +
+                        " " +
+                        phone +
+                        " " +
+                        email +
+                        " " +
+                        policyNumber +
+                        " " +
+                        policyType
+                    ).toLowerCase();
+
+
+                let policyDisplay;
+
+
+                if (
+                    customerPolicies.length === 0
+                ) {
+
+                    policyDisplay = `
+                        <span class="policy-number">
+                            —
+                        </span>
+
+                        <span class="policy-type">
+                            No policy added
+                        </span>
+                    `;
+
+                } else if (
+                    customerPolicies.length === 1
+                ) {
+
+                    policyDisplay = `
+                        <span class="policy-number">
+                            ${escapeHtml(
+                                policyNumber ||
+                                "Policy"
+                            )}
+                        </span>
+
+                        <span class="policy-type">
+                            ${escapeHtml(
+                                policyType ||
+                                "Insurance Policy"
+                            )}
+                        </span>
+                    `;
+
+                } else {
+
+                    policyDisplay = `
+                        <span class="policy-number">
+                            ${escapeHtml(
+                                policyNumber ||
+                                "Policy"
+                            )}
+                        </span>
+
+                        <span class="policy-type">
+                            ${escapeHtml(
+                                policyType ||
+                                "Insurance Policy"
+                            )}
+                            + ${customerPolicies.length - 1}
+                            more
+                        </span>
+                    `;
+
+                }
+
+
+                const statusHtml =
+                    getStatusHtml(
+                        status
+                    );
+
+
+                const priorityHtml =
+                    getPriorityHtml(
+                        priority
+                    );
+
+
+                const premiumDisplay =
+                    formatPremium(
+                        premium
+                    );
+
+
+                row.innerHTML = `
+
+                    <td>
+
+                        <div class="customer-name">
+
+                            <div class="customer-avatar">
+                                ${escapeHtml(
+                                    initials
+                                )}
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    ${escapeHtml(
+                                        name
+                                    )}
+                                </strong>
+
+                                <span>
+                                    ${escapeHtml(
+                                        customerDisplayId
+                                    )}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </td>
+
+
+                    <td>
+
+                        <div>
+                            ${escapeHtml(
+                                phone
+                            )}
+                        </div>
+
+                        <div style="font-size:8px;color:#8995a5;margin-top:3px;">
+                            ${escapeHtml(
+                                email
+                            )}
+                        </div>
+
+                    </td>
+
+
+                    <td>
+                        ${policyDisplay}
+                    </td>
+
+
+                    <td>
+                        ${escapeHtml(
+                            premiumDisplay
+                        )}
+                    </td>
+
+
+                    <td>
+                        ${statusHtml}
+                    </td>
+
+
+                    <td>
+                        ${priorityHtml}
+                    </td>
+
+
+                    <td>
+                        ${escapeHtml(
+                            followUpDate
+                        )}
+                    </td>
+
+
+                    <td>
+
+                        <div class="action-buttons">
+
+
+                            <button
+                                class="action-btn"
+                                title="View Customer"
+                                onclick="viewCustomer('${escapeJs(customerId)}')">
+
+                                👁
+
+                            </button>
+
+
+                            <button
+                                class="action-btn gold"
+                                title="Create Follow-up"
+                                onclick="addFollowUp('${escapeJs(customerId)}')">
+
+                                🔔
+
+                            </button>
+
+
+                        </div>
+
+                    </td>
+
+                `;
+
+
+                tbody.appendChild(
+                    row
+                );
+
+            }
+        );
+
+
+        updateShowingText(
+            customers.length,
+            customers.length
+        );
+
+
+        updateEmptyState(
+            customers.length
+        );
+
+    }
+
+
+    /* =========================================
+       GET CUSTOMER NEXT FOLLOW-UP
+    ========================================= */
+
+    function getCustomerNextFollowup(
+        customerId
+    ) {
+
+        if (!customerId) {
+            return "—";
+        }
+
+
+        const followups =
+            getStoredFollowups();
+
+
+        const customerFollowups =
+            followups.filter(
+                function(item) {
+
+                    return (
+                        String(
+                            item.customerId
+                        ) ===
+                        String(
+                            customerId
+                        ) &&
+                        item.status !==
+                            "completed" &&
+                        item.date
+                    );
+
+                }
+            );
+
+
+        if (
+            !customerFollowups.length
+        ) {
+
+            return "—";
+
+        }
+
+
+        customerFollowups.sort(
+            function(a, b) {
+
+                const dateA =
+                    new Date(
+                        a.date +
+                        "T" +
+                        (
+                            a.time ||
+                            "00:00"
+                        )
+                    ).getTime();
+
+
+                const dateB =
+                    new Date(
+                        b.date +
+                        "T" +
+                        (
+                            b.time ||
+                            "00:00"
+                        )
+                    ).getTime();
+
+
+                return dateA - dateB;
+
+            }
+        );
+
+
+        return formatDate(
+            customerFollowups[0].date
+        );
+
+    }
+
+
+    /* =========================================
+       POLICY FUNCTIONS
+    ========================================= */
+
+    function getPolicyNumber(
+        policy
+    ) {
+
+        return (
+            policy.policyNumber ||
+            policy.number ||
+            policy.policyNo ||
+            "—"
+        );
+
+    }
+
+
+    function getPolicyType(
+        policy
+    ) {
+
+        return (
+            policy.policyType ||
+            policy.type ||
+            policy.planName ||
+            policy.plan ||
+            "Insurance Policy"
+        );
+
+    }
+
+
+    function getPolicyPremium(
+        policy
+    ) {
+
+        const value =
+            policy.premium ??
+            policy.premiumAmount ??
+            policy.amount ??
+            policy.installmentAmount ??
+            0;
+
+
+        const numericValue =
+            Number(value);
+
+
+        if (
+            Number.isNaN(
+                numericValue
+            )
+        ) {
+
+            return value || "";
+
+        }
+
+
+        return numericValue;
+
+    }
+
+
+    function getPolicyStatus(
+        policy
+    ) {
+
+        if (!policy) {
+            return "none";
+        }
+
+
+        const rawStatus =
+            String(
+                policy.status ||
+                policy.policyStatus ||
+                policy.paymentStatus ||
+                "active"
+            )
+                .trim()
+                .toLowerCase();
+
+
+        if (
+            rawStatus.includes(
+                "expire"
+            ) ||
+            rawStatus.includes(
+                "lapse"
+            )
+        ) {
+
+            return "expired";
+
+        }
+
+
+        if (
+            rawStatus.includes(
+                "due"
+            ) ||
+            rawStatus.includes(
+                "renew"
+            ) ||
+            rawStatus.includes(
+                "pending"
+            )
+        ) {
+
+            return "due";
+
+        }
+
+
+        if (
+            rawStatus.includes(
+                "active"
+            ) ||
+            rawStatus.includes(
+                "in force"
+            )
+        ) {
+
+            return "active";
+
+        }
+
+
+        return "active";
+
+    }
+
+
+    function isRenewalDue(
+        policy
+    ) {
+
+        if (!policy) {
+            return false;
+        }
+
+
+        const status =
+            getPolicyStatus(
+                policy
+            );
+
+
+        if (
+            status === "due"
+        ) {
+
+            return true;
+
+        }
+
+
+        if (
+            status === "expired"
+        ) {
+
+            return false;
+
+        }
+
+
+        const dateValue =
+            policy.premiumDate ||
+            policy.renewalDate ||
+            policy.nextPremiumDate ||
+            policy.dueDate ||
+            policy.nextDueDate;
+
+
+        if (!dateValue) {
+            return false;
+        }
+
+
+        const dueDate =
+            new Date(
+                dateValue
+            );
+
+
+        if (
+            Number.isNaN(
+                dueDate.getTime()
+            )
+        ) {
+
+            return false;
+
+        }
+
+
+        const today =
+            new Date();
+
+
+        today.setHours(
+            0,
+            0,
+            0,
+            0
+        );
+
+
+        const thirtyDaysLater =
+            new Date(
+                today
+            );
+
+
+        thirtyDaysLater.setDate(
+            today.getDate() + 30
+        );
+
+
+        return (
+            dueDate >= today &&
+            dueDate <= thirtyDaysLater
+        );
+
+    }
+
+
+    function calculateCustomerPriority(
+        policies
+    ) {
+
+        if (
+            !Array.isArray(
+                policies
+            ) ||
+            policies.length === 0
+        ) {
+
+            return "low";
+
+        }
+
+
+        const hasHighPriority =
+            policies.some(
+                function(policy) {
+
+                    return (
+                        getPolicyStatus(
+                            policy
+                        ) === "expired" ||
+                        isRenewalDue(
+                            policy
+                        )
+                    );
+
+                }
+            );
+
+
+        if (
+            hasHighPriority
+        ) {
+
+            return "high";
+
+        }
+
+
+        return "medium";
+
+    }
+
+
+    function getStatusHtml(
+        status
+    ) {
+
+        if (
+            status === "active"
+        ) {
+
+            return `
+                <span class="status active">
+                    Active
+                </span>
+            `;
+
+        }
+
+
+        if (
+            status === "due"
+        ) {
+
+            return `
+                <span class="status due">
+                    Renewal Due
+                </span>
+            `;
+
+        }
+
+
+        if (
+            status === "expired"
+        ) {
+
+            return `
+                <span class="status expired">
+                    Expired
+                </span>
+            `;
+
+        }
+
+
+        return `
+            <span class="status none">
+                No Policy
+            </span>
+        `;
+
+    }
+
+
+    function getPriorityHtml(
+        priority
+    ) {
+
+        const text =
+            priority.charAt(0)
+                .toUpperCase() +
+            priority.slice(1);
+
+
+        return `
+            <span class="priority ${escapeHtml(priority)}">
+                ${escapeHtml(text)}
+            </span>
+        `;
+
+    }
+
+
+    function formatPremium(
+        value
+    ) {
+
+        if (
+            value === "" ||
+            value === null ||
+            value === undefined ||
+            value === 0
+        ) {
+
+            return "—";
+
+        }
+
+
+        const numericValue =
+            Number(value);
+
+
+        if (
+            Number.isNaN(
+                numericValue
+            )
+        ) {
+
+            return String(value);
+
+        }
+
+
+        return (
+            "₹" +
+            numericValue.toLocaleString(
+                "en-IN"
+            )
+        );
+
+    }
+
+
+    /* =========================================
+       SEARCH / FILTER
+    ========================================= */
+
+    function searchCustomers() {
+
+        filterCustomers();
+
+    }
+
+
+    function filterCustomers() {
+
+        const status =
+            document.getElementById(
+                "policyFilter"
+            ).value;
+
+
+        const priority =
+            document.getElementById(
+                "priorityFilter"
+            ).value;
+
+
+        const search =
+            document.getElementById(
+                "searchInput"
+            ).value
+                .trim()
+                .toLowerCase();
+
+
+        const rows =
+            document.querySelectorAll(
+                "#customerTableBody tr"
+            );
+
+
+        let visibleCount = 0;
+
+
+        rows.forEach(
+            function(row) {
+
+                const rowStatus =
+                    row.dataset.status ||
+                    "none";
+
+
+                const rowPriority =
+                    row.dataset.priority ||
+                    "low";
+
+
+                const rowSearch =
+                    row.dataset.search ||
+                    row.textContent
+                        .toLowerCase();
+
+
+                const statusMatch =
+                    status === "all" ||
+                    rowStatus === status;
+
+
+                const priorityMatch =
+                    priority === "all" ||
+                    rowPriority === priority;
+
+
+                const searchMatch =
+                    rowSearch.includes(
+                        search
+                    );
+
+
+                if (
+                    statusMatch &&
+                    priorityMatch &&
+                    searchMatch
+                ) {
+
+                    row.style.display =
+                        "";
+
+                    visibleCount++;
+
+                } else {
+
+                    row.style.display =
+                        "none";
+
+                }
+
+            }
+        );
+
+
+        updateEmptyState(
+            visibleCount
+        );
+
+
+        updateShowingText(
+            visibleCount,
+            allCustomers.length
+        );
+
+    }
+
+
+    /* =========================================
+       EMPTY STATE
+    ========================================= */
+
+    function showEmptyState(
+        message
+    ) {
+
+        const emptyState =
+            document.getElementById(
+                "emptyState"
+            );
+
+
+        const messageElement =
+            emptyState.querySelector(
+                "p"
+            );
+
+
+        if (
+            messageElement
+        ) {
+
+            messageElement.textContent =
+                message;
+
+        }
+
+
+        emptyState.style.display =
+            "block";
+
+    }
+
+
+    function updateEmptyState(
+        count
+    ) {
+
+        const emptyState =
+            document.getElementById(
+                "emptyState"
+            );
+
+
+        if (
+            count === 0
+        ) {
+
+            emptyState.style.display =
+                "block";
+
+        } else {
+
+            emptyState.style.display =
+                "none";
+
+        }
+
+    }
+
+
+    /* =========================================
+       TABLE FOOTER
+    ========================================= */
+
+    function updateShowingText(
+        visibleCount,
+        totalCount
+    ) {
+
+        const showingText =
+            document.getElementById(
+                "showingText"
+            );
+
+
+        if (!showingText) {
+            return;
+        }
+
+
+        if (
+            totalCount === 0
+        ) {
+
+            showingText.textContent =
+                "Showing 0 of 0 customers";
+
+            return;
+
+        }
+
+
+        showingText.textContent =
+            "Showing " +
+            visibleCount +
+            " of " +
+            totalCount +
+            " customers";
+
+    }
+
+
+    /* =========================================
+       VIEW CUSTOMER
+    ========================================= */
+
+    function viewCustomer(
+        customerId
+    ) {
+
+        if (!customerId) {
+
+            alert(
+                "Customer ID not available."
+            );
+
+            return;
+
+        }
+
+
+        window.location.href =
+            "customer-details.html?id=" +
+            encodeURIComponent(
+                customerId
+            );
+
+    }
+
+
+    /* =========================================
+       CREATE FOLLOW-UP
+    ========================================= */
+
+    function addFollowUp(
+        customerId
+    ) {
+
+        const customer =
+            allCustomers.find(
+                function(item) {
+
+                    return String(
+                        item._id || ""
+                    ) ===
+                    String(
+                        customerId
+                    );
+
+                }
+            );
+
+
+        if (!customer) {
+
+            alert(
+                "Customer details could not be found."
+            );
+
+            return;
+
+        }
+
+
+        selectedFollowupCustomer =
+            customer;
+
+
+        const customerName =
+            customer.fullName ||
+            customer.name ||
+            "Customer";
+
+
+        const phone =
+            customer.phone ||
+            customer.mobile ||
+            customer.mobileNumber ||
+            "Phone not available";
+
+
+        const policies =
+            getCustomerPolicies(
+                customer
+            );
+
+
+        const policy =
+            policies.length
+                ? policies[0]
+                : null;
+
+
+        document.getElementById(
+            "followupCustomerId"
+        ).value =
+            customer._id || "";
+
+
+        document.getElementById(
+            "followupCustomerName"
+        ).value =
+            customerName;
+
+
+        document.getElementById(
+            "followupCustomerPhone"
+        ).value =
+            phone;
+
+
+        document.getElementById(
+            "followupPolicyNumber"
+        ).value =
+            policy
+                ? getPolicyNumber(
+                    policy
+                )
+                : "";
+
+
+        document.getElementById(
+            "followupPolicyName"
+        ).value =
+            policy
+                ? getPolicyType(
+                    policy
+                )
+                : "General Customer Follow-up";
+
+
+        document.getElementById(
+            "selectedCustomerName"
+        ).textContent =
+            customerName;
+
+
+        document.getElementById(
+            "selectedCustomerPhone"
+        ).textContent =
+            phone;
+
+
+        /*
+         * Set today's date automatically.
+         */
+        const today =
+            new Date();
+
+
+        const todayString =
+            today.getFullYear() +
+            "-" +
+            String(
+                today.getMonth() + 1
+            ).padStart(
+                2,
+                "0"
+            ) +
+            "-" +
+            String(
+                today.getDate()
+            ).padStart(
+                2,
+                "0"
+            );
+
+
+        document.getElementById(
+            "followupDate"
+        ).value =
+            todayString;
+
+
+        /*
+         * Set a default time.
+         */
+        document.getElementById(
+            "followupTime"
+        ).value =
+            "10:00";
+
+
+        document.getElementById(
+            "followupPriority"
+        ).value =
+            calculateCustomerPriority(
+                policies
+            );
+
+
+        document.getElementById(
+            "followupType"
+        ).value =
+            "Phone Call";
+
+
+        document.getElementById(
+            "followupNotes"
+        ).value =
+            "";
+
+
+        document.getElementById(
+            "followupSuccess"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "followupModal"
+        ).classList.add(
+            "show"
+        );
+
+    }
+
+
+    /* =========================================
+       CLOSE FOLLOW-UP MODAL
+    ========================================= */
+
+    function closeFollowupModal() {
+
+        document.getElementById(
+            "followupModal"
+        ).classList.remove(
+            "show"
+        );
+
+
+        selectedFollowupCustomer =
+            null;
+
+    }
+
+
+    /* =========================================
+       GET STORED FOLLOW-UPS
+    ========================================= */
+
+    function getStoredFollowups() {
+
+        try {
+
+            const stored =
+                localStorage.getItem(
+                    FOLLOWUP_STORAGE_KEY
+                );
+
+
+            if (!stored) {
+                return [];
+            }
+
+
+            const parsed =
+                JSON.parse(
+                    stored
+                );
+
+
+            return Array.isArray(
+                parsed
+            )
+                ? parsed
+                : [];
+
+
+        } catch (error) {
+
+            console.error(
+                "Unable to read follow-ups:",
+                error
+            );
+
+
+            return [];
+
+        }
+
+    }
+
+
+    /* =========================================
+       SAVE STORED FOLLOW-UPS
+    ========================================= */
+
+    function saveStoredFollowups(
+        followups
+    ) {
+
+        localStorage.setItem(
+            FOLLOWUP_STORAGE_KEY,
+            JSON.stringify(
+                followups
+            )
+        );
+
+    }
+
+
+    /* =========================================
+       SAVE FOLLOW-UP
+    ========================================= */
+
+    document
+        .getElementById(
+            "followupForm"
+        )
+        .addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+
+                const customerId =
+                    document.getElementById(
+                        "followupCustomerId"
+                    ).value;
+
+
+                const customerName =
+                    document.getElementById(
+                        "followupCustomerName"
+                    ).value;
+
+
+                const phone =
+                    document.getElementById(
+                        "followupCustomerPhone"
+                    ).value;
+
+
+                const policyNumber =
+                    document.getElementById(
+                        "followupPolicyNumber"
+                    ).value;
+
+
+                const policyName =
+                    document.getElementById(
+                        "followupPolicyName"
+                    ).value;
+
+
+                const date =
+                    document.getElementById(
+                        "followupDate"
+                    ).value;
+
+
+                const time =
+                    document.getElementById(
+                        "followupTime"
+                    ).value;
+
+
+                const priority =
+                    document.getElementById(
+                        "followupPriority"
+                    ).value;
+
+
+                const type =
+                    document.getElementById(
+                        "followupType"
+                    ).value;
+
+
+                const notes =
+                    document.getElementById(
+                        "followupNotes"
+                    ).value.trim();
+
+
+                if (
+                    !customerId ||
+                    !date ||
+                    !time
+                ) {
+
+                    alert(
+                        "Please select a follow-up date and time."
+                    );
+
+                    return;
+
+                }
+
+
+                const saveButton =
+                    document.getElementById(
+                        "saveFollowupButton"
+                    );
+
+
+                saveButton.disabled =
+                    true;
+
+
+                saveButton.textContent =
+                    "Creating...";
+
+
+                try {
+
+                    const followups =
+                        getStoredFollowups();
+
+
+                    /*
+                     * Create a unique follow-up.
+                     */
+                    const followup = {
+
+                        id:
+                            "FU-" +
+                            Date.now(),
+
+                        agentId:
+                            loggedInAgentId,
+
+                        customerId:
+                            customerId,
+
+                        customerName:
+                            customerName,
+
+                        phone:
+                            phone,
+
+                        policyNumber:
+                            policyNumber,
+
+                        policyName:
+                            policyName,
+
+                        date:
+                            date,
+
+                        time:
+                            time,
+
+                        priority:
+                            priority,
+
+                        type:
+                            type,
+
+                        notes:
+                            notes,
+
+                        status:
+                            "pending",
+
+                        createdAt:
+                            new Date()
+                                .toISOString(),
+
+                        completedAt:
+                            null
+
+                    };
+
+
+                    followups.push(
+                        followup
+                    );
+
+
+                    saveStoredFollowups(
+                        followups
+                    );
+
+
+                    /*
+                     * Update the customer table
+                     * immediately.
+                     */
+                    renderCustomers(
+                        allCustomers
+                    );
+
+
+                    document.getElementById(
+                        "followupSuccess"
+                    ).style.display =
+                        "block";
+
+
+                    document.getElementById(
+                        "followupSuccess"
+                    ).textContent =
+                        "Follow-up for " +
+                        customerName +
+                        " created successfully.";
+
+
+                    /*
+                     * Close modal after
+                     * successful save.
+                     */
+                    setTimeout(
+                        function() {
+
+                            closeFollowupModal();
+
+                        },
+                        700
+                    );
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Follow-up save error:",
+                        error
+                    );
+
+
+                    alert(
+                        "Unable to create follow-up. Please try again."
+                    );
+
+                } finally {
+
+                    saveButton.disabled =
+                        false;
+
+
+                    saveButton.textContent =
+                        "Create Follow-up";
+
+                }
+
+            }
+        );
+
+
+    /* =========================================
+       CLOSE FOLLOW-UP MODAL OUTSIDE
+    ========================================= */
+
+    document
+        .getElementById(
+            "followupModal"
+        )
+        .addEventListener(
+            "click",
+            function(event) {
+
+                if (
+                    event.target ===
+                    this
+                ) {
+
+                    closeFollowupModal();
+
+                }
+
+            }
+        );
+
+
+    /* =========================================
+       ADD CUSTOMER MODAL
+    ========================================= */
+
+    /*
+     * Your original customer modal is kept
+     * here for compatibility.
+     */
+
+    const addCustomerModal =
+        document.getElementById(
+            "addCustomerModal"
+        );
+
+
+    function openAddCustomerModal() {
+
+        if (addCustomerModal) {
+
+            addCustomerModal.classList.add(
+                "show"
+            );
+
+        }
+
+    }
+
+
+    function closeAddCustomerModal() {
+
+        if (addCustomerModal) {
+
+            addCustomerModal.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+
+
+    /* =========================================
+       FORMAT DATE
+    ========================================= */
+
+    function formatDate(
+        value
+    ) {
+
+        if (!value) {
+            return "—";
+        }
+
+
+        const date =
+            new Date(
+                value
+            );
+
+
+        if (
+            Number.isNaN(
+                date.getTime()
+            )
+        ) {
+
+            return String(value);
+
+        }
+
+
+        return date.toLocaleDateString(
+            "en-IN",
+            {
+                day: "2-digit",
+                month: "short",
+                year: "numeric"
+            }
+        );
+
+    }
+
+
+    /* =========================================
+       CUSTOMER FORM
+    ========================================= */
+
+    const customerForm =
+        document.getElementById(
+            "customerForm"
+        );
+
+
+    if (customerForm) {
+
+        customerForm.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+
+                if (!loggedInAgentId) {
+
+                    alert(
+                        "Your login session was not found. Please login again."
+                    );
+
+
+                    window.location.href =
+                        "../login.html";
+
+
+                    return;
+
+                }
+
+
+                const saveButton =
+                    this.querySelector(
+                        ".modal-btn.save"
+                    );
+
+
+                const name =
+                    document.getElementById(
+                        "customerName"
+                    ).value.trim();
+
+
+                const mobile =
+                    document.getElementById(
+                        "customerMobile"
+                    ).value.trim();
+
+
+                const email =
+                    document.getElementById(
+                        "customerEmail"
+                    ).value.trim();
+
+
+                const dob =
+                    document.getElementById(
+                        "customerDob"
+                    ).value;
+
+
+                const policyNumber =
+                    document.getElementById(
+                        "policyNumber"
+                    ).value.trim();
+
+
+                const policyType =
+                    document.getElementById(
+                        "policyType"
+                    ).value;
+
+
+                const address =
+                    document.getElementById(
+                        "customerAddress"
+                    ).value.trim();
+
+
+                if (
+                    !name ||
+                    !mobile
+                ) {
+
+                    alert(
+                        "Please enter customer name and mobile number."
+                    );
+
+
+                    return;
+
+                }
+
+
+                const customerData = {
+
+                    agentId:
+                        loggedInAgentId,
+
+                    fullName:
+                        name,
+
+                    dob:
+                        dob ||
+                        "Not provided",
+
+                    gender:
+                        "Not specified",
+
+                    maritalStatus:
+                        "Not specified",
+
+                    occupation:
+                        "Not specified",
+
+                    phone:
+                        mobile,
+
+                    email:
+                        email,
+
+                    address:
+                        address ||
+                        "Not provided",
+
+                    city:
+                        "Not provided",
+
+                    state:
+                        "Not provided",
+
+                    pincode:
+                        "Not provided",
+
+                    annualIncome:
+                        0,
+
+                    familyMembers:
+                        0,
+
+                    dependents:
+                        0,
+
+                    insuranceNeed:
+                        policyType ||
+                        "Not specified",
+
+                    notes:
+                        policyNumber
+                            ? "Policy Number: " +
+                              policyNumber
+                            : ""
+
+                };
+
+
+                try {
+
+                    saveButton.disabled =
+                        true;
+
+
+                    saveButton.textContent =
+                        "Saving...";
+
+
+                    const response =
+                        await fetch(
+                            API_URL +
+                            "/api/customers",
+                            {
+
+                                method:
+                                    "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body:
+                                    JSON.stringify(
+                                        customerData
+                                    )
+
+                            }
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (
+                        !response.ok ||
+                        !data.success
+                    ) {
+
+                        throw new Error(
+                            data.message ||
+                            "Unable to save customer."
+                        );
+
+                    }
+
+
+                    alert(
+                        "Customer " +
+                        name +
+                        " added successfully!"
+                    );
+
+
+                    this.reset();
+
+
+                    closeAddCustomerModal();
+
+
+                    await loadCustomers();
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Save customer error:",
+                        error
+                    );
+
+
+                    alert(
+                        error.message ||
+                        "Unable to add customer. Please try again."
+                    );
+
+
+                } finally {
+
+                    saveButton.disabled =
+                        false;
+
+
+                    saveButton.textContent =
+                        "Save Customer";
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* =========================================
+       ADD CUSTOMER MODAL CLOSE
+    ========================================= */
+
+    if (addCustomerModal) {
+
+        addCustomerModal.addEventListener(
+            "click",
+            function(event) {
+
+                if (
+                    event.target ===
+                    addCustomerModal
+                ) {
+
+                    closeAddCustomerModal();
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* =========================================
+       PAGINATION
+    ========================================= */
+
+    document
+        .querySelectorAll(
+            ".page-btn"
+        )
+        .forEach(
+            function(button) {
+
+                button.addEventListener(
+                    "click",
+                    function() {
+
+                        const text =
+                            this.textContent
+                                .trim();
+
+
+                        if (
+                            text !== "‹" &&
+                            text !== "›"
+                        ) {
+
+                            document
+                                .querySelectorAll(
+                                    ".page-btn"
+                                )
+                                .forEach(
+                                    function(btn) {
+
+                                        btn.classList
+                                            .remove(
+                                                "active"
+                                            );
+
+                                    }
+                                );
+
+
+                            this.classList.add(
+                                "active"
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+
+    /* =========================================
+       SECURITY HELPERS
+    ========================================= */
+
+    function getInitials(
+        name
+    ) {
+
+        const parts =
+            name
+                .trim()
+                .split(/\s+/);
+
+
+        if (
+            !parts.length
+        ) {
+
+            return "CU";
+
+        }
+
+
+        let initials =
+            parts[0]
+                .charAt(0);
+
+
+        if (
+            parts.length > 1
+        ) {
+
+            initials +=
+                parts[
+                    parts.length - 1
+                ]
+                    .charAt(0);
+
+        }
+
+
+        return initials
+            .toUpperCase();
+
+    }
+
+
+    function escapeHtml(
+        value
+    ) {
+
+        return String(
+            value ?? ""
+        )
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+            .replace(
+                /</g,
+                "&lt;"
+            )
+            .replace(
+                />/g,
+                "&gt;"
+            )
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+    }
+
+
+    function escapeJs(
+        value
+    ) {
+
+        return String(
+            value ?? ""
+        )
+            .replace(
+                /\\/g,
+                "\\\\"
+            )
+            .replace(
+                /'/g,
+                "\\'"
+            )
+            .replace(
+                /"/g,
+                '\\"'
+            )
+            .replace(
+                /\n/g,
+                "\\n"
+            )
+            .replace(
+                /\r/g,
+                "\\r"
+            );
+
+    }
+
+
+    /* =========================================
+       PAGE LOAD
+    ========================================= */
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        async function() {
+
+            loadAgentDetails();
+
+            await loadCustomers();
+
+
+            console.log(
+                "TrustNest Customers page loaded successfully."
+            );
+
+
+            /*
+             * Show how many pending/overdue
+             * follow-ups exist in notification
+             * badge.
+             */
+            updateNotificationBadge();
+
+        }
+    );
+
+
+    /* =========================================
+       UPDATE NOTIFICATION BADGE
+    ========================================= */
+
+    function updateNotificationBadge() {
+
+        const badge =
+            document.getElementById(
+                "notificationBadge"
+            );
+
+
+        if (!badge) {
+            return;
+        }
+
+
+        const followups =
+            getStoredFollowups();
+
+
+        const today =
+            new Date();
+
+
+        today.setHours(
+            0,
+            0,
+            0,
+            0
+        );
+
+
+        let count = 0;
+
+
+        followups.forEach(
+            function(item) {
+
+                if (
+                    item.status ===
+                    "completed"
+                ) {
+
+                    return;
+
+                }
+
+
+                if (!item.date) {
+                    return;
+                }
+
+
+                const date =
+                    new Date(
+                        item.date
+                    );
+
+
+                date.setHours(
+                    0,
+                    0,
+                    0,
+                    0
+                );
+
+
+                /*
+                 * Today or overdue.
+                 */
+                if (
+                    date <= today
+                ) {
+
+                    count++;
+
+                }
+
+            }
+        );
+
+
+        badge.textContent =
+            count;
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

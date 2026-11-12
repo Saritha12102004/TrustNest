@@ -1,0 +1,4800 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Customer Details | TrustNest</title>
+
+<meta name="description"
+      content="View customer details, policies, interactions and smart insights in TrustNest">
+
+<link rel="preconnect"
+      href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet">
+
+<link rel="stylesheet"
+      href="../../css/style.css">
+
+<link rel="stylesheet"
+      href="../../css/dashboard.css">
+
+<link rel="stylesheet"
+      href="../../css/forms.css">
+
+<link rel="stylesheet"
+      href="../../css/responsive.css">
+
+
+<style>
+
+/* =========================================================
+   GENERAL
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Inter",sans-serif;
+    background:#f5f7fb;
+    color:#172033;
+    min-height:100vh;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+button{
+    font-family:inherit;
+}
+
+.dashboard{
+    display:flex;
+    min-height:100vh;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar{
+    width:250px;
+    background:linear-gradient(180deg,#061f42,#092b5c);
+    color:#fff;
+    position:fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    z-index:100;
+    display:flex;
+    flex-direction:column;
+    transition:.3s;
+}
+
+.sidebar-logo{
+    height:85px;
+    display:flex;
+    align-items:center;
+    padding:0 25px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.logo-icon{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:#fff;
+    color:#092b5c;
+    border:3px solid #c9a227;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:800;
+    margin-right:10px;
+}
+
+.logo-name{
+    font-family:"Playfair Display",serif;
+    font-size:23px;
+    font-weight:700;
+}
+
+.logo-subtitle{
+    display:block;
+    font-size:7px;
+    letter-spacing:1.5px;
+    color:#d6b23c;
+    margin-top:-2px;
+}
+
+.menu-title{
+    padding:25px 25px 10px;
+    color:#7f94ad;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+}
+
+.sidebar-menu{
+    list-style:none;
+    padding:0 12px;
+}
+
+.sidebar-menu li{
+    margin-bottom:4px;
+}
+
+.sidebar-menu a{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:11px 13px;
+    border-radius:7px;
+    color:#b8c6d8;
+    font-size:12px;
+    transition:.25s;
+}
+
+.sidebar-menu a:hover{
+    background:rgba(255,255,255,.07);
+    color:#fff;
+}
+
+.sidebar-menu a.active{
+    background:rgba(255,255,255,.12);
+    color:#fff;
+    border-left:3px solid #c9a227;
+}
+
+.menu-icon{
+    width:22px;
+    text-align:center;
+    font-size:14px;
+}
+
+.sidebar-bottom{
+    margin-top:auto;
+    padding:15px;
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+.sidebar-bottom a{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:#aebed0;
+    font-size:11px;
+    padding:10px;
+}
+
+.sidebar-bottom a:hover{
+    color:#fff;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main{
+    margin-left:250px;
+    width:calc(100% - 250px);
+    min-height:100vh;
+}
+
+
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.topbar{
+    height:75px;
+    background:#fff;
+    border-bottom:1px solid #e8edf3;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 30px;
+    position:sticky;
+    top:0;
+    z-index:50;
+}
+
+.mobile-menu{
+    display:none;
+    border:none;
+    background:none;
+    font-size:22px;
+    cursor:pointer;
+    margin-right:10px;
+}
+
+.page-title h1{
+    font-family:"Playfair Display",serif;
+    color:#092b5c;
+    font-size:24px;
+    margin-bottom:2px;
+}
+
+.page-title p{
+    color:#8995a5;
+    font-size:10px;
+}
+
+.topbar-right{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.notification{
+    position:relative;
+    font-size:18px;
+    color:#526071;
+}
+
+.notification-badge{
+    position:absolute;
+    top:-5px;
+    right:-6px;
+    width:15px;
+    height:15px;
+    border-radius:50%;
+    background:#c9a227;
+    color:#fff;
+    font-size:8px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+}
+
+.agent-profile-mini{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.agent-avatar-small{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#092b5c,#1c518e);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    font-size:13px;
+    border:2px solid #d6b23c;
+}
+
+.agent-mini-info strong{
+    display:block;
+    font-size:11px;
+    color:#172033;
+}
+
+.agent-mini-info span{
+    font-size:9px;
+    color:#8995a5;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content{
+    padding:28px 30px;
+    max-width:1250px;
+    margin:auto;
+}
+
+
+/* =========================================================
+   BREADCRUMB
+========================================================= */
+
+.breadcrumb{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    font-size:9px;
+    color:#8995a5;
+    margin-bottom:18px;
+}
+
+.breadcrumb a{
+    color:#52769c;
+    font-weight:500;
+}
+
+.breadcrumb a:hover{
+    color:#092b5c;
+}
+
+.breadcrumb .current{
+    color:#526071;
+    font-weight:600;
+}
+
+
+/* =========================================================
+   CUSTOMER HEADER
+========================================================= */
+
+.customer-header{
+    background:#fff;
+    border:1px solid #e5eaf0;
+    border-radius:11px;
+    padding:22px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    margin-bottom:18px;
+}
+
+.customer-main-info{
+    display:flex;
+    align-items:center;
+    gap:16px;
+}
+
+.customer-avatar{
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#092b5c,#1b4f87);
+    color:#fff;
+    border:3px solid #d6b23c;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:21px;
+    font-weight:700;
+    flex-shrink:0;
+}
+
+.customer-name{
+    font-family:"Playfair Display",serif;
+    font-size:23px;
+    color:#092b5c;
+    margin-bottom:5px;
+}
+
+.customer-id{
+    font-size:9px;
+    color:#8995a5;
+    margin-bottom:7px;
+}
+
+.status-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    padding:5px 9px;
+    border-radius:20px;
+    background:#eaf7f0;
+    color:#258351;
+    font-size:8px;
+    font-weight:700;
+}
+
+.status-dot{
+    width:5px;
+    height:5px;
+    border-radius:50%;
+    background:#258351;
+}
+
+.header-actions{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn{
+    border:none;
+    border-radius:7px;
+    padding:10px 14px;
+    font-size:9px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.2s;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+}
+
+.btn-primary{
+    background:#092b5c;
+    color:#fff;
+}
+
+.btn-primary:hover{
+    background:#061f42;
+    transform:translateY(-1px);
+}
+
+.btn-secondary{
+    background:#edf1f5;
+    color:#526071;
+}
+
+.btn-secondary:hover{
+    background:#e2e6eb;
+}
+
+.btn-gold{
+    background:#c9a227;
+    color:#fff;
+}
+
+.btn-gold:hover{
+    background:#b08d18;
+}
+
+
+/* =========================================================
+   MAIN GRID
+========================================================= */
+
+.main-grid{
+    display:grid;
+    grid-template-columns:minmax(0,2fr) minmax(280px,1fr);
+    gap:18px;
+}
+
+.left-column,
+.right-column{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.card{
+    background:#fff;
+    border:1px solid #e5eaf0;
+    border-radius:11px;
+    overflow:hidden;
+}
+
+.card-header{
+    padding:17px 20px;
+    border-bottom:1px solid #edf0f4;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.card-title{
+    font-size:12px;
+    color:#172033;
+    font-weight:700;
+}
+
+.card-subtitle{
+    font-size:8px;
+    color:#8995a5;
+    margin-top:3px;
+}
+
+.card-body{
+    padding:20px;
+}
+
+
+/* =========================================================
+   INFORMATION GRID
+========================================================= */
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:19px 25px;
+}
+
+.info-item label{
+    display:block;
+    font-size:8px;
+    color:#8995a5;
+    margin-bottom:5px;
+    text-transform:uppercase;
+    letter-spacing:.4px;
+    font-weight:600;
+}
+
+.info-item span,
+.info-item a{
+    display:block;
+    font-size:10px;
+    color:#344054;
+    font-weight:600;
+    word-break:break-word;
+}
+
+.info-item a{
+    color:#092b5c;
+}
+
+.info-item a:hover{
+    text-decoration:underline;
+}
+
+
+/* =========================================================
+   POLICY
+========================================================= */
+
+.policy-card{
+    border:1px solid #e6ebf0;
+    border-radius:8px;
+    padding:15px;
+    margin-bottom:10px;
+    transition:.2s;
+}
+
+.policy-card:last-child{
+    margin-bottom:0;
+}
+
+.policy-card:hover{
+    border-color:#c8d2de;
+    transform:translateY(-1px);
+}
+
+.policy-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:10px;
+    margin-bottom:12px;
+}
+
+.policy-number{
+    color:#092b5c;
+    font-size:10px;
+    font-weight:700;
+}
+
+.policy-name{
+    color:#172033;
+    font-size:11px;
+    font-weight:700;
+    margin-top:3px;
+}
+
+.policy-status{
+    padding:4px 8px;
+    border-radius:15px;
+    font-size:7px;
+    font-weight:700;
+    white-space:nowrap;
+}
+
+.active-status{
+    background:#eaf7f0;
+    color:#258351;
+}
+
+.due-status{
+    background:#fff6df;
+    color:#a47600;
+}
+
+.expired-status{
+    background:#fff0f0;
+    color:#b23b3b;
+}
+
+.policy-details{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.policy-detail label{
+    display:block;
+    color:#9aa4b1;
+    font-size:7px;
+    margin-bottom:4px;
+}
+
+.policy-detail span{
+    color:#344054;
+    font-size:9px;
+    font-weight:600;
+}
+
+.no-policy{
+    background:#f8fafc;
+    border:1px dashed #d7dfe8;
+    border-radius:8px;
+    padding:18px;
+    text-align:center;
+    color:#8995a5;
+    font-size:9px;
+    line-height:1.6;
+}
+
+.policy-count-badge{
+    background:#edf3fa;
+    color:#092b5c;
+    border-radius:15px;
+    padding:4px 8px;
+    font-size:8px;
+    font-weight:700;
+}
+
+
+/* =========================================================
+   QUICK ACTIONS
+========================================================= */
+
+.quick-actions{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:8px;
+}
+
+.quick-action{
+    border:1px solid #e5eaf0;
+    border-radius:8px;
+    padding:13px 10px;
+    text-align:center;
+    cursor:pointer;
+    transition:.2s;
+    background:#fff;
+}
+
+.quick-action:hover{
+    border-color:#092b5c;
+    background:#f8fafc;
+}
+
+.quick-action-icon{
+    font-size:17px;
+    margin-bottom:5px;
+}
+
+.quick-action span{
+    display:block;
+    font-size:8px;
+    color:#526071;
+    font-weight:600;
+}
+
+
+/* =========================================================
+   SCORE
+========================================================= */
+
+.score-card{
+    background:linear-gradient(135deg,#092b5c,#0d396e);
+    color:#fff;
+    padding:20px;
+    border-radius:11px;
+}
+
+.score-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:17px;
+}
+
+.score-title{
+    font-size:11px;
+    font-weight:700;
+}
+
+.ai-badge{
+    background:rgba(255,255,255,.12);
+    color:#d6b23c;
+    padding:4px 7px;
+    border-radius:12px;
+    font-size:7px;
+    font-weight:700;
+}
+
+.score-content{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.score-circle{
+    width:72px;
+    height:72px;
+    border-radius:50%;
+    border:5px solid #d6b23c;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    flex-shrink:0;
+}
+
+.score-number{
+    font-size:21px;
+    font-weight:800;
+}
+
+.score-out-of{
+    font-size:6px;
+    color:#b9c9dc;
+}
+
+.score-text h4{
+    font-size:10px;
+    margin-bottom:5px;
+}
+
+.score-text p{
+    font-size:8px;
+    color:#b9c9dc;
+    line-height:1.5;
+}
+
+
+/* =========================================================
+   FOLLOW-UP
+========================================================= */
+
+.followup-box{
+    background:#fffaf0;
+    border:1px solid #f1e3bd;
+    border-radius:8px;
+    padding:14px;
+}
+
+.followup-label{
+    color:#9a7a1b;
+    font-size:8px;
+    font-weight:700;
+    margin-bottom:5px;
+}
+
+.followup-date{
+    color:#344054;
+    font-size:12px;
+    font-weight:700;
+    margin-bottom:4px;
+}
+
+.followup-desc{
+    color:#8995a5;
+    font-size:8px;
+    line-height:1.5;
+}
+
+
+/* =========================================================
+   RECOMMENDATION
+========================================================= */
+
+.recommendation{
+    padding:13px;
+    border:1px solid #e4e9ef;
+    border-radius:8px;
+    margin-bottom:9px;
+    background:#fbfcfe;
+}
+
+.recommendation:last-child{
+    margin-bottom:0;
+}
+
+.recommendation-top{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:6px;
+}
+
+.recommendation-icon{
+    width:27px;
+    height:27px;
+    border-radius:7px;
+    background:#edf3fa;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:13px;
+}
+
+.recommendation strong{
+    color:#344054;
+    font-size:9px;
+}
+
+.recommendation p{
+    color:#8995a5;
+    font-size:8px;
+    line-height:1.5;
+}
+
+
+/* =========================================================
+   TIMELINE
+========================================================= */
+
+.timeline{
+    position:relative;
+    padding-left:20px;
+}
+
+.timeline::before{
+    content:"";
+    position:absolute;
+    left:4px;
+    top:5px;
+    bottom:5px;
+    width:1px;
+    background:#dce3eb;
+}
+
+.timeline-item{
+    position:relative;
+    margin-bottom:18px;
+}
+
+.timeline-item:last-child{
+    margin-bottom:0;
+}
+
+.timeline-dot{
+    position:absolute;
+    left:-20px;
+    top:2px;
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:#092b5c;
+    border:2px solid white;
+    box-shadow:0 0 0 1px #092b5c;
+}
+
+.timeline-title{
+    font-size:9px;
+    color:#344054;
+    font-weight:700;
+    margin-bottom:3px;
+}
+
+.timeline-date{
+    font-size:7px;
+    color:#9aa4b1;
+    margin-bottom:4px;
+}
+
+.timeline-text{
+    color:#8995a5;
+    font-size:8px;
+    line-height:1.5;
+}
+
+.notes-box{
+    background:#f8fafc;
+    border:1px solid #e8edf2;
+    border-radius:7px;
+    padding:13px;
+    color:#697586;
+    font-size:8px;
+    line-height:1.6;
+}
+
+
+/* =========================================================
+   LOADING / ERROR
+========================================================= */
+
+.loading-box{
+    text-align:center;
+    padding:25px;
+    color:#8995a5;
+    font-size:9px;
+}
+
+.error-box{
+    background:#fff2f2;
+    border:1px solid #f0caca;
+    border-radius:7px;
+    padding:13px;
+    color:#a33a3a;
+    font-size:8px;
+    line-height:1.6;
+    margin-bottom:15px;
+}
+
+.policy-warning{
+    background:#fffaf0;
+    border:1px solid #f1e3bd;
+    border-radius:7px;
+    padding:10px 12px;
+    color:#8c6d16;
+    font-size:8px;
+    line-height:1.5;
+    margin-bottom:12px;
+}
+
+
+/* =========================================================
+   BRANCH HIGHLIGHT
+========================================================= */
+
+.branch-value{
+    color:#092b5c !important;
+    font-weight:700 !important;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:950px){
+
+    .sidebar{
+        transform:translateX(-100%);
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main{
+        margin-left:0;
+        width:100%;
+    }
+
+    .mobile-menu{
+        display:block;
+    }
+
+    .main-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+
+@media(max-width:650px){
+
+    .content{
+        padding:20px 15px;
+    }
+
+    .topbar{
+        padding:0 15px;
+    }
+
+    .customer-header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .header-actions{
+        justify-content:flex-start;
+        width:100%;
+    }
+
+    .header-actions .btn{
+        flex:1;
+    }
+
+    .info-grid{
+        grid-template-columns:1fr;
+    }
+
+    .policy-details{
+        grid-template-columns:1fr;
+    }
+
+    .agent-mini-info{
+        display:none;
+    }
+
+    .customer-name{
+        font-size:19px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="dashboard">
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar"
+       id="sidebar">
+
+
+<a href="dashboard.html"
+   class="sidebar-logo">
+
+<div class="logo-icon">
+T
+</div>
+
+<div>
+
+<div class="logo-name">
+TrustNest
+</div>
+
+<span class="logo-subtitle">
+Insurance Intelligence
+</span>
+
+</div>
+
+</a>
+
+
+<div class="menu-title">
+Main Menu
+</div>
+
+
+<ul class="sidebar-menu">
+
+<li>
+
+<a href="dashboard.html">
+
+<span class="menu-icon">
+▦
+</span>
+
+Dashboard
+
+</a>
+
+</li>
+
+
+<li>
+
+<a href="customers.html"
+   class="active">
+
+<span class="menu-icon">
+👥
+</span>
+
+Customers
+
+</a>
+
+</li>
+
+
+<li>
+
+<a href="policies.html">
+
+<span class="menu-icon">
+📋
+</span>
+
+Policies
+
+</a>
+
+</li>
+
+
+<li>
+
+<a href="followups.html">
+
+<span class="menu-icon">
+🔔
+</span>
+
+Follow-ups
+
+</a>
+
+</li>
+
+
+<li>
+
+<a href="interactions.html">
+
+<span class="menu-icon">
+💬
+</span>
+
+Interactions
+
+</a>
+
+</li>
+
+</ul>
+
+
+<div class="menu-title">
+Smart Features
+</div>
+
+
+<ul class="sidebar-menu">
+
+<li>
+
+<a href="recommendations.html">
+
+<span class="menu-icon">
+✨
+</span>
+
+Recommendations
+
+</a>
+
+</li>
+
+
+<li>
+
+<a href="leads.html">
+
+<span class="menu-icon">
+🎯
+</span>
+
+Smart Leads
+
+</a>
+
+</li>
+
+
+<li>
+
+<a href="sales-insights.html">
+
+<span class="menu-icon">
+📊
+</span>
+
+Sales Insights
+
+</a>
+
+</li>
+
+
+<li>
+
+<a href="notifications.html">
+
+<span class="menu-icon">
+🔔
+</span>
+
+Notifications
+
+</a>
+
+</li>
+
+</ul>
+
+
+<div class="menu-title">
+Account
+</div>
+
+
+<ul class="sidebar-menu">
+
+<li>
+
+<a href="profile.html">
+
+<span class="menu-icon">
+👤
+</span>
+
+My Profile
+
+</a>
+
+</li>
+
+</ul>
+
+
+<div class="sidebar-bottom">
+
+<a href="../login.html">
+
+<span>
+⇥
+</span>
+
+Logout
+
+</a>
+
+</div>
+
+
+</aside>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+<!-- =====================================================
+     TOPBAR
+===================================================== -->
+
+<header class="topbar">
+
+
+<div style="display:flex;align-items:center">
+
+
+<button class="mobile-menu"
+        id="mobileMenu">
+
+☰
+
+</button>
+
+
+<div class="page-title">
+
+<h1>
+Customer Details
+</h1>
+
+<p>
+Customer profile and insurance overview
+</p>
+
+</div>
+
+
+</div>
+
+
+<div class="topbar-right">
+
+
+<a href="notifications.html"
+   class="notification">
+
+🔔
+
+<span class="notification-badge">
+4
+</span>
+
+</a>
+
+
+<div class="agent-profile-mini">
+
+
+<div class="agent-avatar-small"
+     id="agentAvatar">
+
+--
+
+</div>
+
+
+<div class="agent-mini-info">
+
+<strong id="agentName">
+
+Insurance Agent
+
+</strong>
+
+<span>
+Insurance Agent
+</span>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</header>
+
+
+<!-- =====================================================
+     CONTENT
+===================================================== -->
+
+<div class="content">
+
+
+<!-- BREADCRUMB -->
+
+<div class="breadcrumb">
+
+<a href="dashboard.html">
+Dashboard
+</a>
+
+<span>/</span>
+
+<a href="customers.html">
+Customers
+</a>
+
+<span>/</span>
+
+<span class="current">
+Customer Details
+</span>
+
+</div>
+
+
+<!-- ERROR -->
+
+<div id="pageError"
+     class="error-box"
+     style="display:none">
+</div>
+
+
+<!-- =====================================================
+     CUSTOMER HEADER
+===================================================== -->
+
+<section class="customer-header">
+
+
+<div class="customer-main-info">
+
+
+<div class="customer-avatar"
+     id="customerAvatar">
+
+--
+
+</div>
+
+
+<div>
+
+
+<h2 class="customer-name"
+    id="customerName">
+
+Loading...
+
+</h2>
+
+
+<div class="customer-id">
+
+Customer ID:
+
+<strong id="customerId">
+
+--
+
+</strong>
+
+</div>
+
+
+<span class="status-badge">
+
+<span class="status-dot"></span>
+
+<span id="customerStatus">
+Active Customer
+</span>
+
+</span>
+
+
+</div>
+
+
+</div>
+
+
+<div class="header-actions">
+
+
+<button class="btn btn-secondary"
+        onclick="editCustomer()">
+
+✏️ Edit
+
+</button>
+
+
+<button class="btn btn-gold"
+        onclick="scheduleFollowup()">
+
+🔔 Follow-up
+
+</button>
+
+
+<button class="btn btn-primary"
+        onclick="contactCustomer()">
+
+📞 Contact
+
+</button>
+
+
+</div>
+
+
+</section>
+
+
+<!-- =====================================================
+     MAIN GRID
+===================================================== -->
+
+<div class="main-grid">
+
+
+<!-- =====================================================
+     LEFT COLUMN
+===================================================== -->
+
+<div class="left-column">
+
+
+<!-- =====================================================
+     PERSONAL INFORMATION
+===================================================== -->
+
+<section class="card">
+
+
+<div class="card-header">
+
+<div>
+
+<div class="card-title">
+Personal Information
+</div>
+
+<div class="card-subtitle">
+Customer's basic information
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card-body">
+
+
+<div class="info-grid">
+
+
+<div class="info-item">
+
+<label>
+Full Name
+</label>
+
+<span id="infoName">
+--
+</span>
+
+</div>
+
+
+<div class="info-item">
+
+<label>
+Date of Birth
+</label>
+
+<span id="infoDob">
+--
+</span>
+
+</div>
+
+
+<div class="info-item">
+
+<label>
+Gender
+</label>
+
+<span id="infoGender">
+--
+</span>
+
+</div>
+
+
+<div class="info-item">
+
+<label>
+Marital Status
+</label>
+
+<span id="infoMaritalStatus">
+--
+</span>
+
+</div>
+
+
+<div class="info-item">
+
+<label>
+Occupation
+</label>
+
+<span id="infoOccupation">
+--
+</span>
+
+</div>
+
+
+<div class="info-item">
+
+<label>
+Annual Income
+</label>
+
+<span id="infoIncome">
+--
+</span>
+
+</div>
+
+
+<div class="info-item">
+
+<label>
+Family Size
+</label>
+
+<span id="infoFamily">
+--
+</span>
+
+</div>
+
+
+<div class="info-item">
+
+<label>
+Dependents
+</label>
+
+<span id="infoDependents">
+--
+</span>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     CONTACT INFORMATION
+===================================================== -->
+
+<section class="card">
+
+
+<div class="card-header">
+
+<div>
+
+<div class="card-title">
+Contact Information
+</div>
+
+<div class="card-subtitle">
+Customer communication details
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card-body">
+
+
+<div class="info-grid">
+
+
+<div class="info-item">
+
+<label>
+Mobile Number
+</label>
+
+<a href="#"
+   id="infoPhone">
+
+--
+
+</a>
+
+</div>
+
+
+<div class="info-item">
+
+<label>
+Email Address
+</label>
+
+<a href="#"
+   id="infoEmail">
+
+--
+
+</a>
+
+</div>
+
+
+<div class="info-item">
+
+<label>
+Address
+</label>
+
+<span id="infoAddress">
+--
+</span>
+
+</div>
+
+
+<div class="info-item">
+
+<label>
+City
+</label>
+
+<span id="infoCity">
+--
+</span>
+
+</div>
+
+
+<div class="info-item">
+
+<label>
+State
+</label>
+
+<span id="infoState">
+--
+</span>
+
+</div>
+
+
+<div class="info-item">
+
+<label>
+PIN Code
+</label>
+
+<span id="infoPincode">
+--
+</span>
+
+</div>
+
+
+<div class="info-item">
+
+<label>
+Preferred Contact
+</label>
+
+<span id="infoPreferredContact">
+--
+</span>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     POLICIES
+===================================================== -->
+
+<section class="card">
+
+
+<div class="card-header">
+
+
+<div>
+
+<div class="card-title">
+Insurance Policies
+</div>
+
+<div class="card-subtitle">
+Policies associated with this customer
+</div>
+
+</div>
+
+
+<div style="display:flex;align-items:center;gap:8px">
+
+
+<span class="policy-count-badge"
+      id="policyCount">
+
+0 Policies
+
+</span>
+
+
+<a href="policies.html"
+   class="btn btn-secondary">
+
+View All
+
+</a>
+
+
+</div>
+
+
+</div>
+
+
+<div class="card-body">
+
+
+<div id="policyList">
+
+<div class="loading-box">
+Loading policies...
+</div>
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+<!-- =====================================================
+     INTERACTIONS
+===================================================== -->
+
+<section class="card">
+
+
+<div class="card-header">
+
+
+<div>
+
+<div class="card-title">
+Recent Interactions
+</div>
+
+<div class="card-subtitle">
+Customer communication history
+</div>
+
+</div>
+
+
+<a id="viewInteractionsLink"
+   href="interactions.html"
+   class="btn btn-secondary">
+
+View All
+
+</a>
+
+
+</div>
+
+
+<div class="card-body">
+
+
+<div class="timeline"
+     id="interactionTimeline">
+
+
+<div class="notes-box">
+
+No interactions recorded yet.
+
+Interaction history will appear here when the interaction module is connected.
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+<!-- =====================================================
+     NOTES
+===================================================== -->
+
+<section class="card">
+
+
+<div class="card-header">
+
+
+<div>
+
+<div class="card-title">
+Agent Notes
+</div>
+
+<div class="card-subtitle">
+Private notes for customer management
+</div>
+
+</div>
+
+
+</div>
+
+
+<div class="card-body">
+
+
+<div class="notes-box"
+     id="customerNotes">
+
+No notes have been added for this customer.
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+</div>
+
+
+<!-- =====================================================
+     RIGHT COLUMN
+===================================================== -->
+
+<div class="right-column">
+
+
+<!-- =====================================================
+     PRIORITY SCORE
+===================================================== -->
+
+<section class="score-card">
+
+
+<div class="score-header">
+
+<div class="score-title">
+Customer Priority Score
+</div>
+
+<span class="ai-badge">
+PROFILE INSIGHT
+</span>
+
+</div>
+
+
+<div class="score-content">
+
+
+<div class="score-circle">
+
+<span class="score-number"
+      id="priorityScore">
+
+--
+
+</span>
+
+<span class="score-out-of">
+/ 100
+</span>
+
+</div>
+
+
+<div class="score-text">
+
+<h4 id="priorityTitle">
+Profile Insight
+</h4>
+
+<p id="priorityDescription">
+
+Priority insights will be calculated from the customer's profile and policy information.
+
+</p>
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+<!-- =====================================================
+     QUICK ACTIONS
+===================================================== -->
+
+<section class="card">
+
+
+<div class="card-header">
+
+<div class="card-title">
+Quick Actions
+</div>
+
+</div>
+
+
+<div class="card-body">
+
+
+<div class="quick-actions">
+
+
+<div class="quick-action"
+     onclick="callCustomer()">
+
+<div class="quick-action-icon">
+📞
+</div>
+
+<span>
+Call
+</span>
+
+</div>
+
+
+<div class="quick-action"
+     onclick="whatsappCustomer()">
+
+<div class="quick-action-icon">
+💬
+</div>
+
+<span>
+WhatsApp
+</span>
+
+</div>
+
+
+<div class="quick-action"
+     onclick="sendReminder()">
+
+<div class="quick-action-icon">
+🔔
+</div>
+
+<span>
+Reminder
+</span>
+
+</div>
+
+
+<div class="quick-action"
+     onclick="viewRecommendations()">
+
+<div class="quick-action-icon">
+✨
+</div>
+
+<span>
+Recommend
+</span>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+<!-- =====================================================
+     NEXT FOLLOW-UP
+===================================================== -->
+
+<section class="card">
+
+
+<div class="card-header">
+
+
+<div>
+
+<div class="card-title">
+Next Follow-up
+</div>
+
+<div class="card-subtitle">
+Scheduled customer action
+</div>
+
+</div>
+
+
+</div>
+
+
+<div class="card-body">
+
+
+<div class="followup-box">
+
+
+<div class="followup-label">
+UPCOMING
+</div>
+
+
+<div class="followup-date"
+     id="nextFollowupDate">
+
+No follow-up scheduled
+
+</div>
+
+
+<div class="followup-desc"
+     id="nextFollowupDesc">
+
+Policy due dates and follow-up information will appear here.
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+<!-- =====================================================
+     RECOMMENDATIONS
+===================================================== -->
+
+<section class="card">
+
+
+<div class="card-header">
+
+
+<div>
+
+<div class="card-title">
+Smart Recommendations
+</div>
+
+<div class="card-subtitle">
+Based on customer profile
+</div>
+
+</div>
+
+
+</div>
+
+
+<div class="card-body"
+     id="recommendationList">
+
+
+<div class="recommendation">
+
+
+<div class="recommendation-top">
+
+
+<div class="recommendation-icon">
+✨
+</div>
+
+
+<strong>
+Profile-based recommendations
+</strong>
+
+
+</div>
+
+
+<p id="recommendationText">
+
+Recommendations will be generated from the customer's insurance need, income, family size and policy information.
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+<!-- =====================================================
+     CUSTOMER OVERVIEW
+===================================================== -->
+
+<section class="card">
+
+
+<div class="card-header">
+
+<div class="card-title">
+Customer Overview
+</div>
+
+</div>
+
+
+<div class="card-body">
+
+
+<div class="info-grid"
+     style="grid-template-columns:1fr">
+
+
+<!-- CUSTOMER SINCE -->
+
+<div class="info-item">
+
+<label>
+Customer Since
+</label>
+
+<span id="customerSince">
+--
+</span>
+
+</div>
+
+
+<!-- CUSTOMER SOURCE -->
+
+<div class="info-item">
+
+<label>
+Customer Source
+</label>
+
+<span id="customerSource">
+Added through TrustNest
+</span>
+
+</div>
+
+
+<!-- INSURANCE NEED -->
+
+<div class="info-item">
+
+<label>
+Insurance Need
+</label>
+
+<span id="insuranceNeed">
+--
+</span>
+
+</div>
+
+
+<!-- FINANCIAL GOAL -->
+
+<div class="info-item">
+
+<label>
+Financial Goal
+</label>
+
+<span id="financialGoal">
+--
+</span>
+
+</div>
+
+
+<!-- ASSIGNED AGENT -->
+
+<div class="info-item">
+
+<label>
+Assigned Agent
+</label>
+
+<span id="assignedAgent">
+--
+</span>
+
+</div>
+
+
+<!-- BRANCH -->
+
+<div class="info-item">
+
+<label>
+LIC Branch
+</label>
+
+<span id="agentBranch"
+      class="branch-value">
+
+--
+
+</span>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</main>
+
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   TRUSTNEST CUSTOMER DETAILS
+========================================================= */
+
+const API_URL =
+    window.TRUSTNEST_API_URL ||
+    "http://localhost:5000";
+
+
+const loggedInAgentId =
+    localStorage.getItem("agentId");
+
+
+const loggedInAgentName =
+    localStorage.getItem("agentName") ||
+    "Insurance Agent";
+
+
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const customerId =
+    urlParams.get("id");
+
+
+let currentCustomer = null;
+
+let currentPolicies = [];
+
+let currentAgent = null;
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+const mobileMenu =
+    document.getElementById(
+        "mobileMenu"
+    );
+
+
+const sidebar =
+    document.getElementById(
+        "sidebar"
+    );
+
+
+if(
+    mobileMenu &&
+    sidebar
+){
+
+    mobileMenu.addEventListener(
+        "click",
+        function(){
+
+            sidebar.classList.toggle(
+                "open"
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   AGENT HEADER DEFAULT
+========================================================= */
+
+document.getElementById(
+    "agentName"
+).textContent =
+    loggedInAgentName;
+
+
+document.getElementById(
+    "agentAvatar"
+).textContent =
+    getInitials(
+        loggedInAgentName
+    );
+
+
+/* =========================================================
+   HELPER
+========================================================= */
+
+function getInitials(name){
+
+    if(!name){
+
+        return "--";
+
+    }
+
+
+    const parts =
+        String(name)
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean);
+
+
+    if(parts.length === 1){
+
+        return parts[0]
+            .substring(0,2)
+            .toUpperCase();
+
+    }
+
+
+    return (
+        parts[0][0] +
+        parts[parts.length - 1][0]
+    ).toUpperCase();
+
+}
+
+
+/* =========================================================
+   FIRST VALUE
+========================================================= */
+
+function firstValue(...values){
+
+    for(
+        const value of values
+    ){
+
+        if(
+            value !== undefined &&
+            value !== null &&
+            String(value).trim() !== ""
+        ){
+
+            return value;
+
+        }
+
+    }
+
+
+    return null;
+
+}
+
+
+/* =========================================================
+   FORMAT DATE
+========================================================= */
+
+function formatDate(value){
+
+    if(!value){
+
+        return "Not provided";
+
+    }
+
+
+    const date =
+        new Date(value);
+
+
+    if(
+        Number.isNaN(
+            date.getTime()
+        )
+    ){
+
+        return String(value);
+
+    }
+
+
+    return date.toLocaleDateString(
+        "en-IN",
+        {
+            day:"2-digit",
+            month:"long",
+            year:"numeric"
+        }
+    );
+
+}
+
+
+/* =========================================================
+   SHORT DATE
+========================================================= */
+
+function formatShortDate(value){
+
+    if(!value){
+
+        return "Not provided";
+
+    }
+
+
+    const date =
+        new Date(value);
+
+
+    if(
+        Number.isNaN(
+            date.getTime()
+        )
+    ){
+
+        return String(value);
+
+    }
+
+
+    return date.toLocaleDateString(
+        "en-IN",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric"
+        }
+    );
+
+}
+
+
+/* =========================================================
+   FORMAT INCOME
+========================================================= */
+
+function formatIncome(value){
+
+    if(
+        value === null ||
+        value === undefined ||
+        String(value).trim() === ""
+    ){
+
+        return "Not provided";
+
+    }
+
+
+    /*
+     * Supports:
+     * 500000
+     * "500000"
+     * "₹5,00,000"
+     * "5 LPA"
+     * "₹5 Lakhs"
+     */
+
+    const numericValue =
+        String(value)
+        .replace(/[₹,\s]/g,"")
+        .replace(/LPA/gi,"")
+        .trim();
+
+
+    const amount =
+        Number(numericValue);
+
+
+    if(
+        !Number.isNaN(amount) &&
+        amount > 0
+    ){
+
+        return (
+            "₹" +
+            amount.toLocaleString("en-IN") +
+            " / year"
+        );
+
+    }
+
+
+    return String(value);
+
+}
+
+
+/* =========================================================
+   FORMAT MONEY
+========================================================= */
+
+function formatMoney(value){
+
+    const amount =
+        Number(value);
+
+
+    if(
+        value === null ||
+        value === undefined ||
+        value === "" ||
+        Number.isNaN(amount)
+    ){
+
+        return "Not provided";
+
+    }
+
+
+    return (
+        "₹" +
+        amount.toLocaleString("en-IN")
+    );
+
+}
+
+
+/* =========================================================
+   SHOW ERROR
+========================================================= */
+
+function showError(message){
+
+    const box =
+        document.getElementById(
+            "pageError"
+        );
+
+
+    box.textContent =
+        message;
+
+
+    box.style.display =
+        "block";
+
+
+    document.getElementById(
+        "customerName"
+    ).textContent =
+        "Customer not available";
+
+
+    document.getElementById(
+        "customerAvatar"
+    ).textContent =
+        "--";
+
+}
+
+
+/* =========================================================
+   NORMALIZE POLICY STATUS
+========================================================= */
+
+function normalizePolicyStatus(policy){
+
+    const raw =
+        firstValue(
+            policy.status,
+            policy.policyStatus,
+            policy.currentStatus
+        );
+
+
+    if(!raw){
+
+        return "active";
+
+    }
+
+
+    const status =
+        String(raw)
+        .trim()
+        .toLowerCase();
+
+
+    if(
+        status.includes("expire") ||
+        status.includes("lapse")
+    ){
+
+        return "expired";
+
+    }
+
+
+    if(
+        status.includes("due") ||
+        status.includes("renew")
+    ){
+
+        return "due";
+
+    }
+
+
+    if(
+        status.includes("inactive") ||
+        status.includes("cancel")
+    ){
+
+        return "inactive";
+
+    }
+
+
+    return "active";
+
+}
+
+
+/* =========================================================
+   POLICY STATUS TEXT
+========================================================= */
+
+function policyStatusText(policy){
+
+    const raw =
+        firstValue(
+            policy.status,
+            policy.policyStatus,
+            policy.currentStatus
+        );
+
+
+    if(!raw){
+
+        return "Active";
+
+    }
+
+
+    return String(raw);
+
+}
+
+
+/* =========================================================
+   GET POLICY CUSTOMER ID
+========================================================= */
+
+function getPolicyCustomerId(policy){
+
+    const directId =
+        firstValue(
+            policy.customerId,
+            policy.clientId,
+            policy.customer_id,
+            policy.client_id
+        );
+
+
+    if(directId){
+
+        if(
+            typeof directId === "object" &&
+            directId._id
+        ){
+
+            return String(
+                directId._id
+            );
+
+        }
+
+
+        return String(
+            directId
+        );
+
+    }
+
+
+    if(
+        policy.customer &&
+        typeof policy.customer === "object"
+    ){
+
+        if(policy.customer._id){
+
+            return String(
+                policy.customer._id
+            );
+
+        }
+
+
+        if(policy.customer.id){
+
+            return String(
+                policy.customer.id
+            );
+
+        }
+
+    }
+
+
+    if(policy.customer){
+
+        return String(
+            policy.customer
+        );
+
+    }
+
+
+    if(
+        policy.client &&
+        typeof policy.client === "object"
+    ){
+
+        if(policy.client._id){
+
+            return String(
+                policy.client._id
+            );
+
+        }
+
+    }
+
+
+    if(policy.client){
+
+        return String(
+            policy.client
+        );
+
+    }
+
+
+    return "";
+
+}
+
+
+/* =========================================================
+   GET POLICY NUMBER
+========================================================= */
+
+function getPolicyNumber(policy){
+
+    return firstValue(
+        policy.policyNumber,
+        policy.policyNo,
+        policy.number,
+        policy.policyId,
+        policy.policyID
+    ) || "Policy Number Not Available";
+
+}
+
+
+/* =========================================================
+   GET POLICY TYPE
+========================================================= */
+
+function getPolicyType(policy){
+
+    return firstValue(
+        policy.policyType,
+        policy.type,
+        policy.planName,
+        policy.plan,
+        policy.category
+    ) || "Insurance Policy";
+
+}
+
+
+/* =========================================================
+   GET POLICY PREMIUM
+========================================================= */
+
+function getPolicyPremium(policy){
+
+    return firstValue(
+        policy.premium,
+        policy.premiumAmount,
+        policy.amount,
+        policy.premiumValue
+    );
+
+}
+
+
+/* =========================================================
+   GET POLICY DUE DATE
+========================================================= */
+
+function getPolicyDueDate(policy){
+
+    return firstValue(
+        policy.nextPremiumDate,
+        policy.premiumDate,
+        policy.renewalDate,
+        policy.nextDueDate,
+        policy.dueDate
+    );
+
+}
+
+
+/* =========================================================
+   LOAD AGENT DETAILS
+========================================================= */
+
+async function loadAgentDetails(){
+
+    if(!loggedInAgentId){
+
+        document.getElementById(
+            "assignedAgent"
+        ).textContent =
+            loggedInAgentName;
+
+
+        document.getElementById(
+            "agentBranch"
+        ).textContent =
+            "Not available";
+
+        return;
+
+    }
+
+
+    try{
+
+        const response =
+            await fetch(
+                API_URL +
+                "/api/agents/" +
+                encodeURIComponent(
+                    loggedInAgentId
+                )
+            );
+
+
+        if(!response.ok){
+
+            throw new Error(
+                "Agent details unavailable"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if(
+            data.success &&
+            data.agent
+        ){
+
+            currentAgent =
+                data.agent;
+
+
+            const agent =
+                data.agent;
+
+
+            const agentName =
+                firstValue(
+                    agent.fullName,
+                    agent.name
+                ) ||
+                loggedInAgentName;
+
+
+            const branch =
+                firstValue(
+                    agent.branch,
+                    agent.branchName,
+                    agent.branchDetails,
+                    agent.office,
+                    agent.officeName,
+                    agent.branchCode
+                );
+
+
+            document.getElementById(
+                "agentName"
+            ).textContent =
+                agentName;
+
+
+            document.getElementById(
+                "agentAvatar"
+            ).textContent =
+                getInitials(
+                    agentName
+                );
+
+
+            document.getElementById(
+                "assignedAgent"
+            ).textContent =
+                agentName;
+
+
+            /*
+             * This is the agent branch.
+             * If customer.branch exists,
+             * renderCustomer() will replace it
+             * with the customer branch.
+             */
+
+            document.getElementById(
+                "agentBranch"
+            ).textContent =
+                branch ||
+                "Not provided";
+
+        }
+
+    }
+    catch(error){
+
+        console.warn(
+            "Agent details warning:",
+            error
+        );
+
+
+        document.getElementById(
+            "assignedAgent"
+        ).textContent =
+            loggedInAgentName;
+
+
+        document.getElementById(
+            "agentBranch"
+        ).textContent =
+            "Not available";
+
+    }
+
+}
+
+
+/* =========================================================
+   LOAD CUSTOMER
+========================================================= */
+
+async function loadCustomer(){
+
+    if(!loggedInAgentId){
+
+        showError(
+            "Agent session not found. Please login again."
+        );
+
+        return;
+
+    }
+
+
+    if(!customerId){
+
+        showError(
+            "Customer ID is missing from the URL."
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        const response =
+            await fetch(
+                API_URL +
+                "/api/customers?agentId=" +
+                encodeURIComponent(
+                    loggedInAgentId
+                )
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(
+            !response.ok ||
+            !data.success
+        ){
+
+            throw new Error(
+                data.message ||
+                "Unable to load customers."
+            );
+
+        }
+
+
+        const customers =
+            Array.isArray(
+                data.customers
+            )
+                ? data.customers
+                : [];
+
+
+        const customer =
+            customers.find(
+                item =>
+                    String(item._id) ===
+                    String(customerId)
+            );
+
+
+        if(!customer){
+
+            showError(
+                "Customer not found for this agent."
+            );
+
+            return;
+
+        }
+
+
+        currentCustomer =
+            customer;
+
+
+        renderCustomer(
+            customer
+        );
+
+
+        await loadCustomerPolicies(
+            customer
+        );
+
+
+        updateProfileInsight(
+            customer
+        );
+
+
+        updateRecommendations(
+            customer,
+            currentPolicies
+        );
+
+
+        updateNextFollowup(
+            currentPolicies
+        );
+
+    }
+    catch(error){
+
+        console.error(
+            "Customer details error:",
+            error
+        );
+
+
+        showError(
+            error.message ||
+            "Unable to load customer details."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   RENDER CUSTOMER
+========================================================= */
+
+function renderCustomer(customer){
+
+    const name =
+        firstValue(
+            customer.fullName,
+            customer.name
+        ) ||
+        "Unnamed Customer";
+
+
+    /* =====================================================
+       HEADER
+    ===================================================== */
+
+    document.getElementById(
+        "customerAvatar"
+    ).textContent =
+        getInitials(name);
+
+
+    document.getElementById(
+        "customerName"
+    ).textContent =
+        name;
+
+
+    document.getElementById(
+        "customerId"
+    ).textContent =
+        customer._id || "--";
+
+
+    /* =====================================================
+       STATUS
+    ===================================================== */
+
+    const customerStatus =
+        firstValue(
+            customer.status,
+            customer.customerStatus
+        ) ||
+        "Active";
+
+
+    document.getElementById(
+        "customerStatus"
+    ).textContent =
+        customerStatus;
+
+
+    /* =====================================================
+       PERSONAL INFORMATION
+    ===================================================== */
+
+    document.getElementById(
+        "infoName"
+    ).textContent =
+        name;
+
+
+    const dob =
+        firstValue(
+            customer.dob,
+            customer.dateOfBirth,
+            customer.birthDate
+        );
+
+
+    document.getElementById(
+        "infoDob"
+    ).textContent =
+        formatDate(dob);
+
+
+    document.getElementById(
+        "infoGender"
+    ).textContent =
+        firstValue(
+            customer.gender,
+            customer.sex
+        ) ||
+        "Not specified";
+
+
+    /*
+     * MARITAL STATUS
+     */
+
+    const maritalStatus =
+        firstValue(
+            customer.maritalStatus,
+            customer.marital_status
+        );
+
+
+    document.getElementById(
+        "infoMaritalStatus"
+    ).textContent =
+        maritalStatus ||
+        "Not specified";
+
+
+    /*
+     * OCCUPATION
+     */
+
+    document.getElementById(
+        "infoOccupation"
+    ).textContent =
+        firstValue(
+            customer.occupation,
+            customer.job
+        ) ||
+        "Not specified";
+
+
+    /*
+     * ANNUAL INCOME
+     *
+     * Supports both:
+     * income
+     * annualIncome
+     * yearlyIncome
+     */
+
+    const income =
+        firstValue(
+            customer.income,
+            customer.annualIncome,
+            customer.yearlyIncome
+        );
+
+
+    document.getElementById(
+        "infoIncome"
+    ).textContent =
+        formatIncome(income);
+
+
+    /*
+     * FAMILY SIZE
+     */
+
+    const familySize =
+        firstValue(
+            customer.familySize,
+            customer.familyMembers,
+            customer.familymembers
+        );
+
+
+    document.getElementById(
+        "infoFamily"
+    ).textContent =
+        familySize !== null
+            ? familySize +
+              " Member" +
+              (
+                  Number(familySize) === 1
+                      ? ""
+                      : "s"
+              )
+            : "Not provided";
+
+
+    /*
+     * DEPENDENTS
+     */
+
+    const dependents =
+        firstValue(
+            customer.dependents,
+            customer.dependentCount,
+            customer.numberOfDependents
+        );
+
+
+    document.getElementById(
+        "infoDependents"
+    ).textContent =
+        dependents !== null
+            ? String(dependents)
+            : "Not provided";
+
+
+    /* =====================================================
+       CONTACT INFORMATION
+    ===================================================== */
+
+    const phone =
+        firstValue(
+            customer.phone,
+            customer.mobile,
+            customer.mobileNumber
+        ) || "";
+
+
+    const email =
+        firstValue(
+            customer.email,
+            customer.emailAddress
+        ) || "";
+
+
+    const phoneEl =
+        document.getElementById(
+            "infoPhone"
+        );
+
+
+    const emailEl =
+        document.getElementById(
+            "infoEmail"
+        );
+
+
+    phoneEl.textContent =
+        phone ||
+        "Not provided";
+
+
+    phoneEl.href =
+        phone
+            ? "tel:" +
+              String(phone)
+              .replace(/\s+/g,"")
+            : "#";
+
+
+    emailEl.textContent =
+        email ||
+        "Not provided";
+
+
+    emailEl.href =
+        email
+            ? "mailto:" +
+              email
+            : "#";
+
+
+    document.getElementById(
+        "infoAddress"
+    ).textContent =
+        firstValue(
+            customer.address,
+            customer.fullAddress
+        ) ||
+        "Not provided";
+
+
+    document.getElementById(
+        "infoCity"
+    ).textContent =
+        firstValue(
+            customer.city,
+            customer.town
+        ) ||
+        "Not provided";
+
+
+    document.getElementById(
+        "infoState"
+    ).textContent =
+        firstValue(
+            customer.state
+        ) ||
+        "Not provided";
+
+
+    document.getElementById(
+        "infoPincode"
+    ).textContent =
+        firstValue(
+            customer.pincode,
+            customer.pinCode,
+            customer.zipCode
+        ) ||
+        "Not provided";
+
+
+    document.getElementById(
+        "infoPreferredContact"
+    ).textContent =
+        firstValue(
+            customer.preferredContact,
+            customer.contactPreference
+        ) ||
+        "Not specified";
+
+
+    /* =====================================================
+       NOTES
+    ===================================================== */
+
+    document.getElementById(
+        "customerNotes"
+    ).textContent =
+        firstValue(
+            customer.notes,
+            customer.note
+        ) ||
+        "No notes have been added for this customer.";
+
+
+    /* =====================================================
+       CUSTOMER OVERVIEW
+    ===================================================== */
+
+    document.getElementById(
+        "customerSince"
+    ).textContent =
+        customer.createdAt
+            ? formatDate(
+                customer.createdAt
+              )
+            : "Not available";
+
+
+    document.getElementById(
+        "insuranceNeed"
+    ).textContent =
+        firstValue(
+            customer.insuranceNeed,
+            customer.policyType
+        ) ||
+        "Not specified";
+
+
+    document.getElementById(
+        "financialGoal"
+    ).textContent =
+        firstValue(
+            customer.financialGoal,
+            customer.insuranceGoal,
+            customer.goal
+        ) ||
+        "Not specified";
+
+
+    document.getElementById(
+        "customerSource"
+    ).textContent =
+        firstValue(
+            customer.leadSource,
+            customer.source
+        ) ||
+        "Added through TrustNest";
+
+
+    /*
+     * ASSIGNED AGENT
+     */
+
+    const assignedAgent =
+        firstValue(
+            customer.agentName,
+            currentAgent?.fullName,
+            currentAgent?.name,
+            loggedInAgentName
+        );
+
+
+    document.getElementById(
+        "assignedAgent"
+    ).textContent =
+        assignedAgent ||
+        "Not provided";
+
+
+    /*
+     * BRANCH
+     *
+     * Priority:
+     *
+     * 1. Customer's saved branch
+     * 2. Agent branch
+     * 3. Branch name
+     * 4. Office
+     * 5. Branch code
+     */
+
+    const customerBranch =
+        firstValue(
+            customer.branch,
+            customer.branchName,
+            customer.branchDetails,
+            customer.office,
+            customer.officeName,
+            customer.branchCode
+        );
+
+
+    const agentBranch =
+        firstValue(
+            currentAgent?.branch,
+            currentAgent?.branchName,
+            currentAgent?.branchDetails,
+            currentAgent?.office,
+            currentAgent?.officeName,
+            currentAgent?.branchCode
+        );
+
+
+    const finalBranch =
+        customerBranch ||
+        agentBranch;
+
+
+    document.getElementById(
+        "agentBranch"
+    ).textContent =
+        finalBranch ||
+        "Branch not provided";
+
+}
+
+
+/* =========================================================
+   LOAD POLICIES
+========================================================= */
+
+async function loadCustomerPolicies(customer){
+
+    const policyList =
+        document.getElementById(
+            "policyList"
+        );
+
+
+    policyList.innerHTML =
+        '<div class="loading-box">Loading policies...</div>';
+
+
+    try{
+
+        const response =
+            await fetch(
+                API_URL +
+                "/api/policies?agentId=" +
+                encodeURIComponent(
+                    loggedInAgentId
+                )
+            );
+
+
+        if(!response.ok){
+
+            throw new Error(
+                "Policy API returned status " +
+                response.status
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        let policies = [];
+
+
+        if(
+            Array.isArray(
+                data.policies
+            )
+        ){
+
+            policies =
+                data.policies;
+
+        }
+        else if(
+            Array.isArray(
+                data.data
+            )
+        ){
+
+            policies =
+                data.data;
+
+        }
+        else if(
+            Array.isArray(data)
+        ){
+
+            policies =
+                data;
+
+        }
+
+
+        currentPolicies =
+            policies.filter(
+                policy => {
+
+                    const policyCustomerId =
+                        getPolicyCustomerId(
+                            policy
+                        );
+
+
+                    return (
+                        String(policyCustomerId) ===
+                        String(customer._id)
+                    );
+
+                }
+            );
+
+
+        /*
+         * Fallback customer policy data
+         */
+
+        if(
+            currentPolicies.length === 0
+        ){
+
+            const customerPolicyNumber =
+                firstValue(
+                    customer.policyNumber,
+                    customer.policyNo
+                );
+
+
+            const customerPolicyType =
+                firstValue(
+                    customer.policyType
+                );
+
+
+            if(
+                customerPolicyNumber ||
+                customerPolicyType
+            ){
+
+                currentPolicies = [{
+
+                    _id:
+                        "customer-policy-fallback",
+
+                    policyNumber:
+                        customerPolicyNumber,
+
+                    policyType:
+                        customerPolicyType,
+
+                    premium:
+                        firstValue(
+                            customer.premium,
+                            customer.premiumAmount
+                        ),
+
+                    status:
+                        firstValue(
+                            customer.policyStatus,
+                            customer.status
+                        ) ||
+                        "Active",
+
+                    premiumDate:
+                        customer.premiumDate,
+
+                    renewalDate:
+                        customer.renewalDate
+
+                }];
+
+            }
+
+        }
+
+
+        renderPolicies(
+            currentPolicies
+        );
+
+    }
+    catch(error){
+
+        console.warn(
+            "Policy loading warning:",
+            error
+        );
+
+
+        currentPolicies = [];
+
+
+        renderPolicies([]);
+
+
+        const warning =
+            document.createElement(
+                "div"
+            );
+
+
+        warning.className =
+            "policy-warning";
+
+
+        warning.textContent =
+            "Customer information loaded successfully, but policy records could not be loaded. Please make sure the /api/policies endpoint is available.";
+
+
+        policyList.prepend(
+            warning
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   RENDER POLICIES
+========================================================= */
+
+function renderPolicies(policies){
+
+    const policyList =
+        document.getElementById(
+            "policyList"
+        );
+
+
+    const policyCount =
+        document.getElementById(
+            "policyCount"
+        );
+
+
+    policyCount.textContent =
+        policies.length +
+        " Polic" +
+        (
+            policies.length === 1
+                ? "y"
+                : "ies"
+        );
+
+
+    if(!policies.length){
+
+        policyList.innerHTML = `
+
+            <div class="no-policy">
+
+                <strong>
+                    No policies found
+                </strong>
+
+                <br>
+
+                No policy document is currently linked
+                to this customer.
+
+                <br>
+
+                Add a policy from the Policies module
+                and make sure the policy is linked to
+                this customer's ID.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    policyList.innerHTML = "";
+
+
+    policies.forEach(
+        (policy,index) => {
+
+            const number =
+                getPolicyNumber(
+                    policy
+                );
+
+
+            const type =
+                getPolicyType(
+                    policy
+                );
+
+
+            const premium =
+                getPolicyPremium(
+                    policy
+                );
+
+
+            const status =
+                normalizePolicyStatus(
+                    policy
+                );
+
+
+            const statusText =
+                policyStatusText(
+                    policy
+                );
+
+
+            const dueDate =
+                getPolicyDueDate(
+                    policy
+                );
+
+
+            let statusClass =
+                "active-status";
+
+
+            if(status === "due"){
+
+                statusClass =
+                    "due-status";
+
+            }
+            else if(
+                status === "expired" ||
+                status === "inactive"
+            ){
+
+                statusClass =
+                    "expired-status";
+
+            }
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "policy-card";
+
+
+            card.innerHTML = `
+
+                <div class="policy-top">
+
+                    <div>
+
+                        <div class="policy-number">
+
+                            ${escapeHtml(number)}
+
+                        </div>
+
+                        <div class="policy-name">
+
+                            ${escapeHtml(type)}
+
+                        </div>
+
+                    </div>
+
+
+                    <span class="policy-status ${statusClass}">
+
+                        ${escapeHtml(statusText)}
+
+                    </span>
+
+                </div>
+
+
+                <div class="policy-details">
+
+                    <div class="policy-detail">
+
+                        <label>
+                            PREMIUM
+                        </label>
+
+                        <span>
+                            ${formatMoney(premium)}
+                        </span>
+
+                    </div>
+
+
+                    <div class="policy-detail">
+
+                        <label>
+                            NEXT DUE / RENEWAL
+                        </label>
+
+                        <span>
+                            ${formatShortDate(dueDate)}
+                        </span>
+
+                    </div>
+
+
+                    <div class="policy-detail">
+
+                        <label>
+                            POLICY
+                        </label>
+
+                        <span>
+                            #${index + 1}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            policyList.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(value){
+
+    return String(
+        value ?? ""
+    )
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   PRIORITY SCORE
+========================================================= */
+
+function updateProfileInsight(customer){
+
+    let score = 25;
+
+
+    const policies =
+        currentPolicies || [];
+
+
+    const income =
+        Number(
+            firstValue(
+                customer.income,
+                customer.annualIncome
+            )
+        );
+
+
+    if(income > 0){
+
+        score += 10;
+
+    }
+
+
+    const family =
+        Number(
+            firstValue(
+                customer.familySize,
+                customer.familyMembers
+            )
+        );
+
+
+    if(family > 0){
+
+        score += 5;
+
+    }
+
+
+    if(
+        firstValue(
+            customer.insuranceNeed,
+            customer.financialGoal
+        )
+    ){
+
+        score += 10;
+
+    }
+
+
+    const dependents =
+        Number(
+            firstValue(
+                customer.dependents,
+                customer.dependentCount
+            )
+        );
+
+
+    if(dependents > 0){
+
+        score += 5;
+
+    }
+
+
+    if(policies.length > 0){
+
+        score += 15;
+
+    }
+
+
+    let hasDue = false;
+
+    let hasExpired = false;
+
+    let hasActive = false;
+
+
+    policies.forEach(
+        policy => {
+
+            const status =
+                normalizePolicyStatus(
+                    policy
+                );
+
+
+            if(status === "due"){
+
+                hasDue = true;
+
+            }
+
+
+            if(status === "expired"){
+
+                hasExpired = true;
+
+            }
+
+
+            if(status === "active"){
+
+                hasActive = true;
+
+            }
+
+        }
+    );
+
+
+    if(hasActive){
+
+        score += 10;
+
+    }
+
+
+    if(hasDue){
+
+        score += 15;
+
+    }
+
+
+    if(hasExpired){
+
+        score += 20;
+
+    }
+
+
+    score =
+        Math.min(
+            score,
+            100
+        );
+
+
+    let title =
+        "Low Priority";
+
+
+    let description =
+        "Customer profile requires regular monitoring.";
+
+
+    if(
+        hasExpired ||
+        score >= 80
+    ){
+
+        title =
+            "High Priority";
+
+
+        description =
+            "Customer has policy or profile conditions that may require immediate attention.";
+
+    }
+    else if(
+        hasDue ||
+        score >= 55
+    ){
+
+        title =
+            "Medium Priority";
+
+
+        description =
+            "Customer has active insurance information and may require upcoming follow-up.";
+
+    }
+    else{
+
+        title =
+            "Profile Insight";
+
+
+        description =
+            "Customer profile information is available for future policy and follow-up planning.";
+
+    }
+
+
+    document.getElementById(
+        "priorityScore"
+    ).textContent =
+        score;
+
+
+    document.getElementById(
+        "priorityTitle"
+    ).textContent =
+        title;
+
+
+    document.getElementById(
+        "priorityDescription"
+    ).textContent =
+        description;
+
+}
+
+
+/* =========================================================
+   SMART RECOMMENDATIONS
+========================================================= */
+
+function updateRecommendations(
+    customer,
+    policies
+){
+
+    const recommendationText =
+        document.getElementById(
+            "recommendationText"
+        );
+
+
+    const need =
+        firstValue(
+            customer.insuranceNeed,
+            customer.financialGoal
+        );
+
+
+    const family =
+        firstValue(
+            customer.familySize,
+            customer.familyMembers
+        );
+
+
+    const dependents =
+        firstValue(
+            customer.dependents,
+            customer.dependentCount
+        );
+
+
+    const income =
+        Number(
+            firstValue(
+                customer.income,
+                customer.annualIncome
+            )
+        );
+
+
+    const messages = [];
+
+
+    if(need){
+
+        messages.push(
+            "Recorded insurance need: " +
+            need +
+            "."
+        );
+
+    }
+
+
+    if(
+        Number(family) > 0 ||
+        Number(dependents) > 0
+    ){
+
+        messages.push(
+            "Family and dependent information is available for protection planning."
+        );
+
+    }
+
+
+    if(income > 0){
+
+        messages.push(
+            "Annual income is available for evaluating suitable premium affordability."
+        );
+
+    }
+
+
+    if(
+        policies &&
+        policies.length > 0
+    ){
+
+        messages.push(
+            policies.length +
+            " existing insurance " +
+            (
+                policies.length === 1
+                    ? "policy is"
+                    : "policies are"
+            ) +
+            " linked to this customer."
+        );
+
+    }
+    else{
+
+        messages.push(
+            "No linked policy records were found yet."
+        );
+
+    }
+
+
+    if(messages.length){
+
+        recommendationText.textContent =
+            messages.join(" ");
+
+    }
+    else{
+
+        recommendationText.textContent =
+            "More customer profile information is required to generate detailed recommendations.";
+
+    }
+
+}
+
+
+/* =========================================================
+   NEXT FOLLOW-UP
+========================================================= */
+
+function updateNextFollowup(policies){
+
+    const dateElement =
+        document.getElementById(
+            "nextFollowupDate"
+        );
+
+
+    const descElement =
+        document.getElementById(
+            "nextFollowupDesc"
+        );
+
+
+    const upcomingDates = [];
+
+
+    policies.forEach(
+        policy => {
+
+            const date =
+                getPolicyDueDate(
+                    policy
+                );
+
+
+            if(!date){
+
+                return;
+
+            }
+
+
+            const parsed =
+                new Date(date);
+
+
+            if(
+                !Number.isNaN(
+                    parsed.getTime()
+                )
+            ){
+
+                upcomingDates.push({
+
+                    date:parsed,
+
+                    policy:policy
+
+                });
+
+            }
+
+        }
+    );
+
+
+    upcomingDates.sort(
+        (a,b) =>
+            a.date - b.date
+    );
+
+
+    if(
+        upcomingDates.length === 0
+    ){
+
+        dateElement.textContent =
+            "No follow-up scheduled";
+
+
+        descElement.textContent =
+            "No policy due or renewal date is currently available.";
+
+        return;
+
+    }
+
+
+    const upcoming =
+        upcomingDates[0];
+
+
+    dateElement.textContent =
+        formatDate(
+            upcoming.date
+        );
+
+
+    descElement.textContent =
+        "Upcoming policy premium or renewal date. Consider contacting the customer before the due date.";
+
+}
+
+
+/* =========================================================
+   EDIT CUSTOMER
+========================================================= */
+
+function editCustomer(){
+
+    if(!customerId){
+
+        alert(
+            "Customer ID is missing."
+        );
+
+        return;
+
+    }
+
+
+    window.location.href =
+        "add-customer.html?id=" +
+        encodeURIComponent(
+            customerId
+        );
+
+}
+
+
+/* =========================================================
+   SCHEDULE FOLLOW-UP
+========================================================= */
+
+function scheduleFollowup(){
+
+    if(customerId){
+
+        window.location.href =
+            "followups.html?customerId=" +
+            encodeURIComponent(
+                customerId
+            );
+
+    }
+    else{
+
+        window.location.href =
+            "followups.html";
+
+    }
+
+}
+
+
+/* =========================================================
+   CONTACT CUSTOMER
+========================================================= */
+
+function contactCustomer(){
+
+    if(
+        !currentCustomer ||
+        !firstValue(
+            currentCustomer.phone,
+            currentCustomer.mobile,
+            currentCustomer.mobileNumber
+        )
+    ){
+
+        alert(
+            "Customer phone number is not available."
+        );
+
+        return;
+
+    }
+
+
+    const mobile =
+        String(
+            firstValue(
+                currentCustomer.phone,
+                currentCustomer.mobile,
+                currentCustomer.mobileNumber
+            )
+        ).replace(
+            /\D/g,
+            ""
+        );
+
+
+    const name =
+        currentCustomer.fullName ||
+        "Customer";
+
+
+    const message =
+        "Hello " +
+        name +
+        ", this is " +
+        loggedInAgentName +
+        " from TrustNest. I would like to discuss your insurance details.";
+
+
+    window.open(
+        "https://wa.me/" +
+        mobile +
+        "?text=" +
+        encodeURIComponent(
+            message
+        ),
+        "_blank"
+    );
+
+}
+
+
+/* =========================================================
+   CALL CUSTOMER
+========================================================= */
+
+function callCustomer(){
+
+    if(
+        !currentCustomer ||
+        !firstValue(
+            currentCustomer.phone,
+            currentCustomer.mobile,
+            currentCustomer.mobileNumber
+        )
+    ){
+
+        alert(
+            "Customer phone number is not available."
+        );
+
+        return;
+
+    }
+
+
+    const phone =
+        firstValue(
+            currentCustomer.phone,
+            currentCustomer.mobile,
+            currentCustomer.mobileNumber
+        );
+
+
+    window.location.href =
+        "tel:" +
+        String(phone).replace(
+            /\s+/g,
+            ""
+        );
+
+}
+
+
+/* =========================================================
+   WHATSAPP
+========================================================= */
+
+function whatsappCustomer(){
+
+    contactCustomer();
+
+}
+
+
+/* =========================================================
+   SEND REMINDER
+========================================================= */
+
+function sendReminder(){
+
+    if(!currentCustomer){
+
+        alert(
+            "Customer details are not loaded."
+        );
+
+        return;
+
+    }
+
+
+    const name =
+        currentCustomer.fullName ||
+        "this customer";
+
+
+    alert(
+        "Reminder action is ready for " +
+        name +
+        ". Notification functionality will be connected when the notification module is implemented."
+    );
+
+}
+
+
+/* =========================================================
+   RECOMMENDATIONS
+========================================================= */
+
+function viewRecommendations(){
+
+    if(customerId){
+
+        window.location.href =
+            "recommendations.html?customerId=" +
+            encodeURIComponent(
+                customerId
+            );
+
+    }
+    else{
+
+        window.location.href =
+            "recommendations.html";
+
+    }
+
+}
+
+
+/* =========================================================
+   INITIAL LOAD
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async function(){
+
+        /*
+         * Important:
+         *
+         * Load agent first.
+         * Then load customer.
+         *
+         * This allows the branch to be
+         * taken from the customer first,
+         * and from the agent as fallback.
+         */
+
+        await loadAgentDetails();
+
+        await loadCustomer();
+
+    }
+);
+
+</script>
+
+</body>
+</html>

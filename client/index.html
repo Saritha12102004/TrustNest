@@ -1,0 +1,2397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>TrustNest | Smart Insurance Agent Platform</title>
+
+    <meta name="description"
+          content="TrustNest is a smart insurance platform connecting customers with verified agents and providing intelligent insurance management tools.">
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
+
+
+    <style>
+
+        /* =========================================
+           GLOBAL
+        ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            color: #172033;
+            background: #ffffff;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: min(1180px, 92%);
+            margin: auto;
+        }
+
+        .section {
+            padding: 90px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 55px;
+        }
+
+        .section-title span {
+            color: #c9a227;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title h2 {
+            font-family: "Playfair Display", serif;
+            font-size: 42px;
+            margin: 12px 0;
+            color: #092b5c;
+        }
+
+        .section-title p {
+            color: #667085;
+            font-size: 16px;
+        }
+
+
+        /* =========================================
+           NAVBAR
+        ========================================= */
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+
+            background: rgba(255, 255, 255, 0.97);
+
+            border-bottom: 1px solid #e8edf4;
+
+            box-shadow: 0 3px 18px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-container {
+            height: 78px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+
+        /* LOGO */
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 43px;
+            height: 43px;
+
+            border-radius: 50%;
+
+            background: #092b5c;
+            color: #ffffff;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 20px;
+            font-weight: 800;
+
+            border: 3px solid #c9a227;
+        }
+
+        .logo-text {
+            font-family: "Playfair Display", serif;
+
+            font-size: 25px;
+            font-weight: 700;
+
+            color: #092b5c;
+        }
+
+        .logo-text small {
+            display: block;
+
+            font-family: "Inter", sans-serif;
+
+            font-size: 8px;
+
+            letter-spacing: 2px;
+
+            color: #c9a227;
+
+            text-transform: uppercase;
+
+            margin-top: -3px;
+        }
+
+
+        /* NAVIGATION LINKS */
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 600;
+
+            color: #344054;
+
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #092b5c;
+        }
+
+
+        /* NAV BUTTONS */
+
+        .nav-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .btn {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 12px 22px;
+
+            border-radius: 7px;
+
+            font-weight: 600;
+            font-size: 14px;
+
+            transition: 0.3s;
+
+            cursor: pointer;
+
+            border: none;
+        }
+
+        .btn-outline {
+            border: 1px solid #092b5c;
+
+            color: #092b5c;
+
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: #092b5c;
+            color: white;
+        }
+
+        .btn-primary {
+            background: #092b5c;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #061f42;
+
+            transform: translateY(-2px);
+        }
+
+        .btn-gold {
+            background: #c9a227;
+            color: #092b5c;
+        }
+
+        .btn-gold:hover {
+            background: #b28d1d;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================================
+           HERO
+        ========================================= */
+
+        .hero {
+            min-height: 720px;
+
+            padding-top: 78px;
+
+            background:
+                linear-gradient(
+                    110deg,
+                    #f6f9fd 0%,
+                    #eef4fb 55%,
+                    #e5eef9 100%
+                );
+
+            display: flex;
+
+            align-items: center;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: "";
+
+            position: absolute;
+
+            width: 500px;
+            height: 500px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(9, 43, 92, 0.08);
+
+            right: -180px;
+            top: 90px;
+        }
+
+        .hero-container {
+            display: grid;
+
+            grid-template-columns:
+                1.05fr
+                0.95fr;
+
+            gap: 70px;
+
+            align-items: center;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .trust-badge {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 8px 14px;
+
+            border-radius: 30px;
+
+            background: #ffffff;
+
+            border: 1px solid #dce5f0;
+
+            color: #092b5c;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            margin-bottom: 22px;
+        }
+
+        .trust-dot {
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: #2e9d62;
+        }
+
+        .hero h1 {
+            font-family: "Playfair Display", serif;
+
+            color: #092b5c;
+
+            font-size:
+                clamp(
+                    44px,
+                    5vw,
+                    68px
+                );
+
+            line-height: 1.1;
+
+            margin-bottom: 24px;
+        }
+
+        .hero h1 span {
+            color: #c9a227;
+        }
+
+        .hero-description {
+            color: #536174;
+
+            max-width: 600px;
+
+            font-size: 17px;
+
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+
+            gap: 14px;
+
+            flex-wrap: wrap;
+        }
+
+        .hero-note {
+            display: flex;
+
+            gap: 25px;
+
+            margin-top: 35px;
+
+            color: #667085;
+
+            font-size: 13px;
+        }
+
+        .hero-note div {
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+        }
+
+        .check {
+            width: 19px;
+            height: 19px;
+
+            background: #e2f4ea;
+
+            color: #248451;
+
+            border-radius: 50%;
+
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 11px;
+
+            font-weight: 800;
+        }
+
+
+        /* =========================================
+           HERO DASHBOARD
+        ========================================= */
+
+        .hero-visual {
+            position: relative;
+        }
+
+        .dashboard-card {
+            background: #ffffff;
+
+            border-radius: 18px;
+
+            padding: 24px;
+
+            box-shadow:
+                0 25px 60px
+                rgba(9, 43, 92, 0.15);
+
+            border: 1px solid #e3eaf3;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+        .dashboard-header {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding-bottom: 18px;
+
+            border-bottom:
+                1px solid #edf0f4;
+        }
+
+        .dashboard-header h3 {
+            color: #092b5c;
+            font-size: 17px;
+        }
+
+        .online {
+            font-size: 11px;
+
+            color: #2c8c59;
+
+            background: #e9f7ef;
+
+            padding: 5px 9px;
+
+            border-radius: 20px;
+        }
+
+        .dashboard-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 14px;
+
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            padding: 18px;
+
+            border-radius: 11px;
+
+            background: #f7f9fc;
+        }
+
+        .stat-card p {
+            font-size: 12px;
+            color: #667085;
+        }
+
+        .stat-card h4 {
+            font-size: 25px;
+            color: #092b5c;
+            margin-top: 5px;
+        }
+
+        .priority-box {
+            margin-top: 18px;
+
+            background: #092b5c;
+
+            color: white;
+
+            padding: 19px;
+
+            border-radius: 12px;
+        }
+
+        .priority-box .label {
+            font-size: 11px;
+
+            opacity: 0.75;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+        }
+
+        .priority-box h4 {
+            font-size: 18px;
+
+            margin: 6px 0;
+        }
+
+        .priority-box p {
+            font-size: 12px;
+
+            opacity: 0.8;
+        }
+
+        .floating-card {
+            position: absolute;
+
+            background: white;
+
+            border-radius: 12px;
+
+            padding: 15px 18px;
+
+            box-shadow:
+                0 15px 35px
+                rgba(0, 0, 0, 0.12);
+
+            z-index: 3;
+        }
+
+        .floating-one {
+            left: -55px;
+            top: 45px;
+        }
+
+        .floating-two {
+            right: -45px;
+            bottom: 45px;
+        }
+
+        .floating-card small {
+            color: #667085;
+
+            display: block;
+
+            font-size: 10px;
+        }
+
+        .floating-card strong {
+            color: #092b5c;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================================
+           TRUST STRIP
+        ========================================= */
+
+        .trust-strip {
+            background: #092b5c;
+
+            color: white;
+
+            padding: 20px 0;
+        }
+
+        .trust-items {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            text-align: center;
+        }
+
+        .trust-item {
+            border-right:
+                1px solid
+                rgba(255,255,255,0.15);
+        }
+
+        .trust-item:last-child {
+            border-right: none;
+        }
+
+        .trust-item strong {
+            font-size: 20px;
+
+            display: block;
+        }
+
+        .trust-item span {
+            font-size: 12px;
+
+            opacity: 0.7;
+        }
+
+
+        /* =========================================
+           FEATURES
+        ========================================= */
+
+        .features {
+            background: #ffffff;
+        }
+
+        .feature-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 22px;
+        }
+
+        .feature-card {
+            padding: 30px;
+
+            border: 1px solid #e7ebf0;
+
+            border-radius: 12px;
+
+            transition: 0.3s;
+
+            background: white;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-7px);
+
+            box-shadow:
+                0 18px 40px
+                rgba(9, 43, 92, 0.09);
+
+            border-color: #d3deec;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+
+            border-radius: 10px;
+
+            background: #edf3fa;
+
+            color: #092b5c;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 21px;
+
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            color: #092b5c;
+
+            margin-bottom: 10px;
+
+            font-size: 18px;
+        }
+
+        .feature-card p {
+            color: #667085;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================================
+           VERIFICATION
+        ========================================= */
+
+        .verification {
+            background: #f5f8fc;
+        }
+
+        .verification-container {
+            display: grid;
+
+            grid-template-columns:
+                0.9fr
+                1.1fr;
+
+            gap: 70px;
+
+            align-items: center;
+        }
+
+        .verification-content h2 {
+            font-family: "Playfair Display", serif;
+
+            color: #092b5c;
+
+            font-size: 42px;
+
+            line-height: 1.2;
+
+            margin: 12px 0 18px;
+        }
+
+        .verification-content p {
+            color: #667085;
+
+            margin-bottom: 25px;
+        }
+
+        .verification-card {
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 16px;
+
+            border: 1px solid #e2e8f0;
+
+            box-shadow:
+                0 15px 35px
+                rgba(9, 43, 92, 0.08);
+        }
+
+        .verified-header {
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            margin-bottom: 25px;
+        }
+
+        .verified-icon {
+            width: 50px;
+            height: 50px;
+
+            background: #e4f6eb;
+
+            color: #258351;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 22px;
+        }
+
+        .verified-header h3 {
+            color: #092b5c;
+
+            font-size: 18px;
+        }
+
+        .verified-header p {
+            margin: 0;
+
+            font-size: 12px;
+
+            color: #2d8b58;
+        }
+
+        .agent-details {
+            border-top:
+                1px solid #edf0f4;
+        }
+
+        .detail-row {
+            display: flex;
+
+            justify-content: space-between;
+
+            padding: 14px 0;
+
+            border-bottom:
+                1px solid #edf0f4;
+
+            font-size: 13px;
+        }
+
+        .detail-row span:first-child {
+            color: #667085;
+        }
+
+        .detail-row span:last-child {
+            color: #172033;
+
+            font-weight: 600;
+        }
+
+
+        /* =========================================
+           AI SECTION
+        ========================================= */
+
+        .ai-section {
+            background: #092b5c;
+
+            color: white;
+        }
+
+        .ai-section .section-title span {
+            color: #d6b23c;
+        }
+
+        .ai-section .section-title h2 {
+            color: white;
+        }
+
+        .ai-section .section-title p {
+            color: #c3cfdf;
+        }
+
+        .ai-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 18px;
+        }
+
+        .ai-card {
+            padding: 25px;
+
+            border: 1px solid
+                rgba(255,255,255,0.12);
+
+            border-radius: 12px;
+
+            background:
+                rgba(255,255,255,0.05);
+        }
+
+        .ai-card .number {
+            color: #d6b23c;
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+        .ai-card h3 {
+            margin: 12px 0 9px;
+
+            font-size: 17px;
+        }
+
+        .ai-card p {
+            color: #b9c6d8;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================================
+           PROCESS
+        ========================================= */
+
+        .process {
+            background: #ffffff;
+        }
+
+        .process-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 25px;
+        }
+
+        .process-step {
+            text-align: center;
+
+            position: relative;
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+
+            margin: 0 auto 18px;
+
+            border-radius: 50%;
+
+            background: #092b5c;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-weight: 700;
+        }
+
+        .process-step h3 {
+            color: #092b5c;
+
+            font-size: 17px;
+
+            margin-bottom: 8px;
+        }
+
+        .process-step p {
+            color: #667085;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================================
+           CTA
+        ========================================= */
+
+        .cta {
+            padding: 80px 0;
+
+            background: #f5f7fa;
+        }
+
+        .cta-box {
+            background:
+                linear-gradient(
+                    120deg,
+                    #092b5c,
+                    #123f78
+                );
+
+            border-radius: 18px;
+
+            padding: 60px;
+
+            text-align: center;
+
+            color: white;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .cta-box h2 {
+            font-family: "Playfair Display", serif;
+
+            font-size: 38px;
+
+            margin-bottom: 14px;
+        }
+
+        .cta-box p {
+            color: #c6d1df;
+
+            max-width: 650px;
+
+            margin:
+                0 auto 25px;
+        }
+
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        footer {
+            background: #071e3e;
+
+            color: white;
+
+            padding:
+                60px 0 25px;
+        }
+
+        .footer-grid {
+            display: grid;
+
+            grid-template-columns:
+                1.4fr
+                1fr
+                1fr
+                1fr;
+
+            gap: 50px;
+
+            padding-bottom: 40px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.1);
+        }
+
+        .footer-brand p {
+            color: #aab8ca;
+
+            font-size: 13px;
+
+            margin-top: 15px;
+
+            max-width: 330px;
+        }
+
+        footer h4 {
+            margin-bottom: 17px;
+
+            font-size: 14px;
+        }
+
+        footer ul li {
+            margin-bottom: 10px;
+        }
+
+        footer ul li a {
+            color: #aab8ca;
+
+            font-size: 13px;
+
+            transition: 0.3s;
+        }
+
+        footer ul li a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            padding-top: 22px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            color: #8292a8;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 950px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding:
+                    130px 0 80px;
+            }
+
+            .hero-visual {
+                max-width: 650px;
+
+                margin: auto;
+
+                width: 100%;
+            }
+
+            .feature-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .ai-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .verification-container {
+                grid-template-columns: 1fr;
+            }
+
+            .process-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            .nav-actions .btn-outline {
+                display: none;
+            }
+
+            .logo-text {
+                font-size: 21px;
+            }
+
+            .hero h1 {
+                font-size: 43px;
+            }
+
+            .hero-description {
+                font-size: 15px;
+            }
+
+            .hero-note {
+                flex-direction: column;
+
+                gap: 10px;
+            }
+
+            .floating-card {
+                display: none;
+            }
+
+            .dashboard-card {
+                padding: 17px;
+            }
+
+            .trust-items {
+                grid-template-columns: 1fr;
+
+                gap: 18px;
+            }
+
+            .trust-item {
+                border-right: none;
+            }
+
+            .feature-grid,
+            .ai-grid,
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title h2,
+            .verification-content h2 {
+                font-size: 32px;
+            }
+
+            .cta-box {
+                padding: 40px 20px;
+            }
+
+            .cta-box h2 {
+                font-size: 30px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+
+                gap: 10px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVIGATION
+====================================================== -->
+
+<header class="navbar">
+
+    <div class="container nav-container">
+
+
+        <!-- LOGO -->
+
+        <a href="index.html" class="logo">
+
+            <div class="logo-icon">
+                T
+            </div>
+
+            <div class="logo-text">
+
+                TrustNest
+
+                <small>
+                    Insurance Intelligence
+                </small>
+
+            </div>
+
+        </a>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="nav-links">
+
+            <a href="#home">
+                Home
+            </a>
+
+            <a href="#features">
+                Features
+            </a>
+
+            <a href="#verification">
+                Agent Verification
+            </a>
+
+            <a href="#ai">
+                Smart Solutions
+            </a>
+
+            <a href="#about">
+                About
+            </a>
+
+        </nav>
+
+
+        <!-- ACTIONS -->
+
+        <div class="nav-actions">
+
+
+            <!-- CORRECT LOGIN PATH -->
+
+            <a href="pages/login.html"
+               class="btn btn-outline">
+
+                Login
+
+            </a>
+
+
+            <!-- CORRECT REGISTER PATH -->
+
+            <a href="pages/register.html"
+               class="btn btn-primary">
+
+                Get Started
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     HERO
+====================================================== -->
+
+<section class="hero" id="home">
+
+    <div class="container hero-container">
+
+
+        <div class="hero-content">
+
+
+            <div class="trust-badge">
+
+                <span class="trust-dot"></span>
+
+                Smart Insurance Management Platform
+
+            </div>
+
+
+            <h1>
+
+                Insurance built on
+
+                <span>Trust.</span>
+
+            </h1>
+
+
+            <p class="hero-description">
+
+                TrustNest brings insurance agents and
+                customers together through intelligent
+                customer management, verified agent
+                profiles, smart follow-ups and
+                AI-powered insights.
+
+            </p>
+
+
+            <div class="hero-buttons">
+
+
+                <!-- CORRECT REGISTER PATH -->
+
+                <a href="pages/register.html"
+                   class="btn btn-primary">
+
+                    Get Started
+
+                </a>
+
+
+                <!-- CUSTOMER VERIFICATION -->
+
+                <a href="pages/customer/verify-agent.html"
+                   class="btn btn-gold">
+
+                    Verify an Agent
+
+                </a>
+
+
+            </div>
+
+
+            <div class="hero-note">
+
+
+                <div>
+
+                    <span class="check">
+                        ✓
+                    </span>
+
+                    Verified Agent Profiles
+
+                </div>
+
+
+                <div>
+
+                    <span class="check">
+                        ✓
+                    </span>
+
+                    Smart Follow-ups
+
+                </div>
+
+
+                <div>
+
+                    <span class="check">
+                        ✓
+                    </span>
+
+                    AI Insights
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- DASHBOARD PREVIEW -->
+
+        <div class="hero-visual">
+
+
+            <div class="floating-card floating-one">
+
+                <small>
+                    Priority Customer
+                </small>
+
+                <strong>
+                    Priya · 92/100
+                </strong>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+
+                <div class="dashboard-header">
+
+                    <h3>
+                        Agent Dashboard
+                    </h3>
+
+                    <span class="online">
+                        ● Online
+                    </span>
+
+                </div>
+
+
+                <div class="dashboard-grid">
+
+
+                    <div class="stat-card">
+
+                        <p>
+                            Total Customers
+                        </p>
+
+                        <h4>
+                            250
+                        </h4>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <p>
+                            Active Policies
+                        </p>
+
+                        <h4>
+                            320
+                        </h4>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <p>
+                            Follow-ups
+                        </p>
+
+                        <h4>
+                            12
+                        </h4>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <p>
+                            Potential Leads
+                        </p>
+
+                        <h4>
+                            15
+                        </h4>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="priority-box">
+
+                    <span class="label">
+                        AI Recommendation
+                    </span>
+
+                    <h4>
+                        8 customers need attention today.
+                    </h4>
+
+                    <p>
+
+                        Based on upcoming premiums,
+                        customer interest and
+                        interaction history.
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="floating-card floating-two">
+
+                <small>
+                    Sales Target
+                </small>
+
+                <strong>
+                    80% Achieved
+                </strong>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     TRUST STRIP
+====================================================== -->
+
+<section class="trust-strip">
+
+    <div class="container trust-items">
+
+
+        <div class="trust-item">
+
+            <strong>
+                Smart
+            </strong>
+
+            <span>
+                AI-assisted decisions
+            </span>
+
+        </div>
+
+
+        <div class="trust-item">
+
+            <strong>
+                Secure
+            </strong>
+
+            <span>
+                Protected customer data
+            </span>
+
+        </div>
+
+
+        <div class="trust-item">
+
+            <strong>
+                Transparent
+            </strong>
+
+            <span>
+                Agent & branch verification
+            </span>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FEATURES
+====================================================== -->
+
+<section class="section features"
+         id="features">
+
+    <div class="container">
+
+
+        <div class="section-title">
+
+            <span>
+                Why TrustNest
+            </span>
+
+            <h2>
+                Everything an insurance agent needs
+            </h2>
+
+            <p>
+
+                Manage customers, policies,
+                follow-ups and sales activities
+                from one intelligent platform.
+
+            </p>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    👥
+                </div>
+
+                <h3>
+                    Customer Management
+                </h3>
+
+                <p>
+
+                    Maintain customer profiles,
+                    financial goals, interaction
+                    history and policy information
+                    in one centralized system.
+
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📋
+                </div>
+
+                <h3>
+                    Policy Management
+                </h3>
+
+                <p>
+
+                    Track policies, premiums,
+                    maturity dates, payment status
+                    and renewal activities.
+
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    ⏰
+                </div>
+
+                <h3>
+                    Smart Follow-ups
+                </h3>
+
+                <p>
+
+                    Automatically identify customers
+                    who require attention based on
+                    policy and interaction data.
+
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🎯
+                </div>
+
+                <h3>
+                    Priority Scoring
+                </h3>
+
+                <p>
+
+                    Rank customers according to
+                    payment history, interest,
+                    renewal probability and other factors.
+
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    💡
+                </div>
+
+                <h3>
+                    Smart Recommendations
+                </h3>
+
+                <p>
+
+                    Assist agents in identifying
+                    policy categories that may
+                    match customer requirements.
+
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📊
+                </div>
+
+                <h3>
+                    Sales Insights
+                </h3>
+
+                <p>
+
+                    Understand sales performance,
+                    potential leads, targets and
+                    important customer trends.
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     AGENT VERIFICATION
+====================================================== -->
+
+<section class="section verification"
+         id="verification">
+
+    <div class="container verification-container">
+
+
+        <div class="verification-content">
+
+
+            <span style="
+                color:#c9a227;
+                font-size:14px;
+                font-weight:700;
+                text-transform:uppercase;
+                letter-spacing:2px;
+            ">
+
+                Customer Protection
+
+            </span>
+
+
+            <h2>
+
+                Know your agent.<br>
+
+                Build your trust.
+
+            </h2>
+
+
+            <p>
+
+                Customers can verify an agent using
+                their registered Agent ID and view
+                the associated branch information.
+
+            </p>
+
+
+            <!-- CORRECT CUSTOMER VERIFICATION PATH -->
+
+            <a href="pages/customer/verify-agent.html"
+               class="btn btn-primary">
+
+                Verify Agent
+
+            </a>
+
+
+        </div>
+
+
+
+        <div class="verification-card">
+
+
+            <div class="verified-header">
+
+
+                <div class="verified-icon">
+                    ✓
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Verified Agent
+                    </h3>
+
+                    <p>
+                        TrustNest Registered
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="agent-details">
+
+
+                <div class="detail-row">
+
+                    <span>
+                        Agent Name
+                    </span>
+
+                    <span>
+                        R. Kumar
+                    </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span>
+                        Agent ID
+                    </span>
+
+                    <span>
+                        TN-AGT-10245
+                    </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span>
+                        Branch
+                    </span>
+
+                    <span>
+                        Karur Branch
+                    </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span>
+                        Branch Code
+                    </span>
+
+                    <span>
+                        123
+                    </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span>
+                        Status
+                    </span>
+
+                    <span style="color:#258351;">
+                        Active ✓
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     AI SMART SOLUTIONS
+====================================================== -->
+
+<section class="section ai-section"
+         id="ai">
+
+    <div class="container">
+
+
+        <div class="section-title">
+
+            <span>
+                Intelligent Assistance
+            </span>
+
+            <h2>
+                Smarter decisions for insurance agents
+            </h2>
+
+            <p>
+
+                TrustNest turns customer information
+                into meaningful actions and insights.
+
+            </p>
+
+        </div>
+
+
+        <div class="ai-grid">
+
+
+            <div class="ai-card">
+
+                <span class="number">
+                    01
+                </span>
+
+                <h3>
+                    Customer Priority
+                </h3>
+
+                <p>
+
+                    Identify which customers
+                    require immediate attention.
+
+                </p>
+
+            </div>
+
+
+            <div class="ai-card">
+
+                <span class="number">
+                    02
+                </span>
+
+                <h3>
+                    Lead Prediction
+                </h3>
+
+                <p>
+
+                    Identify potential customers
+                    using profile and interaction
+                    information.
+
+                </p>
+
+            </div>
+
+
+            <div class="ai-card">
+
+                <span class="number">
+                    03
+                </span>
+
+                <h3>
+                    Smart Recommendation
+                </h3>
+
+                <p>
+
+                    Support personalized policy
+                    discussions using customer
+                    requirements.
+
+                </p>
+
+            </div>
+
+
+            <div class="ai-card">
+
+                <span class="number">
+                    04
+                </span>
+
+                <h3>
+                    Sales Insights
+                </h3>
+
+                <p>
+
+                    Understand targets, performance
+                    and customer opportunities.
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     HOW IT WORKS
+====================================================== -->
+
+<section class="section process"
+         id="about">
+
+    <div class="container">
+
+
+        <div class="section-title">
+
+            <span>
+                Simple Process
+            </span>
+
+            <h2>
+                How TrustNest works
+            </h2>
+
+            <p>
+
+                A simple workflow designed around
+                trust, intelligence and efficiency.
+
+            </p>
+
+        </div>
+
+
+        <div class="process-grid">
+
+
+            <div class="process-step">
+
+                <div class="step-number">
+                    01
+                </div>
+
+                <h3>
+                    Register
+                </h3>
+
+                <p>
+
+                    Agents and customers securely
+                    create their accounts.
+
+                </p>
+
+            </div>
+
+
+            <div class="process-step">
+
+                <div class="step-number">
+                    02
+                </div>
+
+                <h3>
+                    Verify
+                </h3>
+
+                <p>
+
+                    Customers can verify registered
+                    agent and branch information.
+
+                </p>
+
+            </div>
+
+
+            <div class="process-step">
+
+                <div class="step-number">
+                    03
+                </div>
+
+                <h3>
+                    Connect
+                </h3>
+
+                <p>
+
+                    Agents manage customers,
+                    policies and interactions.
+
+                </p>
+
+            </div>
+
+
+            <div class="process-step">
+
+                <div class="step-number">
+                    04
+                </div>
+
+                <h3>
+                    Grow
+                </h3>
+
+                <p>
+
+                    AI insights help agents improve
+                    follow-ups and sales activities.
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CTA
+====================================================== -->
+
+<section class="cta">
+
+    <div class="container">
+
+
+        <div class="cta-box">
+
+            <h2>
+                Build stronger relationships.
+            </h2>
+
+            <p>
+
+                Bring intelligent insurance management,
+                verified agent information and customer
+                trust together with TrustNest.
+
+            </p>
+
+
+            <!-- CORRECT REGISTER PATH -->
+
+            <a href="pages/register.html"
+               class="btn btn-gold">
+
+                Get Started with TrustNest
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
+
+<footer>
+
+    <div class="container">
+
+
+        <div class="footer-grid">
+
+
+            <div class="footer-brand">
+
+
+                <div class="logo">
+
+                    <div class="logo-icon">
+                        T
+                    </div>
+
+                    <div class="logo-text"
+                         style="color:white;">
+
+                        TrustNest
+
+                        <small>
+                            Insurance Intelligence
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <p>
+
+                    A smart insurance agent management
+                    and customer trust platform designed
+                    to make insurance interactions simpler,
+                    smarter and more transparent.
+
+                </p>
+
+
+            </div>
+
+
+            <div>
+
+                <h4>
+                    Platform
+                </h4>
+
+                <ul>
+
+                    <li>
+                        <a href="#features">
+                            Features
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#ai">
+                            Smart Solutions
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#verification">
+                            Agent Verification
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div>
+
+                <h4>
+                    For Agents
+                </h4>
+
+                <ul>
+
+                    <!-- CORRECT LOGIN PATH -->
+
+                    <li>
+                        <a href="pages/login.html">
+                            Agent Login
+                        </a>
+                    </li>
+
+
+                    <!-- CORRECT REGISTER PATH -->
+
+                    <li>
+                        <a href="pages/register.html">
+                            Agent Registration
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="#ai">
+                            Sales Insights
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div>
+
+                <h4>
+                    For Customers
+                </h4>
+
+                <ul>
+
+
+                    <!-- CORRECT VERIFICATION PATH -->
+
+                    <li>
+                        <a href="pages/customer/verify-agent.html">
+                            Verify Agent
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="pages/customer/policies.html">
+                            My Policies
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="#">
+                            Contact Support
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 TrustNest. All rights reserved.
+            </span>
+
+            <span>
+                Smart Insurance • Trusted Connections
+            </span>
+
+        </div>
+
+
+    </div>
+
+</footer>
+
+
+</body>
+
+</html>

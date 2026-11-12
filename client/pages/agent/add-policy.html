@@ -1,0 +1,2626 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Add Policy | TrustNest</title>
+
+
+    <!-- GOOGLE FONTS -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
+
+
+    <style>
+
+        /* =========================================
+           GLOBAL
+        ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            font-family: "Inter", sans-serif;
+
+            background: #f5f7fb;
+
+            color: #172033;
+
+            min-height: 100vh;
+        }
+
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+        button,
+        input,
+        select,
+        textarea {
+            font-family: inherit;
+        }
+
+
+        .dashboard {
+
+            display: flex;
+
+            min-height: 100vh;
+        }
+
+
+
+        /* =========================================
+           SIDEBAR
+           SAME AS CUSTOMER.HTML
+        ========================================= */
+
+        .sidebar {
+
+            width: 250px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #061f42,
+                    #092b5c
+                );
+
+            color: white;
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            bottom: 0;
+
+            z-index: 100;
+
+            display: flex;
+
+            flex-direction: column;
+
+            transition: 0.3s;
+        }
+
+
+
+        /* =========================================
+           LOGO
+        ========================================= */
+
+        .sidebar-logo {
+
+            height: 85px;
+
+            display: flex;
+
+            align-items: center;
+
+            padding: 0 25px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.08);
+        }
+
+
+        .logo-icon {
+
+            width: 40px;
+
+            height: 40px;
+
+            border-radius: 50%;
+
+            background: white;
+
+            color: #092b5c;
+
+            border:
+                3px solid
+                #c9a227;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: 800;
+
+            margin-right: 10px;
+        }
+
+
+        .logo-name {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 23px;
+
+            font-weight: 700;
+        }
+
+
+        .logo-subtitle {
+
+            display: block;
+
+            font-size: 7px;
+
+            letter-spacing: 1.5px;
+
+            color: #d6b23c;
+
+            margin-top: -2px;
+        }
+
+
+
+        /* =========================================
+           MENU TITLE
+        ========================================= */
+
+        .menu-title {
+
+            padding:
+                25px 25px 10px;
+
+            color: #7f94ad;
+
+            font-size: 9px;
+
+            font-weight: 700;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+        }
+
+
+
+        /* =========================================
+           SIDEBAR MENU
+        ========================================= */
+
+        .sidebar-menu {
+
+            list-style: none;
+
+            padding: 0 12px;
+        }
+
+
+        .sidebar-menu li {
+
+            margin-bottom: 4px;
+        }
+
+
+        .sidebar-menu a {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 11px 13px;
+
+            border-radius: 7px;
+
+            color: #b8c6d8;
+
+            font-size: 12px;
+
+            transition: 0.25s;
+        }
+
+
+        .sidebar-menu a:hover {
+
+            background:
+                rgba(255,255,255,0.07);
+
+            color: white;
+        }
+
+
+        .sidebar-menu a.active {
+
+            background:
+                rgba(255,255,255,0.12);
+
+            color: white;
+
+            border-left:
+                3px solid
+                #c9a227;
+        }
+
+
+        .menu-icon {
+
+            width: 22px;
+
+            text-align: center;
+
+            font-size: 14px;
+        }
+
+
+
+        /* =========================================
+           SIDEBAR BOTTOM
+        ========================================= */
+
+        .sidebar-bottom {
+
+            margin-top: auto;
+
+            padding: 15px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.08);
+        }
+
+
+        .sidebar-bottom a {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            color: #aebed0;
+
+            font-size: 11px;
+
+            padding: 10px;
+        }
+
+
+        .sidebar-bottom a:hover {
+
+            color: white;
+        }
+
+
+
+        /* =========================================
+           MAIN
+        ========================================= */
+
+        .main {
+
+            margin-left: 250px;
+
+            width:
+                calc(100% - 250px);
+
+            min-height: 100vh;
+        }
+
+
+
+        /* =========================================
+           TOPBAR
+           SAME STYLE AS CUSTOMER.HTML
+        ========================================= */
+
+        .topbar {
+
+            height: 75px;
+
+            background: white;
+
+            border-bottom:
+                1px solid #e8edf3;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 30px;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 50;
+        }
+
+
+        .mobile-menu {
+
+            display: none;
+
+            border: none;
+
+            background: none;
+
+            font-size: 22px;
+
+            cursor: pointer;
+
+            margin-right: 10px;
+        }
+
+
+        .page-title h1 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            color: #092b5c;
+
+            font-size: 24px;
+
+            margin-bottom: 2px;
+        }
+
+
+        .page-title p {
+
+            color: #8995a5;
+
+            font-size: 10px;
+        }
+
+
+
+        /* =========================================
+           TOPBAR RIGHT
+        ========================================= */
+
+        .topbar-right {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+        }
+
+
+        .notification {
+
+            position: relative;
+
+            font-size: 18px;
+
+            cursor: pointer;
+
+            color: #526071;
+        }
+
+
+        .notification-badge {
+
+            position: absolute;
+
+            top: -5px;
+
+            right: -6px;
+
+            width: 15px;
+
+            height: 15px;
+
+            border-radius: 50%;
+
+            background: #c9a227;
+
+            color: white;
+
+            font-size: 8px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: 700;
+        }
+
+
+        .agent-profile-mini {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+
+        .agent-avatar-small {
+
+            width: 38px;
+
+            height: 38px;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #092b5c,
+                    #1c518e
+                );
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: 700;
+
+            font-size: 13px;
+
+            border:
+                2px solid
+                #d6b23c;
+        }
+
+
+        .agent-mini-info strong {
+
+            display: block;
+
+            font-size: 11px;
+
+            color: #172033;
+        }
+
+
+        .agent-mini-info span {
+
+            font-size: 9px;
+
+            color: #8995a5;
+        }
+
+
+
+        /* =========================================
+           CONTENT
+        ========================================= */
+
+        .content {
+
+            padding: 28px 30px;
+
+            max-width: 1250px;
+
+            margin: auto;
+        }
+
+
+
+        /* =========================================
+           BREADCRUMB
+        ========================================= */
+
+        .breadcrumb {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            font-size: 9px;
+
+            color: #8995a5;
+
+            margin-bottom: 18px;
+        }
+
+
+        .breadcrumb a {
+
+            color: #52769c;
+
+            font-weight: 500;
+        }
+
+
+        .breadcrumb a:hover {
+
+            color: #092b5c;
+        }
+
+
+        .breadcrumb .current {
+
+            color: #526071;
+
+            font-weight: 600;
+        }
+
+
+
+        /* =========================================
+           FORM HEADER
+        ========================================= */
+
+        .form-header {
+
+            background: white;
+
+            border:
+                1px solid #e5eaf0;
+
+            border-radius: 11px;
+
+            padding: 22px 25px;
+
+            margin-bottom: 18px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+        }
+
+
+        .form-header-icon {
+
+            width: 48px;
+
+            height: 48px;
+
+            border-radius: 10px;
+
+            background:
+                #eef4fb;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 23px;
+        }
+
+
+        .form-header h2 {
+
+            color: #092b5c;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 19px;
+
+            margin-bottom: 4px;
+        }
+
+
+        .form-header p {
+
+            color: #8995a5;
+
+            font-size: 10px;
+
+            line-height: 1.6;
+        }
+
+
+
+        /* =========================================
+           FORM CARD
+        ========================================= */
+
+        .form-card {
+
+            background: white;
+
+            border:
+                1px solid #e5eaf0;
+
+            border-radius: 11px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 2px 8px
+                rgba(20,40,70,0.03);
+        }
+
+
+        .section-title {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            color: #092b5c;
+
+            font-size: 17px;
+
+            font-weight: 700;
+
+            margin-bottom: 20px;
+
+            padding-bottom: 12px;
+
+            border-bottom:
+                1px solid #edf0f4;
+        }
+
+
+        .form-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 18px 20px;
+        }
+
+
+        .form-group {
+
+            display: flex;
+
+            flex-direction: column;
+        }
+
+
+        .form-group.full {
+
+            grid-column:
+                1 / -1;
+        }
+
+
+        label {
+
+            font-size: 10px;
+
+            font-weight: 600;
+
+            margin-bottom: 7px;
+
+            color: #526071;
+        }
+
+
+        .required {
+
+            color: #dc2626;
+        }
+
+
+        input,
+        select,
+        textarea {
+
+            width: 100%;
+
+            padding: 11px 12px;
+
+            border:
+                1px solid #dce2e9;
+
+            border-radius: 7px;
+
+            font-size: 11px;
+
+            outline: none;
+
+            background: white;
+
+            color: #172033;
+
+            transition: 0.2s;
+        }
+
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+
+            border-color:
+                #52769c;
+
+            box-shadow:
+                0 0 0 2px
+                rgba(82,118,156,0.08);
+        }
+
+
+        textarea {
+
+            min-height: 100px;
+
+            resize: vertical;
+        }
+
+
+        .helper-text {
+
+            margin-top: 5px;
+
+            font-size: 9px;
+
+            color: #9aa5b3;
+        }
+
+
+
+        /* =========================================
+           MESSAGE
+        ========================================= */
+
+        .message {
+
+            display: none;
+
+            padding: 11px 14px;
+
+            border-radius: 7px;
+
+            margin-bottom: 18px;
+
+            font-size: 11px;
+        }
+
+
+        .message.success {
+
+            display: block;
+
+            background: #ecfdf5;
+
+            color: #047857;
+
+            border:
+                1px solid #a7f3d0;
+        }
+
+
+        .message.error {
+
+            display: block;
+
+            background: #fef2f2;
+
+            color: #b91c1c;
+
+            border:
+                1px solid #fecaca;
+        }
+
+
+
+        /* =========================================
+           BUTTON AREA
+        ========================================= */
+
+        .button-area {
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 10px;
+
+            margin-top: 25px;
+
+            padding-top: 18px;
+
+            border-top:
+                1px solid #edf0f4;
+        }
+
+
+        .cancel-btn {
+
+            padding: 10px 20px;
+
+            border:
+                1px solid #dce2e9;
+
+            background: white;
+
+            color: #526071;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            font-size: 11px;
+
+            font-weight: 600;
+        }
+
+
+        .cancel-btn:hover {
+
+            background: #f5f7fb;
+        }
+
+
+        .save-btn {
+
+            padding: 10px 22px;
+
+            border: none;
+
+            background: #092b5c;
+
+            color: white;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            font-size: 11px;
+
+            font-weight: 600;
+        }
+
+
+        .save-btn:hover {
+
+            background: #061f42;
+        }
+
+
+        .save-btn:disabled {
+
+            background: #8b9aad;
+
+            cursor: not-allowed;
+        }
+
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 850px) {
+
+            .sidebar {
+
+                transform:
+                    translateX(-100%);
+            }
+
+
+            .sidebar.open {
+
+                transform:
+                    translateX(0);
+            }
+
+
+            .main {
+
+                margin-left: 0;
+
+                width: 100%;
+            }
+
+
+            .mobile-menu {
+
+                display: block;
+            }
+
+
+            .topbar {
+
+                padding: 0 18px;
+            }
+
+
+            .content {
+
+                padding: 20px 18px;
+            }
+
+        }
+
+
+
+        @media (max-width: 600px) {
+
+            .form-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .form-group.full {
+
+                grid-column: auto;
+            }
+
+
+            .topbar-right {
+
+                gap: 10px;
+            }
+
+
+            .agent-mini-info {
+
+                display: none;
+            }
+
+
+            .content {
+
+                padding: 18px 15px;
+            }
+
+
+            .form-card {
+
+                padding: 18px;
+            }
+
+
+            .form-header {
+
+                padding: 18px;
+            }
+
+
+            .button-area {
+
+                flex-direction: column;
+            }
+
+
+            .cancel-btn,
+            .save-btn {
+
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="dashboard">
+
+
+    <!-- =================================================
+         SIDEBAR
+         SAME AS CUSTOMER.HTML
+    ================================================== -->
+
+    <aside class="sidebar"
+           id="sidebar">
+
+
+        <!-- LOGO -->
+
+        <a href="dashboard.html"
+           class="sidebar-logo">
+
+            <div class="logo-icon">
+                T
+            </div>
+
+
+            <div>
+
+                <div class="logo-name">
+                    TrustNest
+                </div>
+
+
+                <span class="logo-subtitle">
+                    Insurance Intelligence
+                </span>
+
+            </div>
+
+        </a>
+
+
+
+        <!-- MAIN MENU -->
+
+        <div class="menu-title">
+            Main Menu
+        </div>
+
+
+        <ul class="sidebar-menu">
+
+
+            <!-- DASHBOARD -->
+
+            <li>
+
+                <a href="dashboard.html">
+
+                    <span class="menu-icon">
+                        ▦
+                    </span>
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+
+
+            <!-- CUSTOMERS -->
+
+            <li>
+
+                <a href="customers.html">
+
+                    <span class="menu-icon">
+                        👥
+                    </span>
+
+                    Customers
+
+                </a>
+
+            </li>
+
+
+
+            <!-- POLICIES -->
+
+            <li>
+
+                <a href="policies.html"
+                   class="active">
+
+                    <span class="menu-icon">
+                        📋
+                    </span>
+
+                    Policies
+
+                </a>
+
+            </li>
+
+
+
+            <!-- FOLLOW UPS -->
+
+            <li>
+
+                <a href="followups.html">
+
+                    <span class="menu-icon">
+                        🔔
+                    </span>
+
+                    Follow-ups
+
+                </a>
+
+            </li>
+
+
+
+            <!-- INTERACTIONS -->
+
+            <li>
+
+                <a href="interactions.html">
+
+                    <span class="menu-icon">
+                        💬
+                    </span>
+
+                    Interactions
+
+                </a>
+
+            </li>
+
+
+        </ul>
+
+
+
+        <!-- SMART FEATURES -->
+
+        <div class="menu-title">
+            Smart Features
+        </div>
+
+
+        <ul class="sidebar-menu">
+
+
+            <!-- RECOMMENDATIONS -->
+
+            <li>
+
+                <a href="recommendations.html">
+
+                    <span class="menu-icon">
+                        ✨
+                    </span>
+
+                    Recommendations
+
+                </a>
+
+            </li>
+
+
+
+            <!-- SMART LEADS -->
+
+            <li>
+
+                <a href="leads.html">
+
+                    <span class="menu-icon">
+                        🎯
+                    </span>
+
+                    Smart Leads
+
+                </a>
+
+            </li>
+
+
+
+            <!-- SALES INSIGHTS -->
+
+            <li>
+
+                <a href="sales-insights.html">
+
+                    <span class="menu-icon">
+                        📊
+                    </span>
+
+                    Sales Insights
+
+                </a>
+
+            </li>
+
+
+
+            <!-- NOTIFICATIONS -->
+
+            <li>
+
+                <a href="notifications.html">
+
+                    <span class="menu-icon">
+                        🔔
+                    </span>
+
+                    Notifications
+
+                </a>
+
+            </li>
+
+
+        </ul>
+
+
+
+        <!-- ACCOUNT -->
+
+        <div class="menu-title">
+            Account
+        </div>
+
+
+        <ul class="sidebar-menu">
+
+
+            <li>
+
+                <a href="profile.html">
+
+                    <span class="menu-icon">
+                        👤
+                    </span>
+
+                    My Profile
+
+                </a>
+
+            </li>
+
+
+        </ul>
+
+
+
+        <!-- LOGOUT -->
+
+        <div class="sidebar-bottom">
+
+            <a href="../login.html">
+
+                <span>
+                    ⇥
+                </span>
+
+                Logout
+
+            </a>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =================================================
+         MAIN
+    ================================================== -->
+
+    <main class="main">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+
+            <div style="
+                display:flex;
+                align-items:center;
+            ">
+
+
+                <!-- MOBILE MENU -->
+
+                <button
+                    class="mobile-menu"
+                    id="mobileMenu">
+
+                    ☰
+
+                </button>
+
+
+                <div class="page-title">
+
+                    <h1>
+                        Add Policy
+                    </h1>
+
+                    <p>
+                        Add a new insurance policy for an existing customer
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- TOPBAR RIGHT -->
+
+            <div class="topbar-right">
+
+
+                <!-- NOTIFICATION -->
+
+                <a href="notifications.html"
+                   class="notification">
+
+                    🔔
+
+                    <span class="notification-badge">
+                        4
+                    </span>
+
+                </a>
+
+
+
+                <!-- AGENT -->
+
+                <div class="agent-profile-mini">
+
+
+                    <div
+                        class="agent-avatar-small"
+                        id="agentAvatar">
+
+                        ---
+
+                    </div>
+
+
+                    <div class="agent-mini-info">
+
+                        <strong id="agentName">
+                            Loading...
+                        </strong>
+
+                        <span>
+                            Insurance Agent
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =================================================
+             CONTENT
+        ================================================== -->
+
+        <div class="content">
+
+
+            <!-- BREADCRUMB -->
+
+            <div class="breadcrumb">
+
+
+                <a href="dashboard.html">
+                    Dashboard
+                </a>
+
+
+                <span>
+                    /
+                </span>
+
+
+                <a href="policies.html">
+                    Policies
+                </a>
+
+
+                <span>
+                    /
+                </span>
+
+
+                <span class="current">
+                    Add Policy
+                </span>
+
+
+            </div>
+
+
+
+            <!-- FORM HEADER -->
+
+            <div class="form-header">
+
+
+                <div class="form-header-icon">
+                    📋
+                </div>
+
+
+                <div>
+
+                    <h2>
+                        Policy Registration
+                    </h2>
+
+                    <p>
+                        Add a new insurance policy and link it
+                        to an existing customer in your portfolio.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- MESSAGE -->
+
+            <div
+                id="message"
+                class="message">
+            </div>
+
+
+
+            <!-- FORM CARD -->
+
+            <div class="form-card">
+
+
+                <form id="policyForm">
+
+
+                    <div class="section-title">
+                        Policy Information
+                    </div>
+
+
+                    <div class="form-grid">
+
+
+                        <!-- CUSTOMER -->
+
+                        <div class="form-group full">
+
+
+                            <label>
+
+                                Customer
+
+                                <span class="required">
+                                    *
+                                </span>
+
+                            </label>
+
+
+                            <select
+                                id="customerId"
+                                required>
+
+                                <option value="">
+                                    Loading customers...
+                                </option>
+
+                            </select>
+
+
+                            <div class="helper-text">
+
+                                Select the customer who owns this policy.
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- POLICY NUMBER -->
+
+                        <div class="form-group">
+
+
+                            <label>
+
+                                Policy Number
+
+                                <span class="required">
+                                    *
+                                </span>
+
+                            </label>
+
+
+                            <input
+                                type="text"
+                                id="policyNumber"
+                                placeholder="Example: LIC10023456"
+                                required>
+
+
+                        </div>
+
+
+
+                        <!-- POLICY TYPE -->
+
+                        <div class="form-group">
+
+
+                            <label>
+
+                                Policy Type
+
+                                <span class="required">
+                                    *
+                                </span>
+
+                            </label>
+
+
+                            <select
+                                id="policyType"
+                                required>
+
+
+                                <option value="">
+                                    Select Policy Type
+                                </option>
+
+
+                                <option value="Life Insurance">
+                                    Life Insurance
+                                </option>
+
+
+                                <option value="Term Insurance">
+                                    Term Insurance
+                                </option>
+
+
+                                <option value="Endowment Plan">
+                                    Endowment Plan
+                                </option>
+
+
+                                <option value="Money Back Plan">
+                                    Money Back Plan
+                                </option>
+
+
+                                <option value="Whole Life Plan">
+                                    Whole Life Plan
+                                </option>
+
+
+                                <option value="Child Plan">
+                                    Child Plan
+                                </option>
+
+
+                                <option value="Pension Plan">
+                                    Pension Plan
+                                </option>
+
+
+                                <option value="ULIP">
+                                    ULIP
+                                </option>
+
+
+                                <option value="Other">
+                                    Other
+                                </option>
+
+
+                            </select>
+
+
+                        </div>
+
+
+
+                        <!-- PREMIUM -->
+
+                        <div class="form-group">
+
+
+                            <label>
+
+                                Premium Amount
+
+                                <span class="required">
+                                    *
+                                </span>
+
+                            </label>
+
+
+                            <input
+                                type="number"
+                                id="premiumAmount"
+                                placeholder="Example: 25000"
+                                min="1"
+                                required>
+
+
+                        </div>
+
+
+
+                        <!-- FREQUENCY -->
+
+                        <div class="form-group">
+
+
+                            <label>
+
+                                Premium Frequency
+
+                                <span class="required">
+                                    *
+                                </span>
+
+                            </label>
+
+
+                            <select
+                                id="premiumFrequency">
+
+
+                                <option value="Yearly">
+                                    Yearly
+                                </option>
+
+
+                                <option value="Half-Yearly">
+                                    Half-Yearly
+                                </option>
+
+
+                                <option value="Quarterly">
+                                    Quarterly
+                                </option>
+
+
+                                <option value="Monthly">
+                                    Monthly
+                                </option>
+
+
+                            </select>
+
+
+                        </div>
+
+
+
+                        <!-- SUM ASSURED -->
+
+                        <div class="form-group">
+
+
+                            <label>
+
+                                Sum Assured
+
+                                <span class="required">
+                                    *
+                                </span>
+
+                            </label>
+
+
+                            <input
+                                type="number"
+                                id="sumAssured"
+                                placeholder="Example: 1000000"
+                                min="1"
+                                required>
+
+
+                        </div>
+
+
+
+                        <!-- STATUS -->
+
+                        <div class="form-group">
+
+
+                            <label>
+                                Status
+                            </label>
+
+
+                            <select id="status">
+
+
+                                <option value="Active">
+                                    Active
+                                </option>
+
+
+                                <option value="Due Soon">
+                                    Due Soon
+                                </option>
+
+
+                                <option value="Lapsed">
+                                    Lapsed
+                                </option>
+
+
+                            </select>
+
+
+                        </div>
+
+
+
+                        <!-- START DATE -->
+
+                        <div class="form-group">
+
+
+                            <label>
+
+                                Policy Start Date
+
+                                <span class="required">
+                                    *
+                                </span>
+
+                            </label>
+
+
+                            <input
+                                type="date"
+                                id="startDate"
+                                required>
+
+
+                        </div>
+
+
+
+                        <!-- NEXT DUE DATE -->
+
+                        <div class="form-group">
+
+
+                            <label>
+
+                                Next Premium Due Date
+
+                                <span class="required">
+                                    *
+                                </span>
+
+                            </label>
+
+
+                            <input
+                                type="date"
+                                id="nextDueDate"
+                                required>
+
+
+                        </div>
+
+
+
+                        <!-- NOTES -->
+
+                        <div class="form-group full">
+
+
+                            <label>
+                                Notes
+                            </label>
+
+
+                            <textarea
+                                id="notes"
+                                placeholder="Add any additional policy information...">
+                            </textarea>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- BUTTONS -->
+
+                    <div class="button-area">
+
+
+                        <button
+                            type="button"
+                            class="cancel-btn"
+                            onclick="window.location.href='policies.html'">
+
+                            Cancel
+
+                        </button>
+
+
+                        <button
+                            type="submit"
+                            class="save-btn"
+                            id="saveButton">
+
+                            Save Policy
+
+                        </button>
+
+
+                    </div>
+
+
+                </form>
+
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =================================================
+     JAVASCRIPT
+================================================== -->
+
+<script>
+
+
+    /* =========================================
+       API URL
+    ========================================= */
+
+    const API_BASE =
+        window.TRUSTNEST_API_URL ||
+        "http://localhost:5000";
+
+
+
+    /* =========================================
+       LOGGED-IN AGENT
+    ========================================= */
+
+    const agentId =
+        localStorage.getItem("agentId");
+
+
+
+    /* =========================================
+       ELEMENTS
+    ========================================= */
+
+    const customerSelect =
+        document.getElementById(
+            "customerId"
+        );
+
+
+    const policyForm =
+        document.getElementById(
+            "policyForm"
+        );
+
+
+    const messageBox =
+        document.getElementById(
+            "message"
+        );
+
+
+    const saveButton =
+        document.getElementById(
+            "saveButton"
+        );
+
+
+
+    /* =========================================
+       MOBILE SIDEBAR
+       SAME AS CUSTOMER.HTML
+    ========================================= */
+
+    const mobileMenu =
+        document.getElementById(
+            "mobileMenu"
+        );
+
+
+    const sidebar =
+        document.getElementById(
+            "sidebar"
+        );
+
+
+    if (
+        mobileMenu &&
+        sidebar
+    ) {
+
+        mobileMenu.addEventListener(
+            "click",
+            function () {
+
+                sidebar.classList.toggle(
+                    "open"
+                );
+
+            }
+        );
+
+    }
+
+
+
+    /* =========================================
+       LOAD AGENT DETAILS
+    ========================================= */
+
+    function loadAgentDetails() {
+
+
+        const agentName =
+            localStorage.getItem(
+                "agentName"
+            ) ||
+            "Agent";
+
+
+        const nameElement =
+            document.getElementById(
+                "agentName"
+            );
+
+
+        const avatarElement =
+            document.getElementById(
+                "agentAvatar"
+            );
+
+
+        if (nameElement) {
+
+            nameElement.textContent =
+                agentName;
+
+        }
+
+
+        if (avatarElement) {
+
+            const parts =
+                agentName
+                    .trim()
+                    .split(/\s+/);
+
+
+            let initials = "";
+
+
+            if (parts.length >= 2) {
+
+                initials =
+                    parts[0].charAt(0) +
+                    parts[parts.length - 1]
+                        .charAt(0);
+
+            }
+
+            else if (parts.length === 1) {
+
+                initials =
+                    parts[0]
+                        .substring(0, 2);
+
+            }
+
+
+            avatarElement.textContent =
+                initials.toUpperCase();
+
+        }
+
+    }
+
+
+    loadAgentDetails();
+
+
+
+    /* =========================================
+       CHECK LOGIN
+    ========================================= */
+
+    if (!agentId) {
+
+
+        showMessage(
+            "Your session has expired. Please login again.",
+            "error"
+        );
+
+
+        customerSelect.innerHTML =
+            `
+            <option value="">
+                Please login first
+            </option>
+            `;
+
+
+        saveButton.disabled = true;
+
+    }
+
+    else {
+
+        loadCustomers();
+
+    }
+
+
+
+    /* =========================================
+       LOAD CUSTOMERS
+    ========================================= */
+
+    async function loadCustomers() {
+
+
+        try {
+
+
+            const response =
+                await fetch(
+                    API_BASE +
+                    "/api/customers?agentId=" +
+                    encodeURIComponent(
+                        agentId
+                    )
+                );
+
+
+            const data =
+                await response.json();
+
+
+
+            if (
+                !response.ok ||
+                !data.success
+            ) {
+
+                throw new Error(
+                    data.message ||
+                    "Unable to load customers."
+                );
+
+            }
+
+
+
+            customerSelect.innerHTML =
+                `
+                <option value="">
+                    Select Customer
+                </option>
+                `;
+
+
+
+            /* NO CUSTOMERS */
+
+            if (
+                !data.customers ||
+                data.customers.length === 0
+            ) {
+
+
+                customerSelect.innerHTML =
+                    `
+                    <option value="">
+                        No customers found
+                    </option>
+                    `;
+
+
+                saveButton.disabled =
+                    true;
+
+
+                showMessage(
+                    "Please add a customer before creating a policy.",
+                    "error"
+                );
+
+
+                return;
+
+            }
+
+
+
+            /* ADD CUSTOMERS */
+
+            data.customers.forEach(
+                customer => {
+
+
+                    const option =
+                        document.createElement(
+                            "option"
+                        );
+
+
+                    option.value =
+                        customer._id;
+
+
+                    option.textContent =
+                        customer.fullName +
+                        (
+                            customer.phone
+                                ? " - " +
+                                  customer.phone
+                                : ""
+                        );
+
+
+                    customerSelect.appendChild(
+                        option
+                    );
+
+                }
+            );
+
+
+            saveButton.disabled =
+                false;
+
+
+        }
+
+
+        catch (error) {
+
+
+            console.error(
+                "Load customers error:",
+                error
+            );
+
+
+            customerSelect.innerHTML =
+                `
+                <option value="">
+                    Unable to load customers
+                </option>
+                `;
+
+
+            saveButton.disabled =
+                true;
+
+
+            showMessage(
+                "Unable to load customers from the server. Please make sure the TrustNest backend is running.",
+                "error"
+            );
+
+        }
+
+    }
+
+
+
+    /* =========================================
+       SUBMIT POLICY FORM
+    ========================================= */
+
+    policyForm.addEventListener(
+        "submit",
+        async function(event) {
+
+
+            event.preventDefault();
+
+
+
+            /* FORM VALUES */
+
+            const customerId =
+                document.getElementById(
+                    "customerId"
+                ).value;
+
+
+            const policyNumber =
+                document.getElementById(
+                    "policyNumber"
+                ).value.trim();
+
+
+            const policyType =
+                document.getElementById(
+                    "policyType"
+                ).value;
+
+
+            const premiumAmount =
+                document.getElementById(
+                    "premiumAmount"
+                ).value;
+
+
+            const premiumFrequency =
+                document.getElementById(
+                    "premiumFrequency"
+                ).value;
+
+
+            const sumAssured =
+                document.getElementById(
+                    "sumAssured"
+                ).value;
+
+
+            const startDate =
+                document.getElementById(
+                    "startDate"
+                ).value;
+
+
+            const nextDueDate =
+                document.getElementById(
+                    "nextDueDate"
+                ).value;
+
+
+            const status =
+                document.getElementById(
+                    "status"
+                ).value;
+
+
+            const notes =
+                document.getElementById(
+                    "notes"
+                ).value.trim();
+
+
+
+            /* VALIDATION */
+
+            if (!agentId) {
+
+                showMessage(
+                    "Please login again.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if (!customerId) {
+
+                showMessage(
+                    "Please select a customer.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if (!policyNumber) {
+
+                showMessage(
+                    "Please enter the policy number.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if (!policyType) {
+
+                showMessage(
+                    "Please select a policy type.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if (
+                !premiumAmount ||
+                Number(premiumAmount) <= 0
+            ) {
+
+                showMessage(
+                    "Please enter a valid premium amount.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if (
+                !sumAssured ||
+                Number(sumAssured) <= 0
+            ) {
+
+                showMessage(
+                    "Please enter a valid sum assured amount.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if (!startDate) {
+
+                showMessage(
+                    "Please select the policy start date.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if (!nextDueDate) {
+
+                showMessage(
+                    "Please select the next premium due date.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+
+            /* DISABLE */
+
+            saveButton.disabled =
+                true;
+
+
+            saveButton.textContent =
+                "Saving...";
+
+
+
+            try {
+
+
+                /* SEND TO BACKEND */
+
+                const response =
+                    await fetch(
+                        API_BASE +
+                        "/api/policies",
+                        {
+
+                            method: "POST",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json"
+
+                            },
+
+                            body:
+                                JSON.stringify({
+
+                                    agentId:
+                                        agentId,
+
+                                    customerId:
+                                        customerId,
+
+                                    policyNumber:
+                                        policyNumber,
+
+                                    policyType:
+                                        policyType,
+
+                                    premiumAmount:
+                                        Number(
+                                            premiumAmount
+                                        ),
+
+                                    premiumFrequency:
+                                        premiumFrequency,
+
+                                    sumAssured:
+                                        Number(
+                                            sumAssured
+                                        ),
+
+                                    startDate:
+                                        startDate,
+
+                                    nextDueDate:
+                                        nextDueDate,
+
+                                    status:
+                                        status,
+
+                                    notes:
+                                        notes
+
+                                })
+
+                        }
+                    );
+
+
+
+                const data =
+                    await response.json();
+
+
+
+                if (
+                    !response.ok ||
+                    !data.success
+                ) {
+
+                    throw new Error(
+                        data.message ||
+                        "Unable to save policy."
+                    );
+
+                }
+
+
+
+                /* SUCCESS */
+
+                showMessage(
+                    "Policy added successfully!",
+                    "success"
+                );
+
+
+                saveButton.textContent =
+                    "Saved";
+
+
+
+                /* REDIRECT */
+
+                setTimeout(
+                    function () {
+
+                        window.location.href =
+                            "policies.html";
+
+                    },
+                    1200
+                );
+
+
+            }
+
+
+            catch (error) {
+
+
+                console.error(
+                    "Save policy error:",
+                    error
+                );
+
+
+                showMessage(
+                    error.message ||
+                    "Unable to save policy.",
+                    "error"
+                );
+
+
+                saveButton.disabled =
+                    false;
+
+
+                saveButton.textContent =
+                    "Save Policy";
+
+            }
+
+        }
+    );
+
+
+
+    /* =========================================
+       SHOW MESSAGE
+    ========================================= */
+
+    function showMessage(
+        message,
+        type
+    ) {
+
+
+        messageBox.textContent =
+            message;
+
+
+        messageBox.className =
+            "message " + type;
+
+    }
+
+
+</script>
+
+
+</body>
+
+</html>

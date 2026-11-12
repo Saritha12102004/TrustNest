@@ -1,0 +1,2197 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Customer Dashboard | TrustNest</title>
+
+    <meta
+        name="description"
+        content="TrustNest customer dashboard."
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            color: #172033;
+            background: #f5f7fb;
+            font-family: "Inter", sans-serif;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
+        .sidebar {
+            width: 250px;
+            position: fixed;
+            inset: 0 auto 0 0;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(180deg, #061f42, #092b5c);
+            color: #fff;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            height: 85px;
+            padding: 0 25px;
+            border-bottom: 1px solid rgba(255,255,255,.08);
+        }
+
+        .brand-mark {
+            display: grid;
+            place-items: center;
+            width: 40px;
+            height: 40px;
+            border: 3px solid #c9a227;
+            border-radius: 50%;
+            background: #fff;
+            color: #092b5c;
+            font-weight: 800;
+        }
+
+        .brand-name {
+            font: 700 23px "Playfair Display", serif;
+        }
+
+        .brand-subtitle {
+            display: block;
+            margin-top: -2px;
+            color: #d6b23c;
+            font-size: 7px;
+            letter-spacing: 1.5px;
+        }
+
+        .menu-label {
+            padding: 25px 25px 10px;
+            color: #7f94ad;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .menu {
+            margin: 0;
+            padding: 0 12px;
+            list-style: none;
+        }
+
+        .menu li {
+            margin-bottom: 4px;
+        }
+
+        .menu a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 11px 13px;
+            border-radius: 7px;
+            color: #b8c6d8;
+            font-size: 12px;
+        }
+
+        .menu a:hover,
+        .menu a.active {
+            background: rgba(255,255,255,.12);
+            color: #fff;
+        }
+
+        .menu a.active {
+            border-left: 3px solid #c9a227;
+        }
+
+        .menu-icon {
+            width: 22px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .logout {
+            margin-top: auto;
+            padding: 20px 25px;
+            border-top: 1px solid rgba(255,255,255,.08);
+            color: #b8c6d8;
+            font-size: 12px;
+        }
+
+        .logout a {
+            cursor: pointer;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .main {
+            width: calc(100% - 250px);
+            margin-left: 250px;
+        }
+
+        .topbar {
+            min-height: 85px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 34px;
+            background: #fff;
+            border-bottom: 1px solid #e8edf4;
+        }
+
+        .mobile-menu {
+            display: none;
+            border: 0;
+            background: transparent;
+            color: #092b5c;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .heading h1 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        .heading p {
+            margin: 5px 0 0;
+            color: #7b8798;
+            font-size: 12px;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar {
+            display: grid;
+            place-items: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #e8eef8;
+            color: #092b5c;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .profile strong,
+        .profile span {
+            display: block;
+        }
+
+        .profile strong {
+            font-size: 12px;
+        }
+
+        .profile span {
+            margin-top: 3px;
+            color: #8b95a4;
+            font-size: 10px;
+        }
+
+        .content {
+            max-width: 1100px;
+            padding: 32px 34px;
+        }
+
+        /* =========================
+           LOADING
+        ========================= */
+
+        .loading {
+            padding: 30px;
+            text-align: center;
+            color: #7b8798;
+            font-size: 13px;
+        }
+
+        .error-box {
+            display: none;
+            margin-bottom: 20px;
+            padding: 14px 17px;
+            border-left: 3px solid #c0392b;
+            border-radius: 4px;
+            background: #fff0ef;
+            color: #a93226;
+            font-size: 11px;
+        }
+
+        /* =========================
+           WELCOME
+        ========================= */
+
+        .welcome {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 24px;
+            padding: 23px 25px;
+            border: 1px solid #edf0f5;
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0 5px 18px rgba(24,42,70,.04);
+        }
+
+        .welcome h2 {
+            margin: 0 0 7px;
+            color: #172033;
+            font-size: 21px;
+        }
+
+        .welcome p {
+            margin: 0;
+            color: #7b8798;
+            font-size: 12px;
+        }
+
+        .welcome-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 8px 12px;
+            border-radius: 15px;
+            background: #e2f4eb;
+            color: #23794d;
+            font-size: 10px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        /* =========================
+           SUMMARY
+        ========================= */
+
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid #edf0f5;
+            border-radius: 8px;
+            box-shadow: 0 5px 18px rgba(24,42,70,.04);
+        }
+
+        .summary-card {
+            padding: 19px;
+        }
+
+        .summary-icon {
+            display: grid;
+            place-items: center;
+            width: 39px;
+            height: 39px;
+            margin-bottom: 14px;
+            border-radius: 9px;
+            background: #e8eef8;
+            color: #31588e;
+            font-size: 18px;
+        }
+
+        .summary-card span,
+        .summary-card small {
+            display: block;
+            color: #7b8798;
+            font-size: 11px;
+        }
+
+        .summary-card strong {
+            display: block;
+            margin: 7px 0 4px;
+            color: #172033;
+            font-size: 23px;
+        }
+
+        .summary-card small {
+            font-size: 10px;
+        }
+
+        /* =========================
+           SECTION
+        ========================= */
+
+        .section-title {
+            margin: 0 0 16px;
+            color: #172033;
+            font-size: 18px;
+        }
+
+        /* =========================
+           QUICK ACTIONS
+        ========================= */
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 25px;
+        }
+
+        .action-card {
+            padding: 19px;
+            background: #fff;
+            border: 1px solid #edf0f5;
+            border-radius: 8px;
+            box-shadow: 0 5px 18px rgba(24,42,70,.04);
+            transition: .2s;
+        }
+
+        .action-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(24,42,70,.08);
+        }
+
+        .action-icon {
+            display: grid;
+            place-items: center;
+            width: 40px;
+            height: 40px;
+            margin-bottom: 14px;
+            border-radius: 9px;
+            background: #e8eef8;
+            color: #31588e;
+            font-size: 17px;
+        }
+
+        .action-card strong {
+            display: block;
+            color: #25344b;
+            font-size: 12px;
+        }
+
+        .action-card p {
+            min-height: 32px;
+            margin: 7px 0 12px;
+            color: #8b95a4;
+            font-size: 10px;
+            line-height: 1.5;
+        }
+
+        .action-link {
+            color: #31588e;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        /* =========================
+           LOWER CONTENT
+        ========================= */
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 18px;
+        }
+
+        .panel {
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid #edf0f5;
+            border-radius: 8px;
+            box-shadow: 0 5px 18px rgba(24,42,70,.04);
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 20px;
+            border-bottom: 1px solid #edf0f5;
+        }
+
+        .panel-header h3 {
+            margin: 0;
+            color: #25344b;
+            font-size: 14px;
+        }
+
+        .view-all {
+            color: #31588e;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        /* =========================
+           POLICY
+        ========================= */
+
+        .policy {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 17px 20px;
+            border-bottom: 1px solid #f0f2f6;
+        }
+
+        .policy:last-child {
+            border-bottom: 0;
+        }
+
+        .policy-icon {
+            display: grid;
+            place-items: center;
+            flex: 0 0 40px;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: #e8eef8;
+            color: #31588e;
+            font-size: 18px;
+        }
+
+        .policy-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .policy-info strong {
+            display: block;
+            color: #25344b;
+            font-size: 11px;
+        }
+
+        .policy-info span {
+            display: block;
+            margin-top: 4px;
+            color: #8b95a4;
+            font-size: 9px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 9px;
+            border-radius: 12px;
+            background: #e2f4eb;
+            color: #23794d;
+            font-size: 9px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .status.due {
+            background: #fff5d8;
+            color: #956f13;
+        }
+
+        .empty-policy {
+            padding: 25px 20px;
+            color: #8b95a4;
+            text-align: center;
+            font-size: 11px;
+        }
+
+        /* =========================
+           REMINDER
+        ========================= */
+
+        .reminder {
+            padding: 20px;
+        }
+
+        .reminder-icon {
+            display: grid;
+            place-items: center;
+            width: 40px;
+            height: 40px;
+            margin-bottom: 13px;
+            border-radius: 9px;
+            background: #fff5d8;
+            color: #956f13;
+            font-size: 18px;
+        }
+
+        .reminder h4 {
+            margin: 0 0 6px;
+            color: #25344b;
+            font-size: 12px;
+        }
+
+        .reminder p {
+            margin: 0 0 15px;
+            color: #8b95a4;
+            font-size: 10px;
+            line-height: 1.6;
+        }
+
+        .reminder-date {
+            padding: 11px 13px;
+            border-left: 3px solid #c9a227;
+            border-radius: 4px;
+            background: #fffaf0;
+            color: #725d28;
+            font-size: 10px;
+        }
+
+        .reminder-date strong {
+            color: #634e1c;
+        }
+
+        /* =========================
+           SMART RECOMMENDATION
+        ========================= */
+
+        .recommendation {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 22px;
+            padding: 20px;
+            background: #fff;
+            border: 1px solid #edf0f5;
+            border-radius: 8px;
+            box-shadow: 0 5px 18px rgba(24,42,70,.04);
+        }
+
+        .recommendation-icon {
+            display: grid;
+            place-items: center;
+            flex: 0 0 43px;
+            width: 43px;
+            height: 43px;
+            border-radius: 10px;
+            background: #e8eef8;
+            color: #31588e;
+            font-size: 19px;
+        }
+
+        .recommendation-content {
+            flex: 1;
+        }
+
+        .recommendation-content strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #25344b;
+            font-size: 12px;
+        }
+
+        .recommendation-content p {
+            margin: 0;
+            color: #8b95a4;
+            font-size: 10px;
+            line-height: 1.5;
+        }
+
+        .recommendation-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 9px 13px;
+            border-radius: 6px;
+            background: #092b5c;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .recommendation-button:hover {
+            background: #061f42;
+        }
+
+        /* =========================
+           PAYMENT SAFETY
+        ========================= */
+
+        .notice {
+            margin-top: 20px;
+            padding: 14px 17px;
+            border-left: 3px solid #c9a227;
+            border-radius: 4px;
+            background: #fffaf0;
+            color: #725d28;
+            font-size: 10px;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 950px) {
+
+            .quick-actions {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 850px) {
+
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform .2s ease;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main {
+                width: 100%;
+                margin-left: 0;
+            }
+
+            .mobile-menu {
+                display: block;
+                margin-right: 14px;
+            }
+
+            .topbar {
+                padding: 0 18px;
+            }
+
+            .content {
+                padding: 22px 18px;
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            .summary {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .recommendation {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .recommendation-button {
+                width: 100%;
+            }
+
+            .profile span {
+                display: none;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="layout">
+
+    <!-- =========================
+         LEFT SIDEBAR
+    ========================= -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <a href="dashboard.html" class="brand">
+
+            <div class="brand-mark">
+                T
+            </div>
+
+            <div>
+
+                <div class="brand-name">
+                    TrustNest
+                </div>
+
+                <span class="brand-subtitle">
+                    Insurance Intelligence
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <div class="menu-label">
+            My Account
+        </div>
+
+
+        <ul class="menu">
+
+            <li>
+
+                <a href="dashboard.html" class="active">
+
+                    <span class="menu-icon">
+                        &#9638;
+                    </span>
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="policies.html">
+
+                    <span class="menu-icon">
+                        &#128203;
+                    </span>
+
+                    My Policies
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="verify-agent.html">
+
+                    <span class="menu-icon">
+                        &#10003;
+                    </span>
+
+                    Verify Agent
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="agent-details.html">
+
+                    <span class="menu-icon">
+                        &#128100;
+                    </span>
+
+                    Agent Details
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="branch-details.html">
+
+                    <span class="menu-icon">
+                        &#127970;
+                    </span>
+
+                    Branch Details
+
+                </a>
+
+            </li>
+
+        </ul>
+
+
+        <div class="logout">
+
+            <a href="#" id="logoutBtn">
+
+                &#8617;&nbsp;&nbsp;Logout
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="main">
+
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div style="display:flex;align-items:center;">
+
+                <button
+                    class="mobile-menu"
+                    id="mobileMenu"
+                    aria-label="Open navigation">
+
+                    &#9776;
+
+                </button>
+
+
+                <div class="heading">
+
+                    <h1>
+                        Customer Dashboard
+                    </h1>
+
+                    <p>
+                        Manage your insurance protection and stay connected
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="profile">
+
+                <div
+                    class="avatar"
+                    id="profileAvatar">
+                    --
+                </div>
+
+
+                <div>
+
+                    <strong id="profileName">
+                        Loading...
+                    </strong>
+
+                    <span>
+                        TrustNest Customer
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- CONTENT -->
+
+        <div class="content">
+
+
+            <!-- ERROR -->
+
+            <div
+                class="error-box"
+                id="errorBox">
+            </div>
+
+
+            <!-- WELCOME -->
+
+            <section class="welcome">
+
+                <div>
+
+                    <h2 id="welcomeName">
+                        Welcome back!
+                    </h2>
+
+                    <p id="welcomeText">
+                        Loading your account information...
+                    </p>
+
+                </div>
+
+
+                <div class="welcome-badge">
+
+                    &#10003;
+
+                    <span id="accountStatus">
+                        Account Active
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <!-- SUMMARY -->
+
+            <section class="summary">
+
+
+                <div class="card summary-card">
+
+                    <div class="summary-icon">
+                        &#128737;
+                    </div>
+
+                    <span>
+                        Active policies
+                    </span>
+
+                    <strong id="activePolicies">
+                        0
+                    </strong>
+
+                    <small>
+                        Protection currently active
+                    </small>
+
+                </div>
+
+
+                <div class="card summary-card">
+
+                    <div class="summary-icon">
+                        &#8377;
+                    </div>
+
+                    <span>
+                        Total coverage
+                    </span>
+
+                    <strong id="totalCoverage">
+                        ₹0
+                    </strong>
+
+                    <small>
+                        Coverage across your policies
+                    </small>
+
+                </div>
+
+
+                <div class="card summary-card">
+
+                    <div class="summary-icon">
+                        &#128197;
+                    </div>
+
+                    <span>
+                        Annual premium
+                    </span>
+
+                    <strong id="annualPremium">
+                        ₹0
+                    </strong>
+
+                    <small id="premiumText">
+                        Based on your policies
+                    </small>
+
+                </div>
+
+            </section>
+
+
+            <!-- QUICK ACTIONS -->
+
+            <h2 class="section-title">
+                Quick Actions
+            </h2>
+
+
+            <section class="quick-actions">
+
+
+                <a
+                    href="policies.html"
+                    class="action-card">
+
+                    <div class="action-icon">
+                        &#128203;
+                    </div>
+
+                    <strong>
+                        My Policies
+                    </strong>
+
+                    <p>
+                        View your policies, coverage and premium details.
+                    </p>
+
+                    <span class="action-link">
+                        View policies →
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="verify-agent.html"
+                    class="action-card">
+
+                    <div class="action-icon">
+                        &#10003;
+                    </div>
+
+                    <strong>
+                        Verify Agent
+                    </strong>
+
+                    <p>
+                        Check whether your insurance agent is verified.
+                    </p>
+
+                    <span class="action-link">
+                        Verify agent →
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="agent-details.html"
+                    class="action-card">
+
+                    <div class="action-icon">
+                        &#128100;
+                    </div>
+
+                    <strong>
+                        Agent Details
+                    </strong>
+
+                    <p>
+                        View your agent's contact and professional information.
+                    </p>
+
+                    <span class="action-link">
+                        View details →
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="branch-details.html"
+                    class="action-card">
+
+                    <div class="action-icon">
+                        &#127970;
+                    </div>
+
+                    <strong>
+                        Branch Details
+                    </strong>
+
+                    <p>
+                        View the branch associated with your insurance agent.
+                    </p>
+
+                    <span class="action-link">
+                        View branch →
+                    </span>
+
+                </a>
+
+            </section>
+
+
+            <!-- LOWER DASHBOARD -->
+
+            <section class="dashboard-grid">
+
+
+                <!-- RECENT POLICIES -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <h3>
+                            Recent Policies
+                        </h3>
+
+                        <a
+                            href="policies.html"
+                            class="view-all">
+
+                            View all
+
+                        </a>
+
+                    </div>
+
+
+                    <div id="policyList">
+
+                        <div class="loading">
+                            Loading policies...
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- UPCOMING REMINDER -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <h3>
+                            Upcoming Reminder
+                        </h3>
+
+                    </div>
+
+
+                    <div class="reminder">
+
+                        <div class="reminder-icon">
+                            &#128276;
+                        </div>
+
+
+                        <h4 id="reminderTitle">
+                            No upcoming reminder
+                        </h4>
+
+
+                        <p id="reminderDescription">
+                            Your upcoming premium or renewal reminders will appear here.
+                        </p>
+
+
+                        <div class="reminder-date">
+
+                            <strong>
+                                Due date:
+                            </strong>
+
+                            <span id="reminderDate">
+                                --
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- SMART RECOMMENDATION -->
+
+            <div class="recommendation">
+
+                <div class="recommendation-icon">
+                    &#10024;
+                </div>
+
+
+                <div class="recommendation-content">
+
+                    <strong>
+                        Smart Policy Recommendation
+                    </strong>
+
+                    <p>
+                        Get suitable insurance suggestions based on your age,
+                        family needs, financial goals and existing coverage.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="recommendations.html"
+                    class="recommendation-button">
+
+                    Get Recommendation
+
+                </a>
+
+            </div>
+
+
+            <!-- PAYMENT SAFETY -->
+
+            <div class="notice">
+
+                <strong>
+                    Payment safety:
+                </strong>
+
+                TrustNest will never ask for your password or OTP.
+                Confirm your agent and branch details before making a premium payment.
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script>
+
+    /* =====================================================
+       TRUSTNEST CUSTOMER DASHBOARD
+    ===================================================== */
+
+
+    const API_BASE = "http://localhost:5000";
+
+
+    /* =====================================================
+       HELPER FUNCTIONS
+    ===================================================== */
+
+    function getCustomerToken() {
+
+        return (
+            localStorage.getItem("customerToken") ||
+            localStorage.getItem("token")
+        );
+
+    }
+
+
+    function getInitials(name) {
+
+        if (!name) {
+            return "--";
+        }
+
+        const words = name
+            .trim()
+            .split(/\s+/)
+            .filter(Boolean);
+
+        if (words.length === 1) {
+
+            return words[0]
+                .substring(0, 2)
+                .toUpperCase();
+
+        }
+
+        return (
+            words[0][0] +
+            words[words.length - 1][0]
+        ).toUpperCase();
+
+    }
+
+
+    function formatCurrency(value) {
+
+        const number = Number(value) || 0;
+
+        return "₹" + number.toLocaleString("en-IN");
+
+    }
+
+
+    function formatCoverage(value) {
+
+        const number = Number(value) || 0;
+
+        if (number >= 10000000) {
+
+            return "₹" +
+                (number / 10000000)
+                    .toFixed(1)
+                    .replace(".0", "") +
+                "Cr";
+
+        }
+
+        if (number >= 100000) {
+
+            return "₹" +
+                (number / 100000)
+                    .toFixed(1)
+                    .replace(".0", "") +
+                "L";
+
+        }
+
+        if (number >= 1000) {
+
+            return "₹" +
+                (number / 1000)
+                    .toFixed(1)
+                    .replace(".0", "") +
+                "K";
+
+        }
+
+        return formatCurrency(number);
+
+    }
+
+
+    function formatDate(dateValue) {
+
+        if (!dateValue) {
+            return "--";
+        }
+
+        const date = new Date(dateValue);
+
+        if (isNaN(date.getTime())) {
+            return dateValue;
+        }
+
+        return date.toLocaleDateString(
+            "en-IN",
+            {
+                day: "2-digit",
+                month: "short",
+                year: "numeric"
+            }
+        );
+
+    }
+
+
+    function showError(message) {
+
+        const errorBox =
+            document.getElementById("errorBox");
+
+        errorBox.textContent = message;
+
+        errorBox.style.display = "block";
+
+    }
+
+
+    /* =====================================================
+       CHECK LOGIN
+    ===================================================== */
+
+    const token = getCustomerToken();
+
+
+    if (!token) {
+
+        window.location.href = "../login.html";
+
+    }
+
+
+    /* =====================================================
+       LOAD CUSTOMER DASHBOARD
+    ===================================================== */
+
+    async function loadCustomerDashboard() {
+
+        try {
+
+            const response = await fetch(
+                `${API_BASE}/api/customer-portal/me`,
+                {
+                    method: "GET",
+
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    }
+                }
+            );
+
+
+            const data = await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.message ||
+                    "Unable to load customer information."
+                );
+
+            }
+
+
+            /*
+             * Expected response:
+             *
+             * {
+             *   customer: {...},
+             *   agent: {...}
+             * }
+             */
+
+
+            const customer =
+                data.customer || {};
+
+            const agent =
+                data.agent || {};
+
+
+            /* =========================
+               CUSTOMER NAME
+            ========================= */
+
+            const customerName =
+                customer.fullName ||
+                "Customer";
+
+
+            document.getElementById(
+                "profileName"
+            ).textContent = customerName;
+
+
+            document.getElementById(
+                "profileAvatar"
+            ).textContent =
+                getInitials(customerName);
+
+
+            document.getElementById(
+                "welcomeName"
+            ).textContent =
+                `Welcome back, ${customerName}!`;
+
+
+            /* =========================
+               CUSTOMER INFORMATION
+            ========================= */
+
+            let welcomeText =
+                "Here's a quick overview of your insurance protection and account.";
+
+
+            if (customer.customerLoginId) {
+
+                welcomeText =
+                    `Login ID: ${customer.customerLoginId}`;
+
+            }
+
+
+            if (customer.branch) {
+
+                welcomeText +=
+                    ` • Branch: ${customer.branch}`;
+
+            }
+
+
+            document.getElementById(
+                "welcomeText"
+            ).textContent = welcomeText;
+
+
+            /* =========================
+               ACCOUNT STATUS
+            ========================= */
+
+            document.getElementById(
+                "accountStatus"
+            ).textContent =
+                customer.customerLoginEnabled === false
+                    ? "Account Disabled"
+                    : "Account Active";
+
+
+            /* =========================
+               STORE CUSTOMER DATA
+            ========================= */
+
+            localStorage.setItem(
+                "customerName",
+                customerName
+            );
+
+
+            if (customer.customerLoginId) {
+
+                localStorage.setItem(
+                    "customerLoginId",
+                    customer.customerLoginId
+                );
+
+            }
+
+
+            if (customer.branch) {
+
+                localStorage.setItem(
+                    "customerBranch",
+                    customer.branch
+                );
+
+            }
+
+
+            /* =========================
+               AGENT INFORMATION
+            ========================= */
+
+            if (agent.name) {
+
+                localStorage.setItem(
+                    "customerAgentName",
+                    agent.name
+                );
+
+            }
+
+            if (agent.branch) {
+
+                localStorage.setItem(
+                    "customerAgentBranch",
+                    agent.branch
+                );
+
+            }
+
+
+            /* =========================
+               LOAD POLICIES
+            ========================= */
+
+            await loadPolicies();
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Dashboard error:",
+                error
+            );
+
+
+            showError(
+                error.message ||
+                "Unable to load your dashboard."
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       LOAD CUSTOMER POLICIES
+    ===================================================== */
+
+    async function loadPolicies() {
+
+        const policyList =
+            document.getElementById(
+                "policyList"
+            );
+
+
+        try {
+
+            const response = await fetch(
+                `${API_BASE}/api/customer-portal/policies`,
+                {
+                    method: "GET",
+
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    }
+                }
+            );
+
+
+            const data = await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.message ||
+                    "Unable to load policies."
+                );
+
+            }
+
+
+            /*
+             * Supports:
+             *
+             * [
+             *   {...},
+             *   {...}
+             * ]
+             *
+             * OR
+             *
+             * {
+             *   policies: [...]
+             * }
+             */
+
+
+            const policies =
+                Array.isArray(data)
+                    ? data
+                    : (
+                        Array.isArray(data.policies)
+                            ? data.policies
+                            : []
+                    );
+
+
+            updatePolicySummary(
+                policies
+            );
+
+
+            displayPolicies(
+                policies
+            );
+
+
+            displayUpcomingReminder(
+                policies
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Policy loading error:",
+                error
+            );
+
+
+            /*
+             * If the policy endpoint is not created yet,
+             * don't destroy the whole dashboard.
+             */
+
+            policyList.innerHTML = `
+                <div class="empty-policy">
+                    No policy information available yet.
+                </div>
+            `;
+
+        }
+
+    }
+
+
+    /* =====================================================
+       UPDATE POLICY SUMMARY
+    ===================================================== */
+
+    function updatePolicySummary(
+        policies
+    ) {
+
+        const activePolicies =
+            policies.filter(
+                policy => {
+
+                    const status =
+                        String(
+                            policy.status || ""
+                        ).toLowerCase();
+
+                    return (
+                        status === "active" ||
+                        status === "in force" ||
+                        status === "running"
+                    );
+
+                }
+            );
+
+
+        document.getElementById(
+            "activePolicies"
+        ).textContent =
+            activePolicies.length;
+
+
+        let totalCoverage = 0;
+
+        let annualPremium = 0;
+
+
+        policies.forEach(
+            policy => {
+
+                totalCoverage +=
+                    Number(
+                        policy.sumAssured ||
+                        policy.coverageAmount ||
+                        policy.coverage ||
+                        policy.totalCoverage ||
+                        0
+                    );
+
+
+                annualPremium +=
+                    Number(
+                        policy.annualPremium ||
+                        policy.premiumAmount ||
+                        policy.premium ||
+                        0
+                    );
+
+            }
+        );
+
+
+        document.getElementById(
+            "totalCoverage"
+        ).textContent =
+            formatCoverage(
+                totalCoverage
+            );
+
+
+        document.getElementById(
+            "annualPremium"
+        ).textContent =
+            formatCurrency(
+                annualPremium
+            );
+
+
+        document.getElementById(
+            "premiumText"
+        ).textContent =
+            policies.length
+                ? "Total annual premium"
+                : "No policies available";
+
+    }
+
+
+    /* =====================================================
+       DISPLAY POLICIES
+    ===================================================== */
+
+    function displayPolicies(
+        policies
+    ) {
+
+        const policyList =
+            document.getElementById(
+                "policyList"
+            );
+
+
+        if (!policies.length) {
+
+            policyList.innerHTML = `
+                <div class="empty-policy">
+                    You currently have no policies.
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        /*
+         * Show latest 3 policies
+         */
+
+        const recentPolicies =
+            policies.slice(0, 3);
+
+
+        policyList.innerHTML =
+            recentPolicies
+                .map(
+                    policy => {
+
+                        const name =
+                            policy.policyName ||
+                            policy.name ||
+                            policy.policyType ||
+                            "Insurance Policy";
+
+
+                        const policyNumber =
+                            policy.policyNumber ||
+                            policy.policyNo ||
+                            policy.number ||
+                            "Not available";
+
+
+                        const type =
+                            policy.policyType ||
+                            policy.type ||
+                            "Insurance";
+
+
+                        const status =
+                            policy.status ||
+                            "Active";
+
+
+                        const normalizedStatus =
+                            String(status)
+                                .toLowerCase();
+
+
+                        const statusClass =
+                            (
+                                normalizedStatus.includes(
+                                    "due"
+                                ) ||
+                                normalizedStatus.includes(
+                                    "renew"
+                                ) ||
+                                normalizedStatus.includes(
+                                    "pending"
+                                )
+                            )
+                                ? "status due"
+                                : "status";
+
+
+                        let icon = "&#128737;";
+
+
+                        if (
+                            type
+                                .toLowerCase()
+                                .includes("health")
+                        ) {
+
+                            icon = "&#9829;";
+
+                        }
+                        else if (
+                            type
+                                .toLowerCase()
+                                .includes("vehicle") ||
+                            type
+                                .toLowerCase()
+                                .includes("motor")
+                        ) {
+
+                            icon = "&#128663;";
+
+                        }
+
+
+                        return `
+
+                            <div class="policy">
+
+                                <div class="policy-icon">
+                                    ${icon}
+                                </div>
+
+                                <div class="policy-info">
+
+                                    <strong>
+                                        ${escapeHTML(name)}
+                                    </strong>
+
+                                    <span>
+                                        Policy no.
+                                        ${escapeHTML(policyNumber)}
+                                        |
+                                        ${escapeHTML(type)}
+                                    </span>
+
+                                </div>
+
+                                <span class="${statusClass}">
+                                    ${escapeHTML(status)}
+                                </span>
+
+                            </div>
+
+                        `;
+
+                    }
+                )
+                .join("");
+
+    }
+
+
+    /* =====================================================
+       UPCOMING REMINDER
+    ===================================================== */
+
+    function displayUpcomingReminder(
+        policies
+    ) {
+
+        if (!policies.length) {
+
+            return;
+
+        }
+
+
+        const policiesWithDates =
+            policies
+                .map(
+                    policy => {
+
+                        const dateValue =
+                            policy.renewalDate ||
+                            policy.nextPaymentDate ||
+                            policy.dueDate ||
+                            policy.premiumDueDate;
+
+
+                        if (!dateValue) {
+                            return null;
+                        }
+
+
+                        const date =
+                            new Date(
+                                dateValue
+                            );
+
+
+                        if (
+                            isNaN(
+                                date.getTime()
+                            )
+                        ) {
+                            return null;
+                        }
+
+
+                        return {
+                            policy,
+                            date
+                        };
+
+                    }
+                )
+                .filter(Boolean)
+                .sort(
+                    (a, b) =>
+                        a.date - b.date
+                );
+
+
+        if (
+            !policiesWithDates.length
+        ) {
+
+            return;
+
+        }
+
+
+        const upcoming =
+            policiesWithDates[0];
+
+
+        const policy =
+            upcoming.policy;
+
+
+        const policyName =
+            policy.policyName ||
+            policy.name ||
+            policy.policyType ||
+            "Insurance Policy";
+
+
+        document.getElementById(
+            "reminderTitle"
+        ).textContent =
+            policyName;
+
+
+        document.getElementById(
+            "reminderDescription"
+        ).textContent =
+            "Your upcoming premium or policy renewal is approaching. Please review the details before making payment.";
+
+
+        document.getElementById(
+            "reminderDate"
+        ).textContent =
+            formatDate(
+                upcoming.date
+            );
+
+    }
+
+
+    /* =====================================================
+       ESCAPE HTML
+    ===================================================== */
+
+    function escapeHTML(
+        value
+    ) {
+
+        return String(value ?? "")
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+            .replace(
+                /</g,
+                "&lt;"
+            )
+            .replace(
+                />/g,
+                "&gt;"
+            )
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+    }
+
+
+    /* =====================================================
+       LOGOUT
+    ===================================================== */
+
+    document
+        .getElementById("logoutBtn")
+        .addEventListener(
+            "click",
+            function(event) {
+
+                event.preventDefault();
+
+
+                localStorage.removeItem(
+                    "customerToken"
+                );
+
+                localStorage.removeItem(
+                    "token"
+                );
+
+                localStorage.removeItem(
+                    "customerName"
+                );
+
+                localStorage.removeItem(
+                    "customerLoginId"
+                );
+
+                localStorage.removeItem(
+                    "customerBranch"
+                );
+
+                localStorage.removeItem(
+                    "customerAgentName"
+                );
+
+                localStorage.removeItem(
+                    "customerAgentBranch"
+                );
+
+
+                window.location.href =
+                    "../login.html";
+
+            }
+        );
+
+
+    /* =====================================================
+       MOBILE SIDEBAR
+    ===================================================== */
+
+    document
+        .getElementById("mobileMenu")
+        .addEventListener(
+            "click",
+            function() {
+
+                document
+                    .getElementById("sidebar")
+                    .classList.toggle(
+                        "open"
+                    );
+
+            }
+        );
+
+
+    /* =====================================================
+       START DASHBOARD
+    ===================================================== */
+
+    if (token) {
+
+        loadCustomerDashboard();
+
+    }
+
+</script>
+
+</body>
+</html>

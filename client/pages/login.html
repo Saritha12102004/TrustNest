@@ -1,0 +1,2161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Login | TrustNest</title>
+
+    <meta name="description"
+          content="Login to TrustNest Smart Insurance Platform">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
+
+
+    <style>
+
+        /* =========================================
+           RESET
+        ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: "Inter", sans-serif;
+
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f5f8fc 0%,
+                    #eaf1f9 100%
+                );
+
+            color: #172033;
+        }
+
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =========================================
+           MAIN CONTAINER
+        ========================================= */
+
+        .page {
+            min-height: 100vh;
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+        }
+
+
+        /* =========================================
+           LEFT SIDE
+        ========================================= */
+
+        .left-section {
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #061f42,
+                    #092b5c,
+                    #123f78
+                );
+
+            color: white;
+
+            padding: 55px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: space-between;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        .left-section::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 450px;
+            height: 450px;
+
+            border-radius: 50%;
+
+            border: 1px solid
+                rgba(255,255,255,0.08);
+
+            right: -180px;
+            top: -120px;
+        }
+
+
+        .left-section::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 300px;
+            height: 300px;
+
+            border-radius: 50%;
+
+            border: 1px solid
+                rgba(201,162,39,0.15);
+
+            left: -150px;
+            bottom: -100px;
+        }
+
+
+        /* =========================================
+           LOGO
+        ========================================= */
+
+        .logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .logo-icon {
+
+            width: 45px;
+            height: 45px;
+
+            border-radius: 50%;
+
+            background: white;
+
+            color: #092b5c;
+
+            border: 3px solid #c9a227;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: 800;
+
+            font-size: 20px;
+        }
+
+
+        .logo-name {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 27px;
+
+            font-weight: 700;
+        }
+
+
+        .logo-subtitle {
+
+            display: block;
+
+            font-family:
+                "Inter",
+                sans-serif;
+
+            font-size: 8px;
+
+            letter-spacing: 2px;
+
+            color: #d6b23c;
+
+            text-transform: uppercase;
+
+            margin-top: -3px;
+        }
+
+
+        /* =========================================
+           LEFT CONTENT
+        ========================================= */
+
+        .left-content {
+
+            position: relative;
+
+            z-index: 2;
+
+            max-width: 530px;
+        }
+
+
+        .left-content .badge {
+
+            display: inline-block;
+
+            padding: 8px 14px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.15);
+
+            color: #d6b23c;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            margin-bottom: 22px;
+        }
+
+
+        .left-content h1 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                clamp(40px, 4vw, 58px);
+
+            line-height: 1.12;
+
+            margin-bottom: 20px;
+        }
+
+
+        .left-content h1 span {
+
+            color: #d6b23c;
+        }
+
+
+        .left-content p {
+
+            color: #c4d0df;
+
+            font-size: 15px;
+
+            line-height: 1.8;
+
+            max-width: 500px;
+        }
+
+
+        /* =========================================
+           TRUST FEATURES
+        ========================================= */
+
+        .trust-features {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 14px;
+
+            margin-top: 35px;
+        }
+
+
+        .trust-item {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            color: #d8e1ed;
+
+            font-size: 12px;
+        }
+
+
+        .check {
+
+            width: 22px;
+            height: 22px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(201,162,39,0.18);
+
+            color: #d6b23c;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 11px;
+
+            font-weight: 800;
+        }
+
+
+        /* =========================================
+           COPYRIGHT
+        ========================================= */
+
+        .left-footer {
+
+            position: relative;
+
+            z-index: 2;
+
+            color: #8ea0b7;
+
+            font-size: 11px;
+        }
+
+
+        /* =========================================
+           RIGHT SECTION
+        ========================================= */
+
+        .right-section {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 40px;
+        }
+
+
+        /* =========================================
+           LOGIN CARD
+        ========================================= */
+
+        .login-card {
+
+            width: min(460px, 100%);
+
+            background: white;
+
+            padding: 42px;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 25px 70px
+                rgba(9, 43, 92, 0.12);
+
+            border:
+                1px solid #e5ebf2;
+        }
+
+
+        .login-header {
+
+            margin-bottom: 30px;
+        }
+
+
+        .login-header h2 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            color: #092b5c;
+
+            font-size: 34px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .login-header p {
+
+            color: #667085;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================================
+           ROLE SELECTOR
+        ========================================= */
+
+        .role-label {
+
+            display: block;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            color: #344054;
+
+            margin-bottom: 10px;
+        }
+
+
+        .role-options {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 10px;
+
+            margin-bottom: 22px;
+        }
+
+
+        .role-option {
+
+            position: relative;
+        }
+
+
+        .role-option input {
+
+            position: absolute;
+
+            opacity: 0;
+        }
+
+
+        .role-option label {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            padding: 12px;
+
+            border:
+                1px solid #d9e0e8;
+
+            border-radius: 8px;
+
+            color: #667085;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+
+        .role-option input:checked + label {
+
+            background: #edf3fa;
+
+            border-color: #092b5c;
+
+            color: #092b5c;
+        }
+
+
+        /* =========================================
+           FORM
+        ========================================= */
+
+        .form-group {
+
+            margin-bottom: 19px;
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            color: #344054;
+
+            margin-bottom: 8px;
+        }
+
+
+        .input-wrapper {
+
+            position: relative;
+        }
+
+
+        .input-icon {
+
+            position: absolute;
+
+            left: 14px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            color: #98a2b3;
+
+            font-size: 15px;
+
+            z-index: 2;
+        }
+
+
+        .form-control {
+
+            width: 100%;
+
+            padding:
+                13px
+                42px
+                13px
+                42px;
+
+            border:
+                1px solid #d9e0e8;
+
+            border-radius: 8px;
+
+            outline: none;
+
+            font-family:
+                "Inter",
+                sans-serif;
+
+            font-size: 13px;
+
+            color: #172033;
+
+            transition: 0.25s;
+
+            background: white;
+        }
+
+
+        .form-control:focus {
+
+            border-color: #092b5c;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(9,43,92,0.08);
+        }
+
+
+        .form-control::placeholder {
+
+            color: #98a2b3;
+        }
+
+
+        .password-toggle {
+
+            position: absolute;
+
+            right: 13px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            color: #667085;
+
+            font-size: 13px;
+
+            z-index: 2;
+        }
+
+
+        /* =========================================
+           LOGIN HELP TEXT
+        ========================================= */
+
+        .login-help {
+
+            display: none;
+
+            margin-top: -9px;
+
+            margin-bottom: 18px;
+
+            color: #667085;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+        }
+
+
+        .login-help strong {
+
+            color: #092b5c;
+        }
+
+
+        /* =========================================
+           FORM OPTIONS
+        ========================================= */
+
+        .form-options {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin:
+                5px 0 22px;
+        }
+
+
+        .remember {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: #667085;
+
+            font-size: 12px;
+
+            cursor: pointer;
+        }
+
+
+        .remember input {
+
+            accent-color: #092b5c;
+        }
+
+
+        .forgot-password {
+
+            color: #092b5c;
+
+            font-size: 12px;
+
+            font-weight: 600;
+        }
+
+
+        .forgot-password:hover {
+
+            color: #c9a227;
+        }
+
+
+        /* =========================================
+           LOGIN BUTTON
+        ========================================= */
+
+        .login-btn {
+
+            width: 100%;
+
+            border: none;
+
+            padding: 14px;
+
+            border-radius: 8px;
+
+            background: #092b5c;
+
+            color: white;
+
+            font-family:
+                "Inter",
+                sans-serif;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+
+        .login-btn:hover {
+
+            background: #061f42;
+
+            transform:
+                translateY(-1px);
+
+            box-shadow:
+                0 8px 20px
+                rgba(9,43,92,0.18);
+        }
+
+
+        .login-btn:disabled {
+
+            opacity: 0.65;
+
+            cursor: not-allowed;
+
+            transform: none;
+
+            box-shadow: none;
+        }
+
+
+        /* =========================================
+           DIVIDER
+        ========================================= */
+
+        .divider {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin: 25px 0;
+
+            color: #98a2b3;
+
+            font-size: 11px;
+        }
+
+
+        .divider::before,
+        .divider::after {
+
+            content: "";
+
+            flex: 1;
+
+            height: 1px;
+
+            background: #e7ebf0;
+        }
+
+
+        /* =========================================
+           REGISTER
+        ========================================= */
+
+        .register-text {
+
+            text-align: center;
+
+            color: #667085;
+
+            font-size: 13px;
+        }
+
+
+        .register-text a {
+
+            color: #092b5c;
+
+            font-weight: 700;
+        }
+
+
+        .register-text a:hover {
+
+            color: #c9a227;
+        }
+
+
+        /* =========================================
+           SECURITY NOTE
+        ========================================= */
+
+        .security-note {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 7px;
+
+            margin-top: 22px;
+
+            color: #7b8797;
+
+            font-size: 10px;
+        }
+
+
+        .security-icon {
+
+            color: #258351;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================================
+           ERROR MESSAGE
+        ========================================= */
+
+        .error-message {
+
+            display: none;
+
+            background: #fff0f0;
+
+            border:
+                1px solid #f3caca;
+
+            color: #c0392b;
+
+            padding: 10px 12px;
+
+            border-radius: 7px;
+
+            font-size: 12px;
+
+            margin-bottom: 18px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================================
+           SUCCESS MESSAGE
+        ========================================= */
+
+        .success-message {
+
+            display: none;
+
+            background: #edf9f1;
+
+            border:
+                1px solid #c8ead3;
+
+            color: #258351;
+
+            padding: 10px 12px;
+
+            border-radius: 7px;
+
+            font-size: 12px;
+
+            margin-bottom: 18px;
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 900px) {
+
+            .page {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .left-section {
+
+                min-height: 430px;
+
+                padding: 35px;
+            }
+
+
+            .left-content {
+
+                margin:
+                    50px 0 30px;
+            }
+
+
+            .left-footer {
+
+                display: none;
+            }
+        }
+
+
+        @media (max-width: 550px) {
+
+            .left-section {
+
+                padding: 25px;
+
+                min-height: 390px;
+            }
+
+
+            .left-content h1 {
+
+                font-size: 38px;
+            }
+
+
+            .left-content p {
+
+                font-size: 13px;
+            }
+
+
+            .trust-features {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .right-section {
+
+                padding: 25px 15px;
+            }
+
+
+            .login-card {
+
+                padding: 28px 22px;
+            }
+
+
+            .login-header h2 {
+
+                font-size: 29px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+    <!-- =================================================
+         LEFT SIDE
+    ================================================== -->
+
+    <section class="left-section">
+
+
+        <!-- LOGO -->
+
+        <a href="../index.html"
+           class="logo">
+
+            <div class="logo-icon">
+                T
+            </div>
+
+            <div>
+
+                <div class="logo-name">
+                    TrustNest
+                </div>
+
+                <span class="logo-subtitle">
+                    Insurance Intelligence
+                </span>
+
+            </div>
+
+        </a>
+
+
+
+        <!-- CONTENT -->
+
+        <div class="left-content">
+
+
+            <div class="badge">
+
+                ● Secure Insurance Platform
+
+            </div>
+
+
+            <h1>
+
+                Welcome back to
+
+                <span>
+                    TrustNest.
+                </span>
+
+            </h1>
+
+
+            <p>
+
+                Manage customers, policies,
+                follow-ups and insurance activities
+                through one intelligent platform.
+
+                TrustNest helps agents work smarter
+                and helps customers build confidence
+                through verified agent information.
+
+            </p>
+
+
+            <div class="trust-features">
+
+
+                <div class="trust-item">
+
+                    <span class="check">
+                        ✓
+                    </span>
+
+                    Verified Agent Profiles
+
+                </div>
+
+
+                <div class="trust-item">
+
+                    <span class="check">
+                        ✓
+                    </span>
+
+                    Smart Follow-ups
+
+                </div>
+
+
+                <div class="trust-item">
+
+                    <span class="check">
+                        ✓
+                    </span>
+
+                    Customer Management
+
+                </div>
+
+
+                <div class="trust-item">
+
+                    <span class="check">
+                        ✓
+                    </span>
+
+                    AI-powered Insights
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <div class="left-footer">
+
+            © 2026 TrustNest · Smart Insurance Management
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         RIGHT SIDE
+    ================================================== -->
+
+    <section class="right-section">
+
+
+        <div class="login-card">
+
+
+            <!-- HEADER -->
+
+            <div class="login-header">
+
+                <h2>
+                    Sign in
+                </h2>
+
+                <p id="loginSubtitle">
+                    Access your TrustNest account
+                </p>
+
+            </div>
+
+
+
+            <!-- ERROR -->
+
+            <div id="errorMessage"
+                 class="error-message">
+
+                Please enter valid login details.
+
+            </div>
+
+
+
+            <!-- SUCCESS -->
+
+            <div id="successMessage"
+                 class="success-message">
+
+                Login successful. Redirecting...
+
+            </div>
+
+
+
+            <!-- ROLE -->
+
+            <span class="role-label">
+
+                Login as
+
+            </span>
+
+
+            <div class="role-options">
+
+
+                <div class="role-option">
+
+                    <input
+                        type="radio"
+                        id="agentRole"
+                        name="role"
+                        value="agent"
+                        checked
+                    >
+
+                    <label for="agentRole">
+
+                        👨‍💼
+
+                        Agent
+
+                    </label>
+
+                </div>
+
+
+                <div class="role-option">
+
+                    <input
+                        type="radio"
+                        id="customerRole"
+                        name="role"
+                        value="customer"
+                    >
+
+                    <label for="customerRole">
+
+                        👤
+
+                        Customer
+
+                    </label>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- LOGIN FORM -->
+
+            <form id="loginForm">
+
+
+                <!-- EMAIL / CUSTOMER ID -->
+
+                <div class="form-group">
+
+                    <label for="email"
+                           id="loginLabel">
+
+                        Email Address
+
+                    </label>
+
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon"
+                              id="loginIcon">
+
+                            ✉
+
+                        </span>
+
+
+                        <input
+                            type="text"
+                            id="email"
+                            class="form-control"
+                            placeholder="Enter your email"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- CUSTOMER HELP -->
+
+                <div id="customerHelp"
+                     class="login-help">
+
+                    Customer login accepts your
+                    <strong>registered email address</strong>
+                    or
+                    <strong>Customer ID</strong>.
+
+                </div>
+
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="password">
+
+                        Password
+
+                    </label>
+
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+
+                            🔒
+
+                        </span>
+
+
+                        <input
+                            type="password"
+                            id="password"
+                            class="form-control"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="togglePassword">
+
+                            Show
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- OPTIONS -->
+
+                <div class="form-options">
+
+
+                    <label class="remember">
+
+                        <input
+                            type="checkbox"
+                            id="rememberMe"
+                        >
+
+                        Remember me
+
+                    </label>
+
+
+                    <a href="#"
+                       class="forgot-password"
+                       onclick="forgotPassword(event)">
+
+                        Forgot password?
+
+                    </a>
+
+
+                </div>
+
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button
+                    type="submit"
+                    class="login-btn"
+                    id="loginButton">
+
+                    Sign In
+
+                </button>
+
+
+            </form>
+
+
+
+            <!-- DIVIDER -->
+
+            <div class="divider">
+
+                OR
+
+            </div>
+
+
+
+            <!-- REGISTER -->
+
+            <div class="register-text">
+
+                Don't have an account?
+
+                <a href="register.html">
+
+                    Create an account
+
+                </a>
+
+            </div>
+
+
+
+            <!-- SECURITY -->
+
+            <div class="security-note">
+
+                <span class="security-icon">
+
+                    🔒
+
+                </span>
+
+                Your information is protected and secure.
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+</div>
+
+
+
+<script>
+
+    /* =========================================
+       API BASE URL
+    ========================================= */
+
+    const API_BASE_URL =
+        "http://localhost:5000";
+
+
+
+    /* =========================================
+       ELEMENTS
+    ========================================= */
+
+    const passwordInput =
+        document.getElementById("password");
+
+    const togglePassword =
+        document.getElementById("togglePassword");
+
+    const loginForm =
+        document.getElementById("loginForm");
+
+    const errorMessage =
+        document.getElementById("errorMessage");
+
+    const successMessage =
+        document.getElementById("successMessage");
+
+    const loginButton =
+        document.getElementById("loginButton");
+
+    const loginInput =
+        document.getElementById("email");
+
+    const loginLabel =
+        document.getElementById("loginLabel");
+
+    const loginIcon =
+        document.getElementById("loginIcon");
+
+    const customerHelp =
+        document.getElementById("customerHelp");
+
+    const loginSubtitle =
+        document.getElementById("loginSubtitle");
+
+
+
+    /* =========================================
+       PASSWORD VISIBILITY
+    ========================================= */
+
+    togglePassword.addEventListener(
+        "click",
+        function () {
+
+            if (
+                passwordInput.type === "password"
+            ) {
+
+                passwordInput.type = "text";
+
+                togglePassword.textContent =
+                    "Hide";
+
+            } else {
+
+                passwordInput.type = "password";
+
+                togglePassword.textContent =
+                    "Show";
+            }
+
+        }
+    );
+
+
+
+    /* =========================================
+       ROLE CHANGE
+    ========================================= */
+
+    const roleInputs =
+        document.querySelectorAll(
+            'input[name="role"]'
+        );
+
+
+    roleInputs.forEach(
+        function (radio) {
+
+            radio.addEventListener(
+                "change",
+                function () {
+
+                    updateLoginMode();
+
+                }
+            );
+
+        }
+    );
+
+
+
+    function updateLoginMode() {
+
+        const role =
+            document.querySelector(
+                'input[name="role"]:checked'
+            ).value;
+
+
+        /*
+         * AGENT LOGIN
+         */
+
+        if (role === "agent") {
+
+            loginLabel.textContent =
+                "Email Address";
+
+            loginInput.type =
+                "email";
+
+            loginInput.placeholder =
+                "Enter your email";
+
+            loginInput.autocomplete =
+                "username";
+
+            loginIcon.textContent =
+                "✉";
+
+            customerHelp.style.display =
+                "none";
+
+            loginSubtitle.textContent =
+                "Access your TrustNest agent account";
+
+        }
+
+
+        /*
+         * CUSTOMER LOGIN
+         */
+
+        else {
+
+            loginLabel.textContent =
+                "Email or Customer ID";
+
+            loginInput.type =
+                "text";
+
+            loginInput.placeholder =
+                "Enter your email or Customer ID";
+
+            loginInput.autocomplete =
+                "username";
+
+            loginIcon.textContent =
+                "👤";
+
+            customerHelp.style.display =
+                "block";
+
+            loginSubtitle.textContent =
+                "Access your customer account";
+
+        }
+
+
+        /*
+         * Clear old messages
+         */
+
+        errorMessage.style.display =
+            "none";
+
+        successMessage.style.display =
+            "none";
+
+    }
+
+
+
+    /* =========================================
+       LOGIN FORM
+    ========================================= */
+
+    loginForm.addEventListener(
+        "submit",
+        async function (event) {
+
+            event.preventDefault();
+
+
+            /*
+             * Get values
+             */
+
+            const loginValue =
+                loginInput.value.trim();
+
+            const password =
+                passwordInput.value.trim();
+
+            const role =
+                document.querySelector(
+                    'input[name="role"]:checked'
+                ).value;
+
+
+            /*
+             * Hide old messages
+             */
+
+            errorMessage.style.display =
+                "none";
+
+            successMessage.style.display =
+                "none";
+
+
+            /*
+             * Basic validation
+             */
+
+            if (
+                loginValue === "" ||
+                password === ""
+            ) {
+
+                errorMessage.textContent =
+                    role === "customer"
+                        ? "Please enter your email/Customer ID and password."
+                        : "Please enter your email and password.";
+
+                errorMessage.style.display =
+                    "block";
+
+                return;
+            }
+
+
+            /*
+             * Button loading state
+             */
+
+            loginButton.disabled = true;
+
+            loginButton.textContent =
+                "Signing in...";
+
+
+            try {
+
+
+                /* =====================================
+                   AGENT LOGIN
+                ===================================== */
+
+                if (role === "agent") {
+
+                    const response =
+                        await fetch(
+                            API_BASE_URL +
+                            "/api/agents/login",
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body:
+                                    JSON.stringify({
+                                        email:
+                                            loginValue,
+
+                                        password:
+                                            password,
+
+                                        role:
+                                            "agent"
+                                    })
+                            }
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            data.message ||
+                            "Agent login failed."
+                        );
+
+                    }
+
+
+                    /*
+                     * Check returned agent data
+                     */
+
+                    if (
+                        !data.agent
+                    ) {
+
+                        throw new Error(
+                            "Agent information was not returned by the server."
+                        );
+
+                    }
+
+
+                    /*
+                     * Save agent information
+                     */
+
+                    localStorage.setItem(
+                        "agentId",
+                        data.agent.id ||
+                        data.agent._id
+                    );
+
+
+                    localStorage.setItem(
+                        "agentName",
+                        data.agent.fullName ||
+                        ""
+                    );
+
+
+                    localStorage.setItem(
+                        "agentEmail",
+                        data.agent.email ||
+                        ""
+                    );
+
+
+                    /*
+                     * Save token if backend
+                     * provides one
+                     */
+
+                    if (data.token) {
+
+                        localStorage.setItem(
+                            "agentToken",
+                            data.token
+                        );
+
+                    }
+
+
+                    /*
+                     * Success
+                     */
+
+                    successMessage.textContent =
+                        "Agent login successful. Redirecting...";
+
+                    successMessage.style.display =
+                        "block";
+
+
+                    /*
+                     * Redirect agent
+                     */
+
+                    setTimeout(
+                        function () {
+
+                            window.location.href =
+                                "agent/dashboard.html";
+
+                        },
+                        500
+                    );
+
+                }
+
+
+
+                /* =====================================
+                   CUSTOMER LOGIN
+                ===================================== */
+
+                else if (role === "customer") {
+
+
+                    /*
+                     * Customer login uses:
+                     *
+                     * POST
+                     * /api/customers/login
+                     *
+                     * Login value can be:
+                     * 1. Email
+                     * 2. Customer ID
+                     */
+
+                    const response =
+                        await fetch(
+                            API_BASE_URL +
+                            "/api/customers/login",
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body:
+                                    JSON.stringify({
+
+                                        login:
+                                            loginValue,
+
+                                        email:
+                                            loginValue,
+
+                                        customerLoginId:
+                                            loginValue,
+
+                                        password:
+                                            password
+
+                                    })
+                            }
+                        );
+
+
+                    /*
+                     * Read server response
+                     */
+
+                    const data =
+                        await response.json();
+
+
+                    /*
+                     * Backend rejected login
+                     */
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            data.message ||
+                            "Invalid customer email/Customer ID or password."
+                        );
+
+                    }
+
+
+                    /*
+                     * Make sure customer data
+                     * was returned
+                     */
+
+                    if (
+                        !data.customer
+                    ) {
+
+                        throw new Error(
+                            "Customer information was not returned by the server."
+                        );
+
+                    }
+
+
+                    /*
+                     * Customer ID
+                     *
+                     * Backend may return:
+                     * id
+                     * OR
+                     * _id
+                     */
+
+                    const customerId =
+                        data.customer.id ||
+                        data.customer._id;
+
+
+                    if (!customerId) {
+
+                        throw new Error(
+                            "Customer ID was not returned by the server."
+                        );
+
+                    }
+
+
+                    /*
+                     * Clear agent login information
+                     *
+                     * This prevents customer login
+                     * from accidentally using old
+                     * agent information.
+                     */
+
+                    localStorage.removeItem(
+                        "agentId"
+                    );
+
+                    localStorage.removeItem(
+                        "agentName"
+                    );
+
+                    localStorage.removeItem(
+                        "agentEmail"
+                    );
+
+                    localStorage.removeItem(
+                        "agentToken"
+                    );
+
+
+                    /*
+                     * Save customer information
+                     */
+
+                    localStorage.setItem(
+                        "customerId",
+                        customerId
+                    );
+
+
+                    localStorage.setItem(
+                        "customerName",
+                        data.customer.fullName ||
+                        ""
+                    );
+
+
+                    localStorage.setItem(
+                        "customerEmail",
+                        data.customer.email ||
+                        ""
+                    );
+
+
+                    /*
+                     * Save customer login ID
+                     */
+
+                    if (
+                        data.customer.customerLoginId
+                    ) {
+
+                        localStorage.setItem(
+                            "customerLoginId",
+                            data.customer.customerLoginId
+                        );
+
+                    }
+
+
+                    /*
+                     * Save customer JWT
+                     *
+                     * This is important if your
+                     * customer dashboard uses
+                     * token authentication.
+                     */
+
+                    if (data.token) {
+
+                        localStorage.setItem(
+                            "customerToken",
+                            data.token
+                        );
+
+                    }
+
+
+                    /*
+                     * Save customer role
+                     */
+
+                    localStorage.setItem(
+                        "userRole",
+                        "customer"
+                    );
+
+
+                    /*
+                     * Remember me
+                     */
+
+                    const rememberMe =
+                        document.getElementById(
+                            "rememberMe"
+                        ).checked;
+
+
+                    localStorage.setItem(
+                        "customerRememberMe",
+                        rememberMe
+                    );
+
+
+                    /*
+                     * Success message
+                     */
+
+                    successMessage.textContent =
+                        "Customer login successful. Redirecting...";
+
+                    successMessage.style.display =
+                        "block";
+
+
+                    /*
+                     * Redirect customer
+                     */
+
+                    setTimeout(
+                        function () {
+
+                            window.location.href =
+                                "customer/dashboard.html";
+
+                        },
+                        500
+                    );
+
+                }
+
+            }
+
+
+            catch (error) {
+
+                console.error(
+                    "Login error:",
+                    error
+                );
+
+
+                /*
+                 * Show backend error
+                 */
+
+                errorMessage.textContent =
+                    error.message ||
+                    "Unable to connect to the server. Please try again.";
+
+                errorMessage.style.display =
+                    "block";
+
+
+                /*
+                 * Reset button
+                 */
+
+                loginButton.disabled =
+                    false;
+
+                loginButton.textContent =
+                    "Sign In";
+
+            }
+
+        }
+    );
+
+
+
+    /* =========================================
+       FORGOT PASSWORD
+    ========================================= */
+
+    function forgotPassword(event) {
+
+        event.preventDefault();
+
+
+        const role =
+            document.querySelector(
+                'input[name="role"]:checked'
+            ).value;
+
+
+        if (role === "customer") {
+
+            alert(
+                "Customer password recovery will be available soon. Please contact your insurance agent."
+            );
+
+        } else {
+
+            alert(
+                "Agent password recovery will be available soon."
+            );
+
+        }
+
+    }
+
+
+
+    /* =========================================
+       INITIAL MODE
+    ========================================= */
+
+    updateLoginMode();
+
+</script>
+
+
+</body>
+
+</html>
